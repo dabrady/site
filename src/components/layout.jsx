@@ -19,8 +19,9 @@ export default ({ children }) => (
     render={data => (
       <div
         className={css`
-          margin: 0 auto;
-          max-width: 700px;
+          margin-top: ${rhythm(5)};
+          margin-left: auto;
+          max-width: 900px;
           padding: ${rhythm(2)};
           padding-top: ${rhythm(1.5)};
         `}

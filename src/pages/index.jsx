@@ -1,21 +1,17 @@
 import React from "react";
 
 import Layout from "../components/layout";
-import Image from "../components/image";
 import SEO from "../components/seo";
+
+import "./index.css";
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hi people</h1>
-    <p>
-      Welcome to my unmade site, powered by the great{" "}
-      <a href="https://www.gatsbyjs.org/">Gatsby</a>.
-    </p>
-    <p>I hope to build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
+    <h1>
+      in the beginning there was darkness
+      <a href="https://www.gatsbyjs.org/">…</a>
+    </h1>
   </Layout>
 );
 
