@@ -1,7 +1,7 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
-import { css } from "emotion";
-import React from "react";
 
 import { rhythm } from "../utils/typography";
 
@@ -18,7 +18,7 @@ export default ({ children }) => (
     `}
     render={data => (
       <div
-        className={css`
+        css={css`
           margin-top: ${rhythm(5)};
           margin-left: auto;
           max-width: 900px;
