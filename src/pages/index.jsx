@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import React from "react";
+import { css } from "@emotion/core";
 import { graphql, Link } from "gatsby";
 import gray from "gray-percentage";
 
