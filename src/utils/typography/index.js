@@ -1,6 +1,7 @@
 import Typography from "typography";
-import darkness, { scaleRatio } from "../themes/darkness";
 import lincoln from "typography-theme-lincoln";
+
+import darkness, { scaleRatio } from "@utils/themes/darkness";
 
 const { header, link, body } = darkness.colors;
 const typography = new Typography({

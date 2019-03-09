@@ -2,9 +2,8 @@ import { css } from "@emotion/core";
 import { graphql } from "gatsby";
 import React from "react";
 
+import { rhythm } from "@utils/typography";
 import Layout from "@components/layout";
-
-import { rhythm } from "../utils/typography";
 
 export default ({ data }) => {
   const post = data.markdownRemark;

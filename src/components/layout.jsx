@@ -1,14 +1,13 @@
-import React from "react";
-import styled from "@emotion/styled";
 import { Global } from "@emotion/core";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
 import { ThemeProvider } from "emotion-theming";
 import { space, fontSize } from "styled-system";
+import React from "react";
+import styled from "@emotion/styled";
 
-import { rhythm } from "../utils/typography";
-/* TODO Parameterize theme */
-import darkness from "../utils/themes/darkness";
+import { rhythm } from "@utils/typography";
+import darkness from "@utils/themes/darkness";
 
 const Root = styled.div`
   max-width: 900px;

@@ -3,10 +3,9 @@ import { graphql, Link } from "gatsby";
 import React from "react";
 import gray from "gray-percentage";
 
+import { rhythm } from "@utils/typography";
 import Layout from "@components/layout";
 import SEO from "@components/seo";
-
-import { rhythm } from "../utils/typography";
 
 const dateWidth = rhythm(3.4);
 const postDate = css`

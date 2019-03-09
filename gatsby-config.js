@@ -11,7 +11,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-root-import",
       options: {
-        "@components": path.resolve(__dirname, "src/components")
+        "@components": path.resolve(__dirname, "src/components"),
+        "@utils": path.resolve(__dirname, "src/utils")
       }
     },
     {
