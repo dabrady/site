@@ -6,7 +6,10 @@ module.exports = {
   },
 
   plugins: [
-    "gatsby-transformer-remark",
+    {
+      resolve: "gatsby-transformer-remark",
+      options: { excerpt_separator: `<!-- / -->` }
+    },
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     "gatsby-plugin-emotion",
