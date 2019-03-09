@@ -1,9 +1,26 @@
 import React from "react";
-import { css } from "@emotion/core";
+import styled from "@emotion/styled";
+import { Global } from "@emotion/core";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
+import { ThemeProvider } from "emotion-theming";
+import { space, fontSize } from "styled-system";
 
 import { rhythm } from "../utils/typography";
+/* TODO Parameterize theme */
+import darkness from "../utils/themes/darkness";
+
+const Root = styled.div`
+  max-width: 900px;
+  margin: ${rhythm(3.4)} auto;
+  ${space}
+  ${fontSize}
+`;
+
+Root.propTypes = {
+  ...space.propTypes,
+  ...fontSize.propTypes
+};
 
 export default ({ children }) => (
   <StaticQuery
@@ -17,21 +34,21 @@ export default ({ children }) => (
       }
     `}
     render={data => (
-      <div
-        css={css`
-          margin: ${rhythm(3.4)} auto;
-          max-width: 900px;
-          padding: ${rhythm(2)};
-          padding-top: ${rhythm(1.5)};
-        `}
-      >
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>{data.site.siteMetadata.title}</title>
-          <link href="https://daniel13rady.com/" rel="canonical" />
-        </Helmet>
-        {children}
-      </div>
+      <ThemeProvider theme={darkness}>
+        <Root px={[3, 4]}>
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>{data.site.siteMetadata.title}</title>
+            <link href="https://daniel13rady.com/" rel="canonical" />
+          </Helmet>
+          <Global
+            styles={{
+              body: { backgroundColor: darkness.colors.background }
+            }}
+          />
+          {children}
+        </Root>
+      </ThemeProvider>
     )}
   />
 );
