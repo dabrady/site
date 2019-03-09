@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   siteMetadata: {
     title: "@here",
@@ -6,6 +8,12 @@ module.exports = {
   },
 
   plugins: [
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        "@components": path.resolve(__dirname, "src/components")
+      }
+    },
     {
       resolve: "gatsby-transformer-remark",
       options: { excerpt_separator: `<!-- / -->` }

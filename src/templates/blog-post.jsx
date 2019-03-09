@@ -1,8 +1,9 @@
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { css } from "@emotion/core";
 import { graphql } from "gatsby";
+import React from "react";
 
-import Layout from "../components/layout";
+import Layout from "@components/layout";
+
 import { rhythm } from "../utils/typography";
 
 export default ({ data }) => {

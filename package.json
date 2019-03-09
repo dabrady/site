@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "babel-plugin-emotion": "^10.0.7",
-    "babel-preset-gatsby": "^0.1.8"
+    "babel-preset-gatsby": "^0.1.8",
+    "gatsby-plugin-root-import": "^2.0.5"
   }
 }
