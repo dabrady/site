@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { css } from "@emotion/core";
 import { graphql } from "gatsby";
 import React from "react";
@@ -6,9 +7,10 @@ import { rhythm } from "@utils/typography";
 import Layout from "@components/layout";
 
 export default ({ data }) => {
-  const post = data.markdownRemark;
+  const { markdownRemark: post } = data;
   return (
     <Layout>
+      <Helmet title={post.frontmatter.title} />
       <div
         css={css`
           margin: 0 auto;
