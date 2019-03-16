@@ -143,9 +143,11 @@ const IndexPage = ({ data }) => {
   useEventListener("keydown", function navigateWithKeyboard(event) {
     switch (event.key) {
       case "ArrowUp":
+      case "ArrowLeft":
         event.preventDefault();
         return dispatch({ type: "PREV" });
       case "ArrowDown":
+      case "ArrowRight":
         event.preventDefault();
         return dispatch({ type: "NEXT" });
       default:
