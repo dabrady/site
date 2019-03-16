@@ -54,6 +54,9 @@
   "devDependencies": {
     "babel-plugin-emotion": "^10.0.7",
     "babel-preset-gatsby": "^0.1.8",
-    "gatsby-plugin-root-import": "^2.0.5"
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "gatsby-plugin-root-import": "^2.0.5",
+    "prettier": "1.16.4"
   }
 }
