@@ -71,14 +71,11 @@ function PostListing({
   isCurrent
 }) {
   const listing = useRef();
-  useEffect(
-    () => {
-      if (isCurrent) {
-        listing.current.focus();
-      }
-    },
-    [isCurrent]
-  );
+  useEffect(() => {
+    if (isCurrent) {
+      listing.current.focus();
+    }
+  }, [isCurrent]);
 
   // TODO Remove default style of 'focused' element.
   const PostListingStyles = css``;
@@ -110,13 +107,13 @@ const IndexPage = ({ data }) => {
     (state, action) => {
       switch (action.type) {
         case "PREV":
-          console.log("previous");
+          console.debug("previous");
           return {
             ...state,
             currentIndex: state.currentIndex == 0 ? 0 : state.currentIndex - 1
           };
         case "NEXT":
-          console.log("next");
+          console.debug("next");
           return {
             ...state,
             currentIndex:
@@ -126,7 +123,7 @@ const IndexPage = ({ data }) => {
           };
         // TODO Make focus navigation a thing.
         case "GOTO":
-          console.log("going to " + action.index);
+          console.debug("going to " + action.index);
           return {
             ...state,
             currentIndex: action.index
