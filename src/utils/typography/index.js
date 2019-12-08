@@ -1,9 +1,13 @@
 import Typography from "typography";
 import lincoln from "typography-theme-lincoln";
 
-import darkness, { scaleRatio } from "@utils/themes/darkness";
+import night, { scaleRatio as nightScale } from "@utils/themes/darkness";
+import day, { scaleRatio as dayScale } from "@utils/themes/day";
 
-const { header, link, body } = darkness.colors;
+const theme = day;
+const scaleRatio = dayScale;
+
+const { header, link, body } = theme.colors;
 const typography = new Typography({
   ...lincoln,
   scaleRatio,
