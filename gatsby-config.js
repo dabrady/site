@@ -4,7 +4,8 @@ module.exports = {
   siteMetadata: {
     title: "@here",
     description: "",
-    author: "@dabrady"
+    author: "@dabrady",
+    siteAddr: "https://daniel13rady.com"
   },
 
   plugins: [
