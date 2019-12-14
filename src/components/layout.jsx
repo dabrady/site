@@ -3,6 +3,7 @@ import { StaticQuery, graphql, useStaticQuery } from "gatsby";
 import React from "react";
 
 import SignPost from "@components/sign_post";
+import Logo from "@components/logo";
 
 export default ({ children }) => {
   const {
@@ -27,6 +28,7 @@ export default ({ children }) => {
         <link href={siteAddr} rel="canonical" />
       </Helmet>
 
+      <Logo />
       {children}
       {/* <SignPost>{children}</SignPost> */}
     </div>
