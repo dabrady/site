@@ -1,4 +1,3 @@
-import { Global } from "@emotion/core";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
 import { ThemeProvider } from "emotion-theming";
@@ -43,11 +42,6 @@ export default ({ children }) => (
             meta={[{ charSet: "utf-8" }]}
             title={data.site.siteMetadata.title}
             link={[{ href: "https://daniel13rady.com/", rel: "canonical" }]}
-          />
-          <Global
-            styles={{
-              body: { backgroundColor: darkness.colors.background }
-            }}
           />
           {children}
         </Root>

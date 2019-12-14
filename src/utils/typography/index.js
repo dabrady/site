@@ -7,13 +7,16 @@ import day, { scaleRatio as dayScale } from "@utils/themes/day";
 const theme = day;
 const scaleRatio = dayScale;
 
-const { header, link, body } = theme.colors;
+const { header, link, body, background } = theme.colors;
 const typography = new Typography({
   ...lincoln,
   scaleRatio,
   headerColor: header,
   bodyColor: body,
   overrideThemeStyles: () => ({
+    body: {
+      backgroundColor: background
+    },
     a: {
       color: link,
       backgroundImage: null,
@@ -22,5 +25,6 @@ const typography = new Typography({
   })
 });
 
+window.t = typography;
 export default typography;
 export const rhythm = typography.rhythm;
