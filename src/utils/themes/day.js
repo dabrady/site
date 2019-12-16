@@ -7,7 +7,7 @@ const theme = {
   fontSizes: fontSizes(scaleRatio),
   space: spaces(scaleRatio),
   colors: {
-    background: colors.charcoal,
+    background: colors.white,
     body: colors.charcoal,
     link: colors.icyblue,
     header: colors.black
