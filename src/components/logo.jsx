@@ -29,7 +29,7 @@ const fixedMeasurements = `
     100% 100% at 50% 50%,
     ${palette.b} 49%,
     ${palette.bT} 50%
-  ) 9em 8em / 3em 3em,
+  ) 9em 8em / 3.2em 3.2em,
 
   /* bottom dot */
   radial-gradient(
