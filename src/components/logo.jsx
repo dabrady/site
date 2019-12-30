@@ -16,49 +16,57 @@ const palette = {
 };
 
 const fixedMeasurements = `
-  /* outer ring */
+  /*** Curly wing ***/
   radial-gradient(
     100% 100% at 50% 50%,
-    ${palette.bT} 12.95em,
-    ${palette.b} 13em,
-    ${palette.b} 13.95em,
-    ${palette.bT} 14em
-  ) 0% 0% / 28em 28em,
+    ${palette.r} 49%,
+    ${palette.bT} 50%
+  ) 2em 6em / 7em 15em,
 
-  /* semicolon top dot */
+  /*** Semicolon ***/
+  /* top dot */
   radial-gradient(
     100% 100% at 50% 50%,
     ${palette.b} 49%,
     ${palette.bT} 50%
   ) 9em 8em / 3em 3em,
 
-  /* semicolon bottom dot */
+  /* bottom dot */
   radial-gradient(
     100% 100% at 50% 50%,
     ${palette.b} 49%,
     ${palette.bT} 50%
   ) 9em 12.5em / 3.7em 3.8em,
 
-  /* semicolon swoop: connective curve of swoopy blackness */
+  /* swoop: connective curve of swoopy blackness */
   radial-gradient(
     200% 150% at -50% 70%,
     ${palette.bT} calc(50% - 0.05em),
     ${palette.b} 50%
   ) 10.4em 16em / 0.5em 1.6em,
 
-  /* semicolon swoop: inside curve of swoopy blackness */
+  /* swoop: inside curve of swoopy blackness */
   radial-gradient(
     380% 170% at -90% 10%,
     ${palette.BG} calc(50% - 0.05em),
     ${palette.BGT} 50%
   ) 9.1em 14.4em / 1.8em 7em,
 
-  /* semicolon swoop: outside curve of swoopy blackness */
+  /* swoop: outside curve of swoopy blackness */
   radial-gradient(
     300% 200% at -50% 5%,
     ${palette.b} calc(50% - 0.05em),
     ${palette.BGT} 50%
-  ) 9.1em 14.4em / 3.6em 6em
+  ) 9.1em 14.4em / 3.6em 6em,
+
+  /*** Main ring ***/
+  radial-gradient(
+    100% 100% at 50% 50%,
+    ${palette.bT} 12.95em,
+    ${palette.b} 13em,
+    ${palette.b} 13.95em,
+    ${palette.bT} 14em
+  ) 0% 0% / 28em 28em
 `;
 
 const size = 10;
