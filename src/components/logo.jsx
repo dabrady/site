@@ -61,20 +61,36 @@ const fixedMeasurements = `
 
   /*** Curly wing ***/
   radial-gradient(
+    364% 280% at -100% 118%,
+    ${palette.BG} calc(50% - 0.05em),
+    /* ${Colors.default.icyblue} calc(50% - 0.05em), */
+    ${palette.b} 50%
+  ) 3.9em 7em / 3.2em 2.8em,
+  radial-gradient(
+    100% 150% at 30% 100%,
+    ${palette.BG} 49%,
+    ${palette.b} 50%
+  ) 4em 7em / 3.2em 3.8em,
+  radial-gradient(
     180% 180% at 114% 3%,
-    ${palette.bT} calc(50% - 0.05em),
+    ${palette.b} calc(50% - 0.05em),
     ${palette.BG} 50%
   ) 5.6em 10.4em / 3.8em 4.6em,
   radial-gradient(
-    200% 110% at -20% 52%,
-    ${palette.BG} calc(50% - 0.05em),
-    ${palette.BGT} 50%
-  ) 4.6em 7.8em / 2.5em 5.8em,
+    100% 120% at 100% 8%,
+    ${palette.b} 49%,
+    ${palette.BG} 50%
+  ) 3em 6em / 1em 1.6em,
   radial-gradient(
-    150% 140% at 20% 65%,
+    120% 100% at 30% 50%,
+    ${palette.b} 49%,
+    ${palette.bT} 50%
+  ) 3.6em 5.5em / 4.4em 2em,
+  radial-gradient(
+    150% 150% at 0% 75%,
     ${palette.b} calc(50% - 0.05em),
     ${palette.bT} 50%
-  ) 5.6em 6.6em / 4.2em 8em
+  ) 6.4em 5.8em / 4.2em 8em
 `;
 
 const size = 10;
