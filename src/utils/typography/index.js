@@ -25,6 +25,5 @@ const typography = new Typography({
   })
 });
 
-window.t = typography;
 export default typography;
 export const rhythm = typography.rhythm;
