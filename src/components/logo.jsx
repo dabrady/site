@@ -61,19 +61,19 @@ const fixedMeasurements = `
 
   /*** Curly wing ***/
   radial-gradient(
-    550% 180% at -250% 60%,
-    ${palette.r} 49%,
-    ${palette.bT} 50%
-  ) 5.6em 6.6em / 3em 4em,
+    180% 180% at 114% 3%,
+    ${palette.bT} calc(50% - 0.05em),
+    ${palette.BG} 50%
+  ) 5.6em 10.4em / 3.8em 4.6em,
   radial-gradient(
-    200% 200% at 130% -10%,
-    ${palette.bT} 49%,
-    ${palette.r} 50%
-  ) 5.6em 9.6em / 3em 4em,
+    200% 110% at -20% 52%,
+    ${palette.BG} calc(50% - 0.05em),
+    ${palette.BGT} 50%
+  ) 4.6em 7.8em / 2.5em 5.8em,
   radial-gradient(
     150% 140% at 20% 65%,
-    ${palette.b} 49%,
-    ${palette.BG} 50%
+    ${palette.b} calc(50% - 0.05em),
+    ${palette.bT} 50%
   ) 5.6em 6.6em / 4.2em 8em
 `;
 
