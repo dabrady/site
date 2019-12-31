@@ -71,10 +71,10 @@ const fixedMeasurements = `
     ${palette.r} 50%
   ) 5.6em 9.6em / 3em 4em,
   radial-gradient(
-    200% 175% at 0% 78%,
+    150% 140% at 20% 65%,
     ${palette.b} 49%,
-    ${palette.r} 50%
-  ) 5.6em 6.6em / 4em 8em
+    ${palette.BG} 50%
+  ) 5.6em 6.6em / 4.2em 8em
 `;
 
 const size = 10;
