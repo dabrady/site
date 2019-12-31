@@ -8,20 +8,20 @@ import * as Colors from "../utils/themes/colors";
 const palette = {
   BG: theme.colors.background,
   BGT: Colors.transparent(theme.colors.background),
-  w: "rgba(255,255,255,1)",
-  wT: "rgba(255,255,255,0)",
-  b: "rgba(0,0,0,1)",
-  bT: "rgba(0,0,0,0)",
-  r: "rgba(255,0,0,1)"
+  b: Colors.default.black,
+  bT: Colors.transparent(Colors.default.black),
+  r: Colors.default.red
 };
 
 const fixedMeasurements = `
-  /*** Curly wing ***/
+  /*** Main ring ***/
   radial-gradient(
     100% 100% at 50% 50%,
-    ${palette.r} 49%,
-    ${palette.bT} 50%
-  ) 2em 6em / 7em 15em,
+    ${palette.bT} 12.95em,
+    ${palette.b} 13em,
+    ${palette.b} 13.95em,
+    ${palette.bT} 14em
+  ) 0% 0% / 28em 28em,
 
   /*** Semicolon ***/
   /* top dot */
@@ -56,17 +56,25 @@ const fixedMeasurements = `
   radial-gradient(
     300% 200% at -50% 5%,
     ${palette.b} calc(50% - 0.05em),
-    ${palette.BGT} 50%
+    ${palette.bT} 50%
   ) 9.1em 14.4em / 3.6em 6em,
 
-  /*** Main ring ***/
+  /*** Curly wing ***/
   radial-gradient(
-    100% 100% at 50% 50%,
-    ${palette.bT} 12.95em,
-    ${palette.b} 13em,
-    ${palette.b} 13.95em,
-    ${palette.bT} 14em
-  ) 0% 0% / 28em 28em
+    550% 180% at -250% 60%,
+    ${palette.r} 49%,
+    ${palette.bT} 50%
+  ) 5.6em 6.6em / 3em 4em,
+  radial-gradient(
+    200% 200% at 130% -10%,
+    ${palette.bT} 49%,
+    ${palette.r} 50%
+  ) 5.6em 9.6em / 3em 4em,
+  radial-gradient(
+    200% 175% at 0% 78%,
+    ${palette.b} 49%,
+    ${palette.r} 50%
+  ) 5.6em 6.6em / 4em 8em
 `;
 
 const size = 10;
