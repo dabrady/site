@@ -4,7 +4,7 @@ import lincoln from "typography-theme-lincoln";
 import night, { scaleRatio as nightScale } from "@utils/themes/darkness";
 import day, { scaleRatio as dayScale } from "@utils/themes/day";
 
-const theme = day;
+export const theme = day;
 const scaleRatio = dayScale;
 
 const { header, link, body, background } = theme.colors;
