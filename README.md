@@ -4,3 +4,4 @@ the codebase for my blog
 ### TODOs and Ideas
 - iterate on out-of-the-box typography and theme
 - enhance blog post handling: sync timestamp with commit timestamp
+- add code syntax highlighting (PrismJS?)
