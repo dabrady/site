@@ -32,6 +32,22 @@ module.exports = {
             options: {
               dashes: "oldschool"
             }
+          },
+          // A plugin to embed videos from popular video hosting services in markdown.
+          {
+            resolve: "gatsby-remark-embed-video",
+            options: {
+              width: 800,
+              related: false, //Optional: Will remove related videos from the end of an embedded YouTube video.
+              noIframeBorder: true, //Optional: Disable insertion of <style> border: 0
+              urlOverrides: [
+                {
+                  id: "youtube",
+                  embedURL: videoId =>
+                    `https://www.youtube-nocookie.com/embed/${videoId}`
+                }
+              ] //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support
+            }
           }
         ]
       }
