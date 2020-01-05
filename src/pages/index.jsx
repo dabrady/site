@@ -196,7 +196,7 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { fields: frontmatter___date, order: ASC }) {
+    allMdx(sort: { fields: frontmatter___date, order: ASC }) {
       totalCount
       edges {
         node {

@@ -17,13 +17,11 @@ module.exports = {
       }
     },
     {
-      // This plugin transforms Markdown into HTML.
-      resolve: "gatsby-transformer-remark",
+      // This plugin transforms Markdown + JSX into HTML.
+      resolve: "gatsby-plugin-mdx",
       options: {
-        // `excerpt_separator` specifies a string that is used to demarcate
-        // a section of a Markdown file to use as an excerpt, or "preview".
-        excerpt_separator: `<!-- / -->`,
-        plugins: [
+        extensions: [".mdx", ".md"],
+        gatsbyRemarkPlugins: [
           // A plugin to render emoji in markdown.
           "gatsby-remark-emoji",
           // A plugin to replace "dumb" punctuation marks with "smart" punctuation marks.
@@ -31,22 +29,6 @@ module.exports = {
             resolve: "gatsby-remark-smartypants",
             options: {
               dashes: "oldschool"
-            }
-          },
-          // A plugin to embed videos from popular video hosting services in markdown.
-          {
-            resolve: "gatsby-remark-embed-video",
-            options: {
-              width: 800,
-              related: false, //Optional: Will remove related videos from the end of an embedded YouTube video.
-              noIframeBorder: true, //Optional: Disable insertion of <style> border: 0
-              urlOverrides: [
-                {
-                  id: "youtube",
-                  embedURL: videoId =>
-                    `https://www.youtube-nocookie.com/embed/${videoId}`
-                }
-              ] //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support
             }
           }
         ]

@@ -1,13 +1,14 @@
 import { Helmet } from 'react-helmet';
 import { css } from "@emotion/core";
 import { graphql } from "gatsby";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 import React from "react";
 
 import { rhythm } from "@utils/typography";
 import Layout from "@components/layout";
 
 export default ({ data }) => {
-  const { markdownRemark: post } = data;
+  const { mdx: post } = data;
   return (
     <Layout>
       <Helmet title={post.frontmatter.title} />
@@ -32,12 +33,13 @@ export default ({ data }) => {
         >
           <em>{post.frontmatter.date}</em>
         </h5>
-        <div
+        <MDXRenderer
           css={css`
             margin-top: ${rhythm(1)};
           `}
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
+        >
+          {post.body}
+        </MDXRenderer>
       </div>
     </Layout>
   );
@@ -45,8 +47,8 @@ export default ({ data }) => {
 
 export const query = graphql`
   query($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
+    mdx(fields: { slug: { eq: $slug } }) {
+      body
       frontmatter {
         title
         date(formatString: "DD MMMM, YYYY")
