@@ -5,7 +5,7 @@ const { createFilePath } = require("gatsby-source-filesystem");
 exports.onCreateNode = ({ node, getNode, actions }) => {
   if (node.internal.type == "Mdx") {
     const { createNodeField } = actions;
-    const slug = createFilePath({ node, getNode, basePath: "pages" });
+    const slug = createFilePath({ node, getNode });
     createNodeField({
       node,
       name: "slug",
@@ -18,7 +18,7 @@ exports.createPages = ({ graphql, actions }) =>
   new Promise((resolve, _) => {
     const { createPage } = actions;
     graphql(`
-      {
+      query {
         allMdx {
           edges {
             node {
@@ -31,13 +31,15 @@ exports.createPages = ({ graphql, actions }) =>
       }
     `).then(result => {
       result.data.allMdx.edges.forEach(({ node }) => {
-        createPage({
+        let pageData = {
           path: node.fields.slug,
           component: path.resolve("src/templates/blog-post.jsx"),
           context: {
             slug: node.fields.slug
           }
-        });
+        };
+        console.log("Creating page:", pageData);
+        createPage(pageData);
       });
       resolve();
     });
