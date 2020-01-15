@@ -1,6 +1,5 @@
 ---
 title: "[wip] `var`, `let`, `const`: Which one do I use?"
-tags: [javascript]
 date: "2020-01-11T15:01+00:00"
 ---
 TL;DR: Use the declarator that is sufficient to minimize the scope of your variable.
@@ -60,15 +59,6 @@ Once declared with `var`, the name of your binding is reserved for that specific
 So with `var` we can do this:
 
 ```javascript
-var myStuff;
-var requestCount = 0;
-
-myStuff = holdMyStuff('cat', 'shoe', 42);
-myStuff = holdMyStuff('plant', 'boba tea', 'toilet paper');
-myStuff = holdMyStuff('please?');
-
-console.log(myStuff);
-
 function holdMyStuff(...stuff) {
   // New function, new scope: we can create our own variables
   // and also access the ones in our 'parent' scope.
@@ -83,16 +73,20 @@ function holdMyStuff(...stuff) {
 
   return stuff;
 }
+
+var myStuff;
+var requestCount = 0;
+
+myStuff = holdMyStuff('cat', 'shoe', 42);
+myStuff = holdMyStuff('plant', 'boba tea', 'toilet paper');
+myStuff = holdMyStuff('please?');
+
+console.log(myStuff);
 ```
 
 But we can't do this:
 
 ```javascript
-var myStuff;
-myStuff = holdMyStuff('cat', 'shoe', 42);
-
-console.log(bonusItem) // USEFUL ERROR: `bonusItem` is only accessible within `holdMyStuff` function;
-
 function holdMyStuff(...stuff) {
   var bonusItem = 'boba tea';
 
@@ -105,6 +99,11 @@ function holdMyStuff(...stuff) {
 
   return myStuff;
 }
+
+var myStuff;
+myStuff = holdMyStuff('cat', 'shoe', 42);
+
+console.log(myStuff, bonusItem) // USEFUL ERROR: `bonusItem` is only accessible within `holdMyStuff` function;
 ```
 
 `var` comes with no strings attached. I use `var` for holding values I think will be used throughout most or all of the current function.
@@ -171,11 +170,14 @@ function holdMyStuff(...stuff) {
 
   var firstBox;
   {
+    // ERROR:
     // This is probably a refactoring mistake.
+    //
     // We think we're assigning to the `firstBox` in our parent scope,
-    // but we're actually trying to assign to the `firstBox` we declared
-    // in _this_ scope, and we can't do that yet.
-    firstBox = stuff[0]; // USEFUL ERROR
+    // but our `let` binding below shadows our parent's, and so we're
+    // actually trying to assign to the `firstBox` we declared in
+    // _this_ scope, and we can't do that yet.
+    firstBox = stuff[0];
 
     let firstBox;
     console.debug(firstBox);
@@ -189,7 +191,7 @@ function holdMyStuff(...stuff) {
   }
 
   // What's in the last box?
-  console.debug(box); // USEFUL ERROR: `box` is no longer in scope
+  console.debug(box); // ERROR: `box` is no longer in scope
 
   return boxes;
 }
