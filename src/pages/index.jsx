@@ -3,6 +3,7 @@ import SunCalc from "suncalc";
 
 import Layout from "@components/layout";
 import SEO from "@components/seo";
+import SignPost from "@components/sign_post";
 
 const IndexPage = ({ data }) => {
   // Determine if it's likely to be dark outside for the user.
@@ -22,6 +23,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <a href="/posts">To the blog!</a>
+      <SignPost nightmode={nightmode} />
     </Layout>
   );
 };
