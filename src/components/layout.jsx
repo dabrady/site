@@ -10,7 +10,16 @@ import { rhythm } from "@utils/typography";
 import darkness from "@utils/themes/darkness";
 
 const Root = styled.div`
-  max-width: 900px;
+  display: block;
+  position: absolute;
+  height: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  max-height: 100vh;
+  overflow: hidden;
+  max-width: 85vw;
   margin: ${rhythm(3.4)} auto;
   ${space}
   ${fontSize}
@@ -46,7 +55,9 @@ export default ({ children }) => (
           />
           <Global
             styles={{
-              body: { backgroundColor: darkness.colors.background }
+              body: {
+                backgroundColor: darkness.colors.background
+              }
             }}
           />
           {children}
