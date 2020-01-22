@@ -7,7 +7,6 @@ import React from "react";
 import styled from "@emotion/styled";
 
 import { rhythm } from "@utils/typography";
-import darkness from "@utils/themes/darkness";
 
 const Root = styled.div`
   display: block;
@@ -42,27 +41,23 @@ export default ({ children }) => (
       }
     `}
     render={data => (
-      <ThemeProvider theme={darkness}>
-        <Root px={[3, 4]}>
-          {/* TODO Due to a bug whose fix is not yet published, I need to use the
+      <Root px={[3, 4]}>
+        {/* TODO Due to a bug whose fix is not yet published, I need to use the
           props method of passing children to Helmet: I run into this stack
           overflow if I scroll through posts too fast.
           https://github.com/nfl/react-helmet/issues/373 */}
-          <Helmet
-            meta={[{ charSet: "utf-8" }]}
-            title={data.site.siteMetadata.title}
-            link={[{ href: "https://daniel13rady.com/", rel: "canonical" }]}
-          />
-          <Global
-            styles={{
-              body: {
-                backgroundColor: darkness.colors.background
-              }
-            }}
-          />
-          {children}
-        </Root>
-      </ThemeProvider>
+        <Helmet
+          meta={[{ charSet: "utf-8" }]}
+          title={data.site.siteMetadata.title}
+          link={[{ href: "https://daniel13rady.com/", rel: "canonical" }]}
+        />
+        <Global
+          styles={{
+            body: {}
+          }}
+        />
+        {children}
+      </Root>
     )}
   />
 );
