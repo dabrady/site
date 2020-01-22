@@ -1,73 +1,85 @@
 import { css } from "@emotion/core";
-import { graphql, Link } from "gatsby";
+import { graphql, navigate } from "gatsby";
 import React, { useEffect, useReducer, useRef } from "react";
 import gray from "gray-percentage";
+import styled from "@emotion/styled";
 
 import { rhythm } from "@utils/typography";
 import Layout from "@components/layout";
 import SEO from "@components/seo";
 import useEventListener from "@utils/hooks/useEventListener";
 
-const dateWidth = rhythm(3.4);
-const postDate = css`
-  width: ${dateWidth};
+const transitionSpeed = 0.3;
+//---------
+const PostCarouselStyles = css``;
+function PostCarousel(props) {
+  return <section css={PostCarouselStyles} {...props} />;
+}
+
+const PostListingsStyles = css`
+  margin-left: 0;
+  list-style-type: none;
+`;
+function PostListings(props) {
+  return <ul css={PostListingsStyles} {...props} />;
+}
+
+const StyledDate = styled("div")`
+  width: ${rhythm(3.4)};
   float: left;
   text-align: right;
 
   h6 {
     margin-top: ${0};
     margin-right: ${rhythm(2 / 3)};
-    color: ${gray(10, 0, true)};
+    color: ${props => (props.selected ? gray(30, 0, true) : gray(10, 0, true))};
+    transition: color ${transitionSpeed};
     font-style: italic;
   }
 `;
-
-const postLink = css`
-  margin-left: ${dateWidth};
-  margin-bottom: ${rhythm(1 / 4)};
-`;
-
-//---------
-function PostCarousel(props) {
-  const PostCarouselStyles = css``;
-  return <section css={PostCarouselStyles} {...props} />;
-}
-
-function PostListings(props) {
-  const PostListingsStyles = css`
-    margin-left: 0;
-    list-style-type: none;
-  `;
-  return <ul css={PostListingsStyles} {...props} />;
-}
-
-function PostDate({ postDate }) {
-  const PostDateStyles = css`
-    width: ${dateWidth};
-    float: left;
-    text-align: right;
-
-    h6 {
-      margin-top: ${0};
-      margin-right: ${rhythm(2 / 3)};
-      color: ${gray(10, 0, true)};
-      font-style: italic;
-    }
-  `;
+function PostDate({ postDate, isCurrent }) {
   return (
-    <div css={PostDateStyles}>
+    <StyledDate selected={isCurrent}>
       <h6>{postDate}</h6>
-    </div>
+    </StyledDate>
   );
 }
 
+const StyledExcerpt = styled("div")`
+  margin-left: ${rhythm(3.4)};
+  & > h1 {
+    margin-top: ${rhythm(0.5)};
+    margin-bottom: ${rhythm(0)};
+  }
+  & > p {
+    max-height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, max-height ${transitionSpeed}s ease-in,
+      max-height ${transitionSpeed / 2}s ease-out,
+      opacity ${transitionSpeed}s linear;
+    ${props =>
+      props.show &&
+      css`
+        max-height: ${rhythm(2)};
+        visibility: visible;
+        opacity: 1;
+      `};
+  }
+`;
+const StyledListing = styled("li")`
+  & div:focus {
+    outline: none;
+  }
+  ${props => props.selected && `margin-bottom: ${rhythm(1)}`}
+`;
 function PostListing({
   id,
   postDate,
   postTitle,
   postExcerpt,
   postPath,
-  onClick,
+  onSelect,
   isCurrent
 }) {
   const listing = useRef();
@@ -77,25 +89,32 @@ function PostListing({
     }
   }, [isCurrent]);
 
-  // TODO Remove default style of 'focused' element.
-  const PostListingStyles = css``;
-  const PostExcerptStyles = css`
-    margin-left: ${dateWidth};
-    margin-bottom: ${rhythm(1 / 4)};
-  `;
+  const handleClick = event => {
+    if (isCurrent) {
+      navigate(postPath);
+    } else {
+      onSelect(event);
+    }
+  };
+
   return (
-    <li ref={listing} css={PostListingStyles} onClick={onClick}>
-      <PostDate postDate={postDate} />
-      <div css={PostExcerptStyles}>
+    <StyledListing selected={isCurrent} onClick={onSelect}>
+      <PostDate postDate={postDate} isCurrent={isCurrent} />
+      <StyledExcerpt
+        ref={listing}
+        tabIndex="-1"
+        show={isCurrent}
+        onClick={handleClick}
+        onKeyPress={e => {
+          if (e.key == "Enter") navigate(postPath);
+        }}
+      >
         <h1 id={id}>{postTitle}</h1>
         {/* I only want the current selection to be verbose. */}
-        {isCurrent && (
-          <Link to={postPath}>
-            <p>{postExcerpt}</p>
-          </Link>
-        )}
-      </div>
-    </li>
+        {/* {isCurrent && <p>{postExcerpt}</p>} */}
+        <p>{postExcerpt}</p>
+      </StyledExcerpt>
+    </StyledListing>
   );
 }
 
@@ -166,25 +185,11 @@ const IndexPage = ({ data }) => {
               postExcerpt={node.excerpt}
               postPath={node.fields.slug}
               isCurrent={state.currentIndex == index}
-              onClick={() => dispatch({ type: "GOTO", index })}
+              onSelect={() => dispatch({ type: "GOTO", index })}
             />
           ))}
         </PostListings>
       </PostCarousel>
-      {/* {data.allMarkdownRemark.edges.map(({ node }, index) => ( */}
-      {/* <div key={node.id}> */}
-      {/* <div css={postDate}> */}
-      {/* <h6>{node.frontmatter.date}</h6> */}
-      {/* </div> */}
-      {/* <div css={postLink}> */}
-      {/* <Link to={node.fields.slug}> */}
-      {/* <h1>{node.frontmatter.title}</h1> */}
-      {/* TODO Only show excerpt for "selected" post */}
-      {/* <p>{node.excerpt}</p> */}
-      {/* </Link> */}
-      {/* </div> */}
-      {/* </div> */}
-      {/* ))} */}
     </Layout>
   );
 };
