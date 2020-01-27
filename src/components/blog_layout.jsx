@@ -44,11 +44,6 @@ export default ({ children }) => (
             title={data.site.siteMetadata.title}
             link={[{ href: "https://daniel13rady.com/", rel: "canonical" }]}
           />
-          <Global
-            styles={{
-              body: { backgroundColor: darkness.colors.background }
-            }}
-          />
           {children}
         </Root>
       </ThemeProvider>

@@ -3,13 +3,19 @@ import lincoln from "typography-theme-lincoln";
 
 import darkness, { scaleRatio } from "@utils/themes/darkness";
 
-const { header, link, body } = darkness.colors;
+export const theme = darkness;
+
+const { header, link, body, background } = theme.colors;
+// TODO Iterate on this once I have written some actual blog posts.
 const typography = new Typography({
   ...lincoln,
   scaleRatio,
   headerColor: header,
   bodyColor: body,
   overrideThemeStyles: () => ({
+    body: {
+      backgroundColor: background
+    },
     a: {
       color: link,
       backgroundImage: null,
