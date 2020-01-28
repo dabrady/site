@@ -7,7 +7,6 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-      <a href="/posts">To the blog!</a>
     </Layout>
   );
 };
