@@ -1,4 +1,3 @@
-import { Global } from "@emotion/core";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
 import { ThemeProvider } from "emotion-theming";
