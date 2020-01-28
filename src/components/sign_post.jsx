@@ -52,7 +52,6 @@ const SignPost = ({ children }) => {
     desktopNight
   } = useStaticQuery(graphql`
     query {
-      ### MOBILE ###
       gatsby: file(relativePath: { eq: "images/gatsby-icon.png" }) {
         childImageSharp {
           fluid(maxWidth: 512, quality: 100) {
@@ -60,8 +59,9 @@ const SignPost = ({ children }) => {
           }
         }
       }
+      ### MOBILE ###
       mobileLandscape: file(
-        relativePath: { eq: "images/sign_post/iphone_landscape.png" }
+        relativePath: { eq: "images/sign_post/wip_iphone_landscape.png" }
       ) {
         childImageSharp {
           fluid(maxWidth: 1334, quality: 100) {
@@ -70,7 +70,7 @@ const SignPost = ({ children }) => {
         }
       }
       mobileLandscapeNight: file(
-        relativePath: { eq: "images/sign_post/iphone_landscape_night.png" }
+        relativePath: { eq: "images/sign_post/wip_iphone_landscape_night.png" }
       ) {
         childImageSharp {
           fluid(maxWidth: 1334, quality: 100) {
@@ -79,7 +79,7 @@ const SignPost = ({ children }) => {
         }
       }
       mobilePortrait: file(
-        relativePath: { eq: "images/sign_post/iphone_portrait.png" }
+        relativePath: { eq: "images/sign_post/wip_iphone_portrait.png" }
       ) {
         childImageSharp {
           fluid(maxWidth: 750, quality: 100) {
@@ -88,7 +88,7 @@ const SignPost = ({ children }) => {
         }
       }
       mobilePortraitNight: file(
-        relativePath: { eq: "images/sign_post/iphone_portrait_night.png" }
+        relativePath: { eq: "images/sign_post/wip_iphone_portrait_night.png" }
       ) {
         childImageSharp {
           fluid(maxWidth: 750, quality: 100) {
@@ -100,7 +100,7 @@ const SignPost = ({ children }) => {
       ### TABLET ###
       # TODO Need landscape versions!
       tabletPortrait: file(
-        relativePath: { eq: "images/sign_post/ipad_portrait.png" }
+        relativePath: { eq: "images/sign_post/wip_ipad_portrait.png" }
       ) {
         childImageSharp {
           fluid(maxWidth: 1668, quality: 100) {
@@ -109,7 +109,7 @@ const SignPost = ({ children }) => {
         }
       }
       tabletPortraitNight: file(
-        relativePath: { eq: "images/sign_post/ipad_portrait_night.png" }
+        relativePath: { eq: "images/sign_post/wip_ipad_portrait_night.png" }
       ) {
         childImageSharp {
           fluid(maxWidth: 1668, quality: 100) {
@@ -119,7 +119,7 @@ const SignPost = ({ children }) => {
       }
 
       ### DESKTOP ###
-      desktop: file(relativePath: { eq: "images/sign_post/desktop.png" }) {
+      desktop: file(relativePath: { eq: "images/sign_post/wip_desktop.png" }) {
         childImageSharp {
           fluid(maxWidth: 2880, quality: 100) {
             ...GatsbyImageSharpFluid
@@ -127,7 +127,7 @@ const SignPost = ({ children }) => {
         }
       }
       desktopNight: file(
-        relativePath: { eq: "images/sign_post/desktop_night.png" }
+        relativePath: { eq: "images/sign_post/wip_desktop_night.png" }
       ) {
         childImageSharp {
           fluid(maxWidth: 2880, quality: 100) {
@@ -165,10 +165,10 @@ const SignPost = ({ children }) => {
         },
 
         // TODO Design for these sizes! Placeholder for now.
-        {
-          ...gatsby.childImageSharp.fluid,
-          media: mediaQueries.everythingElse
-        },
+        /* {
+         *   ...gatsby.childImageSharp.fluid,
+         *   media: mediaQueries.everythingElse
+         * }, */
 
         {
           ...desktopNight.childImageSharp.fluid,
@@ -185,10 +185,10 @@ const SignPost = ({ children }) => {
         },
 
         // TODO Design for these sizes! Placeholder for now.
-        {
-          ...gatsby.childImageSharp.fluid,
-          media: mediaQueries.everythingElse
-        },
+        /* {
+         *   ...gatsby.childImageSharp.fluid,
+         *   media: mediaQueries.everythingElse
+         * }, */
 
         {
           ...desktop.childImageSharp.fluid,
