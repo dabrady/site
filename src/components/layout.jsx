@@ -1,7 +1,6 @@
 import { Global } from "@emotion/core";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
-import { ThemeProvider } from "emotion-theming";
 import { space, fontSize } from "styled-system";
 import React from "react";
 import styled from "@emotion/styled";
