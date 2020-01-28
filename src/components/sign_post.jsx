@@ -141,11 +141,9 @@ const SignPost = ({ children }) => {
   // Determine if it's likely to be dark outside for the user, and swap themes accordingly.
   var [nightmode, setNightmode] = useState(false);
   useEffect(() => {
-    console.log("effecting!");
     navigator.geolocation.getCurrentPosition(function getSuntimes({
       coords: { latitude, longitude }
     }) {
-      console.log("getting nightmode");
       const now = new Date();
       const times = SunCalc.getTimes(now, latitude, longitude);
       setNightmode(now < times.dawn || now > times.dusk);
