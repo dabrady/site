@@ -22,7 +22,7 @@ Though the title made me smile, my response to the advice given was less positiv
 >* `var`: why? if you can avoid it, do it;
 >* prefer `const` usage if possible of course (together with an immutable approach when updating objects)! But don't be scared using `let`, especially if the scope of your variables is small, for example inside a function.
 
-To be clear, I think it is very nice summary of the reigning opinion I've been exposed to; but the gospel-like way in which this summary is given triggered a knee-jerk reaction of mine, which is to immediately question bold statements made without supporting arguments.
+To be clear, I think it is very nice summary of the reigning opinion I've been exposed to; but the gospel-like way in which it is given triggered a knee-jerk reaction of mine, which is to immediately question bold statements made without supporting arguments.
 
 I realized I don't entirely agree, but **I couldn't articulate why**. So it got me thinking many hours of thoughts. And with deep thought comes opinions:
 
