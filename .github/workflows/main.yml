@@ -6,6 +6,7 @@ on:
     # TODO Swap these once merged to master
     # - master
     - develop
+    - post/** # My customary branch prefix for writing new posts
     # ...for changes to these files.
     paths:
     - 'src/**/*.mdx?'
