@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - name: Push to DEV.to
-      uses: dabrady/syndicate@develop
+      uses: dabrady/syndicate@v1.0
       env:
         DEV_API_KEY: ${{ secrets.DEV_API_KEY }}
       with:
