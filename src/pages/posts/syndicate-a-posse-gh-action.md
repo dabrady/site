@@ -1,11 +1,12 @@
 ---
-title: "syndicate: a P.O.S.S.E. way to DEV"
-date: "2020-02-13T11:26+00:00"
+date: 2020-02-13T11:26+00:00
+dev_silo_id: 260898
 tags:
 - meta
 - productivity
 - blog
 - showdev
+title: 'syndicate: a P.O.S.S.E. way to DEV'
 ---
 
 Until a month ago I had never written a blog post.
