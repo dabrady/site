@@ -2,8 +2,11 @@
 
 cat << EOF > src/pages/posts/___.md
 ---
-title: "[wip] ___"
+canonical_url:
 date: "$(gdate -Iminutes)"
+published: false
+tags:
+title: "[wip] ___"
 ---
 
 <!-- / -->
