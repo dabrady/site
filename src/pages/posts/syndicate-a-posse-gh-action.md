@@ -7,7 +7,7 @@ tags:
 - productivity
 - blog
 - showdev
-title: 'syndicate: a P.O.S.S.E. way to DEV'
+title: 'syndicate: a POSSE way to DEV'
 ---
 
 Until a month ago I had never written a blog post.
@@ -15,7 +15,7 @@ Until a month ago I had never written a blog post.
 
 My recent discovery of DEV has a lot to do with why I started, and indeed, I created [my first post](https://dev.to/daniel13rady/declaring-variables-in-javascript-31ch) right here on DEV.
 
-While educating myself on the art of writing for other people, I came across the term "P.O.S.S.E.", which I had never heard of before but [is apparently kind of a big deal](https://indieweb.org/POSSE). It is a principle that is embraced by DEV itself, according to Ben.
+While educating myself on the art of writing for other people, I came across the term "POSSE", which I had never heard of before but [is apparently kind of a big deal](https://indieweb.org/POSSE). It is a principle that is embraced by DEV itself, according to Ben.
 
 {% devcomment d8pj %}
 
