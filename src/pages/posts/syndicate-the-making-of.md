@@ -3,18 +3,10 @@ canonical_url:
 date: 2020-02-14T11:47+00:00
 published: false
 tags:
-title: "[wip] The making of 'syndicate'"
+title: "[OUTLINE] The making of 'syndicate'"
 ---
 
 TODO Link to commits where possible, to illustrate the story
-
-I made this for people who write words they share with others:
-
-{% github dabrady/sydicate no-readme %}
-
-It automatically distributes copies of the content you create to various publishing sites.
-
-It took me a week of focused evenings and a weekend of dedicated hacking to polish it to my liking. This is why, this is how, and this is what's next.
 
 <!-- / -->
 
@@ -166,10 +158,10 @@ how did I do it? tech choices and development summary
 - Probably a wholly unnecessary feature, but it seemed like a fun challenge so I did it anyway
 - The very last thing I worked on was the README; this way I could document the project knowing it wasn't about to change drastically
 - When I was ready for launch, I created a release pull request (I like to practice Git Flow and was working on a `develop` branch this entire time) and pinged my buddy `@rhymiz` for a review: he's a great engineer who loves Python and has been developing with it professionally for a few years now, so I asked him to give me some feedback on my project, particularly on the subject of Python best practices; thanks Lemi!
-- Once I got his LGTM, I merged to master, tagged the `v1.0` release, and published my action to the Github Marketplace!
-- (Github made me change the name of my action in the Marketplace from `syndicate` to something else, because it was taken by some organization; I renamed it to `syndicate-elsewhere`, though the project name is still `syndicate`)
 
 # (the making of) syndicate: verifying the release
+- Once I got his LGTM, I merged to master, tagged the `v1.0` release, and published my action to the Github Marketplace!
+- (Github made me change the name of my action in the Marketplace from `syndicate` to something else, because it was taken by some organization; I renamed it to `syndicate-elsewhere`, though the project name is still `syndicate`)
 - Now publically usable, I wanted to share it on DEV.to
 - I decided it would be fitting to use the action to syndicate its own public introduction, so I added it to a workflow in my personal work-in-progress website/blog, wrote a short introductory post, and pushed, triumphant.
 - It didn't work.

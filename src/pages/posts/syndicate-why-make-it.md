@@ -2,9 +2,18 @@
 canonical_url:
 date: 2020-02-17T17:25+00:00
 published: false
+series: The making of 'syndicate'
 tags:
-title: "[wip] syndicate: Why I made it"
+title: "[wip] syndicate: Why I Made It"
 ---
+
+I made this for people who write words they share with others:
+
+{% github dabrady/syndicate no-readme %}
+
+It distributes copies of the content you create to various publishing sites automatically.
+
+It took me a week of focused evenings and a weekend of dedicated hacking to polish it to my liking; and another week to write about it. This is why.
 
 # Why?
 
@@ -19,3 +28,16 @@ On this particular occasion, I was researching the subject of blogging. I had on
 This make a lot of intuitive sense to me, since it is basically the same process used in the creation of more traditional forms of media like books and magazines: the author distributes copies of their work to the publishing companies they want to work with. The biggest difference is that I don't think authors keep taking their work to publishers after they've found one that has agreed to publish their content.
 
 But more importantly, it reminded me that using a text editor which does not give me a copy of my content means I do not control it.
+
+---
+why did I do it? motivation and goals
+- discovered POSSE, reminded me of software deployment strategies, sounded fun to implement
+- seemed like a good small project: clear objective and definition of success, presented a challenge matching my perceived skill level with what I imagined it would entail
+- my initial enthusiasm and interest signaled to me this was something I cared about and thus worth my time
+- automation my jobs away is a passion of mine
+- premature automation is kind of my thing, when I'm the only stakeholder
+- given my previous non-experience with blogging, starting off with POSSE and an automated syndication process seemed easier than a retroactive adoption
+- I like making magic
+- seemed like something other people besides me might find useful
+- I'm the most productive when I have something to avoid doing and in this case, I was avoiding writing a blog post which is ironic
+---
