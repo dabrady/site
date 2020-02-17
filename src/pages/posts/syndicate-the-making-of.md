@@ -37,6 +37,8 @@ why did I do it? motivation and goals
 - I'm the most productive when I have something to avoid doing and in this case, I was avoiding writing a blog post which is ironic
 
 how did I do it? tech choices and development summary
+
+# (the making of) syndicate: setup, requirements, and design
 - created a Trello board (a new tool for me)
 - first thoughts were "DEV API, git hooks and shell scripts"
 - initial research lead me to DEV.to API and Github Actions, seemed perfect
@@ -78,6 +80,8 @@ how did I do it? tech choices and development summary
   - structured as mentioned previously: mechanisms for interacting with a particular silo encapsulated in their own adapter files; `syndicate.elsewhere` responsible for engaging the appropriate adapters and aggregating the output
   - syndicated files would be 'tagged' with unique identifiers provided (presumably) by the silos themselves in the draft API response; tags take the form of attributes injected into the YAML frontmatter of a Markdown file, and persisted via committing upstream
 - Requirements and basic design in hand, I set to work
+
+# (the making of) syndicate: harvesting commits and drafting to DEV
 - I decided to get the DEV API interactions working in isolation first, and figure out how to interact with the `git` commit later; this part went fairly smoothly and quickly, as I'd already invested effort into the time-consuming bits earlier with my 'fetch' implementation, which I also realized I wouldn't need and subsequently deleted
 - Now came the bits which would prove to give me the most challenge in this project: doing things with `git`
 - This is where my third sacred text of this project, the Github Workflow and Action documentation, became truly valuable: it showed me that I had access to many `git`-related things concerning the commit that triggered the workflow, the most valuable of which, for my purposes, were the `GITHUB_TOKEN`, `GITHUB_SHA`, and `GITHUB_REPOSITORY` environment variables
@@ -91,6 +95,8 @@ how did I do it? tech choices and development summary
 - So now I needed a way to parse YAML out of a string; I knew YAML is pretty well-used, so I expected there to be a good library for working with it; and indeed, I found several; `PyYAML` seemed canonical, but also overkill for my needs and the documentation was ugly; in one of my search queries I included the keyword 'frontmatter' and came across `python-frontmatter`, which was small and great for simple reads and writes of the frontmatter
 - At that point, it only took a bit of tinkering and suddenly I had something that would automatically push my newly created content to DEV.to as a draft when I pushed it to my repo.
 - But the battle had only just begun: I now needed to be able to know if I'd previously created a draft for a given post, so I could avoid creating duplicates and set the scene for pushing updates to existing content, if possible
+
+# (the making of) syndicate: marking a post as 'syndicated'
 - My choice to assume the presence of a YAML frontmatter in all posts made possible a simple, potentially elegant solution: insert a YAML attribute marking the post as 'syndicated'
 - And don't give it just any value: most CRUD APIs return some sort of resource identifier in their response bodies, and the DEV API was no different; if I used that 'silo ID' as the tag, then not only would I be able to know which posts had already been syndicated to a silo, but I would be able to use the ID in an 'update' request later on
 - And the `github3.py` library provided an easy-to-use method for committing the change I'd made to the post back upstream to the repository, which was key if I wanted to actually _persist_ the silo tag
@@ -106,6 +112,8 @@ how did I do it? tech choices and development summary
 - After wiring up this "use the proper parent SHA" logic, rerunning my integration test succeeded, and I moved on to implementing the 'update' mechanism which was much simpler since it didn't involve the same tagging process needed during the 'draft' stage; a quick integration test showed it worked as expected
 - At this point, my action was feature complete! It met all my initial requirements
 - Now it was time to go back and have a second look at the perfomance issues I'd created along the way
+
+# (the making of) syndicate: performance problem no.1: too many commits
 - The first one I decided to tackle was the "this action generates too many commits" issue
 - I decided to ensure each use of the action generated at most one commit, by deferring the 'mark as syndicated' logic to the end of the overall action and applying it across the entire set of posts and silos as needed
 - There were two main challenges to this: the first was properly collating the results of syndicating to all specified silos so I could determine which posts needed tagging for which silos; the second was the batch commit itself
@@ -124,6 +132,8 @@ how did I do it? tech choices and development summary
 - So that's what I did: using my newfound knowledge of the `requests` library and the Github Data API documentation, I crafted the final request that would complete the larger incantation I had been cooking up; it took me all of 5 minutes to do it
 - I learned a valuable lesson from that experience: libraries can be nice, wonderful, even; but they can easily become a crutch for us as developers, and sometimes that can hinder more than help us by blinding us to simple solutions
 - I was finally ready to integration test this new feature: I created a few dummy posts and verified that they were properly syndicated to DEV.to, and that they all tagged in a single commit back upstream to my repo; I then pushed some modifications to those posts and confirmed their DEV.to dopplegangers were updated appropriately but that no commits to my repo were generated. Success!
+
+# (the making of) syndicate: performance problem no.2: too slow to build
 - Next on my list of deferred problems was the build time.
 - Before introducing the `github3.py` library, I was using the `python:3-alpine` Docker image, which is very small and gave base Docker build times of around 6 seconds (before I started adding my project dependencies)
 - But `github3.py` relied on some dependencies that are not available on that image: I would need to figure them out and install them manually from my Dockerfile, or else use a different image that included the missing dependencies
@@ -138,6 +148,8 @@ how did I do it? tech choices and development summary
 - I was pleased enough with 15 seconds that I didn't bother investigating the "roll your own" approach of just making raw API requests, and proceeded to replace my `github3.py` integration with `PyGithub`
 - As an added bonus, I discovered that even though `PyGithub` also did not support a simple way of bundling changes to multiple files in a single commit, it _did_ support editing the HEAD of a remote reference (the thing `github3.py` did not), and I was able to simplify my "mark as syndicated" logic a bit in the process
 - That was the end of the performance issues I'd identified and deferred during development
+
+# (the making of) syndicate: preparing for release
 - At this point I felt ready to put the implementation to rest and start polishing it for release
 - To me this meant:
   - ensuring it was simple and easy to use, and that its configuration makes sense
@@ -156,6 +168,8 @@ how did I do it? tech choices and development summary
 - When I was ready for launch, I created a release pull request (I like to practice Git Flow and was working on a `develop` branch this entire time) and pinged my buddy `@rhymiz` for a review: he's a great engineer who loves Python and has been developing with it professionally for a few years now, so I asked him to give me some feedback on my project, particularly on the subject of Python best practices; thanks Lemi!
 - Once I got his LGTM, I merged to master, tagged the `v1.0` release, and published my action to the Github Marketplace!
 - (Github made me change the name of my action in the Marketplace from `syndicate` to something else, because it was taken by some organization; I renamed it to `syndicate-elsewhere`, though the project name is still `syndicate`)
+
+# (the making of) syndicate: verifying the release
 - Now publically usable, I wanted to share it on DEV.to
 - I decided it would be fitting to use the action to syndicate its own public introduction, so I added it to a workflow in my personal work-in-progress website/blog, wrote a short introductory post, and pushed, triumphant.
 - It didn't work.
