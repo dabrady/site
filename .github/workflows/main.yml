@@ -5,7 +5,8 @@ on:
     branches:
     # TODO Swap these once merged to master
     # - master
-    - develop
+    - post/*
+    # - develop
     # ...for changes to these files.
     paths:
     - 'src/**/*.mdx?'
