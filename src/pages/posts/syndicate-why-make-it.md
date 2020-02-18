@@ -25,7 +25,7 @@ On this particular occasion, I was researching the subject of blogging. I had on
 
 > **_POSSE_** is an abbreviation for **Publish (on your) Own Site, Syndicate Elsewhere**, a content publishing model that starts with posting content on your own domain first, then syndicating out copies to 3rd party services with permashortlinks back to the original on your site.
 
-This makes a lot of intuitive sense to me, since it is basically the same process used in the creation of more traditional forms of media like books and magazines: the author distributes copies of their work to the publishing companies they want to work with. The biggest difference I see is that I don't think those authors keep taking their work to publishers after they've found one that has agreed to publish their content. :smile:
+This makes a lot of intuitive sense to me, since it is basically the same process used in the creation of more traditional forms of media like books and magazines: the author distributes copies of their work to the publishing companies they want to work with.
 
 But more importantly, it reminded me that I'm not in control of the internet, and if I use the internet to create content, instead of creating content for the internet, I might not be in control of that, either. I don't care so much about _possessing_ what I create, so much as I care about having some measure of control of and responsibility for it.
 
