@@ -1,11 +1,13 @@
 ---
-canonical_url:
+canonical_url: null
 date: 2020-02-18T11:31+00:00
+dev_silo_id: 263737
 published: false
 tags:
 - discuss
 - career
-title: I don't prep for the 'tech' part of tech interviews; does that work for you, too?
+title: I don't prep for the 'tech' part of tech interviews; does that work for you,
+  too?
 ---
 
 This has always been met with vehement opposition, feelings of being offended, and made sages out of friends as they become suddenly protective of me and wanting to "steer me right."
