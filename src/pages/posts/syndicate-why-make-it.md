@@ -13,7 +13,7 @@ I made this for people who write words they share with others:
 
 It distributes copies of the content you create to various publishing sites automatically.
 
-It took me a week of focused evenings and a weekend of dedicated hacking to polish it to my liking; and another week to write about it. This is why.
+It took me a week of focused evenings and a weekend of dedicated hacking to polish it to my liking; and another week to write about it. This is why I did it.
 
 ---
 
