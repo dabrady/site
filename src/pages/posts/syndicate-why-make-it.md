@@ -17,7 +17,7 @@ It took me a week of focused evenings and a weekend of dedicated hacking to poli
 
 ---
 
-Why's are very important to me. I don't like doing things with my time without a reason, even if that reason is as vague as "huh, sounds like fun." Why's help me figure out if I care enough to continue, by situating my actions into some wider context. I've learned that most of the time, when I find my interest in something is waning, it's because I've either lost site of my why or because my why is no longer good enough to keep me coming back.
+Why's are important to me. I don't like doing things with my time without a reason, even if that reason is as vague as "huh, sounds like fun." Why's help me figure out if I care enough to continue, by situating my actions into some wider context. I've learned that most of the time, when I find my interest in something is waning, it's because I've either lost site of my why or because my why is no longer good enough to keep me coming back.
 
 In the case of [`syndicate`](https://github.com/dabrady/syndicate), my why started from one of those complex moments of understanding that often follow deep dives into rabbit holes, where a lot of things you've been processing in the background of your mind come suddenly to the front.
 
