@@ -45,6 +45,6 @@ It didn't take much imagination to see the parallels with software deployment. I
 
 I was immediately taken with this idea. Automating my jobs away is a minor passion of mine, and when I'm the only stakeholder, I like to indulge in a little premature automation just for the fun of it. I mean, who doesn't like [makin' magic](https://sims.fandom.com/wiki/The_Sims:_Makin%27_Magic)?
 
-And it looked like a fun challenge! There was a clear objective and definition of success, and seemed like something that other people besides myself would find useful.
+And it looked like a fun challenge! There was a clear objective and definition of success, and it seemed like something that other people besides myself would find useful.
 
 So I made a Trello board, created a repository on Github, and started Googling.
