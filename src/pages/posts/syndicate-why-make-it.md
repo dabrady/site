@@ -35,7 +35,7 @@ I felt this approach to content creation could be boiled down to a few simple st
 
 1. Create a "source of truth" for your writing.
 2. Know where you want to distribute, and how to do it.
-3. When your truths change, ensure a process is triggered to ferry your changes to the right places.
+3. When your truths change, ensure they are ferried to the right places.
 
 It didn't take much imagination to see the parallels with software deployment. I could easily picture how it would work:
 
