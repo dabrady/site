@@ -5,7 +5,7 @@ dev_silo_id: 264244
 published: false
 series: The making of 'syndicate'
 tags: null
-title: '[wip] syndicate: Why I Made It'
+title: "syndicate: Why I Made It"
 ---
 
 I made this for people who write words they share with others:
