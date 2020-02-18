@@ -1,6 +1,6 @@
 ---
 canonical_url:
-date: 2020-02-17T17:25+00:00
+date: 2020-02-18T21:01+00:00
 published: false
 series: The making of 'syndicate'
 tags:
