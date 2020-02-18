@@ -1,10 +1,11 @@
 ---
-canonical_url:
+canonical_url: null
 date: 2020-02-18T21:01+00:00
+dev_silo_id: 264244
 published: false
 series: The making of 'syndicate'
-tags:
-title: "[wip] syndicate: Why I Made It"
+tags: null
+title: '[wip] syndicate: Why I Made It'
 ---
 
 I made this for people who write words they share with others:
