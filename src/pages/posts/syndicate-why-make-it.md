@@ -31,7 +31,7 @@ But more importantly, it reminded me that I'm not in control of the internet, an
 
 I decided I would adopt POSSE, and started thinking about how I would do it.
 
-This approach to content creation could be boiled down to a few simple steps:
+I felt this approach to content creation could be boiled down to a few simple steps:
 
 1. Create a "source of truth" for your writing.
 2. Know where you want to distribute, and how to do it.
