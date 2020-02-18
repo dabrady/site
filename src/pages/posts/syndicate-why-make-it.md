@@ -43,7 +43,7 @@ It didn't take much imagination to see the parallels with software deployment. I
 2. Decide on the platforms I want to distribute to, and write scripts to do so via public APIs.
 3. Use `git` hooks or some other mechanism to run those scripts when changes are made.
 
-I was immediately taken with this idea. Automating my jobs away is a minor passion of mine, and when I'm the only stakeholder, I like to indulge in a little premature automation just for the fun of it. I mean, who doesn't like makin' magic?
+I was immediately taken with this idea. Automating my jobs away is a minor passion of mine, and when I'm the only stakeholder, I like to indulge in a little premature automation just for the fun of it. I mean, who doesn't like [makin' magic](https://sims.fandom.com/wiki/The_Sims:_Makin%27_Magic)?
 
 And it looked like a fun challenge! There was a clear objective and definition of success, and seemed like something that other people besides myself would find useful.
 
