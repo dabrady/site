@@ -5,7 +5,7 @@ dev_silo_id: 266356
 published: false
 series: The making of 'syndicate'
 tags: null
-title: 'syndicate: Project Setup, Requirements, and Design'
+title: 'syndicate: Initial Research and Setup'
 ---
 
 _I made this for people who write words they share with others:_
@@ -20,6 +20,7 @@ _This is how I got started._
 
 ---
 
+<!-- Reword this, it doesn't flow -->
 In essence, the thing I wanted to build would duplicate changes I made to files in a `git` repo, to corresponding articles on DEV.to, in close-to-real-time.
 
 One of my first questions was, "Can I communicate with DEV.to programmatically?" If the only answer involved pretending to be a human and programmatically engaging with the UI to manipulate blog posts, I was likely to abandon the idea (though I probably would have tried it just for fun).
@@ -34,7 +35,7 @@ Recently, though, I noticed something called [Actions](https://github.com/featur
 
 I hadn't really imagined that the tool I would build might have any actual interface besides an automatic trigger. Thinking about Github Actions made me realize it would be nice to have my tool respond to changes on a _remote_ repository (i.e. on a `push` command) and run on someone else's computer, rather than operating on a user's local machine; it would minimize "works on my machine ¯\\_(ツ)_/¯" headaches when installing and using the tool itself. And it would be awesome to have some sort of interface for monitoring progress and output, and maybe even a logging mechanism.
 
-Github is my private choice of remote source control platform, so I looked into Actions. I was pleasantly surprised at the extent of [Github's documentation](https://help.github.com/en/actions) on the subject, and it would become the first of a few sacred texts I relied on throughout my project.
+Github is my private choice of remote source control platform, so I looked into Actions and how to create them. I was pleasantly surprised at the extent of [Github's documentation](https://help.github.com/en/actions) on the subject, and it would become the first of a few sacred texts I relied on throughout my project.
 
 The docs had two tutorials: one using JavaScript and one using Docker. I chose to follow the Docker tutorial because I'm not familiar with container technology and it could potentially benefit me in my upcoming transition to a DevOps role at Tapjoy.
 
@@ -42,7 +43,7 @@ I dedicated a few evenings to the "Hello, world!" tutorial, trying to massage th
 
 I'm glad I went slowly at the beginning. By the time I had completed the tutorial to my satisfaction, I had learned two important things: a Github Action would be a good way to manifest this tool, and I didn't want to build it out of shell scripts.
 
-I can count on one hand the number of devs I know who can effectively read shell scripting languages, let alone effectively write them (I myself only have a passing proficiency at both) and I wanted this project to be easy for others to grow to suit their needs.
+I can count on one hand the number of devs I know who can effectively read shell scripting languages, let alone effectively write them; I myself only have a passing proficiency at shell scripting, and I wanted this project to be easy for others to grow to suit their needs.
 
 Python was a choice I was primed to make: it's a language I had virtually zero experience developing with; it's easy to pick up and is widely used; it's been on my list of tools to familiarize myself with for awhile; and I have a friend who is enamored by it and is always touting its benefits in web programming.
 
