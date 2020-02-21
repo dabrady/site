@@ -28,9 +28,9 @@ Thankfully, my project was saved by a quick Google search: DEV has a [beta API](
 
 My next question was one of automation: how to trigger a DEV.to API call in response to changes in my `git` repository? My immediate reaction was "`git` hooks."
 
-I've played with `git` hooks in the past for doing things like automatically injecting a JIRA ticket number into my commit messages when pushing; and automatically running database migrations locally after pulling if the schema changed or migration files were added. They seemed like the perfect mechanism to use for this project.
+I've played with `git` hooks in the past for doing things like automatically [injecting a JIRA ticket](https://gist.github.com/dabrady/29b33ef867ca6f0c5d9a60ae5b36f7fc) number into my commit messages when pushing; and automatically [running database migrations locally after pulling](https://gist.github.com/dabrady/4b9e57fb2529ca256dfb506dbb5103b1) if the schema changed or migration files were added. They seemed like the perfect mechanism to use for this project.
 
-Recently, though, my company started using something called [Actions](https://github.com/features/actions) on our Github repositories. I didn't really know what they were, but I knew that they were basically a Github service implemented on top of `git` hooks, and one thing an Action could do was sync with Travis to provide info about running builds right inside the Github GUI of a repository or pull request (as opposed to having to click out to the Travis site for such details).
+Recently, though, I noticed something called [Actions](https://github.com/features/actions) show up on my Github repositories. I didn't really know what they were, but on the surface it seemed like a Github service implemented on top of `git` hooks.
 
 I hadn't really imagined that the tool I would build might have any actual interface besides an automatic trigger. Thinking about Github Actions made me realize it would be nice to have my tool respond to changes on a _remote_ repository (i.e. on a `push` command) and run on someone else's computer, rather than operating on a user's local machine; it would minimize "works on my machine ¯\\_(ツ)_/¯" headaches when installing and using the tool itself. And it would be awesome to have some sort of interface for monitoring progress and output, and maybe even a logging mechanism.
 
