@@ -13,16 +13,36 @@ _I made this for people who write words they share with others:_
 
 _It distributes copies of the content you create to various publishing sites automatically._
 
-_It took me a week of focused evenings and a weekend of dedicated hacking to polish it to my liking; and another week to write about it. This is how I did it._
+_It took me a week of focused evenings and a weekend of dedicated hacking to polish it to my liking; and another week to write about it.
+
+_This is how I started._
 
 ---
 
+So. The thing I wanted to build, in essence, would duplicate changes I made to files in a `git` repo, to corresponding articles on DEV.to, in close-to-real-time.
+
+One of my first questions was, "Can I communicate with DEV.to programmatically?" If the only answer involved pretending to be a human and programmatically engaging with the UI to manipulate blog posts, I was likely to abandon the idea (though I probably would have tried it just for fun).
+
+Thankfully, my project was saved by a quick Google search: DEV has a [beta API](https://docs.dev.to/api) that exposes end points I could leverage.
+
+My next question was one of automation: how to trigger a DEV.to API call in response to changes in my `git` repository? My immediate reaction was "`git` hooks."
+
+I've played with `git` hooks in the past for doing things like automatically injecting a JIRA ticket number into my commit messages when pushing; and automatically running database migrations locally after pulling if the schema changed or migration files were added. They seemed like the perfect mechanism to use for this project.
+
+Recently, though, my company started using something called [Actions](https://github.com/features/actions) on our Github repositories. I didn't really know what they were, but I knew that they were basically a Github service implemented on top of `git` hooks, and one thing an Action could do was sync with Travis to provide info about running builds right inside the Github GUI of a repository or pull request (as opposed to having to click out to the Travis site for such details).
+
+I hadn't really imagined that the tool I would build might have any actual interface besides an automatic trigger, but thinking about Github Actions made me realize it would be nice to have my tool respond to changes on a _remote_ repository (i.e. on a `push` command) and run on someone else's computer, rather than operating on a user's local machine; it would minimize "works on my machine ¯\\_(ツ)_/¯" headaches when installing and using the tool itself. And it would awesome to have some sort of interface for monitoring progress and output, and maybe even a logging mechanism.
+
+Github is my private choice of remote source control platform, so I looked into Actions. I was pleasantly surprised at the extent of [Github's documentation](https://help.github.com/en/actions) on the subject, and it would become the first of a few sacred texts I relied on throughout my project.
+
+The docs had two tutorials: one using JavaScript and one using Docker. I chose to follow the Docker tutorial because I'm not familiar with container technology and it could potentially benefit me in my upcoming transition to a DevOps role at Tapjoy.
+
+I dedicated a few evenings to the "Hello, world!" tutorial, trying to massage the steps into something close to what I imagined I'd need for my real project. I took my time: I wasn't sure this would be a proper fit for my project, so I wanted to be sure before I dismissed it as an option.
+
+I'm glad I went slowly at the beginning. By the time I had completed the tutorial to my satisfaction, I had learned two important things: a Github Action would be a good way to manifest this tool, and I didn't want to build it out of shell scripts.
+
+
 ---
-- created a Trello board (a new tool for me)
-- first thoughts were "DEV API, git hooks and shell scripts"
-- initial research lead me to DEV.to API and Github Actions, seemed perfect
-- Github Action docs had two tutorials: one using JavaScript and one using Docker; I chose Docker because I was less familiar with it and it could potentially benefit me in me upcoming transition to DevOps
-- started by following the Hello World Docker action tutorial; spent a few evenings on that, taking my time and trying to massage the steps into something closer to what I imagined I'd need for my real project
 - once I was ready to transition to my actual project work, I quickly decided I didn't want to build it out of shell scripts: I can count on one hand the number of DEVs I know who can effectively read shell scripting languages, let alone effectively write them, and I wanted this project to be easy for others to grow to suit their needs
 - Python was a choice I was primed to make: it's a language I had virtually zero experience developing with, it's easy to pick up and widely used, and it was on my list of tools to familiarize myself with; and I have a dev friend who's enamored by it and always touting its benefits in web programming
 - Once I chose Python, I needed to know the best practices I'd be following, so I looked for them
