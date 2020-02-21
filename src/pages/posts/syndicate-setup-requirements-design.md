@@ -14,7 +14,7 @@ _I made this for people who write words they share with others:_
 
 _It distributes copies of the content you create to various publishing sites automatically._
 
-_It took me a week of focused evenings and a weekend of dedicated hacking to polish it to my liking; and another week to write about it.
+_It took me a week of focused evenings and a weekend of dedicated hacking to polish it to my liking; and another week to write about it._
 
 _This is how I got started._
 
