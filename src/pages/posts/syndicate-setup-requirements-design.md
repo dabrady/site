@@ -15,7 +15,7 @@ _It distributes copies of the content you create to various publishing sites aut
 
 _It took me a week of focused evenings and a weekend of dedicated hacking to polish it to my liking; and another week to write about it.
 
-_This is how I started._
+_This is how I got started._
 
 ---
 
@@ -41,15 +41,17 @@ I dedicated a few evenings to the "Hello, world!" tutorial, trying to massage th
 
 I'm glad I went slowly at the beginning. By the time I had completed the tutorial to my satisfaction, I had learned two important things: a Github Action would be a good way to manifest this tool, and I didn't want to build it out of shell scripts.
 
+I can count on one hand the number of devs I know who can effectively read shell scripting languages, let alone effectively write them (I myself only have a passing proficiency at both) and I wanted this project to be easy for others to grow to suit their needs.
+
+Python was a choice I was primed to make: it's a language I had virtually zero experience developing with; it's easy to pick up and is widely used; it's been on my list of tools to familiarize myself with for awhile; and I have a friend who is enamored by it and is always touting its benefits in web programming.
+
+I'd used Python before, nigh on a decade ago. But if I wanted to start this project off in a good direction, I needed to brush up on contemporary best practices. My primary concerns, at least in the beginning, were project structure and development tools. How do I lay out this project, and what will help me build it?
+
+The internet doth provide: [_The Hitchhiker's Guide to Python_](https://docs.python-guide.org) was often referenced, so I concluded it must espouse a highly regarded opinion and decided to adopt it as another of my sacred texts. Indeed, it proved very useful as a quickish reference for many things: project structure, package management, testing tools, documentation practices....
+
+Armed with an initial (and empty) project layout and a basic Github Workflow that would execute my "Hello, world!" Action any time I pushed to Github, I could finally get started on the logic that would become [`syndicate`](https://github.com/dabrady/syndicate).
 
 <!---
-- once I was ready to transition to my actual project work, I quickly decided I didn't want to build it out of shell scripts: I can count on one hand the number of DEVs I know who can effectively read shell scripting languages, let alone effectively write them, and I wanted this project to be easy for others to grow to suit their needs
-- Python was a choice I was primed to make: it's a language I had virtually zero experience developing with, it's easy to pick up and widely used, and it was on my list of tools to familiarize myself with; and I have a dev friend who's enamored by it and always touting its benefits in web programming
-- Once I chose Python, I needed to know the best practices I'd be following, so I looked for them
-- The first things I cared about were project structure and dev tools: how do I lay out this project, and what will help me build it?
-- I quickly found The Hitchhiker's Guide was referenced often in my topic searches, so I concluded it must be a highly regarded opinion and decided to use it as a project bible
-- It proved very useful as a quickish reference for many things: project structure, package management, test tools, documentation practices, etc.
-- Armed with an initial (and empty) project layout and a basic Github workflow that would execute my Hello World script any time I pushed to Github, I could finally get started on the logic that would become `syndicate`
 - The first challenge I overcame was finding a Docker image that would actually run Python; turns out the `alpine` image used in the tutorial did not have Python installed, so I needed to find one that did (python:alpine)
 - Now that I could run Python, I needed to figure out how to use the DEV.to API: what Python library should I be using?
 - The `requests` package was the answer, quickly found, and its documentation was the second sacred text in this project's development
