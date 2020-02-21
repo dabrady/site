@@ -20,10 +20,11 @@ _This is how I got started._
 
 ---
 
-<!-- Reword this, it doesn't flow -->
-In essence, the thing I wanted to build would duplicate changes I made to files in a `git` repo, to corresponding articles on DEV.to, in close-to-real-time.
+In essence, the thing I wanted to build would take changes I made to files in a `git` repo, and push them someplace else. Classic Patrick Star.
 
-One of my first questions was, "Can I communicate with DEV.to programmatically?" If the only answer involved pretending to be a human and programmatically engaging with the UI to manipulate blog posts, I was likely to abandon the idea (though I probably would have tried it just for fun).
+![Why don't we just take it and push it someplace else?](https://media1.tenor.com/images/3df3d2c9492eae324bcd2440dab09b54/tenor.gif?itemid=8976449)
+
+One of my first questions was, "Can I communicate with DEV.to programmatically?" DEV.to is currently the only place I publish writing, so if the only answer involved pretending to be a human and programmatically engaging with the UI to manipulate blog posts, I was likely to abandon the idea (though I probably would have tried it just for fun).
 
 Thankfully, my project was saved by a quick Google search: DEV has a [beta API](https://docs.dev.to/api) that exposes end points I could leverage.
 
