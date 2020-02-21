@@ -20,7 +20,7 @@ _This is how I got started._
 
 ---
 
-So. In essence, the thing I wanted to build would duplicate changes I made to files in a `git` repo, to corresponding articles on DEV.to, in close-to-real-time.
+In essence, the thing I wanted to build would duplicate changes I made to files in a `git` repo, to corresponding articles on DEV.to, in close-to-real-time.
 
 One of my first questions was, "Can I communicate with DEV.to programmatically?" If the only answer involved pretending to be a human and programmatically engaging with the UI to manipulate blog posts, I was likely to abandon the idea (though I probably would have tried it just for fun).
 
