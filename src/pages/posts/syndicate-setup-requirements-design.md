@@ -19,7 +19,7 @@ _This is how I started._
 
 ---
 
-So. The thing I wanted to build, in essence, would duplicate changes I made to files in a `git` repo, to corresponding articles on DEV.to, in close-to-real-time.
+So. In essence, the thing I wanted to build would duplicate changes I made to files in a `git` repo, to corresponding articles on DEV.to, in close-to-real-time.
 
 One of my first questions was, "Can I communicate with DEV.to programmatically?" If the only answer involved pretending to be a human and programmatically engaging with the UI to manipulate blog posts, I was likely to abandon the idea (though I probably would have tried it just for fun).
 
@@ -31,7 +31,7 @@ I've played with `git` hooks in the past for doing things like automatically inj
 
 Recently, though, my company started using something called [Actions](https://github.com/features/actions) on our Github repositories. I didn't really know what they were, but I knew that they were basically a Github service implemented on top of `git` hooks, and one thing an Action could do was sync with Travis to provide info about running builds right inside the Github GUI of a repository or pull request (as opposed to having to click out to the Travis site for such details).
 
-I hadn't really imagined that the tool I would build might have any actual interface besides an automatic trigger, but thinking about Github Actions made me realize it would be nice to have my tool respond to changes on a _remote_ repository (i.e. on a `push` command) and run on someone else's computer, rather than operating on a user's local machine; it would minimize "works on my machine ¯\\_(ツ)_/¯" headaches when installing and using the tool itself. And it would awesome to have some sort of interface for monitoring progress and output, and maybe even a logging mechanism.
+I hadn't really imagined that the tool I would build might have any actual interface besides an automatic trigger. Thinking about Github Actions made me realize it would be nice to have my tool respond to changes on a _remote_ repository (i.e. on a `push` command) and run on someone else's computer, rather than operating on a user's local machine; it would minimize "works on my machine ¯\\_(ツ)_/¯" headaches when installing and using the tool itself. And it would be awesome to have some sort of interface for monitoring progress and output, and maybe even a logging mechanism.
 
 Github is my private choice of remote source control platform, so I looked into Actions. I was pleasantly surprised at the extent of [Github's documentation](https://help.github.com/en/actions) on the subject, and it would become the first of a few sacred texts I relied on throughout my project.
 
@@ -42,7 +42,7 @@ I dedicated a few evenings to the "Hello, world!" tutorial, trying to massage th
 I'm glad I went slowly at the beginning. By the time I had completed the tutorial to my satisfaction, I had learned two important things: a Github Action would be a good way to manifest this tool, and I didn't want to build it out of shell scripts.
 
 
----
+<!---
 - once I was ready to transition to my actual project work, I quickly decided I didn't want to build it out of shell scripts: I can count on one hand the number of DEVs I know who can effectively read shell scripting languages, let alone effectively write them, and I wanted this project to be easy for others to grow to suit their needs
 - Python was a choice I was primed to make: it's a language I had virtually zero experience developing with, it's easy to pick up and widely used, and it was on my list of tools to familiarize myself with; and I have a dev friend who's enamored by it and always touting its benefits in web programming
 - Once I chose Python, I needed to know the best practices I'd be following, so I looked for them
@@ -79,3 +79,4 @@ I'm glad I went slowly at the beginning. By the time I had completed the tutoria
   - structured as mentioned previously: mechanisms for interacting with a particular silo encapsulated in their own adapter files; `syndicate.elsewhere` responsible for engaging the appropriate adapters and aggregating the output
   - syndicated files would be 'tagged' with unique identifiers provided (presumably) by the silos themselves in the draft API response; tags take the form of attributes injected into the YAML frontmatter of a Markdown file, and persisted via committing upstream
 - Requirements and basic design in hand, I set to work
+-->
