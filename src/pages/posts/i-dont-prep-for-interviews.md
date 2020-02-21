@@ -13,7 +13,7 @@ This has always been met with vehement opposition, feelings of being offended, a
 
 **So let me just preface this** with, "This works for me, I'm open to improvements, and I'm not disparaging what works for anyone else."
 
-I don't prep for the 'tech' part of tech interviews.¯\\_(ツ)_/¯
+I don't prep for the 'tech' part of tech interviews.¯\\\_(ツ)\_/¯
 
 <!-- / -->
 
