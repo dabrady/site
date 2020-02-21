@@ -4,7 +4,7 @@ date: 2020-02-18T20:57+00:00
 published: false
 series: The making of 'syndicate'
 tags:
-title: syndicate: Project Setup, Requirements, and Design
+title: 'syndicate: Project Setup, Requirements, and Design'
 ---
 
 _I made this for people who write words they share with others:_
