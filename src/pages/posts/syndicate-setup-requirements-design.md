@@ -1,9 +1,10 @@
 ---
-canonical_url:
+canonical_url: null
 date: 2020-02-18T20:57+00:00
+dev_silo_id: 266356
 published: false
 series: The making of 'syndicate'
-tags:
+tags: null
 title: 'syndicate: Project Setup, Requirements, and Design'
 ---
 
