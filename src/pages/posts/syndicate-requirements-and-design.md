@@ -24,7 +24,7 @@ _This is how I got started._
 
 ---
 
-After my initial research and setup, I was eager to start spec'ing out the _actual_ thing I intended to build. I began by converting my implementation of the "Hello, world!" [Docker action tutorial](https://help.github.com/en/actions/building-actions/creating-a-docker-container-action) into a Python project that would run in a Docker container.
+After my [initial research and setup](https://dev.to/daniel13rady/syndicate-initial-research-and-setup-1cmh), I was eager to start spec'ing out the _actual_ thing I intended to build. I began by converting my implementation of the "Hello, world!" [Docker action tutorial](https://help.github.com/en/actions/building-actions/creating-a-docker-container-action) into a Python project that would run in a Docker container.
 
 The first challenge I overcame was finding a Docker image that would actually run Python. As it turns out, the `alpine` image used in the tutorial does not come with Python installed, so I needed to either install it myself or look for a different container that came with it. I opted for the second approach first, and a simple search of "python Docker image" led me to...the [`python` Docker image](https://hub.docker.com/_/python).
 
