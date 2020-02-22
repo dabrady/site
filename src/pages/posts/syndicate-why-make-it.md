@@ -2,9 +2,13 @@
 canonical_url: null
 date: 2020-02-18T21:01+00:00
 dev_silo_id: 264244
-published: false
+published: true
 series: The making of 'syndicate'
-tags: null
+tags:
+- showdev
+- blog
+- thinkdeep
+- motivation
 title: "syndicate: Why I Made It"
 ---
 
