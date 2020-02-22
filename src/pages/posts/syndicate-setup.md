@@ -22,7 +22,7 @@ _This is how I got started._
 
 In essence, the thing I wanted to build would take changes I made to files in a `git` repo, and push them someplace else. Classic Patrick Star.
 
-![Why don't we just take it and push it someplace else?](https://media1.tenor.com/images/3df3d2c9492eae324bcd2440dab09b54/tenor.gif?itemid=8976449)
+![Why don't we just take it and push it somewhere else?](https://media.giphy.com/media/JsKWewNnL1A7oS3ijf/giphy.gif)
 
 One of my first questions was, "Can I communicate with DEV.to programmatically?" DEV.to is currently the only place I publish writing, so if the only answer involved pretending to be a human and programmatically engaging with the UI to manipulate blog posts, I was likely to abandon the idea (though I probably would have tried it just for fun).
 
