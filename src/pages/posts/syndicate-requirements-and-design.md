@@ -1,10 +1,14 @@
 ---
 canonical_url: null
-date: 2020-02-21T23:25+00:00
+date: 2020-02-22T15:01+00:00
 dev_silo_id: 266409
-published: false
+published: true
 series: The making of 'syndicate'
-tags: null
+tags:
+- showdev
+- python
+- thinkdeep
+- development
 title: 'syndicate: Prototype, Requirements and Design'
 ---
 
