@@ -20,6 +20,14 @@ _This is how I got started._
 
 ---
 
+After my initial research and setup, I was eager to start spec'ing out the _actual_ thing I intended to build. I began by converting my implementation of the "Hello, world!" [Docker action tutorial](https://help.github.com/en/actions/building-actions/creating-a-docker-container-action) into a Python project that would run in a Docker container.
+
+The first challenge I overcame was finding a Docker image that would actually run Python. As it turns out, the `alpine` image used in the tutorial does not come with Python installed, so I needed to either install it myself or look for a different container that came with it. I opted for the second approach first, and a simple search of "python Docker image" led me to...the [`python` Docker image](https://hub.docker.com/_/python).
+
+At first, I simply swapped out my `alpine` image for the `python:3` image, but that significantly increased the action build time (by 2 or 3x :grimacing:) so I was immediately skeptical of using it. Luckily, I decided to read beyond the "How to use this image" section of the documentation, and discovered there were a couple of 'light-weight' versions. Since I didn't yet have any project dependencies, I decided to try using `python:3-alpine` because of its boasted performance characterisics until it no longer worked.
+
+
+
 <!---
 - The first challenge I overcame was finding a Docker image that would actually run Python; turns out the `alpine` image used in the tutorial did not have Python installed, so I needed to find one that did (python:alpine)
 - Now that I could run Python, I needed to figure out how to use the DEV.to API: what Python library should I be using?
