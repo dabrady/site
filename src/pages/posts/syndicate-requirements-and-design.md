@@ -26,7 +26,7 @@ The first challenge I overcame was finding a Docker image that would actually ru
 
 At first, I simply swapped out my `alpine` image for the `python:3` image, but that significantly increased the action build time (by 2 or 3x :grimacing:) so I was immediately skeptical of using it. Luckily, I decided to read beyond the "How to use this image" section of the documentation, and discovered there were a couple of 'light-weight' versions. Since I didn't yet have any project dependencies, I decided to try using `python:3-alpine` because of its boasted performance characterisics, and then forget about it until it no longer worked. It did the thing, and my base build time was only about 6 seconds.
 
-Now that I could run Python, I needed to figure out how to use the [DEV.to API](https://docs.dev.to/api) I had discovered earlier. But more importantly, I needed to figure out how to do it **in Python**, ideally using some sort of standard or canonical library.
+Now that I had a Github Action building a container that could run Python, I needed to figure out how to use the [DEV.to API](https://docs.dev.to/api) I had discovered earlier. But more importantly, I needed to figure out how to do it **in Python**, ideally using some sort of standard or canonical library.
 
 The [`requests`](https://requests.readthedocs.io/) package was the answer, quickly found, and its documentation was to become the third and final sacred text in my project's development.
 
