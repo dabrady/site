@@ -24,38 +24,52 @@ After my initial research and setup, I was eager to start spec'ing out the _actu
 
 The first challenge I overcame was finding a Docker image that would actually run Python. As it turns out, the `alpine` image used in the tutorial does not come with Python installed, so I needed to either install it myself or look for a different container that came with it. I opted for the second approach first, and a simple search of "python Docker image" led me to...the [`python` Docker image](https://hub.docker.com/_/python).
 
-At first, I simply swapped out my `alpine` image for the `python:3` image, but that significantly increased the action build time (by 2 or 3x :grimacing:) so I was immediately skeptical of using it. Luckily, I decided to read beyond the "How to use this image" section of the documentation, and discovered there were a couple of 'light-weight' versions. Since I didn't yet have any project dependencies, I decided to try using `python:3-alpine` because of its boasted performance characterisics until it no longer worked.
+At first, I simply swapped out my `alpine` image for the `python:3` image, but that significantly increased the action build time (by 2 or 3x :grimacing:) so I was immediately skeptical of using it. Luckily, I decided to read beyond the "How to use this image" section of the documentation, and discovered there were a couple of 'light-weight' versions. Since I didn't yet have any project dependencies, I decided to try using `python:3-alpine` because of its boasted performance characterisics until it no longer worked. It worked well, and no-dependencies build time was only about 6 seconds.
 
+Now that I could run Python, I needed to figure out how to use the [DEV.to API](https://docs.dev.to/api) I had discovered earlier. But more importantly, I needed to figure out how to do it **in Python**, ideally using some sort of standard or canonical library.
 
+The [`requests`](https://requests.readthedocs.io/) package was the answer, quickly found, and its documentation was to become the third and final sacred text in my project's development.
 
-<!---
-- The first challenge I overcame was finding a Docker image that would actually run Python; turns out the `alpine` image used in the tutorial did not have Python installed, so I needed to find one that did (python:alpine)
-- Now that I could run Python, I needed to figure out how to use the DEV.to API: what Python library should I be using?
-- The `requests` package was the answer, quickly found, and its documentation was the second sacred text in this project's development
-- I started to familiarize myself with `requests` and the DEV API by transforming my Hello World script into something that would simply retrieve the metadata for my published posts on DEV.to (by this time, I'd written 4 or 5 and so this was a really nice sample data set)
-- Once I got that working, I thought about whether I would actually need that functionality in `syndicate`: it wasn't clear at that point, because I hadn't actually done any design work for the project itself yet; I decided to spend time making this bit of logic an example for myself to follow with respect to using the DEV API and `requests` package properly (including things like error handling, input validation, request authentication, failed request handling, testing, and logging)
-- This decision proved quite valuable: it gave me a concrete exercise in which I figured out how my overall application logic would flow, and learned things like how to print to the Github Workflow log; how to read information from the Github Action environment; how to use Pytest; how to authenticate my DEV API requests and parse response bodies; how to handle failed requests
-- By the end of the end of that exercise, I had:
-  - a Github Workflow definition that used my action and provided it with a list of platforms to publish to and the API keys required for using their APIs
-  - an entrypoint for the Docker container that simply invoked my 'main' Python script with any arguments specified by the workflow
-  - a 'main' Python script, which was actually a Python module called 'syndicate' which defined a single function, `elsewhere`, responsible for basic input validation, delegation to the appropriate silo adapters, and final reporting
-  - a 'DEV' adapter that fetched and returned my published posts from DEV.to using the API key provided by the workflow definition
-  - the beginnings of a utility library with functions that handled printing to the Github Workflow log at various log levels
-  - a small test suite for my 'fetch' logic
-  - a fully polished and tested example of how to interact with the DEV.to API via the `requests` package
-  - not to mention a much firmer grasp of using Python itself
-- At this point I paused development, and spent an evening working on the requirements and tech design for the actual thing I wanted to build
-- Initial requirements
-  - My MVP (and possibly first release) would only support DEV.to
-  - It needed to be easy to add support for publishing to new platforms
-  - Given a Markdown file, it needed to be able to create a draft on DEV.to with its contents
-  - Given a (presumably changed) Markdown file previously syndicated to DEV.to, it needed to be able to replace the syndicated copy with the new version
-  - Given a commit that triggered a workflow using the `syndicate` action, it needed to be able to identify and extract the contents of the added/modified files to syndicate from that commit
-  - It needed to be able to identify files that had been syndicated to a given silo previously, in order to decide whether to create a draft or push an update
-- Tech design
-  - inputs: list of silos and associated API keys
-  - outputs: summary of the files added/modified on each silo
-  - structured as mentioned previously: mechanisms for interacting with a particular silo encapsulated in their own adapter files; `syndicate.elsewhere` responsible for engaging the appropriate adapters and aggregating the output
-  - syndicated files would be 'tagged' with unique identifiers provided (presumably) by the silos themselves in the draft API response; tags take the form of attributes injected into the YAML frontmatter of a Markdown file, and persisted via committing upstream
-- Requirements and basic design in hand, I set to work
--->
+I started to familiarize myself with `requests` and the DEV.to API by transforming my existing action code into a simple prototype. Given my inexperience in basically everything about this project, I decided to start out building something that would react to pushing a commit to my Github repository by fetching my posts from DEV.to and logging out their titles. Reading from DEV was the simplest interaction with the API that seemed like it would also make for a good exercise.
+
+Once I got that working, I thought about whether I would actually need that functionality in `syndicate`. It wasn't clear at that point, because I hadn't actually done any design work for the project yet.
+
+I decided to spend time maturing this first bit of logic into an example for myself to follow later on, with respect to using the DEV API and `requests` package properly. I would include things like request authentication, input validation, error and failed request handling, testing, and logging.
+
+This decision proved quite valuable. It gave me a small but wholistic exercise in which I figured out how my overall application logic might flow, and learned things like how to print to the Github Workflow log; how to read information from the Github Workflow environment; and how to use Pytest to write specifications for my code.
+
+By the end of that exercise, I had:
+
+- a Github Workflow definition that used my action and provided it with a list of platforms to publsh to, along with the API keys required for using their APIs
+- an entrypoint for the Docker container that invoked my 'main' Python application with any arguments specified by the Github Workflow
+- a small but functional Python module called 'syndicate' which defined a single function, `elsewhere`, responsible for basic input validation, delegation to the appropriate syndication code, and final reporting
+- a function that fetched and returned my published posts from DEV.to using the API key provided by the Github Workflow
+- the beginnings of a utility library, with functions that handled printing to the Github Workflow log at various log levels
+- a small test suite for my DEV 'fetch' logic
+- a fully polished and tested example of how to interact with the DEV.to API via the `requests` package
+
+And let's not overlook the experience gained using Python itself!
+
+I was happy with my prototype, and I had learned many useful things. At this point, I paused development to take stock of where I was and where I needed to go.
+
+I spent an evening working on a set of initial requirements and high-level technical design for the actual thing I wanted to build, and this is what I came up with:
+
+**Initial Requirements**
+- My MVP (and possibly first release) would only support DEV.to
+- It needed to be easy to add support for publishing to new platforms
+- Given a Markdown file, it needed to be abe to create a draft on DEV.to with its contents
+- Given a (presumably changed) Markdown file previously syndicated to DEV.to, it needed to be able to replace the syndicated copy with the new version
+- Given a commit that triggered a workflow using the `syndicate` action, it needed to be able to identify and extract the contents of the added/modified files to syndicate from that commit
+- It needed to be able to identify files that had been syndicated to a given silo previously, in order to decide whether to create a draft or push an update
+
+**High-level Tech Design**
+- `syndicate` would be designed as a Github Action, to be incorporated into a Github Workflow for managing content syndication
+- Inputs:
+  - a list of 'silo' platforms to syndicate to
+  - any secrets required to use the APIs associated with the given silos
+- Outputs:
+  - a summary of the files added/modified on each silo platform
+- Mechanisms for interacting with a particular silo should be encapsulated in their own 'adapter' files with a single point of entry; the `syndicate.elsewhere` function would be responsible for engaging the appropriate adapters and aggregating the output
+- Syndicated files would be 'tagged' with unique identifiers provided (presumably) by the silos themselves in the 'draft' API response; this tagging would allow the action to recognize files in the repo that already exist on a given silo
+
+Seeing it laid out on paper (yes, that still exists) was getting me excited! I gutted the prototype I had created, keeping only the main structure and wiring along with some of the more useful code snippets as comments, and set to work.
