@@ -1,10 +1,10 @@
 ---
-canonical_url:
-date: 2020-02-17T18:25+00:00
+canonical_url: null
+date: 2020-02-22T15:11+00:00
 published: false
 series: The making of 'syndicate'
-tags:
-title: [wip] syndicate: Harvesting Commits and Drafting to DEV.to
+tags: null
+title: 'syndicate: Harvesting Commits and Drafting to DEV'
 ---
 
 _I made this for people who write words they share with others:_
