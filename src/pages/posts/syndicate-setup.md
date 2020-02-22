@@ -1,10 +1,13 @@
 ---
 canonical_url: null
-date: 2020-02-18T20:57+00:00
+date: 2020-02-22T14:56+00:00
 dev_silo_id: 266356
-published: false
+published: true
 series: The making of 'syndicate'
-tags: null
+tags:
+- showdev
+- python
+- development
 title: 'syndicate: Initial Research and Setup'
 ---
 
