@@ -57,7 +57,7 @@ I spent an evening working on a set of initial requirements and high-level techn
 **Initial Requirements**
 - My MVP (and possibly first release) would only support DEV.to
 - It needed to be easy to add support for publishing to new platforms
-- Given a Markdown file, it needed to be abe to create a draft on DEV.to with its contents
+- Given a Markdown file, it needed to be able to create a draft on DEV.to with its contents
 - Given a (presumably changed) Markdown file previously syndicated to DEV.to, it needed to be able to replace the syndicated copy with the new version
 - Given a commit that triggered a workflow using the `syndicate` action, it needed to be able to identify and extract the contents of the added/modified files to syndicate from that commit
 - It needed to be able to identify files that had been syndicated to a given silo previously, in order to decide whether to create a draft or push an update
