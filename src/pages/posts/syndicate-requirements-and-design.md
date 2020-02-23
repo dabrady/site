@@ -44,12 +44,12 @@ This decision proved quite valuable. It gave me a small but wholistic exercise i
 
 By the end of that exercise, I had:
 
-- a Github Workflow definition that used my action and provided it with a list of platforms to publsh to, along with the API keys required for using their APIs
-- an entrypoint for the Docker container that invoked my 'main' Python application with any arguments specified by the Github Workflow
-- a small but functional Python module called 'syndicate' which defined a single function, `elsewhere`, responsible for basic input validation, delegation to the appropriate syndication code, and final reporting
-- a function that fetched and returned my published posts from DEV.to using the API key provided by the Github Workflow
-- the beginnings of a utility library, with functions that handled printing to the Github Workflow log at various log levels
-- a small test suite for my DEV 'fetch' logic
+- [a Github Workflow definition](https://github.com/dabrady/syndicate/blob/30fbc16d30212cf3f94c9644370e724d1050077c/.github/workflows/main.yml) that used my action and provided it with a list of platforms to publsh to, along with the API keys required for using their APIs
+- [an entrypoint for the Docker container](https://github.com/dabrady/syndicate/blob/30fbc16d30212cf3f94c9644370e724d1050077c/entrypoint.py) that invoked my 'main' Python application with any arguments specified by the Github Workflow
+- a small but functional Python module called 'syndicate' which defined [a single function, `elsewhere`](https://github.com/dabrady/syndicate/blob/30fbc16d30212cf3f94c9644370e724d1050077c/syndicate/__init__.py#L8-L27), responsible for basic input validation, delegation to the appropriate syndication code, and final reporting
+- [a function that fetched and returned my published posts](https://github.com/dabrady/syndicate/blob/30fbc16d30212cf3f94c9644370e724d1050077c/syndicate/silos/dev.py#L14-L42) from DEV.to using the API key provided by the Github Workflow
+- the beginnings of [a utility library](https://github.com/dabrady/syndicate/blob/30fbc16d30212cf3f94c9644370e724d1050077c/syndicate/utils.py), with functions that handled printing to the Github Workflow log at various log levels
+- [a small test suite](https://github.com/dabrady/syndicate/blob/30fbc16d30212cf3f94c9644370e724d1050077c/tests/test_dev.py) for my DEV 'fetch' logic
 - a fully polished and tested example of how to interact with the DEV.to API via the `requests` package
 
 And let's not overlook the experience gained using Python itself!
