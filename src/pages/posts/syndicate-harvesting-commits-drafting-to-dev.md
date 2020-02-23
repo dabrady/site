@@ -1,6 +1,7 @@
 ---
 canonical_url: null
 date: 2020-02-22T15:11+00:00
+dev_silo_id: 267097
 published: false
 series: The making of 'syndicate'
 tags: null
