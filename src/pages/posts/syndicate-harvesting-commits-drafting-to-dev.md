@@ -20,7 +20,7 @@ _This is how I did it._
 
 ---
 
-With the skeleton of a project in place and [a clear direction](https://dev.to/daniel13rady/syndicate-prototype-requirements-and-design-455k) to go in, I was ready to get started in earnest.
+With the [skeleton of a project](https://github.com/dabrady/syndicate/tree/30fbc16d30212cf3f94c9644370e724d1050077c) in place and [a clear direction](https://dev.to/daniel13rady/syndicate-prototype-requirements-and-design-455k) to go in, I was ready to get started in earnest.
 
 I decided to get [the DEV.to API](https://docs.dev.to/api) interactions working first, and then I would need to figure out how to harvest a `git` commit for the actual input to DEV.
 
@@ -34,20 +34,22 @@ For my purposes, the most valuable of these would turn out to be:
 - the `GITHUB_SHA` (the commit SHA that triggered the workflow)
 - the `GITHUB_REPOSITORY` (the full name of the repo containing the workflow)
 
-It quickly became apparent that the actual contents of the commit which triggered the workflow were not available to me out of the box; I would need to get them myself, somehow. I had started this project expecting the only external APIs I'd be interacting with would be the ones for the silo platfroms I included support for; but this new development meant I needed to learn about the Github API, as well.
+It quickly became apparent that the actual contents of the commit which triggered the workflow were not available to me out of the box; I would need to get them myself, somehow. I had started this project expecting the only external APIs I'd be interacting with would be the ones for the silo platfroms I included support for; but this new development meant I needed to learn about [the Github API](https://developer.github.com/v3/), as well.
 
-If I had opted to use the Github API directly through the `requests` package, like I was doing with the DEV.to API, I would have had a very different experience. But I did not do that. Instead, I went looking for a Github-specific Python library to use. I don't remember why I chose this path, but it might have simply been because I knew so many Github extensions and integrations existed that there were bound to be some who had wrapped the Github API into an easier-to-consume Python library.
+If I had opted to use the Github API directly through the `requests` package, like I was doing with the DEV.to API, I would have had a very different experience (though not necessarily a better or worse one). But I did not do that.
+
+Instead, I went looking for a Github-specific Python library to use. I don't remember why I chose this path, but it might have simply been because I knew so many Github extensions and integrations existed that there were bound to be some who had wrapped the Github API into an easier-to-consume Python library.
 
 And indeed there were several options to choose from. The first option advertised by the internet via Google was `PyGithub`. But [the documentation felt terrible](https://pygithub.readthedocs.io/): a full half of the README was simply bragging about who was using the library and linking to people on the internet recommending it. For that reason alone, I almost immediately went searching for some other option.
 
-The package I decided to use was called [`github3.py`](https://github3py.readthedocs.io). By comparison, the documentation felt wonderful, like the package authors actually cared about helping people understand the software, and not just each bit of code in isolation. (NOTE TO SELF: don't be a hypocrite, create a great ReadTheDocs site for `syndicate`).
+The package I decided to use was called `github3.py`. By comparison, [the documentation felt wonderful](https://github3py.readthedocs.io), like the package authors actually cared about helping people understand the software, and not just each bit of code in isolation. (NOTE TO SELF: don't be a hypocrite, create a great ReadTheDocs site for `syndicate`).
 
 But there was a problem: adding `github3.py` to my project dependencies broke everything.
 
 The root cause, again, was that my Docker image did not create the environment necessary to support the code I was trying to run. I quickly discovered that switching from using `python:3-alpine` back to `python:3` resolved the build issues, though it also brought back the "this thing takes too damn long to build" problem. But I was impatient, so I decided to put up with the longer build times to unblock what felt like the "real project development" and deferred solving this performance problem until the end of the project.
 
 > <small>:warning: SPOILER ALERT :warning:</small>
-> <small>I would eventually switch from using `github3.py` to using `PyGithub` (which did not introduce the same build issues), and if I had just tried it out at this point instead of being so impatient to continue feature development, I could have saved myself a lot of frustration and headaches.</small>
+> <small>I would eventually switch from using `github3.py` to using `PyGithub` (which did not introduce the same build issues), and if I had just tried it out at this point instead of being so impatient to continue feature development, I could have saved myself a lot of time and self-induced frustration felt while waiting for my code to compile.</small>
 
 With the build back to a stable state, I finally began to tackle the challenge of figuring out how to transform a `git` commit into a draft on DEV.to.
 
