@@ -1,10 +1,13 @@
 ---
 canonical_url: null
-date: 2020-02-22T15:11+00:00
+date: 2020-02-23T19:44+00:00
 dev_silo_id: 267097
-published: false
+published: true
 series: The making of 'syndicate'
-tags: null
+tags:
+- showdev
+- python
+- development
 title: 'syndicate: Harvesting Commits and Drafting to DEV'
 ---
 
