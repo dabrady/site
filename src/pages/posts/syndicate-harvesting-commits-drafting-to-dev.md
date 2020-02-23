@@ -49,12 +49,25 @@ The problem, again, was that my Docker image did not create the environment nece
 > <small>:warning: SPOILER ALERT :warning:</small>
 > <small>I would eventually switch from using `github3.py` to using `PyGithub` (which did not introduce the same build issues), and if I had just tried it out at this point instead of being so impatient to continue feature development, I could have saved myself a lot of frustration and headaches.</small>
 
+With the build back to a stable state, I finally began to tackle the challenge of figuring out how to transform a `git` commit into a draft on DEV.to.
+
+The `github3.py` API documentation is great, and I quickly figured out how to extract the contents of the added/changed files in the commit that had triggered the action. I realized, however, that I couldn't assume all the changed files in the commit were posts that needed syndication; I needed a way to identify the files the commiter _intended_ to syndicate.
+
+A quick and easy solution was to introduce a configuration variable for my Github action specifying a path prefix that could be used to distinguish 'posts' from other files in their repository. This has downsides: it assumes the author keeps all their posts in a particular location, and it assumes that all files in that particular location are posts.
+
+That said, it would suffice until it actually caused someone problems, so I went with that approach. I opted to make it an environment variable instead of an explicit input to the action because of how Github Workflows work: this value is static information about the repository, and my action might get used in multiple steps within the same workflow; using an environment variable allows it to be specified at a higher level than the individual action config if you want, which let's you share the value across a larger part of your workflow and avoid duplication.
+
+Now that I could accurately [identify "posts" in a given commit](https://github.com/dabrady/syndicate/blob/69b30c13bd02eb3223e27dc05693f1c32ce5ef47/syndicate/utils.py#L114-L128), I needed to be able to parse out the details necessary for the API call that would be made.
+
+To create a post, the only actual [data required by the DEV.to API](https://docs.dev.to/api/index.html#operation/createArticle) is a title. Simple. Now that I could access everything about the files being syndicated, I could just grab their titles and contents, plug them into the API request, and win at life.
+
+But...wait. Where is the title of a post? :thinking:
+
+
+
+
 
 <!---
-- The `github3.py` documentation is great, and I quickly figured out how to extract the contents of the added/changed files in the commit that had triggered my action
-- I realized though that I couldn't assume that _all_ the changed files in the commit were posts that needed syndication, so I needed a way to identify the files the committer _intended_ to syndicate; I resolved this simply by adding a new input to my action: a parent directory, relative to the repository root, where the author keeps their posts; I opted to make it an environment variable purely because of how Github Workflows work: it's static info about the repo, and this action might be used mulitple times in a workflow, so using an env var allows it to be defined at a higher level than individual action config if you want
-- This has downsides: it assumes the author keeps all their posts under a specific directory, and it assumes that all files that could change within that directory or its children are posts; but it works for now
-- Once I could accurately identify "posts" in a given commit, I needed to be able to parse out the details necessary for the API call that would be made
 - At this point, I decided to make another assumption: that all posts would have a YAML frontmatter; and rather than try to do something fancy with the filename, I would assume that the YAML frontmatter contains a 'title' attribute (and fail if it doesn't)
 - Again, downsides: I have no idea how common YAML frontmatter usage is, but it's the format used by DEV.to and that influenced the standards by which I developed this project
 - So now I needed a way to parse YAML out of a string; I knew YAML is pretty well-used, so I expected there to be a good library for working with it; and indeed, I found several; `PyYAML` seemed canonical, but also overkill for my needs and the documentation was ugly; in one of my search queries I included the keyword 'frontmatter' and came across `python-frontmatter`, which was small and great for simple reads and writes of the frontmatter
