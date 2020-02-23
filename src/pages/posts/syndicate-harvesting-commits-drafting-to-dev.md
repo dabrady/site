@@ -65,14 +65,14 @@ To create a post, the only actual [data required by the DEV.to API](https://docs
 
 But...wait. Where is the title of a post? :thinking:
 
+An obvious, but probably poor, answer is "in the file name." I could already tell that going down that route would lead to pain and suffering, so I decided to make another assumption: my action would expect all posts to be written in Markdown, and contain a YAML frontmatter with at least a `title` attribute.
 
+Given my initial target audience are those who write for DEV.to, and that is how posts are formatted there, it isn't as random of a choice as it might first appear. But still, I did not do any research on the prevalence of this format adoption, and that may come back to bite me in the future.
 
+But for the first iteration, it would do just fine. I now needed a way to parse YAML out of a string; I knew YAML is pretty widely used in software configuration, and Python is known for its usage in data processing, so I expected there to be a good library for working with it.
 
+And indeed there were. [`PyYAML`](https://pypi.org/project/PyYAML/) seemed canonical, from what I could tell, but it also seemed like overkill for my needs; plus, [the documentation was ugly and hard to use](https://pyyaml.org/wiki/PyYAMLDocumentation) (again NOTE TO SELF: ugly docs discourage users). I kept searching, and in one of my queries I included the keyword 'frontmatter' and caught a lucky break: [`python-frontmatter`](https://python-frontmatter.readthedocs.io/) was a small library specifically for manipulating YAML metadata embedded within text documents, and perfect for my needs.
 
-<!---
-- At this point, I decided to make another assumption: that all posts would have a YAML frontmatter; and rather than try to do something fancy with the filename, I would assume that the YAML frontmatter contains a 'title' attribute (and fail if it doesn't)
-- Again, downsides: I have no idea how common YAML frontmatter usage is, but it's the format used by DEV.to and that influenced the standards by which I developed this project
-- So now I needed a way to parse YAML out of a string; I knew YAML is pretty well-used, so I expected there to be a good library for working with it; and indeed, I found several; `PyYAML` seemed canonical, but also overkill for my needs and the documentation was ugly; in one of my search queries I included the keyword 'frontmatter' and came across `python-frontmatter`, which was small and great for simple reads and writes of the frontmatter
-- At that point, it only took a bit of tinkering and suddenly I had something that would automatically push my newly created content to DEV.to as a draft when I pushed it to my repo.
-- But the battle had only just begun: I now needed to be able to know if I'd previously created a draft for a given post, so I could avoid creating duplicates and set the scene for pushing updates to existing content, if possible
--->
+At that point, it only took a bit of tinkering and [suddenly I had something](https://github.com/dabrady/syndicate/commit/49d7a062df17d4f7a93eef02d94a749245147cb4) that would automatically push my newly created content to DEV.to as a draft, when I pushed it to my repo. It was time for my happy dance.
+
+But the game had only just begun: I now needed to determine if I'd previously created a draft for a given post in order to avoid creating duplicates, and set the stage for pushing updates to existing content if possible.
