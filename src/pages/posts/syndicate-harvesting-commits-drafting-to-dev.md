@@ -48,7 +48,7 @@ But there was a problem: adding `github3.py` to my project dependencies broke ev
 
 The root cause, again, was that my Docker image did not create the environment necessary to support the code I was trying to run. I quickly discovered that switching from using `python:3-alpine` back to `python:3` resolved the build issues, though it also brought back the "this thing takes too damn long to build" problem. But I was impatient, so I decided to put up with the longer build times to unblock what felt like the "real project development" and deferred solving this performance problem until the end of the project.
 
-> <small>:warning: SPOILER ALERT :warning:</small>
+> :snail::cherry_blossom: **Note From Future Me**
 > <small>I would eventually switch from using `github3.py` to using `PyGithub` (which did not introduce the same build issues), and if I had just tried it out at this point instead of being so impatient to continue feature development, I could have saved myself a lot of time and self-induced frustration felt while waiting for my code to compile.</small>
 
 With the build back to a stable state, I finally began to tackle the challenge of figuring out how to transform a `git` commit into a draft on DEV.to.
