@@ -46,9 +46,9 @@ But there was a problem: adding `github3.py` to my project dependencies broke ev
 
 The problem, again, was that my Docker image did not create the environment necessary to support the code I was trying to run. I quickly discovered that switching from using `python:3-alpine` back to `python:3` resolved the build issues, though it also brought back the "this thing takes too damn long to build" problem. But I was impatient, so I decided to put up with the longer build times to unblock what felt like the "real project development" and deferred solving this performance problem until the end of the project.
 
-<details><summary>:warning: SPOILER :warning:</summary>
-I would eventually switch from using `github3.py` to using `PyGithub` (which did not introduce the same build issues), and if I had just tried it out at this point instead of being so impatient to continue feature development, I could have saved myself a lot of frustration and headaches.
-</details>
+> :warning: SPOILER ALERT :warning
+> I would eventually switch from using `github3.py` to using `PyGithub` (which did not introduce the same build issues), and if I had just tried it out at this point instead of being so impatient to continue feature development, I could have saved myself a lot of frustration and headaches.
+
 
 <!---
 - The `github3.py` documentation is great, and I quickly figured out how to extract the contents of the added/changed files in the commit that had triggered my action
