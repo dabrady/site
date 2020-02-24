@@ -1,6 +1,7 @@
 ---
 canonical_url: null
 date: 2020-02-24T10:34+00:00
+dev_silo_id: 267652
 published: false
 series: null
 tags:
@@ -8,7 +9,7 @@ tags:
 - language
 - design
 - thinkdeep
-title: 'Have you ever tried implementing a language spec?'
+title: Have you ever tried implementing a language spec?
 ---
 
 I've thought many times that it would be a fun challenge, and a great way to learn about language design and the choices made by the creators of my tools. But I still have never tried.
