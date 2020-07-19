@@ -5,7 +5,7 @@ import { space, fontSize } from "styled-system";
 import React from "react";
 import styled from "@emotion/styled";
 
-import Styles from "./layout.css";
+import "./layout.css";
 import { rhythm } from "@utils/typography";
 
 const Root = styled.div`
