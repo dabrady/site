@@ -1,10 +1,12 @@
+import _ from "lodash";
 import Typography from "typography";
 import CodePlugin from "typography-plugin-code";
 import lincoln from "typography-theme-lincoln";
 
-import darkness, { scaleRatio } from "@utils/themes/darkness";
+import colors from "@utils/themes/colors";
+import t, { scaleRatio } from "@utils/themes/lightness";
 
-export const theme = darkness;
+export const theme = t;
 
 const { header, link, body, background } = theme.colors;
 // TODO Iterate on this once I have written some actual blog posts.
@@ -14,12 +16,13 @@ const typography = new Typography({
   scaleRatio,
   headerColor: header,
   bodyColor: body,
+  bodyFontFamily: ["fantasy"],
   overrideThemeStyles: () => ({
     body: {
-      backgroundColor: background
+      background
     },
     a: {
-      color: link,
+      color: body,
       backgroundImage: null,
       textShadow: null
     }
@@ -27,4 +30,9 @@ const typography = new Typography({
 });
 
 export default typography;
-export const rhythm = typography.rhythm;
+export const { scale, rhythm } = typography;
+
+export function updateTypography(opts) {
+  _.merge(typography.options, opts);
+  typography.injectStyles();
+}
