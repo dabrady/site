@@ -14,6 +14,7 @@ const typography = new Typography({
   scaleRatio,
   headerColor: header,
   bodyColor: body,
+  bodyFontFamily: ["Lato", "fantasy"],
   overrideThemeStyles: () => ({
     body: {
       backgroundColor: background
