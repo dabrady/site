@@ -5,7 +5,6 @@ const font = new FontFaceObserver("Lato");
 font
   .load()
   .then(function fontLoaded() {
-    console.log("lato font loaded");
     updateTypography({
       bodyFontFamily: ["Lato"]
     });
