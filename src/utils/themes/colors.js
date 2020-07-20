@@ -33,12 +33,12 @@ export function parse(cssColor) {
 }
 
 /**
- * Generates a RGBA version of the given CSS color, with the A set to 0
- * thus creating a transparent version of the given color.
+ * Generates a RGBA version of the given CSS color, with the A set to
+ * the given value, thus creating a transparent version of the given color.
  *
  * Returns the appropriate CSS color string.
  */
-export function transparent(cssColor) {
+export function transparent(cssColor, transparency = 0) {
   // Thank you, community: https://stackoverflow.com/a/5624139/1795402
   function hexToRGB(hex) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -68,10 +68,10 @@ export function transparent(cssColor) {
       var { r, g, b } = rgb;
       values = [r, g, b];
     case "rgb":
-      return `rgba(${values}, 0)`;
+      return `rgba(${values}, ${transparency})`;
     case "rgba":
     case "hsla":
-      values[values.length - 1] = 0;
+      values[values.length - 1] = transparency;
       return `${func}(${values})`;
     default:
       console.warn(`Unrecognized CSS color format: ${cssColor}`);
