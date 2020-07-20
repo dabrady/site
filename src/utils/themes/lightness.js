@@ -5,8 +5,8 @@ const theme = {
   ...base,
   colors: {
     background: colors.SoftWhite,
+    header: colors.Black,
     body: colors.Black,
-    header: colors.Charcoal,
     accent: colors.Red
   }
 };

@@ -1,142 +1,15 @@
 import gray from "gray-percentage";
+import chroma from "chroma-js";
 
 const colors = {
-  Black: "#000",
-  White: "#fff",
-  Red: "#933",
-  Charcoal: "#282828",
-  IcyBlue: "#80aac6",
-  SoftWhite: gray(90, 0, true),
-  DirtySnow: gray(73, 0, true)
+  Black: chroma("#000").css(),
+  White: chroma("#fff").css(),
+  Red: chroma("#933").css(),
+  Charcoal: chroma("#282828").css(),
+  SoftGray: chroma("#9b9b9b").css(),
+  IcyBlue: chroma("#00b7ff").css(),
+  SoftWhite: chroma(gray(90, 0, true)).css(),
+  DirtySnow: chroma(gray(73, 0, true)).css()
 };
 
-/**
- * Parses a CSS color into an array of JS values.
- * The first value is the CSS color function string, and the rest are
- * the number representations of the color values.
- *
- * TODO Support color keywords.
- */
-export function parse(cssColor) {
-  const COLOR_FUNC_REGEX = /^rgba|rgb|hsla|#/;
-  const NON_HEX_COLOR_REGEX = /[^\d,.%]/g;
-  const HEX_COLOR_REGEX = /#/g;
-
-  var colorFunc = cssColor.match(COLOR_FUNC_REGEX)[0];
-  return [
-    colorFunc,
-    ...cssColor
-      .replace(colorFunc === "#" ? HEX_COLOR_REGEX : NON_HEX_COLOR_REGEX, "")
-      .split(",")
-  ];
-}
-
-/**
- * Generates a RGBA version of the given CSS color, with the A set to
- * the given value, thus creating a transparent version of the given color.
- *
- * Returns the appropriate CSS color string.
- */
-export function transparent(cssColor, transparency = 0) {
-  var [func, ...values] = parse(cssColor);
-  switch (func) {
-    case "#":
-      var rgb = hexToRGB(cssColor);
-      if (!rgb) {
-        console.warn(`Unrecognized hex color format: ${cssColor}`);
-        return null;
-      }
-      var { r, g, b } = rgb;
-      values = [r, g, b];
-    case "rgb":
-      return `rgba(${values}, ${transparency})`;
-    case "rgba":
-    case "hsla":
-      values[values.length - 1] = transparency;
-      return `${func}(${values})`;
-    default:
-      console.warn(`Unrecognized CSS color format: ${cssColor}`);
-      return null;
-  }
-}
-
-/**
- * Performs a linear interpolation between the given two colors by the given amount.
- *
- * @see https://stackoverflow.com/a/2690026/1795402
- */
-export function lerp(startColor, endColor, amount) {
-  var [startType, ...startValues] = parse(startColor);
-  var [endType, ...endValues] = parse(endColor);
-  if (startType != endType) {
-    console.warn(
-      "Colors must be of the same type; type coercion not supported"
-    );
-    return null;
-  }
-
-  switch (startType) {
-    case "rgb":
-      var newColor = [
-        slurp(startValues[0], endValues[0], amount),
-        slurp(startValues[1], endValues[1], amount),
-        slurp(startValues[2], endValues[2], amount)
-      ];
-      return `rgb(${newColor})`;
-    case "#":
-      return lerp(
-        `rgb(${Object.values(hexToRGB(startColor))})`,
-        `rgb(${Object.values(hexToRGB(endColor))})`,
-        amount
-      );
-    case "rgba":
-    case "hsla":
-    default:
-      console.warn(`Unsupported CSS color format: ${startType}`);
-      return null;
-  }
-
-  // ******
-  function slurp(start, end, factor) {
-    start = parseInt(start);
-    end = parseInt(end);
-    factor = parseFloat(factor);
-    return start + (end - start) * factor;
-  }
-}
-
-/**
- * Lightens the given color by the given amount.
- */
-export function lighten(color, by = 0.1) {
-  return lerp(color, colors.White, by);
-}
-
-/**
- * Darkens the given color by the given amount.
- */
-export function darken(color, by = 0.1) {
-  return lerp(color, colors.Black, by);
-}
-
 export default colors;
-
-// ********
-
-// Thank you, community: https://stackoverflow.com/a/5624139/1795402
-function hexToRGB(hex) {
-  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      }
-    : null;
-}
