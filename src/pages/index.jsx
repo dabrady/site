@@ -1,3 +1,4 @@
+import chroma from "chroma-js";
 import React from "react";
 import { css } from "@emotion/core";
 
@@ -5,7 +6,6 @@ import Layout from "@components/layout";
 import SEO from "@components/seo";
 
 import { theme } from "@utils/typography";
-import colors, { lighten, darken } from "@utils/themes/colors";
 
 const IndexPage = ({ data }) => {
   return (
@@ -38,7 +38,9 @@ const IndexPage = ({ data }) => {
           font-weight: 600;
           line-height: 1.1;
           margin: 0 0 10px;
-          color: ${darken(theme.colors.body, 0.3)};
+          color: ${chroma(theme.colors.header)
+            .alpha(0.5)
+            .css()};
         `}
       >
         I am not a web developer.
