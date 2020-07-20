@@ -1,12 +1,14 @@
 import gray from "gray-percentage";
 
 const colors = {
-  black: "rgba(0,0,0,1)",
-  white: "rgba(255,255,255,1)",
-  charcoal: "#282828",
-  icyblue: "#80aac6",
-  softwhite: gray(90, 0, true),
-  dirtysnow: gray(73, 0, true)
+  Black: "rgba(0,0,0,1)",
+  White: "rgba(255,255,255,1)",
+  Red: "rgba(153,51,51,1)",
+  FaintRed: "rgba(251, 243, 243, 1)",
+  Charcoal: "#282828",
+  IcyBlue: "#80aac6",
+  SoftWhite: gray(90, 0, true),
+  DirtySnow: gray(73, 0, true)
 };
 
 /**
