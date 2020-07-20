@@ -1,13 +1,13 @@
 import FontFaceObserver from "fontfaceobserver";
-import typography, { updateTypography } from "@utils/typography";
+import { updateTypography } from "@utils/typography";
 
 const font = new FontFaceObserver("Lato");
 font
   .load()
   .then(function fontLoaded() {
-    console.log("lato font loaded");
     updateTypography({
-      bodyFontFamily: ["Lato"]
+      bodyFontFamily: ["Lato"],
+      headerFontFamily: ["Lato"]
     });
   })
   .catch(function fontLoadFailed(e) {
