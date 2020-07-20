@@ -25,6 +25,20 @@ const typography = new Typography({
       color: body,
       backgroundImage: null,
       textShadow: null
+    },
+    // Cloning link style from pracicaltypography.com
+    "a::after": {
+      content: "'°'",
+      marginLeft: "0.1em",
+      top: "-0.1em",
+      fontSize: "90%",
+      color: link
+    },
+    "a:hover": {
+      background: colors.FaintRed,
+      transitionProperty: "background",
+      transitionDuration: "0.2s",
+      borderRadius: "8px"
     }
   })
 });
