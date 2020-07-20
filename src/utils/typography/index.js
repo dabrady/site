@@ -17,12 +17,14 @@ const typography = new Typography({
   headerColor: header,
   bodyColor: body,
   bodyFontFamily: ["fantasy"],
+  headerFontFamily: ["fantasy"],
   overrideThemeStyles: () => ({
     body: {
       background
     },
     a: {
       color: body,
+      cursor: "pointer",
       backgroundImage: null,
       textShadow: null
     },
