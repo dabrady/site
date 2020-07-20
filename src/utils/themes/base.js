@@ -1,8 +1,9 @@
 import { fontSizes, spaces } from "@utils/typography/calculations";
 
 // A 'golden ratio'
-export const scaleRatio = 1.618;
+const scaleRatio = 1.618;
 const theme = {
+  scaleRatio,
   fontSizes: fontSizes(scaleRatio),
   space: spaces(scaleRatio)
 };
