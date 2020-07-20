@@ -3,8 +3,7 @@ import Typography from "typography";
 import CodePlugin from "typography-plugin-code";
 import lincoln from "typography-theme-lincoln";
 
-import colors from "@utils/themes/colors";
-
+import colors, { transparent } from "@utils/themes/colors";
 import t from "@utils/themes/darkness";
 export const theme = t;
 
@@ -36,7 +35,7 @@ const typography = new Typography({
       color: link
     },
     "a:hover": {
-      background: colors.FaintRed,
+      background: transparent(link, 0.075),
       transitionProperty: "background",
       transitionDuration: "0.2s",
       borderRadius: "8px"
