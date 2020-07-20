@@ -3,12 +3,12 @@ import Typography from "typography";
 import CodePlugin from "typography-plugin-code";
 import lincoln from "typography-theme-lincoln";
 
-import colors, { transparent } from "@utils/themes/colors";
+import { lighten, transparent } from "@utils/themes/colors";
 import t from "@utils/themes/darkness";
 export const theme = t;
 
 const { scaleRatio } = theme;
-const { header, link, body, background } = theme.colors;
+const { header, accent, body, background } = theme.colors;
 // TODO Iterate on this once I have written some actual blog posts.
 const typography = new Typography({
   ...lincoln,
@@ -34,10 +34,10 @@ const typography = new Typography({
       marginLeft: "0.1em",
       top: "-0.1em",
       fontSize: "90%",
-      color: link
+      color: accent
     },
     "a:hover": {
-      background: transparent(link, 0.075),
+      background: transparent(lighten(accent, 0.725), 0.3),
       transitionProperty: "background",
       transitionDuration: "0.2s",
       borderRadius: "8px"

@@ -6,8 +6,8 @@ const theme = {
   colors: {
     background: colors.Charcoal,
     body: colors.DirtySnow,
-    link: colors.IcyBlue,
-    header: colors.SoftWhite
+    header: colors.SoftWhite,
+    accent: colors.IcyBlue
   }
 };
 export default theme;

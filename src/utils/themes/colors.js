@@ -1,9 +1,9 @@
 import gray from "gray-percentage";
 
 const colors = {
-  Black: "rgba(0,0,0,1)",
-  White: "rgba(255,255,255,1)",
-  Red: "rgba(153,51,51,1)",
+  Black: "#000",
+  White: "#fff",
+  Red: "#933",
   Charcoal: "#282828",
   IcyBlue: "#80aac6",
   SoftWhite: gray(90, 0, true),
@@ -38,24 +38,6 @@ export function parse(cssColor) {
  * Returns the appropriate CSS color string.
  */
 export function transparent(cssColor, transparency = 0) {
-  // Thank you, community: https://stackoverflow.com/a/5624139/1795402
-  function hexToRGB(hex) {
-    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-      return r + r + g + g + b + b;
-    });
-
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-      ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16)
-        }
-      : null;
-  }
-
   var [func, ...values] = parse(cssColor);
   switch (func) {
     case "#":
@@ -78,4 +60,83 @@ export function transparent(cssColor, transparency = 0) {
   }
 }
 
+/**
+ * Performs a linear interpolation between the given two colors by the given amount.
+ *
+ * @see https://stackoverflow.com/a/2690026/1795402
+ */
+export function lerp(startColor, endColor, amount) {
+  var [startType, ...startValues] = parse(startColor);
+  var [endType, ...endValues] = parse(endColor);
+  if (startType != endType) {
+    console.warn(
+      "Colors must be of the same type; type coercion not supported"
+    );
+    return null;
+  }
+
+  switch (startType) {
+    case "rgb":
+      var newColor = [
+        slurp(startValues[0], endValues[0], amount),
+        slurp(startValues[1], endValues[1], amount),
+        slurp(startValues[2], endValues[2], amount)
+      ];
+      return `rgb(${newColor})`;
+    case "#":
+      return lerp(
+        `rgb(${Object.values(hexToRGB(startColor))})`,
+        `rgb(${Object.values(hexToRGB(endColor))})`,
+        amount
+      );
+    case "rgba":
+    case "hsla":
+    default:
+      console.warn(`Unsupported CSS color format: ${startType}`);
+      return null;
+  }
+
+  // ******
+  function slurp(start, end, factor) {
+    start = parseInt(start);
+    end = parseInt(end);
+    factor = parseFloat(factor);
+    return start + (end - start) * factor;
+  }
+}
+
+/**
+ * Lightens the given color by the given amount.
+ */
+export function lighten(color, by = 0.1) {
+  return lerp(color, colors.White, by);
+}
+
+/**
+ * Darkens the given color by the given amount.
+ */
+export function darken(color, by = 0.1) {
+  return lerp(color, colors.Black, by);
+}
+
 export default colors;
+
+// ********
+
+// Thank you, community: https://stackoverflow.com/a/5624139/1795402
+function hexToRGB(hex) {
+  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      }
+    : null;
+}
