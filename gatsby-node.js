@@ -19,7 +19,9 @@ exports.createPages = ({ graphql, actions }) =>
     const { createPage } = actions;
     graphql(`
       {
-        allMarkdownRemark {
+        allMarkdownRemark(
+          filter: { fileAbsolutePath: { regex: "/src/pages/posts/" } }
+        ) {
           edges {
             node {
               fields {

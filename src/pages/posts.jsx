@@ -197,7 +197,10 @@ const Posts = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { fields: frontmatter___date, order: ASC }) {
+    allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/src/pages/posts/" } }
+      sort: { fields: frontmatter___date, order: ASC }
+    ) {
       totalCount
       edges {
         node {
