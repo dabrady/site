@@ -4,10 +4,11 @@ import CodePlugin from "typography-plugin-code";
 import lincoln from "typography-theme-lincoln";
 
 import colors from "@utils/themes/colors";
-import t, { scaleRatio } from "@utils/themes/lightness";
 
+import t from "@utils/themes/darkness";
 export const theme = t;
 
+const { scaleRatio } = theme;
 const { header, link, body, background } = theme.colors;
 // TODO Iterate on this once I have written some actual blog posts.
 const typography = new Typography({

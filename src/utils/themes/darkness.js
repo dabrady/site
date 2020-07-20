@@ -11,4 +11,3 @@ const theme = {
   }
 };
 export default theme;
-export { scaleRatio } from "@utils/themes/base";
