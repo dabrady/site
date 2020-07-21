@@ -14,7 +14,8 @@ export const { scale, rhythm } = typography;
 
 export function updateTypography(opts) {
   _.merge(typography.options, opts);
-  typography.injectStyles();
+  // TODO disabling to iterate on Theme UI
+  // typography.injectStyles();
 }
 
 export function applyTheme(theme) {
