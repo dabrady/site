@@ -44,6 +44,8 @@ module.exports = {
     // This plugin adds support for the CSS-in-JS library Emotion.
     "gatsby-plugin-emotion",
 
+    "gatsby-plugin-theme-ui",
+
     // This plugin intercepts all local links that have not been created in
     // React using gatsby-link, and replaces their behavior with that of the
     // gatsby-link navigate. This avoids the browser having to refresh the
@@ -66,6 +68,7 @@ module.exports = {
         pathToConfigModule: "src/utils/typography/index.js"
       }
     },
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
