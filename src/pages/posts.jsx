@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 
 import { rhythm } from "@utils/typography";
 import Layout from "@components/blog_layout";
-import SEO from "@components/seo";
+import SEO from "@components/SEO";
 import useEventListener from "@utils/hooks/useEventListener";
 
 const transitionSpeed = 0.3;

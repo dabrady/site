@@ -2,14 +2,14 @@ import chroma from "chroma-js";
 import React from "react";
 import { css } from "@emotion/core";
 
-import Layout from "@components/layout";
-import SEO from "@components/seo";
+import MainLayout from "@components/MainLayout";
+import SEO from "@components/SEO";
 
 import { theme } from "@utils/typography";
 
-const IndexPage = ({ data }) => {
+export default function Home({ data }) {
   return (
-    <Layout>
+    <MainLayout>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
 
       <h1
@@ -48,8 +48,6 @@ const IndexPage = ({ data }) => {
       <p>
         Here is <a>link that goes elsewhere</a> if you click it.
       </p>
-    </Layout>
+    </MainLayout>
   );
-};
-
-export default IndexPage;
+}
