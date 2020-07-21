@@ -7,6 +7,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.7",
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
+    "@theme-ui/color": "^0.3.1",
     "chroma-js": "^2.1.0",
     "emotion": "^10.0.7",
     "emotion-server": "^10.0.7",

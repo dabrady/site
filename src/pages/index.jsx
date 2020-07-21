@@ -1,52 +1,62 @@
-import chroma from "chroma-js";
 import React from "react";
-import { css } from "@emotion/core";
+/** @jsx jsx */
+import { useColorMode, jsx } from "theme-ui";
+import { alpha } from "@theme-ui/color";
 
 import MainLayout from "@components/MainLayout";
 import SEO from "@components/SEO";
 
-import { theme } from "@utils/typography";
-
 export default function Home({ data }) {
+  var [colorMode, setColorMode] = useColorMode();
+  // setColorMode("dark");
   return (
     <MainLayout>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
 
       <h1
-        css={css`
-          font-size: 16px;
-          font-family: "SF Mono", Monaco, monospace;
-          color: ${theme.colors.accent};
-          margin: 0 0 10px 3px;
-        `}
+        sx={{
+          fontSize: 0,
+          fontFamily: "monospace",
+          color: "accent",
+          margin: "0 0 10px 3px"
+        }}
       >
         Hi, my name is
       </h1>
       <h2
-        css={css`
-          font-size: 80px;
-          font-weight: 600;
-          line-height: 1.1;
-          margin: 0;
-        `}
+        sx={{
+          fontFamily: "heading",
+          fontSize: "80px",
+          fontWeight: "600",
+          lineHeight: "1.1",
+          color: "highlight",
+          margin: "0"
+        }}
       >
         Daniel Brady.
       </h2>
       <h3
-        css={css`
-          font-size: 80px;
-          font-weight: 600;
-          line-height: 1.1;
-          margin: 0 0 10px;
-          color: ${chroma(theme.colors.header)
-            .alpha(0.5)
-            .css()};
-        `}
+        sx={{
+          fontFamily: "heading",
+          fontSize: "80px",
+          fontWeight: 600,
+          lineHeight: 1.1,
+          margin: "0 0 10px",
+          color: alpha("text", 0.5)
+        }}
       >
         I am not a web developer.
       </h3>
-      <p>
-        Here is <a>link that goes elsewhere</a> if you click it.
+      <p
+        sx={{
+          fontFamily: "body",
+          fontSize: 1,
+          color: "text"
+        }}
+      >
+        Here is{" "}
+        <a sx={{ variant: "links.external" }}>link that goes elsewhere</a> if
+        you click it.
       </p>
     </MainLayout>
   );
