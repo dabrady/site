@@ -115,6 +115,22 @@ export default {
   },
 
   links: {
+    // TODO Replace with actual SMALLCAPS, don't use text transform.
+    local: {
+      color: "text",
+      cursor: "pointer",
+      textTransform: "uppercase",
+      letterSpacing: "0.1em",
+      backgroundImage: null,
+      textShadow: null,
+      ":hover": {
+        backgroundColor: "muted",
+        color: "highlight",
+        transitionProperty: "background, color",
+        transitionDuration: "0.2s",
+        borderRadius: "8px"
+      }
+    },
     external: {
       color: "text",
       cursor: "pointer",

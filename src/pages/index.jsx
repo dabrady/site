@@ -52,8 +52,8 @@ export default function Home({ data }) {
          https://github.com/system-ui/theme-ui/pull/870
       */}
       <Text variant="default" as="p">
-        Here is <Link variant={"external"}>link that goes elsewhere</Link> if
-        you click it.
+        Here is <Link variant="external">link that goes elsewhere</Link> if you
+        click it, and <Link variant="local">another</Link> that stays here.
       </Text>
     </MainLayout>
   );
