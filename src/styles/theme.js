@@ -6,6 +6,7 @@ import "@styles/fonts.css";
 
 // A 'golden ratio'
 const scaleRatio = 1.618;
+
 // NOTE(dabrady) Leveraging Chroma here to unify color 'type' specifications.
 const palette = {
   black: chroma("#000").css(),
@@ -98,6 +99,14 @@ export default {
   styles: {},
 
   /** Variants */
+
+  text: {
+    default: {
+      color: "text",
+      fontFamily: "body",
+      fontSize: 1
+    }
+  },
 
   links: {
     external: {
