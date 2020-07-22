@@ -1,6 +1,6 @@
 import chroma from "chroma-js";
 import gray from "gray-percentage";
-import { fontSizes, spaces } from "@utils/typography/calculations";
+import { fontSizes, spaces } from "@utils/typography";
 
 import "@styles/fonts.css";
 

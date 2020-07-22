@@ -5,8 +5,6 @@ import { space, fontSize } from "styled-system";
 import React from "react";
 import styled from "@emotion/styled";
 
-import { rhythm } from "@utils/typography";
-
 const Root = styled.div`
   display: block;
   position: absolute;
@@ -18,7 +16,7 @@ const Root = styled.div`
   max-height: 100vh;
   overflow: hidden;
   max-width: 85vw;
-  margin: ${rhythm(3.4)} auto;
+  margin: 4.93rem auto;
   ${space}
   ${fontSize}
 `;

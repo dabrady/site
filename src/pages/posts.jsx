@@ -4,7 +4,6 @@ import React, { useEffect, useReducer, useRef } from "react";
 import gray from "gray-percentage";
 import styled from "@emotion/styled";
 
-import { rhythm } from "@utils/typography";
 import Layout from "@components/blog_layout";
 import SEO from "@components/SEO";
 import useEventListener from "@utils/hooks/useEventListener";
@@ -25,13 +24,13 @@ function PostListings(props) {
 }
 
 const StyledDate = styled("div")`
-  width: ${rhythm(3.4)};
+  width: rhythm(3.4);
   float: left;
   text-align: right;
 
   h6 {
     margin-top: ${0};
-    margin-right: ${rhythm(2 / 3)};
+    margin-right: rhythm(2 / 3);
     color: ${props => (props.selected ? gray(30, 0, true) : gray(10, 0, true))};
     transition: color ${transitionSpeed};
     font-style: italic;
@@ -46,10 +45,10 @@ function PostDate({ postDate, isCurrent }) {
 }
 
 const StyledExcerpt = styled("div")`
-  margin-left: ${rhythm(3.4)};
+  margin-left: rhythm(3.4);
   & > h1 {
-    margin-top: ${rhythm(0.5)};
-    margin-bottom: ${rhythm(0)};
+    margin-top: rhythm(0.5);
+    margin-bottom: rhythm(0);
   }
   & > p {
     max-height: 0;
@@ -61,7 +60,7 @@ const StyledExcerpt = styled("div")`
     ${props =>
       props.show &&
       css`
-        max-height: ${rhythm(2)};
+        max-height: rhythm(2);
         visibility: visible;
         opacity: 1;
       `};
@@ -71,7 +70,7 @@ const StyledListing = styled("li")`
   & div:focus {
     outline: none;
   }
-  ${props => props.selected && `margin-bottom: ${rhythm(1)}`}
+  ${props => props.selected && `margin-bottom: rhythm(1)`}
 `;
 function PostListing({
   id,
