@@ -1,11 +1,8 @@
 import chroma from "chroma-js";
 import gray from "gray-percentage";
-import { fontSizes, spaces } from "@utils/typography";
+import * as T from "@utils/typography";
 
 import "@styles/fonts.css";
-
-// A 'golden ratio'
-const scaleRatio = 1.618;
 
 // NOTE(dabrady) Leveraging Chroma here to unify color 'type' specifications.
 const palette = {
@@ -24,33 +21,41 @@ const palette = {
    @see https://theme-ui.com/theme-spec
  */
 export default {
-  /**
-     Theme UI configuration
-     @see https://theme-ui.com/theming#configuration-flags
-  */
+  /** Theme UI configuration */
+  // @see https://theme-ui.com/theming#configuration-flags
 
   // THIS PAGE LEFT INTENTIONALLY BLANK
 
-  /*******/
+  /** Custom attributes **/
 
+  baseline: T.BASELINE,
+  scaleRatio: T.SCALE_RATIO,
+
+  /** Theme Specification **/
+
+  // TODO Implement responsive design.
   breakpoints: [],
-  space: spaces(scaleRatio),
+
+  // TODO Replace these with MB's fonts, once purchased.
   fonts: {
     body: "'Lato', serif",
     heading: "'Lato', serif",
     monospace: "'SF Mono', Monaco, monospace"
   },
-  fontSizes: fontSizes(scaleRatio),
+  fontSizes: T.FONT_SIZES,
   fontWeights: {
     // body,
     // heading,
     // bold
   },
+
+  space: T.SPACES,
   lineHeights: {
-    // body,
-    // heading
+    body: T.LINE_HEIGHTS[0],
+    heading: T.LINE_HEIGHTS[1]
   },
   letterSpacings: {},
+
   /**
      Key         Description
      -----------------------
@@ -104,6 +109,7 @@ export default {
     default: {
       color: "text",
       fontFamily: "body",
+      lineHeight: "body",
       fontSize: 1
     }
   },
