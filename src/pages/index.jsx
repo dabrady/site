@@ -8,8 +8,10 @@ import { IconGithub, IconInstagram, IconLinkedIn } from "@components/Icons";
 
 export default function Home({ data }) {
   var [colorMode, setColorMode] = useColorMode();
-  // setColorMode("dark");
-  setColorMode("default");
+  function otherMode() {
+    return (colorMode == "default" && "dark") || "default";
+  }
+
   return (
     <MainLayout>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
@@ -58,7 +60,21 @@ export default function Home({ data }) {
               margin: "0 0 10px"
             }}
           >
-            I am not a web developer.
+            I build better software
+            {/* NOTE(dabrady) Secret theme toggle */}
+            <span
+              sx={{
+                cursor: "pointer",
+                ":hover": {
+                  color: "accent",
+                  transitionProperty: "color",
+                  transitionDuration: "0.2s"
+                }
+              }}
+              onClick={() => setColorMode(otherMode())}
+            >
+              .
+            </span>
           </Heading>
 
           <section sx={{ marginTop: "22px" }}>
