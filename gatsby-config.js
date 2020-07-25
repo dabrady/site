@@ -14,32 +14,10 @@ module.exports = {
       options: {
         "@components": path.resolve(__dirname, "src/components"),
         "@utils": path.resolve(__dirname, "src/utils"),
-        "@styles": path.resolve(__dirname, "src/styles")
+        "@styles": path.resolve(__dirname, "src/styles"),
+        "@wip": path.resolve(__dirname, "wip")
       }
     },
-    {
-      // This plugin transforms Markdown into HTML.
-      resolve: "gatsby-transformer-remark",
-      options: {
-        // `excerpt_separator` specifies a string that is used to demarcate
-        // a section of a Markdown file to use as an excerpt, or "preview".
-        excerpt_separator: `<!-- / -->`,
-        plugins: [
-          // A plugin to render emoji in markdown.
-          "gatsby-remark-emoji",
-          // A plugin to replace "dumb" punctuation marks with "smart" punctuation marks.
-          {
-            resolve: "gatsby-remark-smartypants",
-            options: {
-              dashes: "oldschool"
-            }
-          }
-        ]
-      }
-    },
-    // These 'sharp' plugins provide handy utilities for working with images.
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
 
     // This plugin adds support for the CSS-in-JS library Emotion.
     "gatsby-plugin-emotion",
@@ -65,13 +43,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: "a web log",
-        short_name: "Blog",
+        name: "a web site",
+        short_name: "site",
         start_url: "/",
         background_color: "#6b37bf",
         theme_color: "#6b37bf",
-        display: "minimal-ui",
-        icon: "src/images/gatsby-icon.png" // This path is relative to the root of the site.
+        display: "minimal-ui"
       }
     },
     "gatsby-plugin-offline",
