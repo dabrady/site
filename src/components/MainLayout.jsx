@@ -1,30 +1,9 @@
 import { Global } from "@emotion/core";
+import { Box } from "theme-ui";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
-import { space, fontSize } from "styled-system";
 import React from "react";
 import styled from "@emotion/styled";
-
-const Root = styled.div`
-  display: block;
-  position: absolute;
-  height: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  max-height: 100vh;
-  overflow: hidden;
-  max-width: 85vw;
-  margin: 4.93rem auto;
-  ${space}
-  ${fontSize}
-`;
-
-Root.propTypes = {
-  ...space.propTypes,
-  ...fontSize.propTypes
-};
 
 export default function MainLayout({ children }) {
   return (
@@ -40,7 +19,21 @@ export default function MainLayout({ children }) {
       `}
       render={function render(data) {
         return (
-          <Root px={[3, 4]}>
+          <Box
+            sx={{
+              display: "block",
+              position: "absolute",
+              height: "auto",
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              maxHeight: "100vh",
+              overflow: "hidden",
+              maxWidth: "85vw",
+              margin: "4.93rem auto"
+            }}
+          >
             {/* TODO Due to a bug whose fix is not yet published, I need to use the
                  props method of passing children to Helmet: I run into this stack
                  overflow if I scroll through posts too fast.
@@ -56,7 +49,7 @@ export default function MainLayout({ children }) {
               }}
             />
             {children}
-          </Root>
+          </Box>
         );
       }}
     />

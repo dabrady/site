@@ -1,7 +1,6 @@
 import React from "react";
 /** @jsx jsx */
 import { Box, Heading, Link, Text, useColorMode, jsx } from "theme-ui";
-import { alpha } from "@theme-ui/color";
 
 import MainLayout from "@components/MainLayout";
 import SEO from "@components/SEO";
@@ -71,7 +70,7 @@ export default function Home({ data }) {
             here.
           </Text>
         </Box>
-      </Box>{" "}
+      </Box>
     </MainLayout>
   );
 }
