@@ -36,17 +36,19 @@ export default {
   // TODO Implement responsive design.
   breakpoints: [],
 
-  // TODO Replace these with MB's fonts, once purchased.
   fonts: {
-    body: "'Lato', serif",
-    heading: "'Lato', serif",
-    monospace: "'SF Mono', Monaco, monospace"
+    body: "concourse-text, sans-serif",
+    heading: "concourse-text, serif",
+    // heading: "advocate-c43",
+    title: "advocate-c43, serif",
+    monospace: "triplicate-text, monospace",
+    code: "triplicate-code, monospace"
   },
   fontSizes: T.FONT_SIZES,
   fontWeights: {
-    // body,
-    // heading,
-    // bold
+    body: "normal",
+    heading: "bolder",
+    bold: "bold"
   },
 
   space: T.SPACES,
@@ -76,10 +78,11 @@ export default {
     // primary,
     // secondary,
     accent: palette.red,
-    highlight: palette.black,
+    // highlight,
+    bright: palette.black,
     muted: chroma(palette.red)
       .brighten()
-      .alpha(0.2)
+      .alpha(0.07)
       .css(),
     modes: {
       dark: {
@@ -90,7 +93,8 @@ export default {
         // primary,
         // secondary,
         accent: palette.icyBlue,
-        highlight: palette.white,
+        // highlight,
+        bright: palette.white,
         muted: chroma(palette.icyBlue)
           .brighten()
           .alpha(0.2)
@@ -115,17 +119,21 @@ export default {
   },
 
   links: {
-    // TODO Replace with actual SMALLCAPS, don't use text transform.
     local: {
       color: "text",
       cursor: "pointer",
-      textTransform: "uppercase",
-      letterSpacing: "0.1em",
+      textTransform: "lowercase",
+      fontFamily: function({ fonts: { body } }) {
+        var [intendedFont, ...fallbacks] = body.split(", ");
+        return `${intendedFont.replace("-text", "-caps")}, ${fallbacks}`;
+      },
+      fontFeatureSettings: "'c2sc'",
+      // letterSpacing: "0.1em",
       backgroundImage: null,
       textShadow: null,
       ":hover": {
         backgroundColor: "muted",
-        color: "highlight",
+        color: "bright",
         transitionProperty: "background, color",
         transitionDuration: "0.2s",
         borderRadius: "8px"
@@ -146,7 +154,7 @@ export default {
       },
       ":hover": {
         backgroundColor: "muted",
-        color: "highlight",
+        color: "bright",
         transitionProperty: "background, color",
         transitionDuration: "0.2s",
         borderRadius: "8px"
