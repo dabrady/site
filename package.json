@@ -46,8 +46,10 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
     "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "develop": "gatsby develop",
+    "cleanly-develop": "gatsby clean && gatsby develop",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "repository": {
