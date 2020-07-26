@@ -27,15 +27,7 @@ export default function MainLayout({ children }) {
               top: 0,
               left: 0,
               bottom: 0,
-              right: 0,
-              maxHeight: "100vh",
-              overflow: "hidden",
-              margin: [
-                "1rem auto",
-                "1.2rem auto",
-                "2.86rem auto",
-                "4.93rem auto"
-              ]
+              right: 0
             }}
           >
             {/* TODO Due to a bug whose fix is not yet published, I need to use the

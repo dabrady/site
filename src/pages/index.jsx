@@ -23,7 +23,8 @@ export default function Home() {
       <Box
         sx={{
           position: "absolute",
-          bottom: 0
+          bottom: 0,
+          overflow: "hidden"
         }}
       >
         <Heading

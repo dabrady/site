@@ -118,6 +118,47 @@ export default {
       fontFamily: "body",
       lineHeight: "body",
       fontSize: 1
+    },
+    heading: {
+      fontFamily: "heading",
+      fontWeight: "heading",
+      lineHeight: "heading",
+      fontSize: [1, 2]
+    },
+    wishlistValue: {
+      fontSize: 0,
+      fontFamily: "title",
+      position: "absolute",
+      // Trying to center it within the donut
+      top: ({ lineHeights }) => `calc(50% - ${lineHeights.heading}rem + 4px)`,
+      width: "100%",
+      textAlign: "center"
+    }
+  },
+
+  layout: {
+    container: {
+      maxWidth: ["85vw"],
+      maxHeight: ["100vh"],
+      margin: ["1rem auto", "1.2rem auto", "2.86rem auto", "4.93rem auto"]
+    }
+  },
+
+  progress: {
+    default: {
+      color: "accent",
+      display: "inline-block"
+
+      /* Playing with SVG animation */
+      // "circle[stroke-dasharray]": {
+      //   strokeDasharray: 100,
+      //   animation: "dash 5s linear",
+      //   "@keyframes dash": {
+      //     to: {
+      //       strokeDashoffset: 1000
+      //     }
+      //   }
+      // }
     }
   },
 
