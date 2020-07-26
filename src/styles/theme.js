@@ -33,9 +33,6 @@ export default {
 
   /** Theme Specification **/
 
-  // TODO Implement responsive design.
-  breakpoints: [],
-
   fonts: {
     body: "concourse-text, sans-serif",
     heading: "concourse-text, serif",
@@ -44,14 +41,12 @@ export default {
     monospace: "triplicate-text, monospace",
     code: "triplicate-code, monospace"
   },
-  fontSizes: T.FONT_SIZES,
   fontWeights: {
     body: "normal",
     heading: "bolder",
     bold: "bold"
   },
 
-  space: T.SPACES,
   lineHeights: {
     body: T.LINE_HEIGHTS[0],
     heading: T.LINE_HEIGHTS[1]
@@ -104,8 +99,15 @@ export default {
   },
 
   /* For styling MDX content */
-  // TODO switch to MDX for rendering Markdown
+  breakpoints: ["40rem", "42rem", "56rem", "64rem"],
+  // fontSizes: T.FONT_SIZES,
+  fontSizes: ["1rem", "2.2rem", "4rem", "4.4rem", "5rem"],
+  space: T.SPACES,
   styles: {},
+
+  sizes: {
+    container: "85vw"
+  },
 
   /** Variants */
 
@@ -123,7 +125,7 @@ export default {
       color: "text",
       cursor: "pointer",
       textTransform: "lowercase",
-      fontFamily: function({ fonts: { body } }) {
+      fontFamily: function smallCapsVariant({ fonts: { body } }) {
         var [intendedFont, ...fallbacks] = body.split(", ");
         return `${intendedFont.replace("-text", "-caps")}, ${fallbacks}`;
       },

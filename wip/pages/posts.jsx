@@ -4,9 +4,9 @@ import React, { useEffect, useReducer, useRef } from "react";
 import gray from "gray-percentage";
 import styled from "@emotion/styled";
 
-import Layout from "@components/blog_layout";
-import SEO from "@components/SEO";
-import useEventListener from "@utils/hooks/useEventListener";
+import Layout from "../components/blog_layout";
+// import SEO from "@components/SEO";
+import useEventListener from "../utils/hooks/useEventListener";
 
 const transitionSpeed = 0.3;
 //---------
@@ -173,7 +173,7 @@ const Posts = ({ data }) => {
   return (
     <Layout>
       {/* TODO Figure out real keywords */}
-      <SEO title="Posts" keywords={[`gatsby`, `application`, `react`]} />
+      {/* <SEO title="Posts" keywords={[`gatsby`, `application`, `react`]} /> */}
       <PostCarousel>
         <PostListings>
           {postNodes.map(({ node }, index) => (

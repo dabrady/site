@@ -1,6 +1,5 @@
-const BASE_FONT_SIZE = 16; // px
-const BASE_LINE_HEIGHT = 1.5;
-
+export const BASE_FONT_SIZE = 16; // px
+export const BASE_LINE_HEIGHT = 1.5;
 export const BASELINE = BASE_FONT_SIZE * BASE_LINE_HEIGHT;
 // A 'golden ratio'
 export const SCALE_RATIO = 1.618;

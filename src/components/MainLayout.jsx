@@ -1,5 +1,6 @@
 import { Global } from "@emotion/core";
-import { Box } from "theme-ui";
+/** @jsx jsx */
+import { Container, jsx } from "theme-ui";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
 import React from "react";
@@ -19,9 +20,8 @@ export default function MainLayout({ children }) {
       `}
       render={function render(data) {
         return (
-          <Box
+          <Container
             sx={{
-              display: "block",
               position: "absolute",
               height: "auto",
               top: 0,
@@ -30,8 +30,12 @@ export default function MainLayout({ children }) {
               right: 0,
               maxHeight: "100vh",
               overflow: "hidden",
-              maxWidth: "85vw",
-              margin: "4.93rem auto"
+              margin: [
+                "1rem auto",
+                "1.2rem auto",
+                "2.86rem auto",
+                "4.93rem auto"
+              ]
             }}
           >
             {/* TODO Due to a bug whose fix is not yet published, I need to use the
@@ -49,7 +53,7 @@ export default function MainLayout({ children }) {
               }}
             />
             {children}
-          </Box>
+          </Container>
         );
       }}
     />

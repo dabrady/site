@@ -3,7 +3,7 @@ import { css } from "@emotion/core";
 import { graphql } from "gatsby";
 import React from "react";
 
-import Layout from "@components/blog_layout";
+import Layout from "../components/blog_layout";
 
 export default ({ data }) => {
   const { markdownRemark: post } = data;
