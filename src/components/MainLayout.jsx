@@ -4,7 +4,6 @@ import { Container, jsx } from "theme-ui";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
 import React from "react";
-import styled from "@emotion/styled";
 
 export default function MainLayout({ children }) {
   return (
@@ -27,15 +26,7 @@ export default function MainLayout({ children }) {
               top: 0,
               left: 0,
               bottom: 0,
-              right: 0,
-              maxHeight: "100vh",
-              overflow: "hidden",
-              margin: [
-                "1rem auto",
-                "1.2rem auto",
-                "2.86rem auto",
-                "4.93rem auto"
-              ]
+              right: 0
             }}
           >
             {/* TODO Due to a bug whose fix is not yet published, I need to use the
@@ -49,7 +40,10 @@ export default function MainLayout({ children }) {
             />
             <Global
               styles={{
-                body: {}
+                html: { height: "-webkit-fill-available" },
+                body: {
+                  minHeight: "100vh; min-height: -webkit-fill-available"
+                }
               }}
             />
             {children}

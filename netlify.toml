@@ -1,0 +1,38 @@
+### Build configuration ###
+
+[build]
+    command = "yarn build"
+    # TODO(dabrady) Consider putting this in "public" dir to allow troubleshooting via web inspector
+    functions = "./.netlify/functions/"
+    publish = "public"
+
+    # Shared, default environment for all contexts
+    [build.environment]
+        NODE_ENV = "development"
+        GATSBY_STRIPE_PUBLIC_KEY = "pk_test_51H9C9cFdjFUWnf7defV5IMhGPt25eEoRcNXo1bqIyMvQ1OsMQcf174jaRoiYYL2Mbn2JWGR9KXG3qiFL6p3mFZrr00eh1v542P"
+
+### Deploy context-specific configuration ###
+
+[context.production.environment]
+    NODE_ENV = "production"
+    GATSBY_STRIPE_PUBLIC_KEY = "pk_live_51H9C9cFdjFUWnf7dWmNp9573IuRvkrfD8RtAnGwxDNDbuRygVS405mYaInFVHPZ51xP6I0nlTpCJRzV39ZeudviT00ZwrHY2Mm"
+
+# TODO(dabrady) Make a staging environment?
+
+### Build Plugins ###
+
+# For configuring contextual environment variables in the Netlify UI.
+# I use this for contextual secrets.
+[[plugins]]
+    package = 'netlify-plugin-contextual-env'
+    [plugins.inputs]
+        mode = 'prefix'
+
+# For inlining build-time environment variables within Netlify Functions.
+# I use this in conjunction with `netlify-plugin-contextual-env`.
+[[plugins]]
+    package = "netlify-plugin-inline-functions-env"
+    [plugins.inputs]
+        # TODO(dabrady) Figure out how to get this to work pre-build, as the generated
+        # functions are much larger than my actual source (because dependencies)
+        buildEvent = "onPostBuild"
