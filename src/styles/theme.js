@@ -162,6 +162,49 @@ export default {
     }
   },
 
+  stripe: {
+    color: "bright",
+    fontFamily: "body",
+    fontWeight: "body",
+    fontSize: "16px", // Need to specify absolute size because Stripe :P
+    fontSmoothing: "antialiased",
+    lineHeight: "body",
+
+    "::placeholder": {
+      color: "text"
+    }
+  },
+
+  buttons: {
+    disabled: {
+      fontFamily: "title",
+      fontWeight: "body",
+      fontFeatureSettings: "'c2sc'",
+      lineHeight: "body",
+      backgroundColor: "muted",
+      color: "text",
+      margin: "25px auto"
+    },
+    primary: {
+      fontFamily: "title",
+      fontWeight: "body",
+      lineHeight: "body",
+      backgroundColor: "accent",
+      color: "bright",
+      fontFeatureSettings: "'c2sc'",
+      margin: "25px auto"
+    },
+    secondary: {
+      fontFamily: "title",
+      fontWeight: "body",
+      lineHeight: "body",
+      backgroundColor: "muted",
+      color: "accent",
+      fontFeatureSettings: "'c2sc'",
+      margin: "25px auto"
+    }
+  },
+
   links: {
     local: {
       color: "text",

@@ -5,7 +5,7 @@ help: ## Prints help for targets with comments
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 dev: ## Starts dev web server with a clear cache
-	yarn cleanly-develop
+	yarn clean-start
 
 .PHONY: post
 post:

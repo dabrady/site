@@ -7,6 +7,8 @@
     "@emotion/babel-preset-css-prop": "^10.0.7",
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.8.0",
     "@theme-ui/color": "^0.3.1",
     "chroma-js": "^2.1.0",
     "emotion": "^10.0.7",
@@ -22,12 +24,14 @@
     "gatsby-plugin-theme-ui": "^0.3.0",
     "gatsby-source-filesystem": "^2.0.20",
     "gray-percentage": "^2.0.0",
+    "netlify-lambda": "^2.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-emotion": "^10.0.0",
     "react-helmet": "^5.2.0",
     "react-typography": "^0.16.18",
+    "stripe": "^8.79.0",
     "styled-system": "^4.0.1",
     "theme-ui": "^0.3.1",
     "typography": "^0.16.18",
@@ -47,12 +51,19 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby clean && gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "develop": "gatsby develop",
-    "cleanly-develop": "gatsby clean && gatsby develop",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
+    "develop": "gatsby develop --https",
+
+    "build": "gatsby build && yarn build:lambda",
+    "build:app": "yarn build",
+    "build:lambda": "netlify-lambda build src/lambda",
+
+    "start": "run-p start:**",
+    "start:app": "yarn develop -- --https",
+    "start:lambda": "netlify-lambda serve src/lambda",
+
+    "clean-start": "yarn clean && yarn start"
   },
   "repository": {
     "type": "git",
@@ -64,6 +75,8 @@
   "devDependencies": {
     "babel-plugin-emotion": "^10.0.7",
     "babel-preset-gatsby": "^0.1.8",
-    "gatsby-plugin-root-import": "^2.0.5"
+    "gatsby-plugin-root-import": "^2.0.5",
+    "http-proxy-middleware": "^1.0.5",
+    "npm-run-all": "^4.1.5"
   }
 }
