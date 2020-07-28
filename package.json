@@ -53,17 +53,15 @@
   "scripts": {
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "develop": "gatsby develop --https",
 
     "build": "gatsby build && yarn build:lambda",
     "build:app": "yarn build",
     "build:lambda": "netlify-lambda build src/lambda",
 
-    "start": "run-p start:**",
-    "start:app": "yarn develop -- --https",
-    "start:lambda": "netlify-lambda serve src/lambda",
-
-    "clean-start": "yarn clean && yarn start"
+    "develop": "yarn clean && yarn dev-start",
+    "dev-start": "run-p dev-start:**",
+    "dev-start:app": "gatsby develop --https",
+    "dev-start:lambda": "NODE_ENV=development netlify-lambda serve src/lambda"
   },
   "repository": {
     "type": "git",
