@@ -9,7 +9,8 @@ import {
   Heading,
   css,
   jsx,
-  useThemeUI
+  useThemeUI,
+  useColorMode
 } from "theme-ui";
 
 import { loadStripe, registerElements } from "@stripe/stripe-js";
@@ -205,9 +206,25 @@ function Doughnut({ value, progress, children }) {
 }
 
 export default function Wishlist() {
+  var [colorMode, setColorMode] = useColorMode();
+  function otherMode() {
+    return (colorMode == "default" && "dark") || "default";
+  }
   return (
     <MainLayout>
-      <Heading as="header">Wishlist (demo)</Heading>
+      <Heading
+        as="header"
+        sx={{ display: "inline-block", paddingRight: "25px" }}
+      >
+        Wishlist (demo)
+      </Heading>
+      <Button
+        sx={{ display: "inline-block" }}
+        variant="secondary"
+        onClick={() => setColorMode(otherMode())}
+      >
+        Toggle theme
+      </Button>
       <Elements stripe={stripePromise}>
         <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
           <Doughnut name="keyboard" value={350} progress={0.1}>
