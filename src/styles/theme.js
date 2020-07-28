@@ -120,16 +120,19 @@ export default {
       fontSize: 1
     },
     heading: {
+      color: "text",
       fontFamily: "heading",
       fontWeight: "heading",
       lineHeight: "heading",
       fontSize: [1, 2]
     },
     wishlistValue: {
-      fontSize: 0,
+      color: "text",
       fontFamily: "title",
-      position: "absolute",
+      fontSize: 0,
+
       // Trying to center it within the donut
+      position: "absolute",
       top: ({ lineHeights }) => `calc(50% - ${lineHeights.heading}rem + 4px)`,
       width: "100%",
       textAlign: "center"
@@ -190,7 +193,7 @@ export default {
       fontWeight: "body",
       lineHeight: "body",
       backgroundColor: "accent",
-      color: "bright",
+      color: "background",
       fontFeatureSettings: "'c2sc'",
       margin: "25px auto"
     },
