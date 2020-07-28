@@ -66,7 +66,7 @@ function PaymentModal({ itemValue = 0, closeModal }) {
     var amountToDonate = Math.min(amount, itemValue);
     console.info(`🤫 ${amountToDonate}`);
     var response = await fetch(
-      `.netlify/functions/stripe?amount=${amountToDonate}`
+      `/.netlify/functions/stripe?amount=${amountToDonate}`
     );
     var { client_secret } = await response.json();
     var { error, paymentIntent } = await stripe.confirmCardPayment(
