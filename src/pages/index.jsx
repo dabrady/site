@@ -4,7 +4,12 @@ import { Box, Heading, useColorMode, jsx } from "theme-ui";
 
 import MainLayout from "@components/MainLayout";
 // import SEO from "@components/SEO.jsx";
-import { IconGithub, IconInstagram, IconLinkedIn } from "@components/Icons";
+import {
+  IconGithub,
+  IconDev,
+  IconInstagram,
+  IconLinkedIn
+} from "@components/Icons";
 
 export default function Home() {
   var [colorMode, setColorMode] = useColorMode();
@@ -28,20 +33,18 @@ export default function Home() {
             fontFamily: "monospace",
             fontWeight: "normal",
             fontFeatureSettings: "'ss01'",
-            lineHeight: 1.1,
+            lineHeight: 2.4,
             color: "accent",
-            margin: "0 0 10px 3px"
+            marginLeft: ["1.8px", 1]
           }}
         >
           Hi, my name is
         </Heading>
         <Heading
           sx={{
-            /* fontSize: "80px", */
             fontSize: [1, 2, 3, 4],
             lineHeight: 1.1,
-            color: "bright",
-            margin: "0"
+            color: "bright"
           }}
         >
           Daniel Brady.
@@ -49,11 +52,9 @@ export default function Home() {
         <Heading
           as="h3"
           sx={{
-            /* fontSize: "80px", */
             fontSize: [1, 2, 3, 4],
             lineHeight: 1.1,
-            fontWeight: "normal",
-            margin: "0 0 10px"
+            fontWeight: "normal"
           }}
         >
           I build better software
@@ -75,14 +76,13 @@ export default function Home() {
 
         <section
           sx={{
-            marginTop: "22px",
-            marginLeft: "-10px"
-            /* TODO Implement responsive design */
+            marginTop: [5, 7]
           }}
         >
-          <IconGithub size="80px" />
-          <IconLinkedIn size="80px" />
-          <IconInstagram size="80px" />
+          <IconGithub />
+          <IconDev />
+          <IconLinkedIn />
+          <IconInstagram />
         </section>
       </Box>
     </MainLayout>
