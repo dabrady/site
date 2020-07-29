@@ -174,7 +174,11 @@ export default {
     lineHeight: "body",
 
     "::placeholder": {
-      color: "text"
+      color: ({ colors }) => {
+        return chroma(colors.text)
+          .alpha(0.5)
+          .css();
+      }
     }
   },
 
