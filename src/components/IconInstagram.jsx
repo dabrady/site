@@ -1,9 +1,9 @@
 import React from "react";
 import Connecticon from "./Connecticon";
 
-export default function IconInstagram({ size }) {
+export default function IconInstagram() {
   return (
-    <Connecticon size={size} link="https://instagram.com/daniel13rady">
+    <Connecticon link="https://instagram.com/daniel13rady">
       <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 512 512">
         <title>Instagram</title>
         <g>

@@ -1,9 +1,9 @@
 import React from "react";
 import Connecticon from "./Connecticon";
 
-export default function IconDev({ size }) {
+export default function IconDev() {
   return (
-    <Connecticon size={size} link="https://dev.to/daniel13rady">
+    <Connecticon link="https://dev.to/daniel13rady">
       <svg
         role="img"
         xmlns="http://www.w3.org/2000/svg"
