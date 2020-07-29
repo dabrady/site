@@ -11,13 +11,13 @@ export const LINE_HEIGHTS = _lineHeights(_modularScale());
 
 // *********
 
-function _modularScale(count = 6) {
+function _modularScale(count = 9) {
   return Array.from(Array(count).keys()).map(
     x => Math.round(Math.pow(SCALE_RATIO, x) * 1000) / 1000 // using multiply-&-divide for rounding to a precision
   );
 }
 
-function _spaces(count = 6) {
+function _spaces(count = 9) {
   // As our text size increases, so too must the breathing space around it.
   return Array.from(Array(count).keys()).map(x => `${x * SCALE_RATIO * 2}px`);
 }

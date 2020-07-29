@@ -99,14 +99,15 @@ export default {
   },
 
   /* For styling MDX content */
-  breakpoints: ["40rem", "42rem", "56rem", "64rem"],
+  breakpoints: ["40rem", "42rem", "56rem"],
   // fontSizes: T.FONT_SIZES,
   fontSizes: ["1rem", "2.2rem", "4rem", "4.4rem", "5rem"],
   space: T.SPACES,
   styles: {},
 
   sizes: {
-    container: "85vw"
+    container: "85vw",
+    icon: [40, 60, 80]
   },
 
   /** Variants */

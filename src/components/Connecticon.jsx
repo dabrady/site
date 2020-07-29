@@ -1,21 +1,26 @@
 import React from "react";
 /** @jsx jsx */
-import { jsx } from "theme-ui";
+import { useThemeUI, jsx } from "theme-ui";
 
-export default function Connecticon({ children, size, link }) {
+export default function Connecticon({ children, link }) {
+  var {
+    theme: {
+      sizes: { icon }
+    }
+  } = useThemeUI();
   return (
     <a
       href={link}
       sx={{
         display: "inline-block",
-        padding: "0 13px",
+        marginRight: [5, 8],
         cursor: "pointer",
-        width: size,
-        height: size,
+        width: icon,
+        height: icon,
         svg: {
           fill: "text",
-          width: size,
-          height: size
+          width: icon,
+          height: icon
         },
         ":hover": {
           svg: {
