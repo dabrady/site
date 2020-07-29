@@ -1,0 +1,28 @@
+name: Blog syndication
+on:
+  push:
+    # Watch these branches...
+    branches:
+    # TODO Swap these once merged to master
+    # - master
+    - develop
+    # ...for changes to these files.
+    paths:
+    - 'src/**/*.mdx?'
+
+jobs:
+  syndicate:
+    runs-on: ubuntu-latest
+    name: Syndicate posts
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SYNDICATE_POST_DIR: 'src/pages/posts'
+
+    steps:
+    - name: Push to DEV.to
+      uses: dabrady/syndicate@v1.0
+      env:
+        DEV_API_KEY: ${{ secrets.DEV_API_KEY }}
+      with:
+        silos: DEV
+        mark_as_syndicated: true

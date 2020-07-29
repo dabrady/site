@@ -1,10 +1,9 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import { css } from "@emotion/core";
 import { graphql } from "gatsby";
 import React from "react";
 
-import { rhythm } from "@utils/typography";
-import Layout from "@components/layout";
+import Layout from "../components/blog_layout";
 
 export default ({ data }) => {
   const { markdownRemark: post } = data;
@@ -15,13 +14,12 @@ export default ({ data }) => {
         css={css`
           margin: 0 auto;
           max-width: 700px;
-          padding: ${rhythm(2)};
-          /* padding-top: ${rhythm(1.5)}; */
+          /* padding: 0 rhythm(2); */
         `}
       >
         <h1
           css={css`
-            margin-bottom: ${rhythm(1 / 4)};
+            /* margin-bottom: rhythm(1 / 4); */
           `}
         >
           {post.frontmatter.title}
@@ -35,7 +33,7 @@ export default ({ data }) => {
         </h5>
         <div
           css={css`
-            margin-top: ${rhythm(1)};
+            /* margin-top: rhythm(1); */
           `}
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
