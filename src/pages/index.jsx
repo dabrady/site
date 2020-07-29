@@ -4,7 +4,12 @@ import { Box, Heading, useColorMode, jsx } from "theme-ui";
 
 import MainLayout from "@components/MainLayout";
 // import SEO from "@components/SEO.jsx";
-import { IconGithub, IconInstagram, IconLinkedIn } from "@components/Icons";
+import {
+  IconGithub,
+  IconDev,
+  IconInstagram,
+  IconLinkedIn
+} from "@components/Icons";
 
 export default function Home() {
   var [colorMode, setColorMode] = useColorMode();
@@ -81,6 +86,7 @@ export default function Home() {
           }}
         >
           <IconGithub size="80px" />
+          <IconDev size="80px" />
           <IconLinkedIn size="80px" />
           <IconInstagram size="80px" />
         </section>
