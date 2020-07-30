@@ -23,6 +23,7 @@
     "gatsby-plugin-react-helmet": "^3.0.6",
     "gatsby-plugin-theme-ui": "^0.3.0",
     "gatsby-source-filesystem": "^2.0.20",
+    "google-spreadsheet": "^3.0.11",
     "gray-percentage": "^2.0.0",
     "netlify-lambda": "^2.0.1",
     "prop-types": "^15.7.2",
@@ -53,11 +54,9 @@
   "scripts": {
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-
     "build": "gatsby build && yarn build:lambda",
     "build:app": "yarn build",
     "build:lambda": "netlify-lambda build src/lambda",
-
     "develop": "yarn clean && yarn dev-start",
     "dev-start": "run-p dev-start:**",
     "dev-start:app": "gatsby develop --https",

@@ -1,5 +1,9 @@
 var path = require("path");
 var { createProxyMiddleware } = require("http-proxy-middleware");
+// Load any configured environment-specific variables.
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`
+});
 
 module.exports = {
   siteMetadata: {

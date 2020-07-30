@@ -66,6 +66,16 @@ function PaymentModal({ itemValue = 0, closeModal }) {
     // TODO parameterize payment amount
     var amountToDonate = Math.min(amount, itemValue);
     console.info(`🤫 ${amountToDonate}`);
+
+    console.info(
+      await (await fetch("/.netlify/functions/fetchWishlist", {
+        method: "GET"
+        // body: JSON.stringify({
+        //   amountToDonate
+        // })
+      })).json()
+    );
+
     var response = await fetch(
       `/.netlify/functions/stripe?amount=${amountToDonate}`
     );
@@ -210,6 +220,7 @@ export default function Wishlist() {
   function otherMode() {
     return (colorMode == "default" && "dark") || "default";
   }
+
   return (
     <MainLayout>
       <Heading
