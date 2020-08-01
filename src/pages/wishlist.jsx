@@ -49,6 +49,7 @@ function CardSection() {
   );
 }
 
+// TODO Reimplement
 function PaymentModal({ itemValue = 0, closeModal }) {
   var stripe = useStripe();
   var elements = useElements();
@@ -66,16 +67,6 @@ function PaymentModal({ itemValue = 0, closeModal }) {
     // TODO parameterize payment amount
     var amountToDonate = Math.min(amount, itemValue);
     console.info(`🤫 ${amountToDonate}`);
-
-    console.info(
-      await (await fetch("/.netlify/functions/fetchWishlist", {
-        method: "PUT",
-        body: JSON.stringify({
-          itemId: 2,
-          amountToDonate
-        })
-      })).json()
-    );
 
     var response = await fetch(
       `/.netlify/functions/stripe?amount=${amountToDonate}`
@@ -164,7 +155,6 @@ function PaymentModal({ itemValue = 0, closeModal }) {
 }
 
 function Doughnut({ value, progress, children }) {
-  var [openModal, setModalOpen] = useState(true);
   var [progress, setProgress] = useState(progress);
   return (
     <div>
@@ -180,7 +170,7 @@ function Doughnut({ value, progress, children }) {
             }
           }
         }}
-        onClick={() => setModalOpen(true)}
+        /* onClick={() => setModalOpen(true)} */
       >
         <Donut variant="progress.default" value={progress} />
         <Heading variant="wishlistValue">
@@ -201,17 +191,6 @@ function Doughnut({ value, progress, children }) {
           {children}
         </figcaption>
       </figure>
-      {openModal && (
-        <PaymentModal
-          itemValue={value}
-          closeModal={function(v = 0) {
-            var newProgress = progress + v / value;
-            console.log(progress, v, value, newProgress);
-            setProgress(Math.min(1, newProgress));
-            setModalOpen(false);
-          }}
-        />
-      )}
     </div>
   );
 }
@@ -221,6 +200,28 @@ export default function Wishlist() {
   function otherMode() {
     return (colorMode == "default" && "dark") || "default";
   }
+
+  var [wishlist, setWishlist] = useState([]);
+  var [openPayment, setOpenPayment] = useState(true);
+
+  useEffect(function loadWishlist() {
+    async function load() {
+      console.info("[brady] loading wishlist!");
+      // TODO this is just a test
+      // TODO integrate this:
+      // 1. fetchWishlist
+      // 2. render items with id = item_id
+      // 3. update sheet on successful payment
+      var wishlist = await (await fetch("/.netlify/functions/wishlist", {
+        method: "GET"
+      })).json();
+      console.info(wishlist);
+      setWishlist(wishlist);
+    }
+
+    console.info("[brady] effecting");
+    load();
+  }, []);
 
   return (
     <MainLayout>
@@ -239,18 +240,24 @@ export default function Wishlist() {
       </Button>
       <Elements stripe={stripePromise}>
         <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
-          <Doughnut name="keyboard" value={350} progress={0.1}>
-            HHKB Pro Hybrid Type S
-          </Doughnut>
-
-          {/*   <Doughnut name="font" value="300 USD" progress={1}> */}
-          {/*     Professional Fonts */}
-          {/*   </Doughnut> */}
-
-          {/*   <Doughnut name="boba" value="&infin; USD" progress={0.95}> */}
-          {/*     Boba Tea */}
-          {/*   </Doughnut> */}
+          {wishlist.map(function renderItem({
+            item_id: itemId,
+            item: itemName,
+            price,
+            balance
+          }) {
+            return (
+              <Doughnut
+                key={itemId}
+                value={parseInt(price)}
+                progress={balance / price}
+              >
+                {itemName}
+              </Doughnut>
+            );
+          })}
         </Grid>
+        {setOpenPayment && <PaymentModal />}
       </Elements>
     </MainLayout>
   );
