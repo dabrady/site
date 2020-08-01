@@ -53,7 +53,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "clean": "gatsby clean && rm -r .netlify/",
     "build": "gatsby build && yarn build:lambda",
     "build:app": "yarn build",
     "build:lambda": "netlify-lambda build src/lambda",
