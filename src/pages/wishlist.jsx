@@ -69,10 +69,11 @@ function PaymentModal({ itemValue = 0, closeModal }) {
 
     console.info(
       await (await fetch("/.netlify/functions/fetchWishlist", {
-        method: "GET"
-        // body: JSON.stringify({
-        //   amountToDonate
-        // })
+        method: "PUT",
+        body: JSON.stringify({
+          itemId: 2,
+          amountToDonate
+        })
       })).json()
     );
 
