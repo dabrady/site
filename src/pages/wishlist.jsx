@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import _ from "lodash";
 /** @jsx jsx */
 import {
   Button,
@@ -22,6 +23,7 @@ import {
 } from "@stripe/react-stripe-js";
 
 import MainLayout from "@components/MainLayout";
+import useWishlist from "@utils/hooks/useWishlist";
 
 var stripePromise = loadStripe(
   "pk_test_51H9C9cFdjFUWnf7defV5IMhGPt25eEoRcNXo1bqIyMvQ1OsMQcf174jaRoiYYL2Mbn2JWGR9KXG3qiFL6p3mFZrr00eh1v542P"
@@ -50,7 +52,7 @@ function CardSection() {
 }
 
 // TODO Reimplement
-function PaymentModal({ itemValue = 0, closeModal }) {
+function PaymentModal({ itemValue = 0, onSubmit }) {
   var stripe = useStripe();
   var elements = useElements();
   var [confirmed, setConfirmed] = useState(false);
@@ -65,13 +67,15 @@ function PaymentModal({ itemValue = 0, closeModal }) {
     }
 
     // TODO parameterize payment amount
-    var amountToDonate = Math.min(amount, itemValue);
+    // var amountToDonate = Math.min(amount, itemValue);
+    var amountToDonate = amount;
     console.info(`🤫 ${amountToDonate}`);
 
     var response = await fetch(
       `/.netlify/functions/stripe?amount=${amountToDonate}`
     );
     var { client_secret } = await response.json();
+    // TODO attach metadata about item
     var { error, paymentIntent } = await stripe.confirmCardPayment(
       client_secret,
       {
@@ -90,7 +94,8 @@ function PaymentModal({ itemValue = 0, closeModal }) {
       console.info(paymentIntent);
       if (paymentIntent.status == "succeeded") {
         console.log(`Successfully donated $${amountToDonate}`);
-        closeModal(amountToDonate);
+        onSubmit(amountToDonate);
+        // closeModal(amountToDonate);
       } else {
         console.log("Nope:", paymentIntent.status);
       }
@@ -126,7 +131,8 @@ function PaymentModal({ itemValue = 0, closeModal }) {
             // Only allow numbers
             // Cap input at itemValue
             var val = parseInt(e.target.value);
-            setAmount(Math.min(val, itemValue));
+            var amt = val; //Math.min(val, itemValue);
+            setAmount(amt);
           }
           setConfirmed(false);
         }}
@@ -147,14 +153,20 @@ function PaymentModal({ itemValue = 0, closeModal }) {
       >
         {confirmed ? `DONATE $${amount}` : "Confirm donation"}
       </Button>
-      <Button variant="secondary" onClick={() => closeModal(0)}>
+      <Button
+        variant="secondary"
+        onClick={function cancel(e) {
+          e.preventDefault();
+          setConfirmed(false);
+        }}
+      >
         Cancel
       </Button>
     </form>
   );
 }
 
-function Doughnut({ value, progress, children }) {
+function Doughnut({ value, progress, onClick, children }) {
   var [progress, setProgress] = useState(progress);
   return (
     <div>
@@ -170,6 +182,7 @@ function Doughnut({ value, progress, children }) {
             }
           }
         }}
+        onClick={onClick}
         /* onClick={() => setModalOpen(true)} */
       >
         <Donut variant="progress.default" value={progress} />
@@ -201,28 +214,10 @@ export default function Wishlist() {
     return (colorMode == "default" && "dark") || "default";
   }
 
-  var [wishlist, setWishlist] = useState([]);
-  var [openPayment, setOpenPayment] = useState(true);
+  var [wishlist, updateBalance] = useWishlist();
+  var [selectedItem, setSelectedItem] = useState(null);
 
-  useEffect(function loadWishlist() {
-    async function load() {
-      console.info("[brady] loading wishlist!");
-      // TODO this is just a test
-      // TODO integrate this:
-      // 1. fetchWishlist
-      // 2. render items with id = item_id
-      // 3. update sheet on successful payment
-      var wishlist = await (await fetch("/.netlify/functions/wishlist", {
-        method: "GET"
-      })).json();
-      console.info(wishlist);
-      setWishlist(wishlist);
-    }
-
-    console.info("[brady] effecting");
-    load();
-  }, []);
-
+  console.info("[brady] wishlist is currently:", wishlist);
   return (
     <MainLayout>
       <Heading
@@ -240,24 +235,31 @@ export default function Wishlist() {
       </Button>
       <Elements stripe={stripePromise}>
         <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
-          {wishlist.map(function renderItem({
-            item_id: itemId,
-            item: itemName,
-            price,
-            balance
-          }) {
+          {wishlist.map(function renderItem(item) {
+            var { item_id: itemId, item: itemName, price, balance } = item;
             return (
               <Doughnut
                 key={itemId}
+                selected={_.get(selectedItem, "item_id") == itemId}
                 value={parseInt(price)}
                 progress={balance / price}
+                onClick={function markSelected() {
+                  if (_.get(selectedItem, "item_id") == itemId) return;
+                  console.log(`'${itemName}' selected`);
+                  setSelectedItem(item);
+                }}
               >
                 {itemName}
               </Doughnut>
             );
           })}
         </Grid>
-        {setOpenPayment && <PaymentModal />}
+        <PaymentModal
+          selection={selectedItem}
+          onSubmit={function(amountToDonate) {
+            updateBalance(selectedItem.item_id, amountToDonate);
+          }}
+        />
       </Elements>
     </MainLayout>
   );

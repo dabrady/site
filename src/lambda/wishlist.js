@@ -42,15 +42,15 @@ async function fetchData(worksheet) {
   return data;
 }
 
-async function updateItem({ worksheet, itemId, amountToDonate }) {
+async function updateItem({ worksheet, itemId, amount }) {
   console.info(
-    `[brady] updating wishlist item: item ${itemId}, donating ${amountToDonate}`
+    `[brady] updating wishlist item: item ${itemId}, donating ${amount}`
   );
   // NOTE(dabrady) Using row ids as item ids
   var cellLocation = `D${itemId}`;
   await worksheet.loadCells(cellLocation);
   var cell = worksheet.getCellByA1(cellLocation);
-  cell.value = cell.value + amountToDonate;
+  cell.value = cell.value + amount;
   await worksheet.saveUpdatedCells();
   return cell.value;
 }
@@ -73,8 +73,8 @@ export async function handler(event, context) {
       };
       break;
     case "PUT":
-      var { itemId, amountToDonate } = JSON.parse(body);
-      var balance = await updateItem({ worksheet, itemId, amountToDonate });
+      var { itemId, amount } = JSON.parse(body);
+      var balance = await updateItem({ worksheet, itemId, amount });
       return {
         statusCode: 200,
         body: JSON.stringify({
