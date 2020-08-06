@@ -236,27 +236,27 @@ export default function Wishlist() {
       >
         Toggle theme
       </Button>
+      <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
+        {wishlist.map(function renderItem(item) {
+          var { item_id: itemId, item: itemName, price, balance } = item;
+          return (
+            <Doughnut
+              key={itemId}
+              selected={_.get(selectedItem, "item_id") == itemId}
+              value={parseInt(price)}
+              progress={balance / price}
+              onClick={function markSelected() {
+                if (_.get(selectedItem, "item_id") == itemId) return;
+                console.log(`'${itemName}' selected`);
+                setSelectedItem(item);
+              }}
+            >
+              {itemName}
+            </Doughnut>
+          );
+        })}
+      </Grid>
       <Elements stripe={stripePromise}>
-        <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
-          {wishlist.map(function renderItem(item) {
-            var { item_id: itemId, item: itemName, price, balance } = item;
-            return (
-              <Doughnut
-                key={itemId}
-                selected={_.get(selectedItem, "item_id") == itemId}
-                value={parseInt(price)}
-                progress={balance / price}
-                onClick={function markSelected() {
-                  if (_.get(selectedItem, "item_id") == itemId) return;
-                  console.log(`'${itemName}' selected`);
-                  setSelectedItem(item);
-                }}
-              >
-                {itemName}
-              </Doughnut>
-            );
-          })}
-        </Grid>
         <PaymentModal
           selection={selectedItem}
           onSubmit={function(amountToDonate) {
