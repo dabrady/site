@@ -166,7 +166,7 @@ function PaymentModal({ itemValue = 0, onSubmit }) {
   );
 }
 
-function Doughnut({ value, progress, onClick, children }) {
+function WishlistItem({ value, progress, onClick, children }) {
   var [progress, setProgress] = useState(progress);
   return (
     <div>
@@ -238,9 +238,11 @@ export default function Wishlist() {
       </Button>
       <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
         {wishlist.map(function renderItem(item) {
+          if (item == wishlist[0])
+            console.info("[brady] rerendering wishlist items");
           var { item_id: itemId, item: itemName, price, balance } = item;
           return (
-            <Doughnut
+            <WishlistItem
               key={itemId}
               selected={_.get(selectedItem, "item_id") == itemId}
               value={parseInt(price)}
@@ -252,7 +254,7 @@ export default function Wishlist() {
               }}
             >
               {itemName}
-            </Doughnut>
+            </WishlistItem>
           );
         })}
       </Grid>
