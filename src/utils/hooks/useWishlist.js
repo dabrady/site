@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 
-export default function useWishlist() {
+export default function useWishlist({ onFirstLoad }) {
   var [wishlist, setWishlist] = useState([]);
 
   useEffect(function loadWishlist() {
     (async function load() {
       console.info("[brady] loading wishlist!");
-      var wishlist = await (await fetch("/.netlify/functions/wishlist", {
-        method: "GET"
-      })).json();
-      console.info(wishlist);
+      var wishlist = await (await fetch("/.netlify/functions/wishlist")).json();
       setWishlist(wishlist);
+      onFirstLoad(wishlist);
     })();
   }, []);
 

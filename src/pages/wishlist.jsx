@@ -214,10 +214,13 @@ export default function Wishlist() {
     return (colorMode == "default" && "dark") || "default";
   }
 
-  var [wishlist, updateBalance] = useWishlist();
   var [selectedItem, setSelectedItem] = useState(null);
+  var [wishlist, updateBalance] = useWishlist({
+    onFirstLoad: function setInitialSelection(wishlist) {
+      setSelectedItem(wishlist[0]);
+    }
+  });
 
-  console.info("[brady] wishlist is currently:", wishlist);
   return (
     <MainLayout>
       <Heading
