@@ -14,7 +14,7 @@ export default function useWishlist({ onFirstLoad }) {
 
   return [
     wishlist,
-    async function updateBalance(itemId, amount) {
+    async function updateItemBalance(itemId, amount) {
       console.info(`[brady] updating item '${itemId} by $${amount}'`);
       var { balance } = await (await fetch("/.netlify/functions/wishlist", {
         method: "PUT",

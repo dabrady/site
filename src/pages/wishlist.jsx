@@ -215,7 +215,7 @@ export default function Wishlist() {
   }
 
   var [selectedItem, setSelectedItem] = useState(null);
-  var [wishlist, updateBalance] = useWishlist({
+  var [wishlist, updateItemBalance] = useWishlist({
     onFirstLoad: function setInitialSelection(wishlist) {
       setSelectedItem(wishlist[0]);
     }
@@ -260,7 +260,7 @@ export default function Wishlist() {
         <PaymentModal
           selection={selectedItem}
           onSubmit={function(amountToDonate) {
-            updateBalance(selectedItem.item_id, amountToDonate);
+            updateItemBalance(selectedItem.item_id, amountToDonate);
           }}
         />
       </Elements>
