@@ -56,7 +56,7 @@ function PaymentModal({ itemValue = 0, onSubmit }) {
   var stripe = useStripe();
   var elements = useElements();
   var [confirmed, setConfirmed] = useState(false);
-  var [amount, setAmount] = useState(1);
+  var [amount, setAmount] = useState("");
 
   async function handleSubmit(e, money) {
     var amount = parseFloat(money);
@@ -68,7 +68,7 @@ function PaymentModal({ itemValue = 0, onSubmit }) {
 
     // TODO parameterize payment amount
     // var amountToDonate = Math.min(amount, itemValue);
-    var amountToDonate = amount;
+    var amountToDonate = amount || 1;
     console.info(`🤫 ${amountToDonate}`);
 
     var response = await fetch(
