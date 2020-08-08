@@ -18,29 +18,8 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Stripe from "@components/Stripe";
 import MainLayout from "@components/MainLayout";
+import CreditCardForm from "@components/CreditCardForm";
 import useWishlist from "@utils/hooks/useWishlist";
-
-function CardSection() {
-  var { theme, colorMode } = useThemeUI();
-  return (
-    <CardElement
-      options={{
-        style: {
-          base: {
-            ...css(theme.stripe)(theme),
-            iconColor:
-              colorMode == "default"
-                ? theme.colors.accent
-                : theme.colors.modes[colorMode].accent
-          },
-          invalid: {
-            color: "#E25950"
-          }
-        }
-      }}
-    />
-  );
-}
 
 // TODO Reimplement
 function PaymentModal({ itemValue = 0, onSubmit }) {
@@ -128,7 +107,7 @@ function PaymentModal({ itemValue = 0, onSubmit }) {
           setConfirmed(false);
         }}
       />
-      <CardSection />
+      <CreditCardForm />
       <Button
         variant={buttonVariant}
         sx={{ marginRight: "10px" }}
