@@ -14,20 +14,11 @@ import {
   useColorMode
 } from "theme-ui";
 
-import { loadStripe, registerElements } from "@stripe/stripe-js";
-import {
-  CardElement,
-  Elements,
-  useStripe,
-  useElements
-} from "@stripe/react-stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
+import Stripe from "@components/Stripe";
 import MainLayout from "@components/MainLayout";
 import useWishlist from "@utils/hooks/useWishlist";
-
-var stripePromise = loadStripe(
-  "pk_test_51H9C9cFdjFUWnf7defV5IMhGPt25eEoRcNXo1bqIyMvQ1OsMQcf174jaRoiYYL2Mbn2JWGR9KXG3qiFL6p3mFZrr00eh1v542P"
-);
 
 function CardSection() {
   var { theme, colorMode } = useThemeUI();
@@ -258,14 +249,14 @@ export default function Wishlist() {
           );
         })}
       </Grid>
-      <Elements stripe={stripePromise}>
+      <Stripe>
         <PaymentModal
           selection={selectedItem}
           onSubmit={function(amountToDonate) {
             updateItemBalance(selectedItem.item_id, amountToDonate);
           }}
         />
-      </Elements>
+      </Stripe>
     </MainLayout>
   );
 }
