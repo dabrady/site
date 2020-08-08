@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import _ from "lodash";
 /** @jsx jsx */
 import {
@@ -10,8 +10,7 @@ import {
   Heading,
   css,
   jsx,
-  useThemeUI,
-  useColorMode
+  useThemeUI
 } from "theme-ui";
 
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
@@ -21,121 +20,6 @@ import MainLayout from "@components/MainLayout";
 import CreditCardForm from "@components/CreditCardForm";
 import useWishlist from "@utils/hooks/useWishlist";
 import useThemeToggle from "@utils/hooks/useThemeToggle";
-
-// TODO Reimplement
-function PaymentModal({ itemValue = 0, onSubmit }) {
-  var stripe = useStripe();
-  var elements = useElements();
-  var [confirmed, setConfirmed] = useState(false);
-  var [amount, setAmount] = useState("");
-
-  async function handleSubmit(e, money) {
-    var amount = parseFloat(money);
-    e.preventDefault();
-
-    if (!stripe || !elements) {
-      return;
-    }
-
-    // TODO parameterize payment amount
-    // var amountToDonate = Math.min(amount, itemValue);
-    var amountToDonate = amount || 1;
-    console.info(`🤫 ${amountToDonate}`);
-
-    var response = await fetch(
-      `/.netlify/functions/stripe?amount=${amountToDonate}`
-    );
-    var { client_secret } = await response.json();
-    // TODO attach metadata about item
-    var { error, paymentIntent } = await stripe.confirmCardPayment(
-      client_secret,
-      {
-        payment_method: {
-          card: elements.getElement(CardElement),
-          billing_details: {
-            name: "Anonymous"
-          }
-        }
-      }
-    );
-
-    if (error) {
-      console.error("[client]", error.message);
-    } else {
-      console.info(paymentIntent);
-      if (paymentIntent.status == "succeeded") {
-        console.log(`Successfully donated $${amountToDonate}`);
-        onSubmit(amountToDonate);
-        // closeModal(amountToDonate);
-      } else {
-        console.log("Nope:", paymentIntent.status);
-      }
-    }
-    // closeModal(amountToDonate);
-  }
-
-  var disabled = !stripe || !amount;
-  var buttonVariant = disabled
-    ? "disabled"
-    : confirmed
-    ? "primary"
-    : "secondary";
-  return (
-    <form
-      sx={{
-        paddingTop: "50px"
-      }}
-      onSubmit={handleSubmit}
-    >
-      <Input
-        sx={{ color: "bright", maxWidth: "20%", marginBottom: "15px" }}
-        placeholder="$1"
-        name="amount"
-        id="amount"
-        type="number"
-        value={amount}
-        onChange={function sanitizeInput(e) {
-          // Allow input clearing
-          if (!e.target.value) {
-            setAmount("");
-          } else if (/^[0-9]*$/.test(e.target.value)) {
-            // Only allow numbers
-            // Cap input at itemValue
-            var val = parseInt(e.target.value);
-            var amt = val; //Math.min(val, itemValue);
-            setAmount(amt);
-          }
-          setConfirmed(false);
-        }}
-      />
-      <CreditCardForm />
-      <Button
-        variant={buttonVariant}
-        sx={{ marginRight: "10px" }}
-        disabled={disabled}
-        onClick={
-          confirmed
-            ? e => handleSubmit(e, amount)
-            : e => {
-                e.preventDefault();
-                amount > 0 && setConfirmed(true);
-              }
-        }
-      >
-        {confirmed ? `DONATE $${amount}` : "Confirm donation"}
-      </Button>
-      <Button
-        variant="secondary"
-        onClick={function cancel(e) {
-          e.preventDefault();
-          setConfirmed(false);
-        }}
-      >
-        Cancel
-      </Button>
-    </form>
-  );
-}
 
 function WishlistItem({ value, progress, onClick, children }) {
   var [progress, setProgress] = useState(progress);
@@ -154,7 +38,6 @@ function WishlistItem({ value, progress, onClick, children }) {
           }
         }}
         onClick={onClick}
-        /* onClick={() => setModalOpen(true)} */
       >
         <Donut variant="progress.default" value={progress} />
         <Heading variant="wishlistValue">
@@ -181,12 +64,15 @@ function WishlistItem({ value, progress, onClick, children }) {
 
 export default function Wishlist() {
   var toggleTheme = useThemeToggle();
-
   var [selectedItem, setSelectedItem] = useState(null);
+  // TODO(dabrady) A better way to lazy init `selecteItem`?
   var [wishlist, updateItemBalance] = useWishlist({
-    onFirstLoad: function setInitialSelection(wishlist) {
-      setSelectedItem(wishlist[0]);
-    }
+    onFirstLoad: useCallback(
+      function setInitialSelection(wishlist) {
+        setSelectedItem(wishlist[0]);
+      },
+      [wishlist]
+    )
   });
 
   return (
@@ -227,11 +113,12 @@ export default function Wishlist() {
         })}
       </Grid>
       <Stripe>
-        <PaymentModal
+        <CreditCardForm
           selection={selectedItem}
-          onSubmit={function(amountToDonate) {
+          onPayment={function(amountToDonate) {
             updateItemBalance(selectedItem.item_id, amountToDonate);
           }}
+          onFailure={console.error}
         />
       </Stripe>
     </MainLayout>

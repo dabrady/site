@@ -3,14 +3,19 @@ import { useEffect, useState } from "react";
 export default function useWishlist({ onFirstLoad }) {
   var [wishlist, setWishlist] = useState([]);
 
-  useEffect(function loadWishlist() {
-    (async function load() {
+  useEffect(
+    function loadWishlist() {
       console.info("[brady] loading wishlist!");
-      var wishlist = await (await fetch("/.netlify/functions/wishlist")).json();
-      setWishlist(wishlist);
-      onFirstLoad(wishlist);
-    })();
-  }, []);
+      (async function load() {
+        var wishlist = await (await fetch(
+          "/.netlify/functions/wishlist"
+        )).json();
+        setWishlist(wishlist);
+        onFirstLoad(wishlist);
+      })();
+    },
+    [onFirstLoad]
+  );
 
   return [
     wishlist,
@@ -24,7 +29,7 @@ export default function useWishlist({ onFirstLoad }) {
       console.info("[brady] updating local balance");
       setWishlist(
         wishlist.map(function updateLocalBalance(item) {
-          if (item.item_id != itemId) return item;
+          if (item.item_id != itemId) return { ...item };
           return {
             ...item,
             balance

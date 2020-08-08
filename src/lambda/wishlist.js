@@ -17,6 +17,7 @@ async function fetchDoc() {
   return doc;
 }
 
+// TODO(dabrady) camelCase column names
 async function fetchData(worksheet) {
   // TODO How to determine how much to load?
   await worksheet.loadCells(`A2:D${itemCount}`);
