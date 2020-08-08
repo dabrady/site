@@ -10,12 +10,10 @@ import {
   IconInstagram,
   IconLinkedIn
 } from "@components/Icons";
+import useThemeToggle from "@utils/hooks/useThemeToggle";
 
 export default function Home() {
-  var [colorMode, setColorMode] = useColorMode();
-  function otherMode() {
-    return (colorMode == "default" && "dark") || "default";
-  }
+  var toggleTheme = useThemeToggle();
 
   return (
     <MainLayout>
@@ -69,7 +67,7 @@ export default function Home() {
                 transitionDuration: "0.2s"
               }
             }}
-            onClick={() => setColorMode(otherMode())}
+            onClick={toggleTheme}
           >
             .
           </span>

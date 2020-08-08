@@ -20,6 +20,7 @@ import Stripe from "@components/Stripe";
 import MainLayout from "@components/MainLayout";
 import CreditCardForm from "@components/CreditCardForm";
 import useWishlist from "@utils/hooks/useWishlist";
+import useThemeToggle from "@utils/hooks/useThemeToggle";
 
 // TODO Reimplement
 function PaymentModal({ itemValue = 0, onSubmit }) {
@@ -179,10 +180,7 @@ function WishlistItem({ value, progress, onClick, children }) {
 }
 
 export default function Wishlist() {
-  var [colorMode, setColorMode] = useColorMode();
-  function otherMode() {
-    return (colorMode == "default" && "dark") || "default";
-  }
+  var toggleTheme = useThemeToggle();
 
   var [selectedItem, setSelectedItem] = useState(null);
   var [wishlist, updateItemBalance] = useWishlist({
@@ -202,7 +200,7 @@ export default function Wishlist() {
       <Button
         sx={{ display: "inline-block" }}
         variant="secondary"
-        onClick={() => setColorMode(otherMode())}
+        onClick={toggleTheme}
       >
         Toggle theme
       </Button>
