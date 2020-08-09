@@ -21,8 +21,8 @@ import CreditCardForm from "@components/CreditCardForm";
 import useWishlist from "@utils/hooks/useWishlist";
 import useThemeToggle from "@utils/hooks/useThemeToggle";
 
-function WishlistItem({ value, progress, onClick, children }) {
-  var [progress, setProgress] = useState(progress);
+function WishlistItem({ balance, value, progress, onClick, children }) {
+  console.info(`[brady] rendering item: ${balance} / ${value}`);
   return (
     <div>
       <figure
@@ -65,10 +65,11 @@ function WishlistItem({ value, progress, onClick, children }) {
 export default function Wishlist() {
   var toggleTheme = useThemeToggle();
   var [selectedItem, setSelectedItem] = useState(null);
-  // TODO(dabrady) A better way to lazy init `selecteItem`?
+  // TODO(dabrady) A better way to lazy init `selectedItem`?
   var [wishlist, updateItemBalance] = useWishlist({
     onFirstLoad: useCallback(
       function setInitialSelection(wishlist) {
+        console.info("[brady] setting initial selection");
         setSelectedItem(wishlist[0]);
       },
       [wishlist]
@@ -91,32 +92,35 @@ export default function Wishlist() {
         Toggle theme
       </Button>
       <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
-        {wishlist.map(function renderItem(item) {
-          if (item == wishlist[0])
-            console.info("[brady] rerendering wishlist items");
-          var { item_id: itemId, item: itemName, price, balance } = item;
-          return (
-            <WishlistItem
-              key={itemId}
-              selected={_.get(selectedItem, "item_id") == itemId}
-              value={parseInt(price)}
-              progress={balance / price}
-              onClick={function markSelected() {
-                if (_.get(selectedItem, "item_id") == itemId) return;
-                console.log(`'${itemName}' selected`);
-                setSelectedItem(item);
-              }}
-            >
-              {itemName}
-            </WishlistItem>
-          );
-        })}
+        {console.info("[brady] rendering wishlist items") ||
+          wishlist.map(function renderItem(item) {
+            var { item_id: itemId, item: itemName, price, balance } = item;
+            return (
+              <WishlistItem
+                key={itemId}
+                selected={_.get(selectedItem, "item_id") == itemId}
+                value={parseInt(price)}
+                progress={balance / price}
+                balance={balance}
+                onClick={function markSelected() {
+                  if (_.get(selectedItem, "item_id") == itemId) return;
+                  console.log(`'${itemName}' selected`);
+                  setSelectedItem(item);
+                }}
+              >
+                {itemName}
+              </WishlistItem>
+            );
+          })}
       </Grid>
       <Stripe>
         <CreditCardForm
           selection={selectedItem}
           onPayment={function(amountToDonate) {
-            updateItemBalance(selectedItem.item_id, amountToDonate);
+            selectedItem &&
+              updateItemBalance(selectedItem.item_id, amountToDonate).then(() =>
+                console.info("[brady] balance updated")
+              );
           }}
           onFailure={console.error}
         />

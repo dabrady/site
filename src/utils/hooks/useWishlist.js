@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useWishlist({ onFirstLoad }) {
+export default function useWishlist({ onFirstLoad } = {}) {
   var [wishlist, setWishlist] = useState([]);
 
   useEffect(
@@ -11,7 +11,7 @@ export default function useWishlist({ onFirstLoad }) {
           "/.netlify/functions/wishlist"
         )).json();
         setWishlist(wishlist);
-        onFirstLoad(wishlist);
+        onFirstLoad && onFirstLoad(wishlist);
       })();
     },
     [onFirstLoad]
