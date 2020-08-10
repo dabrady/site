@@ -53,13 +53,13 @@
   "license": "MIT",
   "scripts": {
     "serve": "gatsby serve",
-    "clean": "gatsby clean && rm -r .netlify/",
-    "build": "gatsby build && yarn build:lambda",
-    "build:app": "yarn build",
-    "build:lambda": "netlify-lambda build src/lambda",
-    "develop": "yarn clean && yarn dev-start",
+    "clean": "gatsby clean && rm -rf .netlify/",
+    "build": "yarn build:app && yarn build:lambda",
+    "build:app": "NODE_ENV=production gatsby build",
+    "build:lambda": "NODE_ENV=production netlify-lambda build src/lambda",
+    "develop": "yarn clean && NODE_ENV=development yarn dev-start",
     "dev-start": "run-p dev-start:**",
-    "dev-start:app": "gatsby develop --https",
+    "dev-start:app": "NODE_ENV=development gatsby develop --https",
     "dev-start:lambda": "NODE_ENV=development netlify-lambda serve src/lambda"
   },
   "repository": {

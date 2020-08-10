@@ -4,6 +4,8 @@ help: ## Prints help for targets with comments
 		sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+clean: ## Cleans build artifacts
+	yarn clean
 dev: ## Starts dev web server with a clear cache
 	yarn develop
 
