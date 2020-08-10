@@ -76,6 +76,8 @@ export default function Wishlist() {
     )
   });
 
+  console.info(`[brady] wishlist is:`, wishlist);
+
   return (
     <MainLayout>
       <Heading
@@ -93,26 +95,25 @@ export default function Wishlist() {
       </Button>
       <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
         {console.info("[brady] rendering wishlist items") ||
-          (wishlist &&
-            wishlist.map(function renderItem(item) {
-              var { item_id: itemId, item: itemName, price, balance } = item;
-              return (
-                <WishlistItem
-                  key={itemId}
-                  selected={_.get(selectedItem, "item_id") == itemId}
-                  value={parseInt(price)}
-                  progress={balance / price}
-                  balance={balance}
-                  onClick={function markSelected() {
-                    if (_.get(selectedItem, "item_id") == itemId) return;
-                    console.log(`'${itemName}' selected`);
-                    setSelectedItem(item);
-                  }}
-                >
-                  {itemName}
-                </WishlistItem>
-              );
-            }))}
+          wishlist.map(function renderItem(item) {
+            var { item_id: itemId, item: itemName, price, balance } = item;
+            return (
+              <WishlistItem
+                key={itemId}
+                selected={_.get(selectedItem, "item_id") == itemId}
+                value={parseInt(price)}
+                progress={balance / price}
+                balance={balance}
+                onClick={function markSelected() {
+                  if (_.get(selectedItem, "item_id") == itemId) return;
+                  console.log(`'${itemName}' selected`);
+                  setSelectedItem(item);
+                }}
+              >
+                {itemName}
+              </WishlistItem>
+            );
+          })}
       </Grid>
       <Stripe>
         <CreditCardForm

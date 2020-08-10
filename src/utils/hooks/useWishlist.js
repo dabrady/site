@@ -6,13 +6,28 @@ export default function useWishlist({ onFirstLoad } = {}) {
   useEffect(
     function loadWishlist() {
       console.info("[brady] loading wishlist!");
-      (async function load() {
-        var wishlist = await (await fetch(
-          "/.netlify/functions/wishlist"
-        )).json();
-        setWishlist(wishlist);
-        onFirstLoad && onFirstLoad(wishlist);
-      })();
+
+      fetch("/.netlify/functions/wishlist", {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(
+              `Error fetching wishlist: ${response.status} -- ${
+                response.statusText
+              }`
+            );
+          }
+          console.info("[brady] response is:", response);
+          return response.json();
+        })
+        .then(wishlist => {
+          setWishlist(wishlist);
+          onFirstLoad && onFirstLoad(wishlist);
+        })
+        .catch(console.error);
     },
     [onFirstLoad]
   );

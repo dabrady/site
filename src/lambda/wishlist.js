@@ -57,7 +57,7 @@ async function updateItem({ worksheet, itemId, amount }) {
 }
 
 export async function handler(event, context) {
-  console.debug(event, context);
+  console.info(event, context);
   var { httpMethod, body } = event;
   var doc = await fetchDoc();
   var worksheet = doc.sheetsByIndex[0];
