@@ -26,7 +26,7 @@ async function fetchData(worksheet) {
   var columnCount = worksheet.headerValues.length;
   var rowCount = loaded / columnCount;
 
-  console.info(worksheet.cellStats);
+  console.log(worksheet.cellStats);
   var data = [];
   rowLoop: for (let r = 1; r < rowCount; r++) {
     var row = {};
@@ -44,7 +44,7 @@ async function fetchData(worksheet) {
 }
 
 async function updateItem({ worksheet, itemId, amount }) {
-  console.info(
+  console.log(
     `[brady] updating wishlist item: item ${itemId}, donating ${amount}`
   );
   // NOTE(dabrady) Using row ids as item ids
@@ -57,17 +57,18 @@ async function updateItem({ worksheet, itemId, amount }) {
 }
 
 export async function handler(event, context) {
-  console.info(event, context);
+  console.log(`[brady] handling wishlist request`, body);
+  console.log(event, context);
   var { httpMethod, body } = event;
   var doc = await fetchDoc();
   var worksheet = doc.sheetsByIndex[0];
 
   switch (httpMethod) {
     case "GET":
-      console.info("[brady] fetching wishlist data");
+      console.log("[brady] fetching wishlist data");
       var data = await fetchData(worksheet);
 
-      console.info(`[brady] data:`, data);
+      console.log(`[brady] data:`, data);
       return {
         statusCode: 200,
         body: JSON.stringify(data)
