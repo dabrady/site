@@ -1,0 +1,12 @@
+{
+  "name": "lambda",
+  "version": "1.0.0",
+  "description": "AWS Lambda functions for my site",
+  "repository": "https://github.com/dabrady/site",
+  "author": "Daniel Brady",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "google-spreadsheet": "^3.0.11"
+  }
+}

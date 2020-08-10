@@ -4,8 +4,14 @@ help: ## Prints help for targets with comments
 		sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+.PHONY: install
+install: ## Installs project dependencies
+	yarn install
+	cd src/lambda && yarn install
+.PHONY: clean
 clean: ## Cleans build artifacts
 	yarn clean
+.PHONY: dev
 dev: ## Starts dev web server with a clear cache
 	yarn develop
 
