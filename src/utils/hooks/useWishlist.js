@@ -7,11 +7,7 @@ export default function useWishlist({ onFirstLoad } = {}) {
     function loadWishlist() {
       console.info("[brady] loading wishlist!");
 
-      fetch("/.netlify/functions/wishlist", {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
+      fetch("/.netlify/functions/wishlist")
         .then(response => {
           if (!response.ok) {
             throw new Error(
