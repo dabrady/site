@@ -21,10 +21,17 @@ import CreditCardForm from "@components/CreditCardForm";
 import useWishlist from "@utils/hooks/useWishlist";
 import useThemeToggle from "@utils/hooks/useThemeToggle";
 
-function WishlistItem({ balance, value, progress, onClick, children }) {
-  console.info(`[brady] rendering item: ${balance} / ${value}`);
+function WishlistItem({
+  selected,
+  balance,
+  value,
+  progress,
+  onClick,
+  children
+}) {
+  console.debug(`[brady] rendering item: ${balance} / ${value}`);
   return (
-    <div>
+    <Box>
       <figure
         sx={{
           position: "relative",
@@ -45,20 +52,20 @@ function WishlistItem({ balance, value, progress, onClick, children }) {
         </Heading>
         <figcaption
           sx={{
+            variant: "text.default",
             textAlign: "center",
-            color: "text",
-            fontFamily: "body",
-            fontWeight: "body",
-            lineHeight: "body",
             ":hover": {
               cursor: "default"
-            }
+            },
+
+            borderBottom: t => selected && "3px solid",
+            borderColor: "accent"
           }}
         >
           {children}
         </figcaption>
       </figure>
-    </div>
+    </Box>
   );
 }
 
@@ -69,14 +76,14 @@ export default function Wishlist() {
   var [wishlist, updateItemBalance] = useWishlist({
     onFirstLoad: useCallback(
       function setInitialSelection(wishlist) {
-        console.info("[brady] setting initial selection");
+        console.debug("[brady] setting initial selection");
         setSelectedItem(wishlist[0]);
       },
       [wishlist]
     )
   });
 
-  console.info(`[brady] wishlist is:`, wishlist);
+  console.debug(`[brady] wishlist is:`, wishlist);
 
   return (
     <MainLayout>
@@ -94,7 +101,7 @@ export default function Wishlist() {
         Toggle theme
       </Button>
       <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
-        {console.info("[brady] rendering wishlist items") ||
+        {console.debug("[brady] rendering wishlist items") ||
           wishlist.map(function renderItem(item) {
             var { item_id: itemId, item: itemName, price, balance } = item;
             return (
@@ -117,11 +124,10 @@ export default function Wishlist() {
       </Grid>
       <Stripe>
         <CreditCardForm
-          selection={selectedItem}
           onPayment={function(amountToDonate) {
             selectedItem &&
               updateItemBalance(selectedItem.item_id, amountToDonate).then(() =>
-                console.info("[brady] balance updated")
+                console.debug("[brady] balance updated")
               );
           }}
           onFailure={console.error}

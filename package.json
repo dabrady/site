@@ -53,12 +53,10 @@
   "scripts": {
     "clean": "gatsby clean && rm -rf .netlify/",
     "serve": "gatsby serve",
-
     "prebuild": "cd src/lambda && NODE_ENV=production yarn install",
     "build": "yarn build:app && yarn build:lambda",
     "build:app": "NODE_ENV=production gatsby build",
     "build:lambda": "NODE_ENV=production netlify-lambda build src/lambda",
-
     "develop": "yarn clean && NODE_ENV=development yarn dev-start",
     "dev-start": "run-p dev-start:**",
     "dev-start:app": "NODE_ENV=development gatsby develop --https",

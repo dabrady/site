@@ -16,7 +16,7 @@ export default function useWishlist({ onFirstLoad } = {}) {
               }`
             );
           }
-          console.info("[brady] response is:", response);
+          console.debug("[brady] response is:", response);
           return response.json();
         })
         .then(wishlist => {
@@ -31,13 +31,13 @@ export default function useWishlist({ onFirstLoad } = {}) {
   return [
     wishlist,
     async function updateItemBalance(itemId, amount) {
-      console.info(`[brady] updating item '${itemId} by $${amount}'`);
+      console.debug(`[brady] updating item '${itemId} by $${amount}'`);
       var { balance } = await (await fetch("/.netlify/functions/wishlist", {
         method: "PUT",
         body: JSON.stringify({ itemId, amount })
       })).json();
 
-      console.info("[brady] updating local balance");
+      console.debug("[brady] updating local balance");
       setWishlist(
         wishlist.map(function updateLocalBalance(item) {
           if (item.item_id != itemId) return { ...item };

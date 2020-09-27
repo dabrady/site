@@ -1,5 +1,6 @@
 import chroma from "chroma-js";
 import gray from "gray-percentage";
+import { alpha } from "@theme-ui/color";
 import * as T from "@utils/typography";
 
 import "@styles/fonts.css";
@@ -79,6 +80,8 @@ export default {
       .brighten()
       .alpha(0.07)
       .css(),
+    shadow: palette.black,
+
     modes: {
       dark: {
         text: palette.softGray,
@@ -93,7 +96,8 @@ export default {
         muted: chroma(palette.icyBlue)
           .brighten()
           .alpha(0.2)
-          .css()
+          .css(),
+        shadow: palette.black
       }
     }
   },
@@ -101,6 +105,7 @@ export default {
   /* For styling MDX content */
   breakpoints: ["40rem", "42rem", "56rem"],
   // fontSizes: T.FONT_SIZES,
+  // TODO(dabrady) Add a "small text" size (~0.875rem) and slightly larger normal text size (~1.3rem)
   fontSizes: ["1rem", "2.2rem", "4rem", "4.4rem", "5rem"],
   space: T.SPACES,
   styles: {},
@@ -116,8 +121,9 @@ export default {
     default: {
       color: "text",
       fontFamily: "body",
+      fontWeight: "body",
       lineHeight: "body",
-      fontSize: 1
+      fontSize: 0
     },
     heading: {
       color: "text",
@@ -136,6 +142,32 @@ export default {
       top: ({ lineHeights }) => `calc(50% - ${lineHeights.heading}rem + 4px)`,
       width: "100%",
       textAlign: "center"
+    },
+    input: {
+      color: "text",
+      fontFamily: "body",
+      fontWeight: "body",
+      lineHeight: "body",
+      fontSize: 0,
+
+      backgroundColor: "transparent",
+      width: "100%",
+      padding: "11px 15px 11px 0",
+
+      animation: "1ms void-animation-out",
+      appearance: "none",
+      outline: "none",
+      borderStyle: "none",
+
+      ":-webkitAutofill": {
+        "-webkitTextFillColor": "#fce883",
+        transition: "background-color 100000000s",
+        "-webkitAnimation": "1ms void-animation-out"
+      },
+
+      "::placeholder": {
+        color: alpha("accent", 0.6)
+      }
     }
   },
 
@@ -162,23 +194,6 @@ export default {
       //     }
       //   }
       // }
-    }
-  },
-
-  stripe: {
-    color: "bright",
-    fontFamily: "body",
-    fontWeight: "body",
-    fontSize: "16px", // Need to specify absolute size because Stripe :P
-    fontSmoothing: "antialiased",
-    lineHeight: "body",
-
-    "::placeholder": {
-      color: ({ colors }) => {
-        return chroma(colors.text)
-          .alpha(0.5)
-          .css();
-      }
     }
   },
 
