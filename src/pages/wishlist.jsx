@@ -12,6 +12,7 @@ import {
   jsx,
   useThemeUI
 } from "theme-ui";
+import { alpha } from "@theme-ui/color";
 
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
@@ -48,6 +49,17 @@ function WishlistItem({
       >
         <Donut variant="progress.default" value={progress} />
         <Heading variant="wishlistValue">
+          <small
+            sx={{
+              position: "absolute",
+              top: t => `calc(-${t.lineHeights.body}rem + 5px)`,
+              textAlign: "center",
+              width: "47%",
+              color: alpha("text", 0.5)
+            }}
+          >
+            {parseInt(balance)} /
+          </small>
           {progress >= 1 ? "🙏" : `${value} USD`}
         </Heading>
         <figcaption

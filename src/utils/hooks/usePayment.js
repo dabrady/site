@@ -1,14 +1,15 @@
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useStripe } from "@stripe/react-stripe-js";
 
 export default function usePayment() {
   var stripe = useStripe();
-  var elements = useElements();
 
-  return function pay(amount) {
+  return function pay({ details, card }) {
     return new Promise(function pay(resolve, reject) {
-      if (!stripe || !elements || !amount) {
+      if (!stripe || !card) {
         reject(new Error("Stripe is borken"));
       } else {
+        var { amount, ...billing_details } = details;
+
         fetch(`/.netlify/functions/stripe?amount=${amount}`)
           .then(function parse(response) {
             return response.json();
@@ -16,12 +17,8 @@ export default function usePayment() {
           .then(function makePayment({ clientSecret }) {
             // TODO attach metadata about item
             return stripe.confirmCardPayment(clientSecret, {
-              payment_method: {
-                card: elements.getElement(CardElement),
-                billing_details: {
-                  name: "Anonymous"
-                }
-              }
+              payment_method: { card, billing_details },
+              receipt_email: billing_details.email
             });
           })
           .then(function handlePayment({ error, paymentIntent }) {
@@ -33,7 +30,7 @@ export default function usePayment() {
 
               if (paymentIntent.status == "succeeded") {
                 console.info(`Successfully donated $${amount}`);
-                resolve(amount, paymentIntent);
+                resolve({ amount, paymentIntent });
               } else {
                 console.error("Nope:", paymentIntent.status);
                 reject(paymentIntent.status);

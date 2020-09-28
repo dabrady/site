@@ -159,10 +159,11 @@ export default {
       outline: "none",
       borderStyle: "none",
 
-      ":-webkitAutofill": {
-        "-webkitTextFillColor": "#fce883",
+      ":-webkit-autofill": {
+        "-webkit-text-fill-color": ({ colors }) => colors.text,
+        background: "transparent !important",
         transition: "background-color 100000000s",
-        "-webkitAnimation": "1ms void-animation-out"
+        "-webkit-animation": "1ms void-animation-out"
       },
 
       "::placeholder": {

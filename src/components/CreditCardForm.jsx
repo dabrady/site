@@ -2,16 +2,17 @@ import React, { useState } from "react";
 /** @jsx jsx */
 import chroma from "chroma-js";
 import { Button, Input, css, jsx, useColorMode, useThemeUI } from "theme-ui";
-import { CardElement } from "@stripe/react-stripe-js";
+import { alpha } from "@theme-ui/color";
+import { CardElement, useElements } from "@stripe/react-stripe-js";
 
-import Stripe from "@components/Stripe";
 import usePayment from "@utils/hooks/usePayment";
 import { getColorFromTheme } from "@utils/theme";
 
-export function CardInput() {
-  var { theme, colorMode } = useThemeUI();
+export function CardInput({ onChange }) {
+  var { theme } = useThemeUI();
   return (
     <CardElement
+      onChange={onChange}
       sx={{
         width: "100%",
         padding: "11px 15px 11px 0",
@@ -24,20 +25,23 @@ export function CardInput() {
         style: {
           base: {
             ...css({
-              color: "bright",
               fontFamily: "Roboto", //"body", // TODO(dabrady) Figure out why font is unavailable in Stripe iframe, and fix it
               fontWeight: "body",
               fontSize: "16px", // Need to specify absolute size because Stripe :P
               fontSmoothing: "antialiased",
               lineHeight: "body",
 
+              color: "text",
+              ":-webkit-autofill": {
+                color: "text"
+              },
+
               "::placeholder": {
-                //alpha("accent", 0.5)
-                color: ({ colors }) => {
-                  return chroma(colors.text)
-                    .alpha(0.5)
-                    .css();
-                }
+                // Matches theme.text.input::placeholder
+                color: ({ colors }) =>
+                  chroma(colors.accent)
+                    .alpha(0.6)
+                    .css()
               }
             })(theme),
             iconColor: theme.colors.accent
@@ -46,34 +50,6 @@ export function CardInput() {
             color: "red"
           }
         }
-      }}
-    />
-  );
-}
-
-export function DonationInput({ setConfirmed }) {
-  var [amount, setAmount] = useState("");
-  return (
-    <InputRow
-      id="amount"
-      name="amount"
-      label="Donate$"
-      type="number"
-      placeholder="1"
-      value={amount}
-      autocomplete={true}
-      onChange={function sanitizeInput(e) {
-        // Allow input clearing
-        if (!e.target.value) {
-          setAmount("");
-        } else if (/^[0-9]*$/.test(e.target.value)) {
-          // Only allow numbers
-          // Cap input at itemValue
-          var val = parseInt(e.target.value);
-          var amt = val; //Math.min(val, itemValue);
-          setAmount(amt);
-        }
-        setConfirmed && setConfirmed(false);
       }}
     />
   );
@@ -134,11 +110,12 @@ function Row({ children }) {
     </div>
   );
 }
-function InputRow({
+function Field({
   id,
   label,
   type,
   placeholder,
+  onChange,
   required = null,
   autocomplete = false
 }) {
@@ -168,49 +145,87 @@ function InputRow({
         required={required}
         autoComplete={autocomplete ? "on" : "off"}
         sx={{ variant: "text.input" }}
+        onChange={onChange}
       />
     </Row>
   );
 }
 
-function EmailInput() {
+function CardField({ onChange }) {
   return (
-    <InputRow
-      id="donation-email"
-      label="Receipt?"
-      type="email"
-      placeholder="your-email@example.com"
-      autocomplete={true}
-    />
+    <Row>
+      <CardInput onChange={onChange} />
+    </Row>
   );
 }
 
 export default function CreditCardForm({ disabled, onPayment, onFailure }) {
   var pay = usePayment();
+  var elements = useElements();
 
-  var [confirmed, setConfirmed] = useState(false);
+  var [donationConfirmed, setDonationConfirmed] = useState(false);
+  var [cardComplete, setCardComplete] = useState(false);
+  var [processingPayment, setProcessingPayment] = useState(false);
+  var [paymentIntent, setPaymentIntent] = useState(null);
+  var [cardError, setCardError] = useState(null);
+  var [donationDetails, setDonationDetails] = useState({
+    email: null,
+    amount: ""
+  });
+
   var buttonVariant = disabled
     ? "disabled"
-    : confirmed
+    : donationConfirmed
     ? "primary"
     : "secondary";
 
-  function handleSubmit(e, money) {
-    console.info("[CreditCardForm#handleSubmit]");
+  function handleSubmit(e) {
     e.preventDefault();
-    var amount = parseFloat(money);
+    console.debug("[CreditCardForm#handleSubmit]");
 
-    // TODO parameterize payment amount
+    var card = elements.getElement(CardElement);
+
+    if (cardError || !cardComplete) {
+      card.focus();
+      return;
+    }
+
+    console.debug("card complete, making payment request");
+    setProcessingPayment(true);
+
+    // NOTE(dabrady) Don't let them overpay!
     // var amountToDonate = Math.min(amount, itemValue);
-    var amountToDonate = amount || 1;
-    console.info(`🤫 ${amountToDonate}`);
+    // var amount = parseFloat(donationDetails.amount) || 1;
+    console.info(`🤫 ${donationDetails.amount}`);
 
-    pay(amountToDonate)
-      .then(onPayment)
-      .catch(onFailure);
+    pay({ details: donationDetails, card })
+      .then(({ amount, paymentIntent }) => {
+        setProcessingPayment(false);
+        setPaymentIntent(paymentIntent);
+        onPayment(amount);
+      })
+      .catch(error => {
+        setProcessingPayment(false);
+        onFailure(error);
+      });
   }
 
-  return (
+  function reset() {
+    setCardError(null);
+    setProcessingPayment(false);
+    setPaymentIntent(null);
+    setDonationDetails({ email: null, amount: "" });
+  }
+
+  return paymentIntent ? (
+    <div>
+      <div>Payment successful</div>
+      <div>
+        Thanks for giving! Check your email for a receipt (if you asked for
+        one).
+      </div>
+    </div>
+  ) : (
     <form
       sx={{
         color: "text",
@@ -224,16 +239,50 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
       onSubmit={handleSubmit}
     >
       <FieldSet>
-        <DonationInput setConfirmed={setConfirmed} />
-        <EmailInput />
+        <Field
+          id="amount"
+          name="amount"
+          label="Donate$"
+          type="number"
+          placeholder="1"
+          value={donationDetails.amount}
+          autocomplete={true}
+          onChange={function sanitizeInput(e) {
+            // Allow input clearing
+            if (!e.target.value) {
+              setDonationDetails({ ...donationDetails, amount: "" });
+            } else if (/^[0-9]*$/.test(e.target.value)) {
+              // Only allow numbers
+              // Cap input at itemValue
+              var val = parseInt(e.target.value);
+              var amt = val; //Math.min(val, itemValue);
+              setDonationDetails({ ...donationDetails, amount: amt });
+            }
+            setDonationConfirmed && setDonationConfirmed(false);
+          }}
+        />
+
+        <Field
+          id="donation-email"
+          label="Receipt?"
+          type="email"
+          placeholder="your-email@example.com"
+          autocomplete={true}
+          onChange={function saveEmail(e) {
+            setDonationDetails({ ...donationDetails, email: e.target.value });
+          }}
+        />
       </FieldSet>
       <FieldSet>
-        <Row>
-          <Stripe>
-            <CardInput />
-          </Stripe>
-        </Row>
+        <CardField
+          onChange={function setCardState({ error, complete }) {
+            console.debug("[brady] setting card state");
+            setCardError(error);
+            setCardComplete(complete);
+          }}
+        />
       </FieldSet>
+
       <Button
         variant={buttonVariant}
         sx={{ marginRight: "10px" }}
@@ -241,20 +290,20 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
       >
         {/* Fix this */}
         {/* onClick={ */}
-        {/*   confirmed */}
+        {/*   donationConfirmed */}
         {/*     ? e => handleSubmit(e, amount) */}
         {/*     : e => { */}
         {/*         e.preventDefault(); */}
-        {/*         amount > 0 && setConfirmed(true); */}
+        {/*         amount > 0 && setDonationConfirmed(true); */}
         {/*       } */}
         {/* } */}
-        {/* {confirmed ? `DONATE $${amount}` : "Confirm donation"} */}
+        {/* {donationConfirmed ? `DONATE $${amount}` : "Confirm donation"} */}
       </Button>
       <Button
         variant="secondary"
         onClick={function cancel(e) {
           e.preventDefault();
-          setConfirmed(false);
+          setDonationConfirmed(false);
         }}
       >
         Cancel
