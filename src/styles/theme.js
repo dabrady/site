@@ -132,6 +132,12 @@ export default {
       lineHeight: "heading",
       fontSize: [1, 2]
     },
+    littleMessage: {
+      color: "text",
+      // Just slightly smaller than the main body text
+      // TODO(dabrady) Just make this font size available in `fontSizes`
+      fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.8)`
+    },
     wishlistValue: {
       color: "text",
       fontFamily: "title",
