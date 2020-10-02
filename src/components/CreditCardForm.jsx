@@ -203,6 +203,7 @@ function ErrorMessage({ children }) {
         transform: "translateY(-15px)",
 
         variant: "text.littleMessage",
+        lineHeight: "unset",
 
         opacity: 0,
         animation: "fade 150ms ease-out",
@@ -327,8 +328,9 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
         fontWeight: "body",
         lineHeight: "body",
 
-        paddingTop: "50px",
-        maxWidth: ["100%", "50%"]
+        /* paddingTop: "50px", */
+        /* maxWidth: ["100%", "50%"] */
+        flex: "1 100%"
       }}
       onSubmit={handleSubmit}
     >

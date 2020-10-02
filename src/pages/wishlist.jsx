@@ -2,11 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import _ from "lodash";
 /** @jsx jsx */
 import {
-  Button,
   Box,
   Donut,
+  Flex,
   Input,
-  Grid,
   Heading,
   css,
   jsx,
@@ -32,12 +31,27 @@ function WishlistItem({
 }) {
   console.debug(`[brady] rendering item: ${balance} / ${value}`);
   return (
-    <Box>
+    <Box sx={{ position: "relative" }}>
+      <Heading variant="wishlistValue">
+        <small
+          sx={{
+            position: "absolute",
+            top: t => `calc(-${t.lineHeights.body}rem + 5px)`,
+            textAlign: "center",
+            width: "47%",
+            color: alpha("text", 0.5)
+          }}
+        >
+          {parseInt(balance)} /
+        </small>
+        {progress >= 1 ? "🙏" : `${value} USD`}
+      </Heading>
       <figure
         sx={{
           position: "relative",
           width: "128px",
-          height: ({ lineHeights }) => `calc(128px + ${lineHeights.body}rem)`,
+          margin: ({ lineHeights }) => `0 auto ${lineHeights.body}rem auto`,
+          /* height: ({ lineHeights }) => `calc(128px + ${lineHeights.body}rem)`, */
           ":hover": {
             cursor: "pointer",
             h2: {
@@ -48,20 +62,6 @@ function WishlistItem({
         onClick={onClick}
       >
         <Donut variant="progress.default" value={progress} />
-        <Heading variant="wishlistValue">
-          <small
-            sx={{
-              position: "absolute",
-              top: t => `calc(-${t.lineHeights.body}rem + 5px)`,
-              textAlign: "center",
-              width: "47%",
-              color: alpha("text", 0.5)
-            }}
-          >
-            {parseInt(balance)} /
-          </small>
-          {progress >= 1 ? "🙏" : `${value} USD`}
-        </Heading>
         <figcaption
           sx={{
             variant: "text.default",
@@ -99,20 +99,21 @@ export default function Wishlist() {
 
   return (
     <MainLayout>
-      <Heading
-        as="header"
-        sx={{ display: "inline-block", paddingRight: "25px" }}
+      <Flex
+        sx={{
+          height: "100%",
+          flexFlow: "row wrap",
+          /* alignItems: "center", */
+          justifyContent: "center",
+          "& > *": {
+            boxSizing: "border-box",
+            flex: "auto"
+          }
+        }}
       >
-        Wishlist (demo)
-      </Heading>
-      <Button
-        sx={{ display: "inline-block" }}
-        variant="secondary"
-        onClick={toggleTheme}
-      >
-        Toggle theme
-      </Button>
-      <Grid sx={{ margin: "auto" }} gap="2rem" columns={[1, 2]}>
+        <Heading as="header" sx={{ flex: "1 100%" }} onClick={toggleTheme}>
+          Wishlist (demo)
+        </Heading>
         {console.debug("[brady] rendering wishlist items") ||
           wishlist.map(function renderItem(item) {
             var { item_id: itemId, item: itemName, price, balance } = item;
@@ -133,18 +134,18 @@ export default function Wishlist() {
               </WishlistItem>
             );
           })}
-      </Grid>
-      <Stripe>
-        <CreditCardForm
-          onPayment={function(amountToDonate) {
-            selectedItem &&
-              updateItemBalance(selectedItem.item_id, amountToDonate).then(() =>
-                console.debug("[brady] balance updated")
-              );
-          }}
-          onFailure={console.error}
-        />
-      </Stripe>
+        <Stripe>
+          <CreditCardForm
+            onPayment={function(amountToDonate) {
+              selectedItem &&
+                updateItemBalance(selectedItem.item_id, amountToDonate).then(
+                  () => console.debug("[brady] balance updated")
+                );
+            }}
+            onFailure={console.error}
+          />
+        </Stripe>
+      </Flex>
     </MainLayout>
   );
 }
