@@ -12,6 +12,7 @@ import {
   useThemeUI
 } from "theme-ui";
 import { alpha } from "@theme-ui/color";
+import { useResponsiveValue } from "@theme-ui/match-media";
 
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
@@ -29,49 +30,87 @@ function WishlistItem({
   onClick,
   children
 }) {
+  var donutSize = useResponsiveValue([64, 128, 192]);
+
   console.debug(`[brady] rendering item: ${balance} / ${value}`);
   return (
-    <Box sx={{ position: "relative" }}>
-      <Heading variant="wishlistValue">
-        <small
-          sx={{
-            position: "absolute",
-            top: t => `calc(-${t.lineHeights.body}rem + 5px)`,
-            textAlign: "center",
-            width: "47%",
-            color: alpha("text", 0.5)
-          }}
-        >
-          {parseInt(balance)} /
-        </small>
-        {progress >= 1 ? "🙏" : `${value} USD`}
-      </Heading>
+    <Box>
       <figure
         sx={{
           position: "relative",
-          width: "128px",
-          margin: ({ lineHeights }) => `0 auto ${lineHeights.body}rem auto`,
+          width: "100%",
+          display: ["flex", "flex", "block"],
+          flexFlow: "row nowrap",
+          alignItems: "center",
+          /* alignContent: "space-between", */
+          justifyContent: "flex-start",
+          "& > *": {
+            /* flex: "0 1 auto" */
+            /* flex: "1 0px" */
+          },
+          margin: ({ lineHeights }) => [
+            `0`,
+            `0`,
+            `0 -3.2rem ${lineHeights.body}rem auto`
+          ],
           /* height: ({ lineHeights }) => `calc(128px + ${lineHeights.body}rem)`, */
           ":hover": {
-            cursor: "pointer",
-            h2: {
-              color: "bright"
-            }
+            cursor: "pointer"
+          },
+          "h2, figcaption": {
+            color: _ => (selected ? "bright" : "body")
           }
         }}
         onClick={onClick}
       >
-        <Donut variant="progress.default" value={progress} />
+        <Donut
+          variant="progress.default"
+          size={donutSize}
+          value={progress}
+          sx={{
+            color: t => (selected ? "accent" : alpha("text", 0.2)(t))
+          }}
+        />
+        {selected && (
+          <Heading
+            variant="wishlistValue"
+            sx={{
+              left: `${donutSize}px`
+            }}
+          >
+            {progress >= 1 ? (
+              "🥳🙏"
+            ) : (
+              <text>
+                <small
+                  sx={{
+                    /* position: "absolute", */
+                    /* top: t => `calc(-${t.lineHeights.body}rem + 5px)`, */
+                    /* textAlign: "center", */
+                    /* width: "47%", */
+                    color: alpha("text", 0.5)
+                  }}
+                >
+                  {parseInt(balance)} /
+                </small>
+                {` ${value} USD`}
+              </text>
+            )}
+          </Heading>
+        )}
         <figcaption
           sx={{
             variant: "text.default",
-            textAlign: "center",
-            ":hover": {
-              cursor: "default"
-            },
+            textAlign: "right",
+            width: "100%",
+            /* ":hover": { */
+            /*   cursor: "default" */
+            /* }, */
 
-            borderBottom: t => selected && "3px solid",
+            borderTop: t => selected && "1px solid",
             borderColor: "accent"
+
+            /* paddingLeft: "15px" */
           }}
         >
           {children}
@@ -98,42 +137,57 @@ export default function Wishlist() {
   console.debug(`[brady] wishlist is:`, wishlist);
 
   return (
-    <MainLayout>
+    <MainLayout
+      sx={{
+        "& *": { boxSizing: "border-box" }
+      }}
+    >
       <Flex
         sx={{
           height: "100%",
           flexFlow: "row wrap",
           /* alignItems: "center", */
-          justifyContent: "center",
+          /* justifyContent: "center", */
           "& > *": {
-            boxSizing: "border-box",
-            flex: "auto"
+            flex: "1 100%"
           }
         }}
       >
-        <Heading as="header" sx={{ flex: "1 100%" }} onClick={toggleTheme}>
+        <Heading as="header" onClick={toggleTheme}>
           Wishlist (demo)
         </Heading>
-        {console.debug("[brady] rendering wishlist items") ||
-          wishlist.map(function renderItem(item) {
-            var { item_id: itemId, item: itemName, price, balance } = item;
-            return (
-              <WishlistItem
-                key={itemId}
-                selected={_.get(selectedItem, "item_id") == itemId}
-                value={parseInt(price)}
-                progress={balance / price}
-                balance={balance}
-                onClick={function markSelected() {
-                  if (_.get(selectedItem, "item_id") == itemId) return;
-                  console.log(`'${itemName}' selected`);
-                  setSelectedItem(item);
-                }}
-              >
-                {itemName}
-              </WishlistItem>
-            );
-          })}
+        <Flex
+          sx={{
+            flexFlow: "row wrap",
+            justifyContent: "flow-start",
+            maxHeight: "40vh",
+            overflow: "scroll",
+            "& > *": {
+              flex: ["1 100%", "1 100%", "0 1 auto"]
+            }
+          }}
+        >
+          {console.debug("[brady] rendering wishlist items") ||
+            wishlist.map(function renderItem(item) {
+              var { item_id: itemId, item: itemName, price, balance } = item;
+              return (
+                <WishlistItem
+                  key={itemId}
+                  selected={_.get(selectedItem, "item_id") == itemId}
+                  value={parseInt(price)}
+                  progress={balance / price}
+                  balance={balance}
+                  onClick={function markSelected() {
+                    if (_.get(selectedItem, "item_id") == itemId) return;
+                    console.log(`'${itemName}' selected`);
+                    setSelectedItem(item);
+                  }}
+                >
+                  {itemName}
+                </WishlistItem>
+              );
+            })}
+        </Flex>
         <Stripe>
           <CreditCardForm
             onPayment={function(amountToDonate) {

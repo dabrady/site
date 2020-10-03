@@ -136,17 +136,18 @@ export default {
       color: "text",
       // Just slightly smaller than the main body text
       // TODO(dabrady) Just make this font size available in `fontSizes`
-      fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.8)`
+      fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.6)`
     },
     wishlistValue: {
       color: "text",
       fontFamily: "title",
-      fontSize: 0,
+      fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.8)`,
+      // fontSize: 0,
 
       // Trying to center it within the donut
       position: "absolute",
-      top: ({ lineHeights }) => `calc(50% - ${lineHeights.heading}rem + 4px)`,
-      width: "100%",
+      // top: ({ lineHeights }) => `calc(50% - ${lineHeights.heading}rem)`,
+      // width: "100%",
       textAlign: "center"
     },
     input: {
@@ -211,8 +212,8 @@ export default {
       fontFeatureSettings: "'c2sc'",
       lineHeight: "body",
       backgroundColor: "muted",
-      color: "text",
-      margin: "25px auto"
+      color: "text"
+      // margin: "25px auto"
     },
     primary: {
       fontFamily: "title",
@@ -220,8 +221,8 @@ export default {
       lineHeight: "body",
       backgroundColor: "accent",
       color: "background",
-      fontFeatureSettings: "'c2sc'",
-      margin: "25px auto"
+      fontFeatureSettings: "'c2sc'"
+      // margin: "25px auto"
     },
     secondary: {
       fontFamily: "title",
@@ -229,8 +230,8 @@ export default {
       lineHeight: "body",
       backgroundColor: "muted",
       color: "accent",
-      fontFeatureSettings: "'c2sc'",
-      margin: "25px auto"
+      fontFeatureSettings: "'c2sc'"
+      // margin: "25px auto"
     }
   },
 
