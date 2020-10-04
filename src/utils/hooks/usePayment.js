@@ -6,16 +6,19 @@ export default function usePayment() {
   return function pay({ details, card }) {
     return new Promise(function pay(resolve, reject) {
       if (!stripe || !card) {
+        console.error("[pay] Stripe is borken");
         reject(new Error("Stripe is borken"));
       } else {
         var { amount, ...billing_details } = details;
 
+        console.debug("[pay] fetching intent from stripe");
         fetch(`/.netlify/functions/stripe?amount=${amount}`)
           .then(function parse(response) {
+            console.debug("[parse] parsing response");
             return response.json();
           })
           .then(function makePayment({ clientSecret }) {
-            // TODO attach metadata about item
+            console.debug("[makePayment] making payment");
             return stripe.confirmCardPayment(clientSecret, {
               payment_method: { card, billing_details },
               receipt_email: billing_details.email
@@ -36,6 +39,10 @@ export default function usePayment() {
                 reject(paymentIntent.status);
               }
             }
+          })
+          .catch(function doSomething(error) {
+            console.error("[usePayment:errorHandler] uh oh");
+            reject(error);
           });
       }
     });

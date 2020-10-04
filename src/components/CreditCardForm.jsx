@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 /** @jsx jsx */
 import chroma from "chroma-js";
-import {
-  Box,
-  Button,
-  Heading,
-  Input,
-  css,
-  jsx,
-  useColorMode,
-  useThemeUI
-} from "theme-ui";
-import { alpha } from "@theme-ui/color";
+import { Box, Button, Heading, css, jsx, useThemeUI } from "theme-ui";
 import { CardElement, useElements } from "@stripe/react-stripe-js";
 
 import usePayment from "@utils/hooks/usePayment";
@@ -78,16 +68,14 @@ export function CardInput({ onChange }) {
 }
 
 function FieldSet({ children }) {
-  // TODO(dabrady) Make the boxshadow work with darkmode
-  var [colorMode, _] = useColorMode();
   return (
     <fieldset
       sx={{
-        /* margin: "0 15px 20px", */
         padding: 0,
         borderStyle: "none",
         borderRadius: "4px",
         boxShadow: function(theme) {
+          // TODO(dabrady) Make the boxshadow work with darkmode
           var bgColor = chroma(getColorFromTheme(theme, "background"));
           var shadow = chroma(getColorFromTheme(theme, "shadow"));
 
@@ -331,16 +319,11 @@ function DonateButton({ processing, error, disabled, children }) {
   );
 }
 
-export default function CreditCardForm({
-  disabled,
-  selectedItem,
-  onPayment,
-  onFailure
-}) {
+export default function CreditCardForm({ selectedItem, onPayment }) {
   var pay = usePayment();
   var elements = useElements();
 
-  var [donationConfirmed, setDonationConfirmed] = useState(false);
+  // var [donationConfirmed, setDonationConfirmed] = useState(false);
   var [cardComplete, setCardComplete] = useState(false);
   var [processingPayment, setProcessingPayment] = useState(false);
   var [paymentIntent, setPaymentIntent] = useState(null);
@@ -350,11 +333,14 @@ export default function CreditCardForm({
     amount: ""
   });
 
-  var buttonVariant = disabled
-    ? "disabled"
-    : donationConfirmed
-    ? "primary"
-    : "secondary";
+  function reset() {
+    // setDonationConfirmed(false);
+    setCardComplete(false);
+    setProcessingPayment(false);
+    setPaymentIntent(null);
+    setCardError(null);
+    setDonationDetails({ email: "", amount: "" });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -364,29 +350,20 @@ export default function CreditCardForm({
 
     if (cardError || !cardComplete) {
       card.focus();
+      console.debug("card error or incomplete");
       return;
     }
 
     console.debug("card complete, making payment request");
     setProcessingPayment(true);
 
-    // NOTE(dabrady) Don't let them overpay!
-    // var amountToDonate = Math.min(amount, itemValue);
-    // var amount = parseFloat(donationDetails.amount) || 1;
-    console.info(`🤫 ${donationDetails.amount}`);
-
     // Sanitize our input.
     // This enforces a max of 2 decimals on the input value.
-    let amount = parseFloat(parseFloat(donationDetails.amount).toFixed(2));
+    var amount = parseFloat(parseFloat(donationDetails.amount).toFixed(2));
+    // Explicitly coercing a missing email into null.
+    var email = donationDetails.email || null;
 
-    /////// TODO
-    setProcessingPayment(false);
-    setPaymentIntent(true);
-    onPayment(42);
-    return;
-    ///////
-
-    pay({ details: { ...donationDetails, amount }, card })
+    pay({ details: { ...donationDetails, amount, email }, card })
       .then(({ amount, paymentIntent }) => {
         setProcessingPayment(false);
         setPaymentIntent(paymentIntent);
@@ -394,16 +371,8 @@ export default function CreditCardForm({
       })
       .catch(error => {
         setProcessingPayment(false);
-        onFailure(error);
+        setCardError(error);
       });
-  }
-
-  function reset() {
-    setCardError(null);
-    setProcessingPayment(false);
-    setCardComplete(false);
-    setPaymentIntent(null);
-    setDonationDetails({ email: "", amount: "" });
   }
 
   return paymentIntent ? (
@@ -432,7 +401,11 @@ export default function CreditCardForm({
           type="number"
           step="0.01" // Allow decimals up to 2 places
           min="1"
-          max={selectedItem.price}
+          max={
+            selectedItem &&
+            // Don't let them donate more than I need!
+            parseFloat(selectedItem.price) - parseFloat(selectedItem.balance)
+          }
           placeholder="$ USD"
           value={donationDetails.amount}
           autocomplete={true}
@@ -441,7 +414,7 @@ export default function CreditCardForm({
               ...donationDetails,
               amount: e.target.value
             });
-            setDonationConfirmed && setDonationConfirmed(false);
+            /* setDonationConfirmed && setDonationConfirmed(false); */
           }}
         />
 
@@ -462,7 +435,6 @@ export default function CreditCardForm({
       <FieldSet>
         <CardField
           onChange={function setCardState({ error, complete }) {
-            console.debug("[brady] setting card state");
             setCardError(error);
             setCardComplete(complete);
           }}
@@ -470,6 +442,7 @@ export default function CreditCardForm({
       </FieldSet>
 
       {cardError && <ErrorMessage>{cardError.message}</ErrorMessage>}
+
       <DonateButton
         processing={processingPayment}
         error={cardError}
@@ -478,31 +451,6 @@ export default function CreditCardForm({
         Donate {donationDetails.amount ? `$${donationDetails.amount}` : ""}
         {selectedItem ? ` to ${selectedItem.item}` : ""}
       </DonateButton>
-      {/* <Button */}
-      {/*   variant={buttonVariant} */}
-      {/*   sx={{ marginRight: "10px" }} */}
-      {/*   disabled={disabled} */}
-      {/* > */}
-      {/* Fix this */}
-      {/* onClick={ */}
-      {/*   donationConfirmed */}
-      {/*     ? e => handleSubmit(e, amount) */}
-      {/*     : e => { */}
-      {/*         e.preventDefault(); */}
-      {/*         amount > 0 && setDonationConfirmed(true); */}
-      {/*       } */}
-      {/* } */}
-      {/* {donationConfirmed ? `DONATE $${amount}` : "Confirm donation"} */}
-      {/* </Button> */}
-      {/* <Button */}
-      {/*   variant="secondary" */}
-      {/*   onClick={function cancel(e) { */}
-      {/*     e.preventDefault(); */}
-      {/*     setDonationConfirmed(false); */}
-      {/*   }} */}
-      {/* > */}
-      {/*   Cancel */}
-      {/* </Button> */}
     </form>
   );
 }

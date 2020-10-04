@@ -1,6 +1,6 @@
 import React from "react";
 /** @jsx jsx */
-import { Box, Heading, useColorMode, jsx } from "theme-ui";
+import { Box, Heading, jsx } from "theme-ui";
 
 import MainLayout from "@components/MainLayout";
 // import SEO from "@components/SEO.jsx";

@@ -1,20 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import _ from "lodash";
 /** @jsx jsx */
-import {
-  Box,
-  Donut,
-  Flex,
-  Input,
-  Heading,
-  css,
-  jsx,
-  useThemeUI
-} from "theme-ui";
+import { Box, Donut, Flex, Heading, jsx } from "theme-ui";
 import { alpha } from "@theme-ui/color";
-import { useResponsiveValue, useBreakpointIndex } from "@theme-ui/match-media";
-
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useResponsiveValue } from "@theme-ui/match-media";
 
 import Stripe from "@components/Stripe";
 import MainLayout from "@components/MainLayout";
@@ -30,7 +19,6 @@ function WishlistItem({
   onClick,
   children
 }) {
-  var breakpoint = useBreakpointIndex();
   var donutSize = useResponsiveValue([64, 128, 192, 256]);
 
   console.debug(`[brady] rendering item: ${balance} / ${value}`);
@@ -78,7 +66,7 @@ function WishlistItem({
             fontSize: ["1rem", "1.4rem"],
             width: "100%",
             textAlign: ["right", null, null, "center"],
-            borderTop: t => selected && "1px solid",
+            borderTop: _ => selected && "1px solid",
             borderColor: "accent",
             marginLeft: [null, null, null, "calc(50% - 4rem)"]
           }}
@@ -98,15 +86,7 @@ function WishlistItem({
                 "🥳🙏"
               ) : (
                 <span>
-                  <small
-                    sx={{
-                      /* position: "absolute", */
-                      /* top: t => `calc(-${t.lineHeights.body}rem + 5px)`, */
-                      /* textAlign: "center", */
-                      /* width: "47%", */
-                      color: alpha("text", 0.5)
-                    }}
-                  >
+                  <small sx={{ color: alpha("text", 0.5) }}>
                     {parseInt(balance)} /
                   </small>
                   {` ${value} USD`}
@@ -120,18 +100,58 @@ function WishlistItem({
   );
 }
 
+function Nothing() {
+  return (
+    <Box
+      sx={{
+        textAlign: "center",
+        animation: "fade 200ms ease-out",
+
+        "@keyframes fade": {
+          from: {
+            opacity: 0,
+            transform: "scale3D(0.95, 0.95, 0.95)"
+          },
+          to: {
+            opacity: 1,
+            transform: "scale3D(1, 1, 1)"
+          }
+        }
+      }}
+    >
+      <Heading
+        sx={{
+          variant: "text.heading",
+          fontSize: ["1.4rem", "1.4rem", "2rem", "2rem"],
+          textAlign: "center"
+        }}
+      >
+        My life is complete!
+      </Heading>
+      <span
+        sx={{
+          display: "block",
+          variant: "text.default",
+          marginBottom: 6,
+          textAlign: "center"
+        }}
+      >
+        Thanks for giving! There's nothing more I want, but you can give me more
+        money if you'd like.
+      </span>
+    </Box>
+  );
+}
+
 export default function Wishlist() {
   var toggleTheme = useThemeToggle();
   var [selectedItem, setSelectedItem] = useState(null);
   // TODO(dabrady) A better way to lazy init `selectedItem`?
   var [wishlist, updateItemBalance] = useWishlist({
-    onFirstLoad: useCallback(
-      function setInitialSelection(wishlist) {
-        console.debug("[brady] setting initial selection");
-        setSelectedItem(wishlist[0]);
-      },
-      [wishlist]
-    )
+    onFirstLoad: useCallback(function setInitialSelection(wishlist) {
+      console.debug("[brady] setting initial selection");
+      setSelectedItem(wishlist[0]);
+    }, [])
   });
 
   console.debug(`[brady] wishlist is:`, wishlist);
@@ -155,12 +175,13 @@ export default function Wishlist() {
         }}
       >
         <Heading as="header" onClick={toggleTheme}>
-          Wishlist (demo)
+          things I want
         </Heading>
         <Flex
           sx={{
             flexFlow: "row wrap",
             justifyContent: "flow-start",
+            // TODO(dabrady) Consider restricting height for long lists
             /* maxHeight: ["40vh", "initial"], */
             overflow: "scroll",
             "& > *": {
@@ -168,7 +189,9 @@ export default function Wishlist() {
             }
           }}
         >
-          {console.debug("[brady] rendering wishlist items") ||
+          {wishlist.length <= 0 ? (
+            <Nothing />
+          ) : (
             wishlist.map(function renderItem(item) {
               var { item_id: itemId, item: itemName, price, balance } = item;
               return (
@@ -187,9 +210,10 @@ export default function Wishlist() {
                   {itemName}
                 </WishlistItem>
               );
-            })}
+            })
+          )}
         </Flex>
-        {selectedItem && (
+        {(selectedItem || wishlist.length == 0) && (
           <Stripe>
             <CreditCardForm
               selectedItem={selectedItem}
@@ -199,7 +223,6 @@ export default function Wishlist() {
                     () => console.debug("[brady] balance updated")
                   );
               }}
-              onFailure={console.error}
             />
           </Stripe>
         )}

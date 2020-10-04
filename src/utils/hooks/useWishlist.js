@@ -38,6 +38,9 @@ export default function useWishlist({ onFirstLoad } = {}) {
           return response.json();
         })
         .then(wishlist => {
+          // NOTE(dabrady) Opting to filter out 'completed' items, as I don't
+          // currently wish to display them.
+          wishlist = wishlist.filter(item => item.price != item.balance);
           setWishlist(wishlist);
           onFirstLoad && onFirstLoad(wishlist);
         })
