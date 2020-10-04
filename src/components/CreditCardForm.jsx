@@ -225,7 +225,7 @@ function ErrorMessage({ children }) {
         variant: "text.littleMessage",
         lineHeight: "unset",
 
-        opacity: 1,
+        opacity: 0,
         animation: "fade 150ms ease-out",
         animationDelay: "50ms",
         animationFillMode: "forwards",
