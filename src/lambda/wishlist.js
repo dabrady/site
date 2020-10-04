@@ -51,7 +51,7 @@ async function updateItem({ worksheet, itemId, amount }) {
   var cellLocation = `D${itemId}`;
   await worksheet.loadCells(cellLocation);
   var cell = worksheet.getCellByA1(cellLocation);
-  cell.value = cell.value + amount;
+  cell.value = parseFloat(cell.value) + amount;
   await worksheet.saveUpdatedCells();
   return cell.value;
 }

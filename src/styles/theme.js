@@ -24,8 +24,7 @@ const palette = {
 export default {
   /** Theme UI configuration */
   // @see https://theme-ui.com/theming#configuration-flags
-
-  // THIS PAGE LEFT INTENTIONALLY BLANK
+  useColorSchemeMediaQuery: true,
 
   /** Custom attributes **/
 
@@ -130,25 +129,27 @@ export default {
       fontFamily: "heading",
       fontWeight: "heading",
       lineHeight: "heading",
-      fontSize: [1, 2]
+      fontSize: [1, 1, 2, 2]
     },
     littleMessage: {
-      color: "text",
+      color: "text"
       // Just slightly smaller than the main body text
       // TODO(dabrady) Just make this font size available in `fontSizes`
-      fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.6)`
+      // fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.6)`
     },
     wishlistValue: {
       color: "text",
       fontFamily: "title",
-      fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.8)`,
+      fontWeight: "heading",
+      lineHeight: "heading",
+      textAlign: "center"
+      // fontSize: t => `calc(${t.fontSizes[0]} * 0.8)`,
       // fontSize: 0,
 
       // Trying to center it within the donut
-      position: "absolute",
+      // position: "absolute",
       // top: ({ lineHeights }) => `calc(50% - ${lineHeights.heading}rem)`,
       // width: "100%",
-      textAlign: "center"
     },
     input: {
       color: "text",

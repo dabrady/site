@@ -1,12 +1,34 @@
 import React, { useState } from "react";
 /** @jsx jsx */
 import chroma from "chroma-js";
-import { Button, Input, css, jsx, useColorMode, useThemeUI } from "theme-ui";
+import {
+  Box,
+  Button,
+  Heading,
+  Input,
+  css,
+  jsx,
+  useColorMode,
+  useThemeUI
+} from "theme-ui";
 import { alpha } from "@theme-ui/color";
 import { CardElement, useElements } from "@stripe/react-stripe-js";
 
 import usePayment from "@utils/hooks/usePayment";
 import { getColorFromTheme } from "@utils/theme";
+
+var fadeAnimation = {
+  "@keyframes fade": {
+    from: {
+      opacity: 0,
+      transform: "scale3D(0.95, 0.95, 0.95)"
+    },
+    to: {
+      opacity: 1,
+      transform: "scale3D(1, 1, 1)"
+    }
+  }
+};
 
 export function CardInput({ onChange }) {
   var { theme } = useThemeUI();
@@ -61,7 +83,7 @@ function FieldSet({ children }) {
   return (
     <fieldset
       sx={{
-        margin: "0 15px 20px",
+        /* margin: "0 15px 20px", */
         padding: 0,
         borderStyle: "none",
         borderRadius: "4px",
@@ -113,11 +135,9 @@ function Row({ children }) {
 function Field({
   id,
   label,
-  type,
-  placeholder,
   onChange,
-  required = null,
-  autocomplete = false
+  autocomplete = false,
+  ...additionalInputOptions
 }) {
   return (
     <Row>
@@ -140,12 +160,10 @@ function Field({
       )}
       <input
         id={id}
-        type={type}
-        placeholder={placeholder}
-        required={required}
         autoComplete={autocomplete ? "on" : "off"}
         sx={{ variant: "text.input" }}
         onChange={onChange}
+        {...additionalInputOptions}
       />
     </Row>
   );
@@ -168,11 +186,11 @@ function ResetButton({ onClick }) {
         cursor: "pointer",
         background: "transparent",
         svg: {
-          fill: "bright"
+          fill: "accent"
         },
         ":hover": {
           svg: {
-            fill: "accent",
+            fill: "bright",
             transitionProperty: "fill",
             transitionDuration: "0.2s"
           }
@@ -209,16 +227,7 @@ function ErrorMessage({ children }) {
         animation: "fade 150ms ease-out",
         animationDelay: "50ms",
         animationFillMode: "forwards",
-        "@keyframes fade": {
-          from: {
-            opacity: 0,
-            transform: "scale3D(0.95, 0.95, 0.95)"
-          },
-          to: {
-            opacity: 1,
-            transform: "scale3D(1, 1, 1)"
-          }
-        },
+        ...fadeAnimation,
 
         svg: {
           marginRight: "10px",
@@ -249,18 +258,83 @@ function ErrorMessage({ children }) {
 
 function SuccessfulPayment({ onReset }) {
   return (
-    <div>
-      <div>Payment successful</div>
-      <div>
+    <Box
+      sx={{
+        textAlign: "center",
+        animation: "fade 200ms ease-out",
+        ...fadeAnimation
+      }}
+    >
+      <Heading
+        sx={{
+          variant: "text.heading",
+          fontSize: ["1.4rem", "1.4rem", "2rem", "2rem"],
+          textAlign: "center"
+        }}
+      >
+        Payment successful
+      </Heading>
+      <span
+        sx={{
+          display: "block",
+          variant: "text.default",
+          marginBottom: 6,
+          textAlign: "center"
+        }}
+      >
         Thanks for giving! Check your email for a receipt (if you asked for
         one).
-      </div>
+      </span>
       <ResetButton onClick={onReset} />
-    </div>
+    </Box>
   );
 }
 
-export default function CreditCardForm({ disabled, onPayment, onFailure }) {
+function DonateButton({ processing, error, disabled, children }) {
+  return (
+    <Button
+      type="submit"
+      disabled={processing || disabled}
+      sx={{
+        display: "block",
+        fontSize: 0,
+        width: "100%", //"calc(100% - 30px)",
+        height: "40px",
+        borderRadius: "4px",
+        margin: ["40px 0 0 0", "40px 0"],
+        cursor: "pointer",
+        transition: "all 100ms ease-in-out",
+
+        ":active": {
+          transform: "scale(0.99)" // Shrink just a tad when pressed down
+        },
+        ...(error
+          ? {
+              transform: "translateY(15px)",
+              ":active": {
+                transform: "scale(0.99) translateY(15px)"
+              }
+            }
+          : {}),
+        ...(disabled
+          ? {
+              opacity: "0.5",
+              cursor: "default"
+            }
+          : {})
+      }}
+    >
+      {processing ? "Processing..." : children}
+    </Button>
+  );
+}
+
+export default function CreditCardForm({
+  disabled,
+  selectedItem,
+  onPayment,
+  onFailure
+}) {
   var pay = usePayment();
   var elements = useElements();
 
@@ -270,7 +344,7 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
   var [paymentIntent, setPaymentIntent] = useState(null);
   var [cardError, setCardError] = useState(null);
   var [donationDetails, setDonationDetails] = useState({
-    email: null,
+    email: "",
     amount: ""
   });
 
@@ -299,7 +373,18 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
     // var amount = parseFloat(donationDetails.amount) || 1;
     console.info(`🤫 ${donationDetails.amount}`);
 
-    pay({ details: donationDetails, card })
+    // Sanitize our input.
+    // This enforces a max of 2 decimals on the input value.
+    let amount = parseFloat(parseFloat(donationDetails.amount).toFixed(2));
+
+    /////// TODO
+    setProcessingPayment(false);
+    setPaymentIntent(true);
+    onPayment(42);
+    return;
+    ///////
+
+    pay({ details: { ...donationDetails, amount }, card })
       .then(({ amount, paymentIntent }) => {
         setProcessingPayment(false);
         setPaymentIntent(paymentIntent);
@@ -315,7 +400,7 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
     setCardError(null);
     setProcessingPayment(false);
     setPaymentIntent(null);
-    setDonationDetails({ email: null, amount: "" });
+    setDonationDetails({ email: "", amount: "" });
   }
 
   return paymentIntent ? (
@@ -323,14 +408,8 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
   ) : (
     <form
       sx={{
-        color: "text",
-        fontFamily: "body",
-        fontWeight: "body",
-        lineHeight: "body",
-
-        /* paddingTop: "50px", */
-        /* maxWidth: ["100%", "50%"] */
-        flex: "1 100%"
+        variant: "text.default",
+        maxWidth: ["100vw", null, null, "50vw"]
       }}
       onSubmit={handleSubmit}
     >
@@ -338,22 +417,19 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
         <Field
           id="amount"
           name="amount"
-          label="Donate$"
+          label="Donate"
           type="number"
-          placeholder="1"
+          step="0.01" // Allow decimals up to 2 places
+          min="1"
+          max={selectedItem.price}
+          placeholder="$ USD"
           value={donationDetails.amount}
           autocomplete={true}
-          onChange={function sanitizeInput(e) {
-            // Allow input clearing
-            if (!e.target.value) {
-              setDonationDetails({ ...donationDetails, amount: "" });
-            } else if (/^[0-9]*$/.test(e.target.value)) {
-              // Only allow numbers
-              // Cap input at itemValue
-              var val = parseInt(e.target.value);
-              var amt = val; //Math.min(val, itemValue);
-              setDonationDetails({ ...donationDetails, amount: amt });
-            }
+          onChange={function setDonationAmount(e) {
+            setDonationDetails({
+              ...donationDetails,
+              amount: e.target.value
+            });
             setDonationConfirmed && setDonationConfirmed(false);
           }}
         />
@@ -365,7 +441,10 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
           placeholder="your-email@example.com"
           autocomplete={true}
           onChange={function saveEmail(e) {
-            setDonationDetails({ ...donationDetails, email: e.target.value });
+            setDonationDetails({
+              ...donationDetails,
+              email: e.target.value || null
+            });
           }}
         />
       </FieldSet>
@@ -381,31 +460,39 @@ export default function CreditCardForm({ disabled, onPayment, onFailure }) {
 
       {cardError && <ErrorMessage>{cardError.message}</ErrorMessage>}
 
-      <Button
-        variant={buttonVariant}
-        sx={{ marginRight: "10px" }}
-        disabled={disabled}
+      <DonateButton
+        processing={processingPayment}
+        error={cardError}
+        disabled={!(cardComplete && donationDetails.amount)}
       >
-        {/* Fix this */}
-        {/* onClick={ */}
-        {/*   donationConfirmed */}
-        {/*     ? e => handleSubmit(e, amount) */}
-        {/*     : e => { */}
-        {/*         e.preventDefault(); */}
-        {/*         amount > 0 && setDonationConfirmed(true); */}
-        {/*       } */}
-        {/* } */}
-        {/* {donationConfirmed ? `DONATE $${amount}` : "Confirm donation"} */}
-      </Button>
-      <Button
-        variant="secondary"
-        onClick={function cancel(e) {
-          e.preventDefault();
-          setDonationConfirmed(false);
-        }}
-      >
-        Cancel
-      </Button>
+        Donate {donationDetails.amount ? `$${donationDetails.amount}` : ""}
+        {selectedItem ? ` to ${selectedItem.item}` : ""}
+      </DonateButton>
+      {/* <Button */}
+      {/*   variant={buttonVariant} */}
+      {/*   sx={{ marginRight: "10px" }} */}
+      {/*   disabled={disabled} */}
+      {/* > */}
+      {/* Fix this */}
+      {/* onClick={ */}
+      {/*   donationConfirmed */}
+      {/*     ? e => handleSubmit(e, amount) */}
+      {/*     : e => { */}
+      {/*         e.preventDefault(); */}
+      {/*         amount > 0 && setDonationConfirmed(true); */}
+      {/*       } */}
+      {/* } */}
+      {/* {donationConfirmed ? `DONATE $${amount}` : "Confirm donation"} */}
+      {/* </Button> */}
+      {/* <Button */}
+      {/*   variant="secondary" */}
+      {/*   onClick={function cancel(e) { */}
+      {/*     e.preventDefault(); */}
+      {/*     setDonationConfirmed(false); */}
+      {/*   }} */}
+      {/* > */}
+      {/*   Cancel */}
+      {/* </Button> */}
     </form>
   );
 }

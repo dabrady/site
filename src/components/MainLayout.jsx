@@ -1,12 +1,21 @@
 import { Global } from "@emotion/core";
 /** @jsx jsx */
-import { Container, jsx } from "theme-ui";
+import { Container, jsx, useThemeUI } from "theme-ui";
 import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 
 export default function MainLayout({ children }) {
+  // var { colorMode, setColorMode } = useThemeUI();
+  // useEffect(
+  //   function() {
+  //     console.debug("color mode changed between renders, updating");
+  //     setColorMode(colorMode);
+  //   },
+  //   [colorMode]
+  // );
+
   return (
     <StaticQuery
       query={graphql`
