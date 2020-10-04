@@ -5,7 +5,10 @@ require("dotenv").config({
 
 var spreadsheetId = process.env.GATSBY_GOOGLE_SHEET_ID;
 var worksheetTitle = process.env.GATSBY_GOOGLE_SHEET_TAB_NAME;
-var creds = JSON.parse(process.env.GATSBY_GOOGLE_SERVICE_ACCOUNT_CREDS);
+var creds = JSON.parse(
+  /* Gotta escape those newlines */
+  process.env.GATSBY_GOOGLE_SERVICE_ACCOUNT_CREDS.replace(/\n/g, "\\n")
+);
 var itemCount = 10; // NOTE(dabrady) Hardcoded for efficiency, assumes no more than 10 items on list
 
 var spreadsheetAPI = require("google-spreadsheet");
