@@ -212,18 +212,20 @@ function ErrorMessage({ children }) {
   return (
     <div
       sx={{
-        position: "absolute",
+        /* position: "absolute", */
         display: "flex",
         justifyContent: "center",
-        padding: "0 15px",
-        marginTop: "0px",
+        /* padding: "0 15px", */
+        /* marginTop: "0px", */
+        fontSize: "smaller",
         width: "100%",
-        transform: "translateY(-15px)",
+        top: t => `-${t.lineHeights[t.text.default.lineHeight]}rem`,
+        /* transform: "translateY(-15px)", */
 
         variant: "text.littleMessage",
         lineHeight: "unset",
 
-        opacity: 0,
+        opacity: 1,
         animation: "fade 150ms ease-out",
         animationDelay: "50ms",
         animationFillMode: "forwards",
@@ -241,7 +243,7 @@ function ErrorMessage({ children }) {
       }}
       role="alert"
     >
-      <svg width="16" height="16" viewBox="0 0 17 17">
+      <svg width="1rem" height="1rem" viewBox="0 0 17 17">
         <path
           className="circle"
           d="M8.5,17 C3.80557963,17 0,13.1944204 0,8.5 C0,3.80557963 3.80557963,0 8.5,0 C13.1944204,0 17,3.80557963 17,8.5 C17,13.1944204 13.1944204,17 8.5,17 Z"
@@ -310,10 +312,10 @@ function DonateButton({ processing, error, disabled, children }) {
         },
         ...(error
           ? {
-              transform: "translateY(15px)",
-              ":active": {
-                transform: "scale(0.99) translateY(15px)"
-              }
+              /* transform: "translateY(1rem)", */
+              /* ":active": { */
+              /*   transform: "scale(0.99) translateY(1rem)" */
+              /* } */
             }
           : {}),
         ...(disabled
@@ -399,6 +401,7 @@ export default function CreditCardForm({
   function reset() {
     setCardError(null);
     setProcessingPayment(false);
+    setCardComplete(false);
     setPaymentIntent(null);
     setDonationDetails({ email: "", amount: "" });
   }
@@ -467,7 +470,6 @@ export default function CreditCardForm({
       </FieldSet>
 
       {cardError && <ErrorMessage>{cardError.message}</ErrorMessage>}
-
       <DonateButton
         processing={processingPayment}
         error={cardError}
