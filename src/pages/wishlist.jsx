@@ -161,7 +161,7 @@ export default function Wishlist() {
           sx={{
             flexFlow: "row wrap",
             justifyContent: "flow-start",
-            maxHeight: "40vh",
+            /* maxHeight: ["40vh", "initial"], */
             overflow: "scroll",
             "& > *": {
               flex: ["1 100%", null, null, "0 1 auto"]

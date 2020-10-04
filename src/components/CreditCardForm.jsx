@@ -301,7 +301,7 @@ function DonateButton({ processing, error, disabled, children }) {
         width: "100%", //"calc(100% - 30px)",
         height: "40px",
         borderRadius: "4px",
-        margin: ["40px 0 0 0", "40px 0"],
+        /* margin: ["40px 0 0 0", "40px 0"], */
         cursor: "pointer",
         transition: "all 100ms ease-in-out",
 
@@ -408,8 +408,16 @@ export default function CreditCardForm({
   ) : (
     <form
       sx={{
+        display: "flex",
+        flexFlow: "row wrap",
+        alignContent: "space-around",
+        "& > *": {
+          flex: "1 100%" // Everyone on their own row
+        },
         variant: "text.default",
-        maxWidth: ["100vw", null, null, "50vw"]
+        maxWidth: [null, null, null, "50vw"],
+        height: [null, null, null, "17vh"]
+        /* maxHeight: [null, null, null, "20vh"] */
       }}
       onSubmit={handleSubmit}
     >
