@@ -50,7 +50,10 @@ export default function MainLayout({ children }) {
             />
             <Global
               styles={{
-                body: {}
+                html: { height: "-webkit-fill-available" },
+                body: {
+                  minHeight: "100vh; min-height: --webkit-fill-available"
+                }
               }}
             />
             {children}
