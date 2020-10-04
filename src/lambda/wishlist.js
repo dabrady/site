@@ -8,7 +8,10 @@ var worksheetTitle = process.env.GATSBY_GOOGLE_SHEET_TAB_NAME;
 var creds = JSON.parse(process.env.GATSBY_GOOGLE_SERVICE_ACCOUNT_CREDS);
 var itemCount = 10; // NOTE(dabrady) Hardcoded for efficiency, assumes no more than 10 items on list
 
-var { GoogleSpreadsheet } = require("google-spreadsheet");
+var spreadsheetAPI = require("google-spreadsheet");
+console.log(spreadsheetAPI);
+var { GoogleSpreadsheet } = spreadsheetAPI;
+console.log(GoogleSpreadsheet);
 
 async function fetchDoc() {
   var doc = new GoogleSpreadsheet(spreadsheetId);
