@@ -52,7 +52,7 @@ export default function MainLayout({ children }) {
               styles={{
                 html: { height: "-webkit-fill-available" },
                 body: {
-                  minHeight: "100vh; min-height: --webkit-fill-available"
+                  minHeight: "100vh; min-height: -webkit-fill-available"
                 }
               }}
             />
