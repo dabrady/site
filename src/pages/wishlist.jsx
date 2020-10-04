@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import _ from "lodash";
 /** @jsx jsx */
-import { Box, Donut, Flex, Heading, jsx } from "theme-ui";
+import { Box, Donut, Flex, Heading, Spinner, jsx } from "theme-ui";
 import { alpha } from "@theme-ui/color";
 import { useResponsiveValue } from "@theme-ui/match-media";
 
@@ -145,16 +145,16 @@ function Nothing() {
 
 export default function Wishlist() {
   var toggleTheme = useThemeToggle();
+  var spinnerSize = useResponsiveValue([64, 128, 192, 256]);
+  var [loaded, setLoaded] = useState(false);
   var [selectedItem, setSelectedItem] = useState(null);
   // TODO(dabrady) A better way to lazy init `selectedItem`?
   var [wishlist, updateItemBalance] = useWishlist({
     onFirstLoad: useCallback(function setInitialSelection(wishlist) {
-      console.debug("[brady] setting initial selection");
+      setLoaded(true);
       setSelectedItem(wishlist[0]);
     }, [])
   });
-
-  console.debug(`[brady] wishlist is:`, wishlist);
 
   return (
     <MainLayout
@@ -189,7 +189,13 @@ export default function Wishlist() {
             }
           }}
         >
-          {wishlist.length <= 0 ? (
+          {!loaded ? (
+            <Spinner
+              sx={{ color: "accent" }}
+              title="loading desires"
+              size={spinnerSize}
+            />
+          ) : wishlist.length <= 0 ? (
             <Nothing />
           ) : (
             wishlist.map(function renderItem(item) {
@@ -213,7 +219,7 @@ export default function Wishlist() {
             })
           )}
         </Flex>
-        {(selectedItem || wishlist.length == 0) && (
+        {loaded && (
           <Stripe>
             <CreditCardForm
               selectedItem={selectedItem}
