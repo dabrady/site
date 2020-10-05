@@ -8,13 +8,13 @@
     # Shared, default environment for all contexts
     [build.environment]
         NODE_ENV = "development"
-        STRIPE_PUBLIC_KEY = "pk_test_51H9C9cFdjFUWnf7defV5IMhGPt25eEoRcNXo1bqIyMvQ1OsMQcf174jaRoiYYL2Mbn2JWGR9KXG3qiFL6p3mFZrr00eh1v542P"
+        GATSBY_STRIPE_PUBLIC_KEY = "pk_test_51H9C9cFdjFUWnf7defV5IMhGPt25eEoRcNXo1bqIyMvQ1OsMQcf174jaRoiYYL2Mbn2JWGR9KXG3qiFL6p3mFZrr00eh1v542P"
 
 ### Deploy context-specific configuration ###
 
 [context.production.environment]
     NODE_ENV = "production"
-    STRIPE_PUBLIC_KEY = "pk_live_51H9C9cFdjFUWnf7dWmNp9573IuRvkrfD8RtAnGwxDNDbuRygVS405mYaInFVHPZ51xP6I0nlTpCJRzV39ZeudviT00ZwrHY2Mm"
+    GATSBY_STRIPE_PUBLIC_KEY = "pk_live_51H9C9cFdjFUWnf7dWmNp9573IuRvkrfD8RtAnGwxDNDbuRygVS405mYaInFVHPZ51xP6I0nlTpCJRzV39ZeudviT00ZwrHY2Mm"
 
 # TODO(dabrady) Make a staging environment?
 
