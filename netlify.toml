@@ -30,4 +30,6 @@
 # For inlining build-time environment variables within Netlify Functions.
 # I use this in conjunction with `netlify-plugin-contextual-env`.
 [[plugins]]
-  package = "netlify-plugin-inline-functions-env"
+    package = "netlify-plugin-inline-functions-env"
+    [plugins.inputs]
+        buildEvent = "onPostBuild"
