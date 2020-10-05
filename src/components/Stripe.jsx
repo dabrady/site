@@ -2,6 +2,9 @@ import React from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
+console.debug("[DEBUG]");
+console.debug(process.env.GATSBY_GOOGLE_SHEET_TAB_NAME);
+console.debug(process.env.STRIPE_PUBLIC_KEY);
 var stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 
 var ELEMENTS_OPTIONS = {
