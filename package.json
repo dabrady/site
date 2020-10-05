@@ -54,14 +54,18 @@
   "scripts": {
     "clean": "gatsby clean && rm -rf .netlify/",
     "serve": "gatsby serve",
-    "prebuild": "cd src/lambda && NODE_ENV=production yarn install",
+    "prebuild": "cd src/lambda && yarn install",
     "build": "yarn build:app && yarn build:lambda",
-    "build:app": "NODE_ENV=production gatsby build",
-    "build:lambda": "NODE_ENV=production netlify-lambda build src/lambda",
-    "develop": "yarn clean && NODE_ENV=development yarn dev-start",
+    "build:app": "gatsby build",
+    "build:lambda": "netlify-lambda build src/lambda",
+    "develop": "yarn clean && source .env.development && NODE_ENV=development yarn dev-start",
     "dev-start": "run-p dev-start:**",
     "dev-start:app": "NODE_ENV=development gatsby develop --https",
-    "dev-start:lambda": "NODE_ENV=development netlify-lambda serve src/lambda"
+    "dev-start:lambda": "NODE_ENV=development netlify-lambda serve src/lambda",
+    "prod": "yarn clean && source .env.production && yarn build && NODE_ENV=production yarn prod-start",
+    "prod-start": "run-p prod-start:**",
+    "prod-start:app": "NODE_ENV=production gatsby serve --port 8000",
+    "prod-start:lambda": "NODE_ENV=production netlify-lambda serve --port 9000 src/lambda"
   },
   "repository": {
     "type": "git",
@@ -76,6 +80,8 @@
     "encoding": "^0.1.13",
     "gatsby-plugin-root-import": "^2.0.5",
     "http-proxy-middleware": "^1.0.5",
+    "netlify-plugin-contextual-env": "^0.3.0",
+    "netlify-plugin-inline-functions-env": "^1.0.5",
     "npm-run-all": "^4.1.5"
   }
 }

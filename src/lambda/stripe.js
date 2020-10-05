@@ -1,14 +1,4 @@
-// Load any configured environment-specific variables.
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`
-});
-
-var API_KEY =
-  process.env.CONTEXT == "production"
-    ? process.env.STRIPE_API_SECRET_KEY_LIVE
-    : process.env.STRIPE_API_SECRET_KEY_TEST;
-
-var stripe = require("stripe")(API_KEY);
+var stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export async function handler(event, context) {
   var { amount } = event.queryStringParameters;
