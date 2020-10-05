@@ -33,3 +33,4 @@
     package = "netlify-plugin-inline-functions-env"
     [plugins.inputs]
         buildEvent = "onPostBuild"
+        verbose = "true" # DEBUGGING
