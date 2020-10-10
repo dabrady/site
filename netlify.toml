@@ -1,7 +1,7 @@
 ### Build configuration ###
 
 [build]
-    command = "yarn build"
+    command = "yarn prod-start:lambda"
     functions = "./.netlify/functions/"
     publish = "public"
 
@@ -23,15 +23,18 @@
 # For configuring contextual environment variables in the Netlify UI.
 # I use this for contextual secrets.
 [[plugins]]
-    package = 'netlify-plugin-contextual-env'
+    # package = 'netlify-plugin-contextual-env'
+    package = '/src/plugins/netlify-plugin-contextual-env'
     [plugins.inputs]
         mode = 'prefix'
 
 # For inlining build-time environment variables within Netlify Functions.
 # I use this in conjunction with `netlify-plugin-contextual-env`.
 [[plugins]]
-    package = "netlify-plugin-inline-functions-env"
+    # package = "netlify-plugin-inline-functions-env"
+    package = '/src/plugins/netlify-plugin-inline-function-env'
     [plugins.inputs]
         # TODO(dabrady) Figure out how to get this to work pre-build, as the generated
         # functions are much larger than my actual source (because dependencies)
         buildEvent = "onPostBuild"
+        verbose = "true"
