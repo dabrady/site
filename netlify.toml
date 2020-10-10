@@ -32,5 +32,6 @@
 [[plugins]]
     package = "netlify-plugin-inline-functions-env"
     [plugins.inputs]
+        # TODO(dabrady) Figure out how to get this to work pre-build, as the generated
+        # functions are much larger than my actual source (because dependencies)
         buildEvent = "onPostBuild"
-        verbose = "true" # DEBUGGING
