@@ -1,7 +1,7 @@
 ### Build configuration ###
 
 [build]
-    command = "yarn prod-start:lambda"
+    command = "yarn build"
     functions = "./.netlify/functions/"
     publish = "public"
 
