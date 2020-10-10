@@ -32,7 +32,7 @@
 # I use this in conjunction with `netlify-plugin-contextual-env`.
 [[plugins]]
     # package = "netlify-plugin-inline-functions-env"
-    package = '/src/plugins/netlify-plugin-inline-function-env'
+    package = '/src/plugins/netlify-plugin-inline-functions-env'
     [plugins.inputs]
         # TODO(dabrady) Figure out how to get this to work pre-build, as the generated
         # functions are much larger than my actual source (because dependencies)
