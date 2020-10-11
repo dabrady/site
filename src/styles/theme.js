@@ -1,5 +1,6 @@
 import chroma from "chroma-js";
 import gray from "gray-percentage";
+import { alpha } from "@theme-ui/color";
 import * as T from "@utils/typography";
 
 import "@styles/fonts.css";
@@ -23,8 +24,7 @@ const palette = {
 export default {
   /** Theme UI configuration */
   // @see https://theme-ui.com/theming#configuration-flags
-
-  // THIS PAGE LEFT INTENTIONALLY BLANK
+  useColorSchemeMediaQuery: true,
 
   /** Custom attributes **/
 
@@ -79,6 +79,8 @@ export default {
       .brighten()
       .alpha(0.07)
       .css(),
+    shadow: palette.black,
+
     modes: {
       dark: {
         text: palette.softGray,
@@ -93,7 +95,8 @@ export default {
         muted: chroma(palette.icyBlue)
           .brighten()
           .alpha(0.2)
-          .css()
+          .css(),
+        shadow: palette.black
       }
     }
   },
@@ -101,6 +104,7 @@ export default {
   /* For styling MDX content */
   breakpoints: ["40rem", "42rem", "56rem"],
   // fontSizes: T.FONT_SIZES,
+  // TODO(dabrady) Add a "small text" size (~0.875rem) and slightly larger normal text size (~1.3rem)
   fontSizes: ["1rem", "2.2rem", "4rem", "4.4rem", "5rem"],
   space: T.SPACES,
   styles: {},
@@ -116,8 +120,119 @@ export default {
     default: {
       color: "text",
       fontFamily: "body",
+      fontWeight: "body",
       lineHeight: "body",
-      fontSize: 1
+      fontSize: 0
+    },
+    heading: {
+      color: "text",
+      fontFamily: "heading",
+      fontWeight: "heading",
+      lineHeight: "heading",
+      fontSize: [1, 1, 2, 2]
+    },
+    littleMessage: {
+      color: "text"
+      // Just slightly smaller than the main body text
+      // TODO(dabrady) Just make this font size available in `fontSizes`
+      // fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.6)`
+    },
+    wishlistValue: {
+      color: "text",
+      fontFamily: "title",
+      fontWeight: "heading",
+      lineHeight: "heading",
+      textAlign: "center"
+      // fontSize: t => `calc(${t.fontSizes[0]} * 0.8)`,
+      // fontSize: 0,
+
+      // Trying to center it within the donut
+      // position: "absolute",
+      // top: ({ lineHeights }) => `calc(50% - ${lineHeights.heading}rem)`,
+      // width: "100%",
+    },
+    input: {
+      color: "text",
+      fontFamily: "body",
+      fontWeight: "body",
+      lineHeight: "body",
+      fontSize: 0,
+
+      backgroundColor: "transparent",
+      width: "100%",
+      padding: "11px 15px 11px 0",
+
+      animation: "1ms void-animation-out",
+      appearance: "none",
+      outline: "none",
+      borderStyle: "none",
+
+      ":-webkit-autofill": {
+        "-webkit-text-fill-color": ({ colors }) => colors.text,
+        background: "transparent !important",
+        transition: "background-color 100000000s",
+        "-webkit-animation": "1ms void-animation-out"
+      },
+
+      "::placeholder": {
+        color: alpha("accent", 0.6)
+      }
+    }
+  },
+
+  layout: {
+    container: {
+      maxWidth: ["85vw"],
+      maxHeight: ["100vh"],
+      margin: ["1rem auto", "1.2rem auto", "2.86rem auto", "4.93rem auto"]
+    }
+  },
+
+  progress: {
+    default: {
+      color: "accent",
+      display: "inline-block"
+
+      /* Playing with SVG animation */
+      // "circle[stroke-dasharray]": {
+      //   strokeDasharray: 100,
+      //   animation: "dash 5s linear",
+      //   "@keyframes dash": {
+      //     to: {
+      //       strokeDashoffset: 1000
+      //     }
+      //   }
+      // }
+    }
+  },
+
+  buttons: {
+    disabled: {
+      fontFamily: "title",
+      fontWeight: "body",
+      fontFeatureSettings: "'c2sc'",
+      lineHeight: "body",
+      backgroundColor: "muted",
+      color: "text"
+      // margin: "25px auto"
+    },
+    primary: {
+      fontFamily: "title",
+      fontWeight: "body",
+      lineHeight: "body",
+      backgroundColor: "accent",
+      color: "background",
+      fontFeatureSettings: "'c2sc'"
+      // margin: "25px auto"
+    },
+    secondary: {
+      fontFamily: "title",
+      fontWeight: "body",
+      lineHeight: "body",
+      backgroundColor: "muted",
+      color: "accent",
+      fontFeatureSettings: "'c2sc'"
+      // margin: "25px auto"
     }
   },
 

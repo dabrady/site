@@ -1,6 +1,6 @@
 import React from "react";
 /** @jsx jsx */
-import { Box, Heading, useColorMode, jsx } from "theme-ui";
+import { Box, Heading, jsx } from "theme-ui";
 
 import MainLayout from "@components/MainLayout";
 // import SEO from "@components/SEO.jsx";
@@ -10,12 +10,10 @@ import {
   IconInstagram,
   IconLinkedIn
 } from "@components/Icons";
+import useThemeToggle from "@utils/hooks/useThemeToggle";
 
 export default function Home() {
-  var [colorMode, setColorMode] = useColorMode();
-  function otherMode() {
-    return (colorMode == "default" && "dark") || "default";
-  }
+  var toggleTheme = useThemeToggle();
 
   return (
     <MainLayout>
@@ -23,7 +21,8 @@ export default function Home() {
       <Box
         sx={{
           position: "absolute",
-          bottom: 0
+          bottom: 0,
+          overflow: "hidden"
         }}
       >
         <Heading
@@ -68,7 +67,7 @@ export default function Home() {
                 transitionDuration: "0.2s"
               }
             }}
-            onClick={() => setColorMode(otherMode())}
+            onClick={toggleTheme}
           >
             .
           </span>

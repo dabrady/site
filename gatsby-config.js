@@ -1,10 +1,29 @@
-const path = require("path");
+var path = require("path");
+var { createProxyMiddleware } = require("http-proxy-middleware");
+// Load any configured environment-specific variables.
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`
+});
 
 module.exports = {
   siteMetadata: {
     title: "@here",
     description: "",
     author: "@dabrady"
+  },
+
+  // for avoiding CORS while developing Netlify Functions locally
+  // read more: https://www.gatsbyjs.org/docs/api-proxy/#advanced-proxying
+  developMiddleware: function proxyNetlifyLambdas(app) {
+    app.use(
+      "/.netlify/functions/",
+      createProxyMiddleware({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": ""
+        }
+      })
+    );
   },
 
   plugins: [
