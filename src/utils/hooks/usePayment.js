@@ -29,8 +29,6 @@ export default function usePayment() {
               console.error("[handlePayment]", error.message);
               reject(error);
             } else {
-              console.debug("[handlePayment] paymentIntent:", paymentIntent);
-
               if (paymentIntent.status == "succeeded") {
                 console.info(`Successfully donated $${amount}`);
                 resolve({ amount, paymentIntent });

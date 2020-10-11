@@ -34,7 +34,6 @@ export default function useWishlist({ onFirstLoad } = {}) {
               }`
             );
           }
-          console.debug("[brady] response is:", response);
           return response.json();
         })
         .then(wishlist => {

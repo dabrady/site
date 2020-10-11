@@ -1,5 +1,0 @@
-name: netlify-plugin-contextual-env
-inputs:
-  - name: mode
-    required: false
-    default: prefix
