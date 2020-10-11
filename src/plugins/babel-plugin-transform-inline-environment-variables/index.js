@@ -29,7 +29,10 @@ module.exports = function({ types: t }) {
                 ].substring(0, 7)}'`
               );
               console.debug("[BRADY]");
-              console.debug(JSON.stringify(key));
+              path.traverse({
+                enter: p => console.log(p.node.name),
+                exit: p => console.log(p.node.name)
+              });
             }
             path.replaceWith(t.valueToNode(process.env[key.value]));
           }
