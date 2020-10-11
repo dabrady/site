@@ -30,7 +30,12 @@ module.exports = function({ types: t }) {
               );
             }
             let node = t.valueToNode(process.env[key.value]);
-            console.debug("[BRADY] to be:", node);
+            if (node.type === "StringLiteral") {
+              console.debug("[BRADY] to be:", {
+                ...node,
+                value: node.value && node.value.substring(0, 7)
+              });
+            }
             path.replaceWith(t.valueToNode(process.env[key.value]));
           }
         }
