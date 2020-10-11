@@ -63,10 +63,15 @@ async function processFiles({ inputs, utils, netlifyConfig }) {
       STRIPE_SECRET_KEY: true,
       GATSBY_STRIPE_PUBLIC_KEY: true
     };
-    let myEnv = Object.entries(process.env).reduce(function(result, [key]) {
-      if (myKeys[key]) result[key] = process.env[key];
+    let myEnv = Object.entries(process.env).reduce(function(
+      result,
+      [key],
+      index
+    ) {
+      if (myKeys[key]) result[index] = process.env[key].substring(0, 7);
       return result;
-    }, {});
+    },
+    {});
     console.log("build env contains my environment variables:", myEnv);
   }
 
