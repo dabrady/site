@@ -1,5 +1,9 @@
 "use strict";
 
+var myKeys = {
+  STRIPE_SECRET_KEY: true,
+  GATSBY_STRIPE_PUBLIC_KEY: true
+};
 module.exports = function({ types: t }) {
   function isLeftSideOfAssignmentExpression(path) {
     return (
@@ -18,9 +22,13 @@ module.exports = function({ types: t }) {
             (!include || include.indexOf(key.value) !== -1) &&
             (!exclude || exclude.indexOf(key.value) === -1)
           ) {
-            console.debug(
-              `[BRADY] transforming '${key}' into '${process.env[key.value]}'`
-            );
+            if (myKeys[key.value]) {
+              console.debug(
+                `[BRADY] transforming '${key.value}' into '${process.env[
+                  key.value
+                ].substring(0, 7)}'`
+              );
+            }
             path.replaceWith(t.valueToNode(process.env[key.value]));
           }
         }
