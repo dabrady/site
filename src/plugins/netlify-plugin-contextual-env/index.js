@@ -17,7 +17,9 @@ function setEnvWithValue(key, contextOrBranch, mode) {
     return;
   }
 
-  console.log(`[BRADY] Exporting ${key}=${process.env[envVar]}.`);
+  console.log(
+    `[BRADY] Exporting ${key}=${process.env[envVar].substring(0, 7)}`
+  );
   process.env[key] = process.env[envVar];
 
   return `${key}=${process.env[envVar]}\n`;
