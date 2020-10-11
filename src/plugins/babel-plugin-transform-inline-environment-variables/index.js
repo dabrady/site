@@ -29,14 +29,9 @@ module.exports = function({ types: t }) {
                 ].substring(0, 7)}'`
               );
             }
+            let node = t.valueToNode(process.env[key.value]);
+            console.debug("[BRADY] to be:", node);
             path.replaceWith(t.valueToNode(process.env[key.value]));
-
-            if (myKeys[key.value]) {
-              console.debug("[BRADY] afterwards:");
-              path.traverse({
-                enter: p => console.log(p.node.name)
-              });
-            }
           }
         }
       }
