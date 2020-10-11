@@ -63,7 +63,7 @@ async function processFiles({ inputs, utils, netlifyConfig }) {
       STRIPE_SECRET_KEY: true,
       GATSBY_STRIPE_PUBLIC_KEY: true
     };
-    let myEnv = Object.entries(process.env).reduce(function(result, key) {
+    let myEnv = Object.entries(process.env).reduce(function(result, [key]) {
       if (myKeys[key]) result[key] = process.env[key];
       return result;
     }, {});
@@ -72,6 +72,8 @@ async function processFiles({ inputs, utils, netlifyConfig }) {
 
   if (netlifyConfig.build && netlifyConfig.build.functions) {
     try {
+      // TODO(dabrady) Parameterize this: these don't exist for me pre-build,
+      // but that's the default build event!
       const files = await findAllJSFiles(netlifyConfig.build.functions);
 
       if (verbose) {
