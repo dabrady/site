@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const babel = require("@babel/core");
-const inlinePlugin = require("babel-plugin-transform-inline-environment-variables");
+const inlinePlugin = require("../babel-plugin-transform-inline-environment-variables");
 
 async function findAllJSFiles(folder) {
   const names = await fs.promises.readdir(folder);
@@ -45,7 +45,7 @@ async function inlineEnv(path, verbose = false) {
   });
 
   if (verbose) {
-    console.log("transformed code", transformed.code);
+    // console.log("transformed code", transformed.code);
   }
 
   await fs.promises.writeFile(path, transformed.code, "utf8");
