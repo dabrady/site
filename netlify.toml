@@ -4,7 +4,7 @@
     command = "yarn build"
     # TODO(dabrady) Consider putting this in "public" dir to allow troubleshooting via web inspector
     functions = "./.netlify/functions/"
-    publish = "public"
+    publish = "public/"
 
     # Shared, default environment for all contexts
     [build.environment]
