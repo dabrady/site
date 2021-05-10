@@ -1,7 +1,7 @@
 {
-  "name": "blog",
-  "description": "a web log",
-  "version": "0.1.0",
+  "name": "site",
+  "description": "a web site",
+  "version": "0.2.0",
   "author": "Daniel Brady",
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.7",
