@@ -262,6 +262,7 @@ export default {
       cursor: "pointer",
       backgroundImage: null,
       textShadow: null,
+      textDecoration: 'none',
       // Cloning link style from pracicaltypography.com
       "::after": {
         content: "'°'",

@@ -1,6 +1,6 @@
 import React from "react";
 /** @jsx jsx */
-import { Box, Heading, jsx } from "theme-ui";
+import { Box, Heading, Link, jsx } from "theme-ui";
 
 import MainLayout from "@components/MainLayout";
 // import SEO from "@components/SEO.jsx";
@@ -56,7 +56,10 @@ export default function Home() {
             fontWeight: "normal"
           }}
         >
-          I build better software
+          I solve for pain
+          @<Link variant="external" href="https://prodperfect.com">
+            ProdPerfect
+          </Link>
           {/* NOTE(dabrady) Secret theme toggle */}
           <span
             sx={{
