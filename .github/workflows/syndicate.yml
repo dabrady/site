@@ -2,12 +2,12 @@ name: Blog syndication
 on:
   push:
     # Watch these branches...
-    branches:
-    # TODO Swap these once merged to master
-    # - master
-    - develop
+    # TODO Swap these once merged to main
+    # branches: [ main ]
+    branches: [ develop ]
     # ...for changes to these files.
     paths:
+    # TODO Can this be a bit more targeted towards posts?
     - 'src/**/*.mdx?'
 
 jobs:
