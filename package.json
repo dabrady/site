@@ -69,7 +69,7 @@
     "build:lambda": "netlify-lambda build src/lambda",
     "develop": "yarn clean && source .env.development && NODE_ENV=development yarn dev-start",
     "dev-start": "run-p dev-start:**",
-    "dev-start:app": "NODE_ENV=development gatsby develop --https",
+    "dev-start:app": "NODE_ENV=development gatsby develop",
     "dev-start:lambda": "NODE_ENV=development netlify-lambda serve src/lambda",
     "prod": "yarn clean && source .env.production && yarn build && NODE_ENV=production yarn prod-start",
     "prod-start": "run-p prod-start:**",
