@@ -82,5 +82,8 @@
   },
   "bugs": {
     "url": "https://github.com/dabrady/blog/issues"
+  },
+  "devDependencies": {
+    "netlify-cli": "^3.29.0"
   }
 }
