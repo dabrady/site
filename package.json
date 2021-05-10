@@ -14,6 +14,7 @@
     "babel-plugin-emotion": "^10.0.7",
     "babel-preset-gatsby": "^0.1.8",
     "chroma-js": "^2.1.0",
+    "core-js": "2.6.12",
     "emotion": "^10.0.7",
     "emotion-server": "^10.0.7",
     "emotion-theming": "^10.0.7",
