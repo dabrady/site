@@ -8,9 +8,11 @@ help: ## Prints help for targets with comments
 install: ## Installs project dependencies
 	yarn install
 	cd src/lambda && yarn install
+
 .PHONY: clean
 clean: ## Cleans build artifacts
 	yarn clean
+
 .PHONY: dev
 dev: ## Starts dev web server with a clear cache
 	yarn develop
@@ -18,3 +20,11 @@ dev: ## Starts dev web server with a clear cache
 .PHONY: post
 post:
 	@./bin/generate_blog_post.sh
+
+.PHONY: pin-nodejs
+pin-nodejs: NODE_VERSION ?= $(subst v,,$(shell node -v))
+pin-nodejs: ## Updates the version of Node.js used by this project
+	@echo "🛠  Pinning Node.js version to ${NODE_VERSION}"
+	@echo ${NODE_VERSION} > .node-version
+	@sed -i '' -e 's/nodejs .*/nodejs ${NODE_VERSION}/' .tool-versions
+	@echo "🤙🏻 Done."
