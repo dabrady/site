@@ -6,6 +6,7 @@ import { alpha } from "@theme-ui/color";
 import { useResponsiveValue } from "@theme-ui/match-media";
 
 import Stripe from "@components/Stripe";
+import StripeBadge from "@components/StripeBadge";
 import MainLayout from "@components/MainLayout";
 import CreditCardForm from "@components/CreditCardForm";
 import useWishlist from "@utils/hooks/useWishlist";
@@ -143,6 +144,9 @@ function Nothing() {
   );
 }
 
+// TODO(dabrady) I've noticed this makes several requests to the wishlist on page load.
+// Figure out why and stop it; probably has something to do with component rendering.
+// TODO(dabrady) Consider caching wishlist in session cookie, which is refreshed on donate.
 export default function Wishlist() {
   var toggleTheme = useThemeToggle();
   var spinnerSize = useResponsiveValue([64, 128, 192, 256]);
@@ -230,6 +234,7 @@ export default function Wishlist() {
                   );
               }}
             />
+            <StripeBadge/>
           </Stripe>
         )}
       </Flex>

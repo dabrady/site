@@ -64,6 +64,9 @@ export default {
      highlight   A background color for highlighting text
      muted       A faint color for backgrounds, borders, and accents
                  that do not require high contrast with the background color
+     (custom)
+     blackWhiteMono  Black or white, depending on what has the most contrast
+                     in this mode
   */
   colors: {
     ...palette,
@@ -80,6 +83,7 @@ export default {
       .alpha(0.07)
       .css(),
     shadow: palette.black,
+    blackWhiteMono: palette.black,
 
     modes: {
       dark: {
@@ -96,7 +100,8 @@ export default {
           .brighten()
           .alpha(0.2)
           .css(),
-        shadow: palette.black
+        shadow: palette.black,
+        blackWhiteMono: palette.white
       }
     }
   },
