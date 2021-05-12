@@ -61,8 +61,19 @@ async function updateItem({ worksheet, itemId, amount }) {
 export async function handler(event, context) {
   console.log(`[brady] handling wishlist request`, body);
   console.log(event, context);
+
   var { httpMethod, body } = event;
-  var doc = await fetchDoc();
+  try {
+    var doc = await fetchDoc();
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error
+      })
+    };
+  }
+
   var worksheet = doc.sheetsByIndex[0];
 
   switch (httpMethod) {
