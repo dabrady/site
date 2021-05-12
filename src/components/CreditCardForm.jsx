@@ -4,6 +4,7 @@ import chroma from "chroma-js";
 import { Box, Button, Heading, css, jsx, useThemeUI } from "theme-ui";
 import { CardElement, useElements } from "@stripe/react-stripe-js";
 
+import StripeBadge from "@components/StripeBadge";
 import usePayment from "@utils/hooks/usePayment";
 import { getColorFromTheme } from "@utils/theme";
 

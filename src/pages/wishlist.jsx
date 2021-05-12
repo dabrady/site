@@ -6,6 +6,7 @@ import { alpha } from "@theme-ui/color";
 import { useResponsiveValue } from "@theme-ui/match-media";
 
 import Stripe from "@components/Stripe";
+import StripeBadge from "@components/StripeBadge";
 import MainLayout from "@components/MainLayout";
 import CreditCardForm from "@components/CreditCardForm";
 import useWishlist from "@utils/hooks/useWishlist";
@@ -233,6 +234,7 @@ export default function Wishlist() {
                   );
               }}
             />
+            <StripeBadge/>
           </Stripe>
         )}
       </Flex>
