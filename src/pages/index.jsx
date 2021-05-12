@@ -1,6 +1,6 @@
 import React from "react";
 /** @jsx jsx */
-import { Box, Heading, jsx } from "theme-ui";
+import { Box, Heading, Link, jsx } from "theme-ui";
 
 import MainLayout from "@components/MainLayout";
 // import SEO from "@components/SEO.jsx";
@@ -46,17 +46,7 @@ export default function Home() {
             color: "bright"
           }}
         >
-          Daniel Brady.
-        </Heading>
-        <Heading
-          as="h3"
-          sx={{
-            fontSize: [1, 2, 3, 4],
-            lineHeight: 1.1,
-            fontWeight: "normal"
-          }}
-        >
-          I build better software
+          Daniel Brady
           {/* NOTE(dabrady) Secret theme toggle */}
           <span
             sx={{
@@ -71,6 +61,20 @@ export default function Home() {
           >
             .
           </span>
+        </Heading>
+        <Heading
+          as="h3"
+          sx={{
+            fontSize: [1, 2, 3, 4],
+            lineHeight: 1.1,
+            fontWeight: "normal"
+          }}
+        >
+          I solve for pain at&nbsp;
+          <Link variant="external" href="https://prodperfect.com">
+            ProdPerfect
+          </Link>
+          .
         </Heading>
 
         <section
