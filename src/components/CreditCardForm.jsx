@@ -388,9 +388,7 @@ export default function CreditCardForm({ selectedItem, onPayment }) {
           flex: "1 100%" // Everyone on their own row
         },
         variant: "text.default",
-        maxWidth: [null, null, null, "50vw"],
-        height: [null, null, null, "17vh"]
-        /* maxHeight: [null, null, null, "20vh"] */
+        maxWidth: [null, null, null, "50vw"]
       }}
       onSubmit={handleSubmit}
     >
