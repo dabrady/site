@@ -70,8 +70,8 @@ export default function Home() {
             fontWeight: "normal"
           }}
         >
-          I solve for pain
-          @<Link variant="external" href="https://prodperfect.com">
+          I solve for pain at&nbsp;
+          <Link variant="external" href="https://prodperfect.com">
             ProdPerfect
           </Link>
           .
