@@ -46,20 +46,7 @@ export default function Home() {
             color: "bright"
           }}
         >
-          Daniel Brady.
-        </Heading>
-        <Heading
-          as="h3"
-          sx={{
-            fontSize: [1, 2, 3, 4],
-            lineHeight: 1.1,
-            fontWeight: "normal"
-          }}
-        >
-          I solve for pain
-          @<Link variant="external" href="https://prodperfect.com">
-            ProdPerfect
-          </Link>
+          Daniel Brady
           {/* NOTE(dabrady) Secret theme toggle */}
           <span
             sx={{
@@ -74,6 +61,20 @@ export default function Home() {
           >
             .
           </span>
+        </Heading>
+        <Heading
+          as="h3"
+          sx={{
+            fontSize: [1, 2, 3, 4],
+            lineHeight: 1.1,
+            fontWeight: "normal"
+          }}
+        >
+          I solve for pain
+          @<Link variant="external" href="https://prodperfect.com">
+            ProdPerfect
+          </Link>
+          .
         </Heading>
 
         <section
