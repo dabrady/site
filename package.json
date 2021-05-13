@@ -1,7 +1,7 @@
 {
-  "name": "blog",
-  "description": "a web log",
-  "version": "0.1.0",
+  "name": "site",
+  "description": "a web site",
+  "version": "0.2.0",
   "author": "Daniel Brady",
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.7",
@@ -14,6 +14,7 @@
     "babel-plugin-emotion": "^10.0.7",
     "babel-preset-gatsby": "^0.1.8",
     "chroma-js": "^2.1.0",
+    "core-js": "2.6.12",
     "emotion": "^10.0.7",
     "emotion-server": "^10.0.7",
     "emotion-theming": "^10.0.7",
@@ -68,7 +69,7 @@
     "build:lambda": "netlify-lambda build src/lambda",
     "develop": "yarn clean && source .env.development && NODE_ENV=development yarn dev-start",
     "dev-start": "run-p dev-start:**",
-    "dev-start:app": "NODE_ENV=development gatsby develop --https",
+    "dev-start:app": "NODE_ENV=development gatsby develop",
     "dev-start:lambda": "NODE_ENV=development netlify-lambda serve src/lambda",
     "prod": "yarn clean && source .env.production && yarn build && NODE_ENV=production yarn prod-start",
     "prod-start": "run-p prod-start:**",
@@ -81,5 +82,8 @@
   },
   "bugs": {
     "url": "https://github.com/dabrady/blog/issues"
+  },
+  "devDependencies": {
+    "netlify-cli": "^3.29.0"
   }
 }

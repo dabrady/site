@@ -4,6 +4,7 @@ import chroma from "chroma-js";
 import { Box, Button, Heading, css, jsx, useThemeUI } from "theme-ui";
 import { CardElement, useElements } from "@stripe/react-stripe-js";
 
+import StripeBadge from "@components/StripeBadge";
 import usePayment from "@utils/hooks/usePayment";
 import { getColorFromTheme } from "@utils/theme";
 
@@ -387,9 +388,7 @@ export default function CreditCardForm({ selectedItem, onPayment }) {
           flex: "1 100%" // Everyone on their own row
         },
         variant: "text.default",
-        maxWidth: [null, null, null, "50vw"],
-        height: [null, null, null, "17vh"]
-        /* maxHeight: [null, null, null, "20vh"] */
+        maxWidth: [null, null, null, "50vw"]
       }}
       onSubmit={handleSubmit}
     >
