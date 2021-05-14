@@ -5,10 +5,7 @@ import { Helmet } from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
 import React from "react";
 
-import useSystemTheme from '@utils/hooks/useSystemTheme';
-
 export default function MainLayout({ children }) {
-  useSystemTheme();
   return (
     <StaticQuery
       query={graphql`
