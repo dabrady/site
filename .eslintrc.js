@@ -1,4 +1,6 @@
 module.exports = {
-  extends: "airbnb",
+  // TODO(dabrady) Actually enable linting and decide on rules
+  // extends: "airbnb",
+  parser: 'babel-eslint',
   rules: {}
 };
