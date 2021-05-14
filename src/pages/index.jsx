@@ -10,10 +10,15 @@ import {
   IconInstagram,
   IconLinkedIn
 } from "@components/Icons";
+import useSystemTheme from '@utils/hooks/useSystemTheme';
 import useThemeToggle from "@utils/hooks/useThemeToggle";
 
 export default function Home() {
+  // Manual theme toggle (easter egg)
   var toggleTheme = useThemeToggle();
+
+  // Actual theme behavior (respect user's system)
+  useSystemTheme();
 
   return (
     <MainLayout>
