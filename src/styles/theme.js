@@ -71,6 +71,7 @@ export default {
   colors: {
     ...palette,
 
+    // TODO(dabrady) Can these go into a 'light' mode?
     text: palette.black,
     background: palette.softWhite,
     // primary,
