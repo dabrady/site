@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import _ from "lodash";
-/** @jsx jsx */
+/** @jsxImportSource theme-ui */
 import { Box, Donut, Flex, Heading, Spinner, jsx } from "theme-ui";
 import { alpha } from "@theme-ui/color";
 import { useResponsiveValue } from "@theme-ui/match-media";
@@ -46,7 +46,6 @@ function WishlistItem({
             cursor: "pointer"
           },
           "h2, figcaption": {
-            color: _ => (selected ? "bright" : "body")
           }
         }}
         onClick={onClick}
@@ -57,7 +56,6 @@ function WishlistItem({
           value={progress}
           sx={{
             flex: `1 0 ${donutSize}px`,
-            color: t => (selected ? "accent" : alpha("text", 0.2)(t))
           }}
         />
         <figcaption
@@ -68,7 +66,6 @@ function WishlistItem({
             width: "100%",
             textAlign: ["right", null, null, "center"],
             borderTop: _ => selected && "1px solid",
-            borderColor: "accent",
             marginLeft: [null, null, null, "calc(50% - 4rem)"]
           }}
         >
@@ -87,7 +84,7 @@ function WishlistItem({
                 "🥳🙏"
               ) : (
                 <span>
-                  <small sx={{ color: alpha("text", 0.5) }}>
+                  <small sx={{}}>
                     {parseInt(balance)} /
                   </small>
                   {` ${value} USD`}
@@ -156,7 +153,7 @@ export default function Wishlist() {
   var [wishlist, updateItemBalance] = useWishlist({
     onFirstLoad: useCallback(function setInitialSelection(wishlist) {
       setLoaded(true);
-      setSelectedItem(wishlist[0]);
+      // setSelectedItem(wishlist[0]);
     }, [])
   });
 
@@ -195,7 +192,7 @@ export default function Wishlist() {
         >
           {!loaded ? (
             <Spinner
-              sx={{ color: "accent" }}
+              sx={{ }}
               title="loading desires"
               size={spinnerSize}
             />

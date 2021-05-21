@@ -24,7 +24,9 @@ const palette = {
 export default {
   /** Theme UI configuration */
   // @see https://theme-ui.com/theming#configuration-flags
-  useColorSchemeMediaQuery: true,
+  config: {
+    useColorSchemeMediaQuery: true,
+  },
 
   /** Custom attributes **/
 
@@ -181,7 +183,7 @@ export default {
       },
 
       "::placeholder": {
-        color: alpha("accent", 0.6)
+        // color: alpha("accent", 0.6)
       }
     }
   },
