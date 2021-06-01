@@ -175,11 +175,11 @@ export default {
       outline: "none",
       borderStyle: "none",
 
-      ":-webkit-autofill": {
-        "-webkit-text-fill-color": ({ colors }) => colors.text,
+      "WebkitAutofill": {
+        "WebkitTextFillColor": ({ colors }) => colors.text,
         background: "transparent !important",
         transition: "background-color 100000000s",
-        "-webkit-animation": "1ms void-animation-out"
+        "WebkitAutomation": "1ms void-animation-out"
       },
 
       "::placeholder": {
