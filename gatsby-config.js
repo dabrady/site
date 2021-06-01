@@ -38,9 +38,7 @@ module.exports = {
       }
     },
 
-    // This plugin adds support for the CSS-in-JS library Emotion.
-    "gatsby-plugin-emotion",
-
+    // This plugin adds support for the CSS-in-JS library Theme UI.
     "gatsby-plugin-theme-ui",
 
     // This plugin intercepts all local links that have not been created in

@@ -1,6 +1,7 @@
+/** @jsxImportSource theme-ui */
+
 import React from "react";
-/** @jsx jsx */
-import { Box, Heading, Link, jsx } from "theme-ui";
+import { Box, Heading, Link } from "theme-ui";
 
 import MainLayout from "@components/MainLayout";
 // import SEO from "@components/SEO.jsx";

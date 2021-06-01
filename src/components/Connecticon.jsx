@@ -1,6 +1,6 @@
-import React from "react";
-/** @jsx jsx */
-import { useThemeUI, jsx } from "theme-ui";
+/** @jsxImportSource theme-ui */
+
+import { useThemeUI } from "theme-ui";
 
 export default function Connecticon({ children, link }) {
   var {
