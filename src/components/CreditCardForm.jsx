@@ -46,7 +46,7 @@ export function CardInput({ onChange }) {
               lineHeight: "body",
 
               color: "text",
-              "WebkitAutofill": {
+              ":-webkit-autofill": {
                 color: "text"
               },
 
