@@ -51,13 +51,13 @@ export function CardInput({ onChange }) {
 
               "::placeholder": {
                 // Matches theme.text.input::placeholder
-                color: ({ rawColors }) =>
-                  chroma(rawColors.accent)
+                color: ({ colors }) =>
+                  chroma(colors.accent)
                     .alpha(0.6)
                     .css()
               }
             })(theme),
-            iconColor: theme.rawColors.accent
+            iconColor: theme.colors.accent
           },
           invalid: {
             color: "red"
@@ -77,8 +77,8 @@ function FieldSet({ children }) {
         borderRadius: "4px",
         boxShadow: function(theme) {
           // TODO(dabrady) Make the boxshadow work with darkmode
-          var bgColor = chroma(theme.rawColors.background);
-          var shadow = chroma(theme.rawColors.shadow);
+          var bgColor = chroma(getColorFromTheme(theme, "background"));
+          var shadow = chroma(getColorFromTheme(theme, "shadow"));
 
           return `
               0 6px 9px ${
