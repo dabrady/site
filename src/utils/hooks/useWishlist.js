@@ -5,13 +5,30 @@ export default function useWishlist({ onFirstLoad } = {}) {
 
   useEffect(
     function loadWishlist() {
-      console.debug("[brady] loading wishlist!");
+      console.info("[brady] loading wishlist!");
 
-      fetch("/.netlify/functions/wishlist", {
-        headers: { "Content-Type": "application/json" }
-      })
+      // fetch("/.netlify/functions/wishlist", {
+      //   headers: { "Content-Type": "application/json" }
+      // })
+      Promise.resolve({ok: true, json() { return []; }})
         .then(response => {
           if (!response.ok) {
+            console.error(`badness: these are the things`);
+            var spreadsheetId = process.env.GATSBY_GOOGLE_SHEET_ID;
+            var worksheetTitle = process.env.GATSBY_GOOGLE_SHEET_TAB_NAME;
+            var rawCreds = process.env.GATSBY_GOOGLE_SERVICE_ACCOUNT_CREDS;
+            console.log(spreadsheetId, worksheetTitle, rawCreds);
+            console.log(rawCreds.replace(/\n/g, "\\n"));
+
+            var creds = JSON.parse(
+              /* Gotta escape those newlines */
+              process.env.GATSBY_GOOGLE_SERVICE_ACCOUNT_CREDS.replace(
+                /\n/g,
+                "\\n"
+              )
+            );
+            console.log(creds);
+
             throw new Error(
               `Error fetching wishlist: ${response.status} -- ${
                 response.statusText
