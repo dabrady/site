@@ -14,8 +14,9 @@ clean: ## Cleans build artifacts
 	yarn clean
 
 .PHONY: dev
+dev: FLAGS ?= '--open'
 dev: ## Starts dev web server with a clear cache
-	yarn develop
+	yarn develop ${FLAGS}
 
 .PHONY: post
 post:
