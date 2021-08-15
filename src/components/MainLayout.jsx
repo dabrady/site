@@ -1,4 +1,4 @@
-import { Global } from "@emotion/react";
+import { Global } from "@emotion/core";
 /** @jsx jsx */
 import { Container, jsx } from "theme-ui";
 import { Helmet } from "react-helmet";

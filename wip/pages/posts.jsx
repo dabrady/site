@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/core";
 import { graphql, navigate } from "gatsby";
 import React, { useEffect, useReducer, useRef } from "react";
 import gray from "gray-percentage";
