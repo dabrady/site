@@ -1,10 +1,6 @@
 {
   "presets": [
-    [
-      "babel-preset-gatsby",
-      {
-        "reactRuntime": "automatic"
-      }
-    ],
+    "babel-preset-gatsby",
+    "@emotion/babel-preset-css-prop"
   ]
 }

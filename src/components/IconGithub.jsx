@@ -1,3 +1,4 @@
+import React from "react";
 import Connecticon from "./Connecticon";
 
 export default function IconGithub() {

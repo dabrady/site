@@ -1,8 +1,7 @@
-/** @jsxImportSource theme-ui */
-
-import { useState } from "react";
+import React, { useState } from "react";
+/** @jsx jsx */
 import chroma from "chroma-js";
-import { Box, Button, Heading, css, useThemeUI } from "theme-ui";
+import { Box, Button, Heading, css, jsx, useThemeUI } from "theme-ui";
 import { CardElement, useElements } from "@stripe/react-stripe-js";
 
 import StripeBadge from "@components/StripeBadge";
@@ -46,7 +45,7 @@ export function CardInput({ onChange }) {
               lineHeight: "body",
 
               color: "text",
-              "WebkitAutofill": {
+              ":-webkit-autofill": {
                 color: "text"
               },
 

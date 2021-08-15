@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { useThemeUI } from "theme-ui";
+/** @jsx jsx */
+import { jsx, useThemeUI } from "theme-ui";
 
 /** Sync site theme with users' system. **/
 export default function useSystemTheme() {

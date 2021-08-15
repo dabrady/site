@@ -1,8 +1,7 @@
-/** @jsxImportSource theme-ui */
-
 import { useCallback, useState } from "react";
 import _ from "lodash";
-import { Box, Donut, Flex, Heading, Spinner } from "theme-ui";
+/** @jsxImportSource theme-ui */
+import { Box, Donut, Flex, Heading, Spinner, jsx } from "theme-ui";
 import { alpha } from "@theme-ui/color";
 import { useResponsiveValue } from "@theme-ui/match-media";
 
@@ -154,7 +153,7 @@ export default function Wishlist() {
   var [wishlist, updateItemBalance] = useWishlist({
     onFirstLoad: useCallback(function setInitialSelection(wishlist) {
       setLoaded(true);
-      setSelectedItem(wishlist[0]);
+      // setSelectedItem(wishlist[0]);
     }, [])
   });
 

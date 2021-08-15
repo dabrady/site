@@ -1,4 +1,6 @@
-/** @jsxImportSource theme-ui */
+import React from "react";
+/** @jsx jsx */
+import { jsx } from "theme-ui";
 
 export default function StripeBadge() {
   return (
