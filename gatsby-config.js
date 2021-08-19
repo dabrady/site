@@ -66,8 +66,7 @@ module.exports = {
         background_color: "#6b37bf",
         theme_color: "#6b37bf",
         display: "minimal-ui",
-        // TODO(dabrady): Make a real icon
-        icon: 'src/images/gatsby-icon.png'
+        icon: 'src/images/logo_black.svg'
       }
     },
     "gatsby-plugin-offline",
