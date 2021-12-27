@@ -32,8 +32,9 @@ module.exports = {
       resolve: "gatsby-plugin-root-import",
       options: {
         "@components": path.resolve(__dirname, "src/components"),
-        "@utils": path.resolve(__dirname, "src/utils"),
+        "@images": path.resolve(__dirname, "src/images"),
         "@styles": path.resolve(__dirname, "src/styles"),
+        "@utils": path.resolve(__dirname, "src/utils"),
         "@wip": path.resolve(__dirname, "wip")
       }
     },
@@ -71,6 +72,7 @@ module.exports = {
     },
     "gatsby-plugin-offline",
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-eslint"
+    "gatsby-plugin-eslint",
+    "gatsby-plugin-svgr",
   ]
 };

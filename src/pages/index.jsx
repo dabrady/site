@@ -4,6 +4,8 @@ import React from "react";
 import { Box, Heading, Link } from "theme-ui";
 
 import MainLayout from "@components/MainLayout";
+import Signpost from "@components/Signpost";
+
 // import SEO from "@components/SEO.jsx";
 import {
   IconGithub,
@@ -11,6 +13,7 @@ import {
   IconInstagram,
   IconLinkedIn
 } from "@components/Icons";
+
 import useSystemTheme from '@utils/hooks/useSystemTheme';
 import useThemeToggle from "@utils/hooks/useThemeToggle";
 
@@ -22,78 +25,81 @@ export default function Home() {
   useSystemTheme();
 
   return (
-    <MainLayout>
+    <Box>
+      <Signpost/>
+      <MainLayout>
       {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          overflow: "hidden"
-        }}
-      >
-        <Heading
-          as="h1"
+        <Box
           sx={{
-            fontSize: ["0.8rem", 0],
-            fontFamily: "monospace",
-            fontWeight: "normal",
-            fontFeatureSettings: "'ss01'",
-            lineHeight: 2.4,
-            color: "accent",
-            marginLeft: ["1.8px", 1]
+            position: "absolute",
+            bottom: 0,
+            overflow: "hidden"
           }}
         >
-          Hi, my name is
-        </Heading>
-        <Heading
-          sx={{
-            fontSize: [1, 2, 3, 4],
-            lineHeight: 1.1,
-            color: "bright"
-          }}
-        >
-          Daniel Brady
-          {/* NOTE(dabrady) Secret theme toggle */}
-          <span
+          <Heading
+            as="h1"
             sx={{
-              cursor: "pointer",
-              ":hover": {
-                color: "accent",
-                transitionProperty: "color",
-                transitionDuration: "0.2s"
-              }
+              fontSize: ["0.8rem", 0],
+              fontFamily: "monospace",
+              fontWeight: "normal",
+              fontFeatureSettings: "'ss01'",
+              lineHeight: 2.4,
+              color: "accent",
+              marginLeft: ["1.8px", 1]
             }}
-            onClick={toggleTheme}
           >
+            Hi, my name is
+          </Heading>
+          <Heading
+            sx={{
+              fontSize: [1, 2, 3, 4],
+              lineHeight: 1.1,
+              color: "bright"
+            }}
+          >
+            Daniel Brady
+            {/* NOTE(dabrady) Secret theme toggle */}
+            <span
+              sx={{
+                cursor: "pointer",
+                ":hover": {
+                  color: "accent",
+                  transitionProperty: "color",
+                  transitionDuration: "0.2s"
+                }
+              }}
+              onClick={toggleTheme}
+            >
+              .
+            </span>
+          </Heading>
+          <Heading
+            as="h3"
+            sx={{
+              fontSize: [1, 2, 3, 4],
+              lineHeight: 1.1,
+              fontWeight: "normal"
+            }}
+          >
+            I solve for pain at&nbsp;
+            <Link variant="external" href="https://prodperfect.com">
+              ProdPerfect
+            </Link>
             .
-          </span>
-        </Heading>
-        <Heading
-          as="h3"
-          sx={{
-            fontSize: [1, 2, 3, 4],
-            lineHeight: 1.1,
-            fontWeight: "normal"
-          }}
-        >
-          I solve for pain at&nbsp;
-          <Link variant="external" href="https://prodperfect.com">
-            ProdPerfect
-          </Link>
-          .
-        </Heading>
+          </Heading>
 
-        <section
-          sx={{
-            marginTop: [5, 7]
-          }}
-        >
-          <IconGithub />
-          <IconDev />
-          <IconLinkedIn />
-          <IconInstagram />
-        </section>
-      </Box>
-    </MainLayout>
+          <section
+            sx={{
+              marginTop: [5, 7]
+            }}
+          >
+            <IconGithub />
+            <IconDev />
+            <IconLinkedIn />
+            <IconInstagram />
+          </section>
+        </Box>
+      </MainLayout>
+    </Box>
   );
 }

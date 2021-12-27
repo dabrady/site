@@ -41,7 +41,12 @@ export default function MainLayout({ children }) {
               styles={{
                 html: { height: "-webkit-fill-available" },
                 body: {
-                  minHeight: "100vh; min-height: -webkit-fill-available"
+                  // NOTE(dabrady) I wish I knew where I got this from, and why I thought
+                  // I needed it.
+                  /* minHeight: "100vh; min-height: -webkit-fill-available" */
+                  // NOTE(dabrady) The above, for whatever reason, make the page slightly larger
+                  // than the actual viewport. This does not.
+                  minHeight: "calc(100vh - 1em)"
                 }
               }}
             />
