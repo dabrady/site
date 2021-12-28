@@ -9,7 +9,8 @@ import {
   IconGithub,
   IconDev,
   IconInstagram,
-  IconLinkedIn
+  IconLinkedIn,
+  IconNomadList
 } from "@components/Icons";
 import useSystemTheme from '@utils/hooks/useSystemTheme';
 import useThemeToggle from "@utils/hooks/useThemeToggle";
@@ -92,6 +93,7 @@ export default function Home() {
           <IconDev />
           <IconLinkedIn />
           <IconInstagram />
+          <IconNomadList />
         </section>
       </Box>
     </MainLayout>
