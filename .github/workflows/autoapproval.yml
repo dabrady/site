@@ -1,0 +1,12 @@
+registered_app_slug: 'deploy-shepherd'
+from_owner:
+  - 'dependabot[bot]'
+
+required_labels: []
+
+blacklisted_labels: []
+
+apply_labels: []
+
+auto_merge_labels:
+  - dad-said-its-okay
