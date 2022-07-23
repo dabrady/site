@@ -1,0 +1,11 @@
+version: 2
+updates:
+  # Keep npm dependencies up to date
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly" # ...But not _too_ up to date.
+    # Raise all pull requests with custom labels
+    labels:
+      - "dependencies"
+      - "dad-said-its-okay" # Tell the robots I said this is fine
