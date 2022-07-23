@@ -8,5 +8,5 @@ blacklisted_labels: []
 
 apply_labels: []
 
-auto_merge_labels:
+auto_rebase_merge_labels:
   - dad-said-its-okay
