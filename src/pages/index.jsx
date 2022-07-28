@@ -77,11 +77,11 @@ export default function Home() {
             fontWeight: "normal"
           }}
         >
-          I solve for pain at&nbsp;
-          <Link variant="external" href="https://prodperfect.com">
-            ProdPerfect
+          I'm&nbsp;
+          <Link variant="external" href="https:prodperfect.com">
+            a mender
           </Link>
-          .
+          , not a maker.
         </Heading>
 
         <section
