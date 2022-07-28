@@ -96,13 +96,10 @@ export default {
           .css(),
         // primary,
         // secondary,
-        accent: palette.icyBlue,
+        // accent,
         // highlight,
         bright: palette.white,
-        muted: chroma(palette.icyBlue)
-          .brighten()
-          .alpha(0.2)
-          .css(),
+        // muted,
         shadow: palette.black,
         blackWhiteMono: palette.white
       }
