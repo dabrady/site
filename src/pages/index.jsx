@@ -78,7 +78,7 @@ export default function Home() {
           }}
         >
           I'm&nbsp;
-          <Link variant="external" href="https:prodperfect.com">
+          <Link variant="external" href="https://prodperfect.com">
             a mender
           </Link>
           , not a maker.
