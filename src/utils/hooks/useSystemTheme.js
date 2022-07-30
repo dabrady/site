@@ -7,10 +7,9 @@ export default function useSystemTheme() {
   useEffect(function syncThemeWithSystem() {
     function switchMode(darkMode) {
       if ( darkMode.matches ) {
-        setColorMode('dark');
+        setColorMode('night');
       } else {
-        // TODO(dabrady) This should be called 'light'; what if dark is default?
-        setColorMode('default'/* 'light' */);
+        setColorMode('day');
       }
     }
 
