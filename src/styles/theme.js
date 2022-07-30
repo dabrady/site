@@ -18,6 +18,63 @@ const palette = {
 };
 
 /**
+   @see https://theme-ui.com/color-modes
+
+   Key         Description
+   -----------------------
+   text        Body foreground color
+   background  Body background color
+   primary     Primary brand color for links, buttons, etc.
+   secondary   A secondary brand color for alternative styling
+   accent      A contrast color for emphasizing UI
+   highlight   A background color for highlighting text
+   muted       A faint color for backgrounds, borders, and accents that do not require high contrast with the background
+               color
+
+   [CUSTOM]
+   blackWhiteMono  Black or white, depending on what has the most contrast in this mode
+*/
+const modes = {
+  day: {
+    text: palette.black,
+    background: palette.softWhite,
+    accent: palette.red,
+    bright: palette.black,
+    muted: chroma(palette.red)
+      .brighten()
+      .alpha(0.07)
+      .css(),
+    shadow: palette.black,
+    blackWhiteMono: palette.black,
+    /* Unspecified  */
+    // primary,
+    // secondary,
+    // highlight,
+  },
+
+  night: {
+    text: palette.softGray,
+    background: chroma(palette.black)
+      .brighten(0.3)
+      .css(),
+    accent: chroma(palette.red)
+      .saturate(0.125) // make it stand out a bit better in the dark
+      .css(),
+    bright: palette.white,
+    muted: chroma(palette.red)
+      .brighten()
+      .alpha(0.07)
+      .css(),
+    shadow: palette.black,
+    blackWhiteMono: palette.white,
+    // primary,
+    // secondary,
+    // highlight,
+  },
+};
+modes.base = modes.day; // Configure base color mode
+
+/**
    I'm using Theme UI.
    @see https://theme-ui.com/theme-spec
  */
@@ -55,55 +112,10 @@ export default {
   },
   letterSpacings: {},
 
-  /**
-     Key         Description
-     -----------------------
-     text        Body foreground color
-     background  Body background color
-     primary     Primary brand color for links, buttons, etc.
-     secondary   A secondary brand color for alternative styling
-     accent      A contrast color for emphasizing UI
-     highlight   A background color for highlighting text
-     muted       A faint color for backgrounds, borders, and accents
-                 that do not require high contrast with the background color
-     (custom)
-     blackWhiteMono  Black or white, depending on what has the most contrast
-                     in this mode
-  */
   colors: {
-    ...palette,
-
-    // TODO(dabrady) Can these go into a 'light' mode?
-    text: palette.black,
-    background: palette.softWhite,
-    // primary,
-    // secondary,
-    accent: palette.red,
-    // highlight,
-    bright: palette.black,
-    muted: chroma(palette.red)
-      .brighten()
-      .alpha(0.07)
-      .css(),
-    shadow: palette.black,
-    blackWhiteMono: palette.black,
-
-    modes: {
-      dark: {
-        text: palette.softGray,
-        background: chroma(palette.black)
-          .brighten(0.3)
-          .css(),
-        // primary,
-        // secondary,
-        // accent,
-        // highlight,
-        bright: palette.white,
-        // muted,
-        shadow: palette.black,
-        blackWhiteMono: palette.white
-      }
-    }
+    ...palette, // Expose color palette
+    ...modes.base, // Base color mode
+    modes, // Other possible modes
   },
 
   /* For styling MDX content */
