@@ -11,7 +11,6 @@ import StripeBadge from "@components/StripeBadge";
 import MainLayout from "@components/MainLayout";
 import CreditCardForm from "@components/CreditCardForm";
 import useWishlist from "@utils/hooks/useWishlist";
-import useSystemTheme from '@utils/hooks/useSystemTheme';
 
 function WishlistItem({
   selected,
@@ -149,7 +148,6 @@ function Nothing() {
 // Figure out why and stop it; probably has something to do with component rendering.
 // TODO(dabrady) Consider caching wishlist in session cookie, which is refreshed on donate.
 export default function Wishlist() {
-  useSystemTheme();
   var spinnerSize = useResponsiveValue([64, 128, 192, 256]);
   var [loaded, setLoaded] = useState(false);
   var [selectedItem, setSelectedItem] = useState(null);
