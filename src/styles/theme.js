@@ -72,7 +72,10 @@ const modes = {
     // highlight,
   },
 };
-modes.base = modes.day; // Configure base color mode
+/* Configure 'system' themes */
+modes.default = modes.day;
+modes.light = modes.day;
+modes.dark = modes.night;
 
 /**
    I'm using Theme UI.
@@ -82,7 +85,7 @@ export default {
   /** Theme UI configuration */
   // @see https://theme-ui.com/theming#configuration-flags
   config: {
-    useColorSchemeMediaQuery: true,
+    useColorSchemeMediaQuery: 'system',
   },
 
   /** Custom attributes **/
@@ -114,8 +117,8 @@ export default {
 
   colors: {
     ...palette, // Expose color palette
-    ...modes.base, // Base color mode
-    modes, // Other possible modes
+    ...modes.default, // Default color mode
+    modes, // Other possible color modes
   },
 
   /* For styling MDX content */
