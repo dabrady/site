@@ -32,16 +32,20 @@ export default function Signpost({children}) {
   useSystemTheme(useCallback(function selectImage(mode) {
     switch(mode) {
       case Modes.DARK: {
-        setBackgroundImage(litSignpost);
+        if ( backgroundImage != litSignpost ) {
+          setBackgroundImage(litSignpost);
+        }
         return;
       }
       case Modes.LIGHT: {
-        setBackgroundImage(unlitSignpost);
+        if ( backgroundImage != unlitSignpost ) {
+          setBackgroundImage(unlitSignpost);
+        }
         return;
       }
       default: break;
     }
-  }, [setBackgroundImage, unlitSignpost, litSignpost]));
+  }, [backgroundImage, setBackgroundImage, unlitSignpost, litSignpost]));
 
   return (
     <BackgroundImage
