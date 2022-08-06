@@ -16,8 +16,10 @@ export default function useSystemTheme(memoizedReaction) {
       }
     }
 
-    // React when browser detects system theme has changed.
     var darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    // React on first render.
+    react(darkModeMediaQuery);
+    // React when browser detects system theme has changed.
     darkModeMediaQuery.addEventListener('change', react);
 
     // Stop monitoring system theme when component is unmounted.
