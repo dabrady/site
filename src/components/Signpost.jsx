@@ -58,21 +58,17 @@ export default function Signpost({children}) {
       // precedence over Theme UI's `sx` styling mechanism. As a result, I need to use `!important`.
       sx={{
         height: '100vh',
-        // unlit
         '&:before': {
           opacity: backgroundImage == unlitSignpost ?
             // NOTE(dabrady) The 'unlit signpost' image has a blanket impact on readability, so I'm
             // drastically lowering its opacity across the board.
-            '0.125 !important'
-            : '0 !important'
+            [ '0.125 !important' ]
+            : [ '0 !important' ]
         },
-        // lit
         '&:after' : {
           opacity: backgroundImage == unlitSignpost ?
-            '0 !important'
-            // NOTE(dabrady) At some breakpoints the text overlaps the image, harming readability.
-            // So I'm adjusting the opacity at those points as a simple remedy.
-            : [ '1 !important', '0.625 !important', '0.625 !important', '1 !important' ]
+            [ '0 !important' ]
+            : [ '1 !important' ]
         },
         '&:before, &:after': {
           // NOTE(dabrady) At some breakpoints the image is a bit to far off-screen, so I'm adjusting
