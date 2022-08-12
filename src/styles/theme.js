@@ -123,9 +123,9 @@ export default {
 
   /* For styling MDX content */
   breakpoints: ["40rem", "42rem", "56rem"],
-  // fontSizes: T.FONT_SIZES,
+  fontSizes: T.FONT_SIZES,
   // TODO(dabrady) Add a "small text" size (~0.875rem) and slightly larger normal text size (~1.3rem)
-  fontSizes: ["1rem", "2.2rem", "4rem", "4.4rem", "5rem"],
+  // fontSizes: ["1rem", "2.2rem", "4rem", "4.4rem", "5rem"],
   space: T.SPACES,
   styles: {},
 

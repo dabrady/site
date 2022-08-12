@@ -31,9 +31,10 @@ module.exports = {
       // This plugin allows us to alias common import paths to short names.
       resolve: "gatsby-plugin-root-import",
       options: {
-        "@components": path.resolve(__dirname, "src/components"),
-        "@utils": path.resolve(__dirname, "src/utils"),
-        "@styles": path.resolve(__dirname, "src/styles"),
+        "@components": path.resolve(__dirname, "src", "components"),
+        "@utils": path.resolve(__dirname, "src", "utils"),
+        "@images": path.resolve(__dirname, "src", "images"),
+        "@styles": path.resolve(__dirname, "src", "styles"),
         "@wip": path.resolve(__dirname, "wip")
       }
     },
@@ -53,12 +54,19 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "src",
-        path: `${__dirname}/src`
+        path: path.resolve(__dirname, 'src')
+      }
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "images",
+        path: path.resolve(__dirname, 'src', 'images')
       }
     },
 
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: "gatsby-plugin-manifest",
       options: {
         name: "a web site",
         short_name: "site",
@@ -66,11 +74,14 @@ module.exports = {
         background_color: "#6b37bf",
         theme_color: "#6b37bf",
         display: "minimal-ui",
-        icon: 'src/images/logo_black.svg'
+        icon: path.resolve(__dirname, "src", "images", "logo_black.svg")
       }
     },
     "gatsby-plugin-offline",
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-eslint"
+    "gatsby-plugin-eslint",
+    "gatsby-plugin-image",
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
   ]
 };

@@ -12,6 +12,7 @@ import {
   IconLinkedIn,
   IconNomadList
 } from "@components/Icons";
+import Signpost from '@components/Signpost';
 import useThemeToggle from "@utils/hooks/useThemeToggle";
 
 export default function Home() {
@@ -19,7 +20,7 @@ export default function Home() {
   var toggleTheme = useThemeToggle();
 
   return (
-    <MainLayout>
+    <MainLayout Background={Signpost}>
       {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
       <Box
         sx={{
