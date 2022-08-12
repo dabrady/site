@@ -2,12 +2,11 @@
 
 import React, { useCallback, useState } from "react";
 import { graphql, useStaticQuery } from 'gatsby';
-import { getImage } from 'gatsby-plugin-image';
-import { BgImage as BackgroundImage } from 'gbimage-bridge';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import useSystemTheme, { Modes } from '@utils/hooks/useSystemTheme';
 
-export default function Signpost({children}) {
+export default function Signpost() {
   var { unlitSignpost, litSignpost } = useStaticQuery(graphql`
       query {
         unlitSignpost: file(relativePath: { eq: "images/full_signpost_unlit.png" }) {
@@ -51,36 +50,29 @@ export default function Signpost({children}) {
   }, [backgroundImage, setBackgroundImage, unlitSignpost, litSignpost]));
 
   return (
-    <BackgroundImage
+    <GatsbyImage
       image={getImage(backgroundImage)}
-      // NOTE(dabrady) This is silly, but a quirk of the `BackgroundImage` component is that
-      // under the hood it applies an inline style attribute to the image tag, which takes
-      // precedence over Theme UI's `sx` styling mechanism. As a result, I need to use `!important`.
+      alt=''
       sx={{
-        height: '100vh',
-        '&:before': {
-          opacity: backgroundImage == unlitSignpost ?
-            // NOTE(dabrady) The 'unlit signpost' image has a blanket impact on readability, so I'm
-            // drastically lowering its opacity across the board.
-            [ '0.125 !important' ]
-            : [ '0 !important' ]
+        height: '100%',
+        width: [ 'calc(100vw * 2)', '100vw' ],
+        opacity: backgroundImage == unlitSignpost ?
+          // NOTE(dabrady) The 'unlit signpost' image has a blanket impact on readability, so I'm
+          // drastically lowering its opacity across the board.
+          [ '0.125 !important' ]
+          : [ '1 !important' ],
+        position: 'absolute',
+        margin: 0,
+        top: 0,
+        right: 0,
+        img: {
+          objectPosition: 'top right'
         },
-        '&:after' : {
-          opacity: backgroundImage == unlitSignpost ?
-            [ '0 !important' ]
-            : [ '1 !important' ]
-        },
-        '&:before, &:after': {
-          // NOTE(dabrady) At some breakpoints the image is a bit to far off-screen, so I'm adjusting
-          // the position a bit to compensate.
-          backgroundPosition: [
-            'right -115px top !important',
-            'right top !important',
-          ]
-        }
+        // NOTE(dabrady) At some breakpoints the image is a bit to far off-screen, so I'm adjusting
+        // the position a bit to compensate.
+        marginRight: [ '-6em', 0 ],
+        overflow: 'hidden',
       }}
-    >
-      {children}
-    </BackgroundImage>
+    />
   );
 }

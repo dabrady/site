@@ -18,7 +18,8 @@ export default function MainLayout({ children, Background = Box }) {
       `}
       render={function render(data) {
         return (
-          <Background>
+          <>
+            <Background />
             <Container
               sx={{
                 position: "absolute",
@@ -51,7 +52,7 @@ export default function MainLayout({ children, Background = Box }) {
               />
               {children}
             </Container>
-          </Background>
+          </>
         );
       }}
     />
