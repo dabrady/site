@@ -73,7 +73,7 @@ export default function Home() {
             fontWeight: "normal"
           }}
         >
-          I'm&nbsp;
+          I’m&nbsp;
           <Link variant="external" href="https://prodperfect.com">
             a software mechanic.
           </Link>
