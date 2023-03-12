@@ -75,9 +75,8 @@ export default function Home() {
         >
           I'm&nbsp;
           <Link variant="external" href="https://prodperfect.com">
-            a mender
+            a software mechanic.
           </Link>
-          , not a maker.
         </Heading>
 
         <section
