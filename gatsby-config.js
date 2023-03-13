@@ -37,6 +37,7 @@ module.exports = {
         "@wip": path.resolve(__dirname, "wip")
       }
     },
+    "gatsby-plugin-netlify",
 
     // This plugin adds support for the CSS-in-JS library Theme UI.
     "gatsby-plugin-theme-ui",
