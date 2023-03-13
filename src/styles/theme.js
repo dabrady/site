@@ -292,7 +292,7 @@ const theme = {
       fontFeatureSettings: "'c2sc'",
       backgroundImage: null,
       textShadow: null,
-      ":hover": {
+      ":hover, :focus": {
         backgroundColor: "muted",
         color: "bright",
         transitionProperty: "background, color",
@@ -317,7 +317,7 @@ const theme = {
         fontSize: "90%",
         color: "accent"
       },
-      ":hover": {
+      ":hover, :focus": {
         backgroundColor: "muted",
         color: "bright",
         transitionProperty: "background, color",

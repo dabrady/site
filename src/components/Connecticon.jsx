@@ -22,7 +22,7 @@ export default function Connecticon({ children, link }) {
           width: icon,
           height: icon
         },
-        ":hover": {
+        ":hover, :focus": {
           svg: {
             fill: "accent",
             transitionProperty: "fill",
