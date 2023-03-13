@@ -44,6 +44,7 @@
     "gatsby-plugin-react-helmet": "^6.7.0",
     "gatsby-plugin-root-import": "^2.0.5",
     "gatsby-plugin-theme-ui": "^0.15.5",
+    "gatsby-remark-smartypants": "^6.7.0",
     "gatsby-source-filesystem": "^5.7.0",
     "gray-percentage": "^2.0.0",
     "http-proxy-middleware": "^2.0.0",

@@ -49,7 +49,21 @@ module.exports = {
     "gatsby-plugin-catch-links",
 
     // This plugin lets us write JSX embedded inside Markdown.
-    "gatsby-plugin-mdx",
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-smartypants",
+            options: {
+              quotes: true,
+              ellipses: true,
+              dashes: "oldschool",
+            },
+          },
+        ],
+      },
+    },
 
     // This plugin parses local files into 'File' nodes for further manipulation
     // by transformers within our application.
