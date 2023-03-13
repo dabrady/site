@@ -64,14 +64,11 @@
     "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-proposal-decorators": "^7.14.2",
     "babel-preset-gatsby": "^3.7.0",
-    "eslint": "^8.36.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "eslint-webpack-plugin": "^4.0.0",
-    "gatsby-plugin-eslint": "^4.0.3",
     "netlify-cli": "^13.1.2"
   },
   "wipDependencies": {
