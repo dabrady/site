@@ -3,6 +3,7 @@
 import { Global, Container } from "theme-ui";
 
 import CoreLayout from '@components/CoreLayout';
+import Terminav from "@components/Terminav";
 
 export default function FullscreenNoScrollLayout({ children }) {
   return (
@@ -29,6 +30,7 @@ export default function FullscreenNoScrollLayout({ children }) {
           margin: ["2rem auto", "2.8rem auto"],
         }}
       >
+        <Terminav/>
         {children}
       </Container>
     </CoreLayout>

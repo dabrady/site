@@ -192,6 +192,13 @@ const theme = {
       color: "bright",
       borderRadius: "8px"
     },
+    monospace: {
+      color: "text",
+      fontFamily: "monospace",
+      fontWeight: "body",
+      lineHeight: "body",
+      fontSize: 0
+    },
     heading: {
       color: "text",
       fontFamily: "heading",
@@ -235,6 +242,7 @@ const theme = {
       appearance: "none",
       outline: "none",
       borderStyle: "none",
+      caretColor: "accent",
 
       ":-webkit-autofill": {
         "WebkitTextFillColor": ({ colors }) => colors.text,
@@ -325,6 +333,17 @@ const theme = {
         borderRadius: "8px"
       }
     }
+  },
+
+  forms: {
+    label: {
+      color: "text",
+      fontFamily: "body",
+      fontWeight: "body",
+      lineHeight: "body",
+      fontSize: 0,
+      marginLeft: [1],
+    },
   },
 
   aside: {
