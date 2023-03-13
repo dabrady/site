@@ -48,13 +48,16 @@ module.exports = {
     // whole page when navigating between local pages
     "gatsby-plugin-catch-links",
 
+    // This plugin lets us write JSX embedded inside Markdown.
+    "gatsby-plugin-mdx",
+
     // This plugin parses local files into 'File' nodes for further manipulation
     // by transformers within our application.
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "src",
-        path: `${__dirname}/src`
+        name: "pages",
+        path: `${__dirname}/src/pages`
       }
     },
 
