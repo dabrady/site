@@ -157,20 +157,6 @@ export default {
       // TODO(dabrady) Just make this font size available in `fontSizes`
       // fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.6)`
     },
-    wishlistValue: {
-      color: "text",
-      fontFamily: "title",
-      fontWeight: "heading",
-      lineHeight: "heading",
-      textAlign: "center"
-      // fontSize: t => `calc(${t.fontSizes[0]} * 0.8)`,
-      // fontSize: 0,
-
-      // Trying to center it within the donut
-      // position: "absolute",
-      // top: ({ lineHeights }) => `calc(50% - ${lineHeights.heading}rem)`,
-      // width: "100%",
-    },
     input: {
       color: "text",
       fontFamily: "body",

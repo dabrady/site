@@ -7,7 +7,6 @@ help: ## Prints help for targets with comments
 .PHONY: install
 install: ## Installs project dependencies
 	yarn install
-	cd src/lambda && yarn install
 
 .PHONY: clean
 clean: ## Cleans build artifacts
