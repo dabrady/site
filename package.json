@@ -31,13 +31,11 @@
     "@theme-ui/mdx": "^0.15.5",
     "chroma-js": "^2.1.0",
     "core-js": "^3.13.1",
-    "dotenv": "^16.0.3",
     "encoding": "^0.1.13",
     "fontfaceobserver": "^2.1.0",
     "gatsby": "^5.7.0",
     "gatsby-plugin-catch-links": "^5.7.0",
     "gatsby-plugin-emotion": "^8.7.0",
-    "gatsby-plugin-eslint": "^4.0.2",
     "gatsby-plugin-manifest": "^5.7.0",
     "gatsby-plugin-offline": "^6.7.0",
     "gatsby-plugin-react-helmet": "^6.7.0",
@@ -71,6 +69,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-webpack-plugin": "^4.0.0",
+    "gatsby-plugin-eslint": "^4.0.3",
     "netlify-cli": "^13.1.2"
   },
   "wipDependencies": {
