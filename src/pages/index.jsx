@@ -44,6 +44,7 @@ export default function Home() {
         </Heading>
         <Heading
           sx={{
+            fontFamily: 'body',
             fontSize: [1, 2, 3, 4],
             lineHeight: 1.1,
             color: "bright"
@@ -68,6 +69,7 @@ export default function Home() {
         <Heading
           as="h3"
           sx={{
+            fontFamily: 'body',
             fontSize: [1, 2, 3, 4],
             lineHeight: 1.1,
             fontWeight: "normal"

@@ -81,7 +81,7 @@ modes.dark = modes.night;
    I'm using Theme UI.
    @see https://theme-ui.com/theme-spec
  */
-export default {
+const theme = {
   /** Theme UI configuration */
   // @see https://theme-ui.com/theming#configuration-flags
   config: {
@@ -97,9 +97,9 @@ export default {
 
   fonts: {
     body: "concourse-text, sans-serif",
-    heading: "concourse-text, serif",
+    heading: "advocate-c43, serif",
     // heading: "advocate-c43",
-    title: "advocate-c43, serif",
+    // title: "advocate-c43, serif",
     monospace: "triplicate-text, monospace",
     code: "triplicate-code, monospace"
   },
@@ -121,13 +121,11 @@ export default {
     modes, // Other possible color modes
   },
 
-  /* For styling MDX content */
   breakpoints: ["40rem", "42rem", "56rem"],
   // fontSizes: T.FONT_SIZES,
   // TODO(dabrady) Add a "small text" size (~0.875rem) and slightly larger normal text size (~1.3rem)
   fontSizes: ["1rem", "2.2rem", "4rem", "4.4rem", "5rem"],
   space: T.SPACES,
-  styles: {},
 
   sizes: {
     container: "85vw",
@@ -143,6 +141,18 @@ export default {
       fontWeight: "body",
       lineHeight: "body",
       fontSize: 0
+    },
+    code: {
+      color: "text",
+      fontFamily: 'code',
+      fontWeight: "body",
+      lineHeight: "body",
+      // Slightly smaller than the body text
+      fontSize: '0.875rem',
+      // Muted highlight
+      backgroundColor: "muted",
+      color: "bright",
+      borderRadius: "8px"
     },
     heading: {
       color: "text",
@@ -269,6 +279,9 @@ export default {
       backgroundImage: null,
       textShadow: null,
       textDecoration: 'none',
+      marginLeft: '-2px',
+      paddingLeft: '-2px',
+      paddingRight: '2px',
       // Cloning link style from pracicaltypography.com
       "::after": {
         content: "'°'",
@@ -287,3 +300,18 @@ export default {
     }
   }
 };
+
+// Use variants in MDX for unified style.
+theme.styles = {
+  p: theme.text.default,
+  a: theme.links.external, // default to external since we don't know at this point
+  h1: theme.text.heading,
+  h2: theme.text.heading,
+  h3: theme.text.heading,
+  h4: theme.text.heading,
+  h5: theme.text.heading,
+  h6: theme.text.heading,
+  code: theme.text.code,
+};
+
+export default theme;
