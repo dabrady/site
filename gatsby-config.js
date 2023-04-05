@@ -64,8 +64,6 @@ module.exports = {
         name: "a web site",
         short_name: "site",
         start_url: "/",
-        background_color: "#6b37bf",
-        theme_color: "#6b37bf",
         display: "minimal-ui",
         icon: 'src/images/logo_black.svg'
       }
