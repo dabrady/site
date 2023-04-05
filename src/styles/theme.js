@@ -178,7 +178,6 @@ const theme = {
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",
-      fontSize: 0
     },
     code: {
       color: "text",
@@ -197,7 +196,6 @@ const theme = {
       fontFamily: "monospace",
       fontWeight: "body",
       lineHeight: "body",
-      fontSize: 0
     },
     heading: {
       color: "text",
@@ -227,34 +225,6 @@ const theme = {
       lineHeight: 1.35,
       textTransform: 'lowercase',
     },
-    input: {
-      color: "text",
-      fontFamily: "body",
-      fontWeight: "body",
-      lineHeight: "body",
-      fontSize: 0,
-
-      backgroundColor: "transparent",
-      width: "100%",
-      padding: "11px 15px 11px 0",
-
-      animation: "1ms void-animation-out",
-      appearance: "none",
-      outline: "none",
-      borderStyle: "none",
-      caretColor: "accent",
-
-      ":-webkit-autofill": {
-        "WebkitTextFillColor": ({ colors }) => colors.text,
-        background: "transparent !important",
-        transition: "background-color 100000000s",
-        "WebkitAnimation": "1ms void-animation-out"
-      },
-
-      "::placeholder": {
-        color: alpha("accent", 0.6)
-      }
-    }
   },
 
   buttons: {
@@ -292,11 +262,7 @@ const theme = {
       color: "text",
       cursor: "pointer",
       textDecoration: 'none',
-      textTransform: "lowercase",
-      fontFamily: function smallCapsVariant({ fonts: { body } }) {
-        var [intendedFont, ...fallbacks] = body.split(", ");
-        return `${intendedFont.replace("-text", "-caps")}, ${fallbacks}`;
-      },
+      fontFamily: 'concourse-caps, sans-serif',
       fontFeatureSettings: "'c2sc'",
       backgroundImage: null,
       textShadow: null,
@@ -341,8 +307,35 @@ const theme = {
       fontFamily: "body",
       fontWeight: "body",
       lineHeight: "body",
-      fontSize: 0,
-      marginLeft: [1],
+    },
+
+    input: {
+      color: "text",
+      fontFamily: "monospace",
+      fontWeight: "body",
+      lineHeight: "body",
+
+      backgroundColor: "transparent",
+      width: "100%",
+      padding: '0',
+      marginLeft: '1rem',
+
+      animation: "1ms void-animation-out",
+      appearance: "none",
+      outline: "none",
+      borderStyle: "none",
+      caretColor: "accent",
+
+      ":-webkit-autofill": {
+        "WebkitTextFillColor": ({ colors }) => colors.text,
+        background: "transparent !important",
+        transition: "background-color 100000000s",
+        "WebkitAnimation": "1ms void-animation-out"
+      },
+
+      "::placeholder": {
+        color: alpha("accent", 0.6)
+      }
     },
   },
 
