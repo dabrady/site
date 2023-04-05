@@ -1,11 +1,14 @@
 /** @jsxImportSource theme-ui */
 
 import { Global, Container } from "theme-ui";
+import { useState } from 'react';
 
 import CoreLayout from '@components/CoreLayout';
 import Terminav from "@components/Terminav";
+import { NavContext } from "@utils/hooks/useNavContext";
 
-export default function FullscreenNoScrollLayout({ children }) {
+export default function FullscreenNoScrollLayout({ children, showNavOnLoad = true }) {
+  const [showTerminav, setShowTerminav] = useState(showNavOnLoad);
   return (
     <CoreLayout>
       <Global styles={{
@@ -30,8 +33,13 @@ export default function FullscreenNoScrollLayout({ children }) {
           margin: ["2rem auto", "2.8rem auto"],
         }}
       >
-        <Terminav/>
-        {children}
+        {showTerminav && <Terminav />}
+        <NavContext.Provider value={{
+          showNav: setShowTerminav,
+          isNavShown: showTerminav
+        }}>
+          {children}
+        </NavContext.Provider>
       </Container>
     </CoreLayout>
   );
