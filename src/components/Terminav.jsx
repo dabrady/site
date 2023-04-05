@@ -6,8 +6,7 @@ import { Box, Flex, Input, Label, NavLink, Paragraph } from 'theme-ui';
 
 const NAV_LINKS = {
   ['home']: <NavLink variant='local' href='/'>home</NavLink>,
-  ['blog']: <NavLink variant='local' href='/blog'>blog</NavLink>,
-  ['wishlist']: <NavLink variant='local' href='/wishlist'>wishlist</NavLink>
+  ['blog']: <NavLink variant='local' href='/blog/'>blog</NavLink>,
 }
 const UNKNOWN_COMMAND = '_UNKNOWN_';
 const COMMANDS = {
