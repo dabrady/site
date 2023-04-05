@@ -1,14 +1,28 @@
-import React from "react";
+/** @jsxImportSource theme-ui */
+import { Heading, Paragraph } from "theme-ui";
 
 import MainLayout from "@components/MainLayout";
 // import SEO from "@components/SEO";
 
-const NotFoundPage = () => (
-  <MainLayout>
-    {/* <SEO title="404: Not found" /> */}
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </MainLayout>
-);
-
-export default NotFoundPage;
+export default function NotFoundPage() {
+  return (
+    <MainLayout>
+      {/* <SEO title="404: Not found" /> */}
+      <Heading as='h1'>HMM....</Heading>
+      <pre sx={{ fontFamily: 'monospace' }}>
+          {`
+     __//
+    /.__.\\
+    \\ \\/ /
+ '__/    \\
+  \\-      )
+   \\_____/
+_____|_|____
+     " "
+`}
+      </pre>
+      <Paragraph>This place doesn&#8217;t exist....The sadness.</Paragraph>
+      <Paragraph>...But then of course, if this place doesn&#8217;t exist, are you really here?</Paragraph>
+    </MainLayout>
+  );
+}
