@@ -3,7 +3,7 @@
 import React from "react";
 import { Box, Heading, Link } from "theme-ui";
 
-import MainLayout from "@components/MainLayout";
+import FullscreenNoScrollLayout from "@components/FullscreenNoScrollLayout";
 // import SEO from "@components/SEO.jsx";
 import {
   IconGithub,
@@ -19,7 +19,7 @@ export default function Home() {
   var toggleTheme = useThemeToggle();
 
   return (
-    <MainLayout>
+    <FullscreenNoScrollLayout>
       {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
       <Box
         sx={{
@@ -93,6 +93,6 @@ export default function Home() {
           <IconNomadList />
         </section>
       </Box>
-    </MainLayout>
+    </FullscreenNoScrollLayout>
   );
 }
