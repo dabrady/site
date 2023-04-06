@@ -9,7 +9,8 @@ module.exports = {
   siteMetadata: {
     title: "Daniel Brady",
     description: "",
-    author: "@dabrady"
+    author: "@dabrady",
+    baseUrl: "https://www.daniel13rady.com/",
   },
 
   // for avoiding CORS while developing Netlify Functions locally
