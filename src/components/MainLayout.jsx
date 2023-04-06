@@ -29,7 +29,8 @@ export default function MainLayout({ children }) {
         top: 0,
         left: 0,
         bottom: 0,
-        right: 0
+        right: 0,
+        maxHeight: 'none',
       }}
     >
       {/* TODO Due to a bug whose fix is not yet published, I need to use the
