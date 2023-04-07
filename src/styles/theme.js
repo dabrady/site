@@ -121,10 +121,10 @@ const theme = {
     modes, // Other possible color modes
   },
 
-  breakpoints: ["40rem", "42rem", "56rem"],
+  breakpoints: ["520px", "1000px"],
   // fontSizes: T.FONT_SIZES,
   // TODO(dabrady) Add a "small text" size (~0.875rem) and slightly larger normal text size (~1.3rem)
-  fontSizes: ["1rem", "2.2rem", "3rem", "4rem", "4.4rem", "5rem"],
+  fontSizes: ["1rem", "3rem", "4rem", "4.4rem", "5rem"],
   space: T.SPACES,
 
   sizes: {
@@ -193,14 +193,6 @@ const theme = {
       "::placeholder": {
         color: alpha("accent", 0.6)
       }
-    }
-  },
-
-  layout: {
-    container: {
-      maxWidth: ["85vw"],
-      maxHeight: ["100vh"],
-      margin: ["1rem auto", "1.2rem auto", "2.86rem auto", "4.93rem auto"]
     }
   },
 
@@ -280,7 +272,7 @@ const theme = {
       textShadow: null,
       textDecoration: 'none',
       marginLeft: '-2px',
-      paddingLeft: '-2px',
+      paddingLeft: '2px',
       paddingRight: '2px',
       // Cloning link style from pracicaltypography.com
       "::after": {
@@ -301,8 +293,11 @@ const theme = {
   }
 };
 
-// Use variants in MDX for unified style.
+// Use variants in MDX/JSX for unified style.
 theme.styles = {
+  root: {
+    fontSize: ['18px', '2.4vw', '24px']
+  },
   p: theme.text.default,
   a: theme.links.external, // default to external since we don't know at this point
   h1: theme.text.heading,
