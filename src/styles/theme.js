@@ -159,7 +159,6 @@ const theme = {
       fontFamily: "heading",
       fontWeight: "heading",
       lineHeight: "heading",
-      fontSize: [1, 1, 2, 2]
     },
     littleMessage: {
       color: "text"
@@ -248,6 +247,7 @@ const theme = {
     local: {
       color: "text",
       cursor: "pointer",
+      textDecoration: 'none',
       textTransform: "lowercase",
       fontFamily: function smallCapsVariant({ fonts: { body } }) {
         var [intendedFont, ...fallbacks] = body.split(", ");

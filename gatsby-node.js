@@ -63,8 +63,7 @@ async function makeFromMDX(graphql, reporter) {
   }
 
   var posts = result.data.allMdx.nodes;
-  // TODO(dabrady) Design a real layout.
-  var postTemplate = path.resolve('./src/components/BaseContentLayout.jsx');
+  var postTemplate = path.resolve('./src/templates/post.jsx');
   return posts.map((post) => ({
     path: post.fields.slug,
     // Provide the path to the MDX content file so webpack can pick it up and transform it into JSX
