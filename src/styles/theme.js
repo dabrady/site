@@ -128,7 +128,6 @@ const theme = {
   space: T.SPACES,
 
   sizes: {
-    container: "85vw",
     icon: [40, 60, 80]
   },
 
