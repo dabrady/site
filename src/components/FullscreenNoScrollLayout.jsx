@@ -9,12 +9,13 @@ export default function FullscreenNoScrollLayout({ children }) {
     <Container
       sx={{
         position: "absolute",
-        height: "auto",
         top: 0,
         left: 0,
         bottom: 0,
         right: 0,
-        maxHeight: 'none',
+        height: "auto",
+        maxWidth: ["85vw"],
+        margin: ["2rem auto", "2.8rem auto"],
       }}
     >
       <SiteHelmet/>
