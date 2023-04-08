@@ -3,7 +3,7 @@
 import { Link as InternalLink } from 'gatsby';
 import { Box, Link as ThemeLink } from 'theme-ui';
 
-export default function Link({ href, ...props}) {
+export function Link({ href, ...props}) {
   if (href.startsWith('http')) {
     return <ThemeLink variant='links.external' href={href} {...props}/>;
   }
