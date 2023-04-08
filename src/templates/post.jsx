@@ -16,13 +16,9 @@ const shortcodes = {
 export default function PostTemplate({ children, data }) {
   return (
     <BaseContentLayout>
-      <Heading
-        as='h1'
-        sx={{
-          fontSize: '125%',
-          lineHeight: 1.35,
-        }}
-      >{data.mdx.frontmatter.title.toLowerCase()}</Heading>
+      <Heading as='h1' variant='text.title'>
+        {data.mdx.frontmatter.title}
+      </Heading>
       <MDXProvider components={shortcodes}>
         {children}
       </MDXProvider>
