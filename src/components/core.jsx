@@ -9,3 +9,7 @@ export function Link({ href, ...props}) {
   }
   return <InternalLink to={href} sx={{ variant: 'links.local' }} {...props}/>;
 }
+
+export function Aside(props) {
+  return <aside sx={{ variant: 'aside' }} {...props}/>;
+}

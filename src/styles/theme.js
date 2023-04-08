@@ -303,7 +303,15 @@ const theme = {
         borderRadius: "8px"
       }
     }
-  }
+  },
+
+  aside: {
+    marginTop: '1.5rem',
+    marginBottom: '1.5rem',
+    padding: '1rem 1rem 0.5rem 1rem',
+    borderTop: '1px solid #ccc',
+    borderBottom: '1px solid #ccc',
+  },
 };
 
 // Use variants in MDX/JSX for unified style.
@@ -311,8 +319,23 @@ theme.styles = {
   root: {
     fontSize: ['18px', '2.4vw', '24px']
   },
-  p: theme.text.default,
-  a: theme.links.external, // default to external since we don't know at this point
+  p: {
+    ...theme.text.default,
+    marginBottom: '1em',
+  },
+  li: {
+    ...theme.text.default,
+    marginBottom: '1em',
+    marginLeft: '0.8rem',
+    paddingLeft: '1.8rem'
+  },
+  blockquote: {
+    marginTop: '1.5rem',
+    marginBottom: '1.5rem',
+    padding: '1rem 1rem 0.5rem 1rem',
+    borderLeft: '3px solid #ccc',
+    fontStyle: 'italic',
+  },
   h1: theme.text.heading,
   h2: theme.text.heading,
   h3: theme.text.heading,
