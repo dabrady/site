@@ -6,10 +6,11 @@ import { graphql } from 'gatsby';
 import { Heading } from 'theme-ui';
 
 import BaseContentLayout from '@components/BaseContentLayout';
-import Link from '@components/Link';
+import * as CoreComponents from '@components/core';
 
 const shortcodes = {
-  a: Link,
+  a: CoreComponents.Link,
+  ...CoreComponents,
 };
 
 export default function PostTemplate({ children, data }) {
