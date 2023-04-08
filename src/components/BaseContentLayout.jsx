@@ -11,11 +11,16 @@ export default function BaseContentLayout({ children }) {
     <>
       <SiteHelmet/>
       <Global styles={{
+        '*': {
+          padding: 0,
+          margin: 0,
+        },
         body: {
           marginLeft: 'auto',
           marginRight: 'auto',
           maxWidth: '1000px',
-        }
+          position: 'relative',
+        },
       }}/>
       <Container
         sx={{

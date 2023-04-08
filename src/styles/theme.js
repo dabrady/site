@@ -97,7 +97,7 @@ const theme = {
 
   fonts: {
     body: "concourse-text, sans-serif",
-    heading: "triplicate-caps, serif",
+    heading: "triplicate-text, serif",
     // heading: "advocate-c43",
     // title: "advocate-c43, serif",
     monospace: "triplicate-text, monospace",
@@ -157,7 +157,21 @@ const theme = {
       color: "text",
       fontFamily: "heading",
       fontWeight: "heading",
+      fontSize: '125%',
       lineHeight: "heading",
+    },
+    title: {
+      display: 'block',
+      position: ['inherit', 'absolute'],
+      float: ['inherit', 'left'],
+      left: '2.5rem',
+      width: ['100%', '7.5rem'],
+      textAlign: ['left', 'right'],
+      marginBottom: '2rem',
+      clear: 'both',
+      fontSize: '125%',
+      lineHeight: 1.35,
+      textTransform: 'lowercase',
     },
     littleMessage: {
       color: "text"
