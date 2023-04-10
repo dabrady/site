@@ -18,6 +18,7 @@ export default function BaseContentLayout({ children }) {
         body: {
           marginLeft: 'auto',
           marginRight: 'auto',
+          width: '100%',
           maxWidth: '1000px',
           position: 'relative',
         },
@@ -25,7 +26,7 @@ export default function BaseContentLayout({ children }) {
       <Container
         sx={{
           maxHeight: 'none',
-          width: "auto",
+          width: 'inherit',
           maxWidth: ['100vw', '85vw', '60vw'],
           margin: ['1.5rem', '0 2.5rem 2.5rem 12rem'],
           paddingTop: [0, '3rem']
