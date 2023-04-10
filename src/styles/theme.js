@@ -11,7 +11,9 @@ const palette = {
   white: chroma("#fff").css(),
   red: chroma("#933").css(),
   charcoal: chroma("#282828").css(),
-  softGray: chroma("#9b9b9b").css(),
+  softGray: chroma("#d5d5d5").css(),
+  gray: chroma("#9b9b9b").css(),
+  hardGray: chroma("#667").css(),
   icyBlue: chroma("#00b7ff").css(),
   softWhite: chroma(gray(90, 0, true)).css(),
   dirtySnow: chroma(gray(73, 0, true)).css()
@@ -46,6 +48,7 @@ const modes = {
       .css(),
     shadow: palette.black,
     blackWhiteMono: palette.black,
+    aside: palette.hardGray,
     /* Unspecified  */
     // primary,
     // secondary,
@@ -67,6 +70,7 @@ const modes = {
       .css(),
     shadow: palette.black,
     blackWhiteMono: palette.white,
+    aside: palette.gray,
     // primary,
     // secondary,
     // highlight,
@@ -306,11 +310,35 @@ const theme = {
   },
 
   aside: {
-    marginTop: '1.5rem',
-    marginBottom: '1.5rem',
-    padding: '1rem 1rem 0.5rem 1rem',
-    borderTop: '1px solid #ccc',
-    borderBottom: '1px solid #ccc',
+    display: 'block',
+    position: ['inherit', 'absolute'],
+    float: ['inherit', 'left'],
+    left: '2.5rem',
+    boxSizing: 'content-box',
+    marginBottom: '1rem',
+    padding: ['0.3rem 0.5rem', '0'],
+
+    border: ['1px solid #ccc', 'none'],
+    borderLeft: ['3px solid #ccc', 'none'],
+
+    width: ['90%', 'calc(2.5rem * 3)'],
+    '@media screen and (min-width: 1200px)': {
+      left: '0',
+      width: 'calc(2.5rem * 4)',
+    },
+
+    textAlign: ['left', 'right'],
+    clear: 'both',
+
+    p: {
+      fontSize: '0.83rem',
+      lineHeight: 1.4,
+      letterSpacing: '0.015em',
+      color: 'aside',
+      ':last-child': {
+        marginBottom: ['0'],
+      }
+    }
   },
 };
 
