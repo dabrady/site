@@ -33,6 +33,7 @@ module.exports = {
       resolve: "gatsby-plugin-root-import",
       options: {
         "@components": path.resolve(__dirname, "src/components"),
+        "@templates": path.resolve(__dirname, "src/templates"),
         "@utils": path.resolve(__dirname, "src/utils"),
         "@styles": path.resolve(__dirname, "src/styles"),
         "@wip": path.resolve(__dirname, "wip")
@@ -53,6 +54,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-mdx",
       options: {
+        extensions: ['.md', '.mdx'],
         gatsbyRemarkPlugins: [
           {
             resolve: "gatsby-remark-smartypants",

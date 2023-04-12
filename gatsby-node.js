@@ -1,15 +1,6 @@
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const path = require("path");
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  var { createPage } = actions;
-
-  // Make pages for MDX content.
-  for (let page of (await makeFromMDX(graphql, reporter))) {
-    createPage(page);
-  }
-};
-
 // Disables the dev 404 page. I find it mildly annoying.
 // @see https://github.com/gatsbyjs/gatsby/issues/16112
 exports.onCreatePage = ({ page, actions }) => {
@@ -41,44 +32,12 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
 /**** Helpers ****/
 
-async function makeFromMDX(graphql, reporter) {
-  var result = await graphql(`
-    query {
-      allMdx {
-        nodes {
-          id
-          fields {
-            slug
-          }
-          internal {
-            contentFilePath
-          }
-        }
-      }
-    }
-  `);
-
-  if (result.errors) {
-    reporter.panicOnBuild('Error loading MDX result', result.errors);
-  }
-
-  var posts = result.data.allMdx.nodes;
-  var postTemplate = path.resolve('./src/templates/post.jsx');
-  return posts.map((post) => ({
-    path: post.fields.slug,
-    // Provide the path to the MDX content file so webpack can pick it up and transform it into JSX
-    component: `${postTemplate}?__contentFilePath=${post.internal.contentFilePath}`,
-    // You can use the values in this context in our page layout component
-    context: { id: post.id },
-  }));
-}
-
 function makeSlugField(node, getNode) {
   var slug;
   if (node.frontmatter?.slug) {
     slug = node.frontmatter.slug;
   } else {
-    slug = createFilePath({ node, getNode, basePath: 'src/content' });
+    slug = createFilePath({ node, getNode });
   }
 
   return {

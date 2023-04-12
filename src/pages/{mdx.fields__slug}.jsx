@@ -8,29 +8,33 @@ import { Heading } from 'theme-ui';
 import BaseContentLayout from '@components/BaseContentLayout';
 import * as CoreComponents from '@components/core';
 
+import BlogPost from '@templates/BlogPost';
+
 const shortcodes = {
   a: CoreComponents.Link,
   ...CoreComponents,
 };
 
-export default function PostTemplate({ children, data }) {
+const templates = {
+  ['blog']: BlogPost
+}
+
+export default function MDXPage({ children, data, ...props }) {
+  const Template = templates[data.mdx.parent.relativeDirectory] || BaseContentLayout;
   return (
-    <BaseContentLayout>
-      <Heading as='h1' variant='text.title'>
-        {data.mdx.frontmatter.title}
-      </Heading>
-      <MDXProvider components={shortcodes}>
-        {children}
-      </MDXProvider>
-    </BaseContentLayout>
+    <MDXProvider components={shortcodes}>
+      <Template {...props}>{children}</Template>
+    </MDXProvider>
   );
 }
 
 export const query = graphql`
   query($id: String!) {
     mdx(id: { eq: $id }) {
-      frontmatter {
-        title
+      parent {
+        ... on File {
+          relativeDirectory
+        }
       }
     }
   }
