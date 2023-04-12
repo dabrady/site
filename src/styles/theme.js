@@ -102,8 +102,6 @@ const theme = {
   fonts: {
     body: "concourse-text, sans-serif",
     heading: "triplicate-text, serif",
-    // heading: "advocate-c43",
-    // title: "advocate-c43, serif",
     monospace: "triplicate-text, monospace",
     code: "triplicate-code, monospace"
   },
@@ -127,7 +125,6 @@ const theme = {
 
   breakpoints: ["520px", "1000px"],
   // fontSizes: T.FONT_SIZES,
-  // TODO(dabrady) Add a "small text" size (~0.875rem) and slightly larger normal text size (~1.3rem)
   fontSizes: ["1rem", "3rem", "4rem", "4.4rem", "5rem"],
   space: T.SPACES,
 
@@ -161,8 +158,16 @@ const theme = {
       color: "text",
       fontFamily: "heading",
       fontWeight: "heading",
-      fontSize: '125%',
       lineHeight: "heading",
+      fontSize: '125%',
+    },
+    smallerHeading: {
+      variant: 'text.heading',
+      fontSize: 0,
+      fontFamily: function smallCapsVariant({ fonts: { body } }) {
+        var [intendedFont, ...fallbacks] = body.split(", ");
+        return `${intendedFont.replace("-text", "-caps")}, ${fallbacks}`;
+      },
     },
     title: {
       display: 'block',
@@ -176,12 +181,6 @@ const theme = {
       fontSize: '125%',
       lineHeight: 1.35,
       textTransform: 'lowercase',
-    },
-    littleMessage: {
-      color: "text"
-      // Just slightly smaller than the main body text
-      // TODO(dabrady) Just make this font size available in `fontSizes`
-      // fontSize: t => `calc(${t.fontSizes[t.text.default.fontSize]} * 0.6)`
     },
     input: {
       color: "text",
@@ -209,24 +208,6 @@ const theme = {
       "::placeholder": {
         color: alpha("accent", 0.6)
       }
-    }
-  },
-
-  progress: {
-    default: {
-      color: "accent",
-      display: "inline-block"
-
-      /* Playing with SVG animation */
-      // "circle[stroke-dasharray]": {
-      //   strokeDasharray: 100,
-      //   animation: "dash 5s linear",
-      //   "@keyframes dash": {
-      //     to: {
-      //       strokeDashoffset: 1000
-      //     }
-      //   }
-      // }
     }
   },
 
@@ -271,7 +252,6 @@ const theme = {
         return `${intendedFont.replace("-text", "-caps")}, ${fallbacks}`;
       },
       fontFeatureSettings: "'c2sc'",
-      // letterSpacing: "0.1em",
       backgroundImage: null,
       textShadow: null,
       ":hover": {
@@ -364,13 +344,13 @@ theme.styles = {
     borderLeft: '3px solid #ccc',
     fontStyle: 'italic',
   },
-  h1: theme.text.heading,
-  h2: theme.text.heading,
-  h3: theme.text.heading,
-  h4: theme.text.heading,
-  h5: theme.text.heading,
-  h6: theme.text.heading,
-  code: theme.text.code,
+  h1: { variant: 'text.heading' },
+  h2: { variant: 'text.smallerHeading' },
+  h3: { variant: 'text.smallerHeading' },
+  h4: { variant: 'text.smallerHeading' },
+  h5: { variant: 'text.smallerHeading' },
+  h6: { variant: 'text.smallerHeading' },
+  code: { variant: 'text.code' },
 };
 
 export default theme;

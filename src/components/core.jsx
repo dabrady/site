@@ -7,7 +7,7 @@ export function Link({ href, ...props}) {
   if (href.startsWith('http')) {
     return <ThemeLink variant='links.external' href={href} {...props}/>;
   }
-  return <InternalLink to={href} sx={{ variant: 'links.local' }} {...props}/>;
+  return <InternalLink to={href} sx={{ variant: 'links.local', ...(props.sx || {}) }} {...props}/>;
 }
 
 export function Aside(props) {
