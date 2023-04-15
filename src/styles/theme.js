@@ -320,37 +320,61 @@ const theme = {
       }
     }
   },
+
+  /** Default Markdown styles */
+  // NOTE(dabrady) This is an exhaustive list of all supported Markdown elements.
+  // Any other HTML elements must be used explicitly as such in Markdown files,
+  // and those styles are overridden by the `shortcodes` injected into
+  // the Markdown renderer in the relevant template file.
+  styles: {
+    root: {
+      fontSize: ['18px', '2.4vw', '24px']
+    },
+    a: {},
+    blockquote: {
+      marginTop: '1.5rem',
+      marginBottom: '1.5rem',
+      padding: '1rem 1rem 0.5rem 1rem',
+      borderLeft: '3px solid #ccc',
+      fontStyle: 'italic',
+    },
+    br: {},
+    code: { variant: 'text.code' },
+    del: {},
+    em: {},
+    h1: { variant: 'text.heading' },
+    h2: { variant: 'text.smallerHeading' },
+    h3: { variant: 'text.smallerHeading' },
+    h4: { variant: 'text.smallerHeading' },
+    h5: { variant: 'text.smallerHeading' },
+    h6: { variant: 'text.smallerHeading' },
+    hr: {},
+    inlineCode: {}, // MDX alias for `code` tags outside of a `pre` tag
+    img: {},
+    li: {
+      variant: 'text.default',
+      marginBottom: '1em',
+      marginLeft: '0.8rem',
+      paddingLeft: '1.8rem'
+    },
+    ol: {},
+    p: {
+      variant: 'text.default',
+      marginBottom: '1em',
+    },
+    pre: {},
+    strong: {},
+    table: {},
+    td: {},
+    th: {},
+    tr: {},
+    ul: {},
+  },
 };
 
-// Use variants in MDX/JSX for unified style.
-theme.styles = {
-  root: {
-    fontSize: ['18px', '2.4vw', '24px']
-  },
-  p: {
-    ...theme.text.default,
-    marginBottom: '1em',
-  },
-  li: {
-    ...theme.text.default,
-    marginBottom: '1em',
-    marginLeft: '0.8rem',
-    paddingLeft: '1.8rem'
-  },
-  blockquote: {
-    marginTop: '1.5rem',
-    marginBottom: '1.5rem',
-    padding: '1rem 1rem 0.5rem 1rem',
-    borderLeft: '3px solid #ccc',
-    fontStyle: 'italic',
-  },
-  h1: { variant: 'text.heading' },
-  h2: { variant: 'text.smallerHeading' },
-  h3: { variant: 'text.smallerHeading' },
-  h4: { variant: 'text.smallerHeading' },
-  h5: { variant: 'text.smallerHeading' },
-  h6: { variant: 'text.smallerHeading' },
-  code: { variant: 'text.code' },
-};
+// HTML & MDX tag Aliases
+theme.styles.b = theme.styles.strong;
+theme.styles.i = theme.styles.em;
+theme.styles.thematicBreak = theme.styles.hr; // MDX alias for `hr`
 
 export default theme;
