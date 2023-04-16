@@ -135,7 +135,7 @@ const theme = {
   /** Variants */
 
   text: {
-    default: {
+    body: {
       color: "text",
       fontFamily: "body",
       fontWeight: "body",
@@ -352,14 +352,14 @@ const theme = {
     inlineCode: {}, // MDX alias for `code` tags outside of a `pre` tag
     img: {},
     li: {
-      variant: 'text.default',
+      variant: 'text.body',
       marginBottom: '1em',
       marginLeft: '0.8rem',
       paddingLeft: '1.8rem'
     },
     ol: {},
     p: {
-      variant: 'text.default',
+      variant: 'text.body',
       marginBottom: '1em',
     },
     pre: {},
@@ -371,6 +371,9 @@ const theme = {
     ul: {},
   },
 };
+
+// Theme variant aliases
+theme.text.default = theme.text.body;
 
 // HTML & MDX tag Aliases
 theme.styles.b = theme.styles.strong;
