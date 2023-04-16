@@ -1,28 +1,12 @@
 /** @jsxImportSource theme-ui */
 
-import { Global } from "@emotion/react";
-
 import { Container } from "theme-ui";
 
-import SiteHelmet from '@components/SiteHelmet';
+import CoreLayout from '@components/CoreLayout';
 
 export default function BaseContentLayout({ children }) {
   return (
-    <>
-      <SiteHelmet/>
-      <Global styles={{
-        '*': {
-          padding: 0,
-          margin: 0,
-        },
-        body: {
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          width: '100%',
-          maxWidth: '1000px',
-          position: 'relative',
-        },
-      }}/>
+    <CoreLayout>
       <Container
         sx={{
           maxHeight: 'none',
@@ -34,6 +18,6 @@ export default function BaseContentLayout({ children }) {
       >
         {children}
       </Container>
-    </>
+    </CoreLayout>
   );
 }

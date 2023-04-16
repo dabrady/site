@@ -1,13 +1,22 @@
 /** @jsxImportSource theme-ui */
 
-import { Container } from "theme-ui";
+import { Global, Container } from "theme-ui";
 
-import SiteHelmet from '@components/SiteHelmet';
+import CoreLayout from '@components/CoreLayout';
 
 export default function FullscreenNoScrollLayout({ children }) {
   return (
-    <>
-      <SiteHelmet/>
+    <CoreLayout>
+      <Global styles={{
+        // Reset some 'body' global overrides
+        body: {
+          marginLeft: 'inherit',
+          marginRight: 'inherit',
+          width: 'inherit',
+          maxWidth: 'inherit',
+          position: 'inherit',
+        }
+      }}/>
       <Container
         sx={{
           position: "absolute",
@@ -22,6 +31,6 @@ export default function FullscreenNoScrollLayout({ children }) {
       >
         {children}
       </Container>
-    </>
+    </CoreLayout>
   );
 }

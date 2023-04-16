@@ -133,6 +133,44 @@ const theme = {
   },
 
   /** Variants */
+  globals: {
+    '*': {
+      padding: 0,
+      margin: 0,
+    },
+
+    html: {
+      fontSize: ['18px', '2.4vw', '24px']
+    },
+
+    aside: { variant: 'aside' },
+
+    body: {
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      width: '100%',
+      maxWidth: '1000px',
+      minHeight: '100vh; min-height: -webkit-fill-available',
+      position: 'relative',
+    },
+
+    li: {
+      variant: 'text.body',
+      marginBottom: '1em',
+      marginLeft: '0.8rem',
+      paddingLeft: '1.8rem'
+    },
+
+    p: {
+      variant: 'text.body',
+      marginBottom: '1em',
+    },
+
+    small: {
+      variant: 'text.body',
+      fontSize: '0.83rem'
+    },
+  },
 
   text: {
     body: {
@@ -324,12 +362,8 @@ const theme = {
   /** Default Markdown styles */
   // NOTE(dabrady) This is an exhaustive list of all supported Markdown elements.
   // Any other HTML elements must be used explicitly as such in Markdown files,
-  // and those styles are overridden by the `shortcodes` injected into
-  // the Markdown renderer in the relevant template file.
+  // and those styles are defined above in `theme.globals`.
   styles: {
-    root: {
-      fontSize: ['18px', '2.4vw', '24px']
-    },
     a: {},
     blockquote: {
       marginTop: '1.5rem',
@@ -351,17 +385,9 @@ const theme = {
     hr: {},
     inlineCode: {}, // MDX alias for `code` tags outside of a `pre` tag
     img: {},
-    li: {
-      variant: 'text.body',
-      marginBottom: '1em',
-      marginLeft: '0.8rem',
-      paddingLeft: '1.8rem'
-    },
+    li: {},
     ol: {},
-    p: {
-      variant: 'text.body',
-      marginBottom: '1em',
-    },
+    p: {},
     pre: {},
     strong: {},
     table: {},
