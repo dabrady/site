@@ -10,13 +10,8 @@ tags:
 title: Declaring Variables in JavaScript
 series: Miniseries
 ---
-import { Heading, Link as ExternalLink } from 'theme-ui';
 
-<Heading as='h1'>
-  {props.pageContext.frontmatter.title.toLowerCase()}
-</Heading>
-
-The variable declarators available to us in JavaScript, and more specifically when to use them, are a hot topic of conversation these days. A few weeks ago, I read an article called <ExternalLink href='https://dev.to/stearm/another-var-vs-let-vs-const-27g1'>"Another var vs let vs const"</ExternalLink>.
+The variable declarators available to us in JavaScript, and more specifically when to use them, are a hot topic of conversation these days. A few weeks ago, I read an article called ["Another var vs let vs const"](https://dev.to/stearm/another-var-vs-let-vs-const-27g1).
 
 Though the title made me smile, my response to the advice given was less positive:
 
@@ -41,17 +36,20 @@ If you choose to follow my dive into this particular rabbit hole, I'd appreciate
 I've written a miniseries of posts that encourages deep thoughts about variable declaration in JavaScript.
 {/* / */}
 
-> 📖 Most of the differences between our variable declaration tools pertain to (lexical) scope, so if you don't have a firm grasp of that subject, I highly recommend Kyle Simpson's short book <ExternalLink href='https://github.com/getify/You-Dont-Know-JS'>_Scope and Closures_</ExternalLink>; it's a fantastic resource, and I think Kyle does a great job at explaining this area of language design in an easy-to-follow way.
->
-
 Each post dives deeper into one of JavaScript's variable declarators, and rather than constitute a sequence they are intended to be standalone, interrelated references.
+
+<aside>
+
+📖 Most of the differences between our variable declaration tools pertain to (lexical) scope, so if you don't have a firm grasp of that subject, I highly recommend Kyle Simpson's short book _[Scope and Closures](https://github.com/getify/You-Dont-Know-JS)_; it's a fantastic resource, and I think Kyle does a great job at explaining this area of language design in an easy-to-follow way.
+
+</aside>
 
 I have chosen to give them identical structures and also tried to keep the examples* as similar as possible for easily comparing and contrasting the information in each, should you choose (and I strongly encourage it 😄).
 
 I hope they help you make better decisions about which one is the right tool for holding a particular bit of your data. 🙏 I've definitely learned a lot from trying to write them!
 
-- <ExternalLink href='https://dev.to/daniel13rady/using-js-var-5kp'>Using JS: `var`</ExternalLink>
-- <ExternalLink href='https://dev.to/daniel13rady/using-js-let-1k81'>Using JS: `let`</ExternalLink>
-- <ExternalLink href='https://dev.to/daniel13rady/using-js-const-444'>Using JS: `const`</ExternalLink>
+- [Using JS: `var`](https://dev.to/daniel13rady/using-js-var-5kp)
+- [Using JS: `let`](https://dev.to/daniel13rady/using-js-let-1k81)
+- [Using JS: `const`](https://dev.to/daniel13rady/using-js-const-444)
 
-<small>*For the curious, I'm using [Carbon](https://carbon.now.sh) with some [custom settings](https://carbon.now.sh/?bg=rgba(255%2C255%2C255%2C0)&t=synthwave-84&wt=none&ds=false&dsyoff=20px&dsblur=68px&wc=false&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=146%25&si=false&es=4x&wm=false) to generate pretty pictures from code.</small>
+<small>*For the curious, I'm using [Carbon with some custom settings](https://carbon.now.sh/?bg=rgba(255%2C255%2C255%2C0)&t=synthwave-84&wt=none&ds=false&dsyoff=20px&dsblur=68px&wc=false&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=146%25&si=false&es=4x&wm=false) to generate pretty pictures from code.</small>

@@ -1,0 +1,9 @@
+- label: home
+  path: /
+
+# TODO(dabrady) Release the blog!
+# - label: blog
+#   path: /blog/
+
+- label: credits
+  path: /credits/

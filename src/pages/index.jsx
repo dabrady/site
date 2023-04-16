@@ -1,9 +1,9 @@
 /** @jsxImportSource theme-ui */
 
-import React from "react";
 import { Box, Heading, Link } from "theme-ui";
 
 import FullscreenNoScrollLayout from "@components/FullscreenNoScrollLayout";
+import useNavContext from "@utils/hooks/useNavContext";
 // import SEO from "@components/SEO.jsx";
 import {
   IconGithub,
@@ -12,14 +12,32 @@ import {
   IconLinkedIn,
   IconNomadList
 } from "@components/Icons";
-import useThemeToggle from "@utils/hooks/useThemeToggle";
+
+function NavButton({ children }) {
+  var { showNav, isNavShown } = useNavContext();
+  return (
+    <button
+      tabIndex={0}
+      autoFocus={true}
+      sx={{
+        all: 'unset',
+        cursor: "pointer",
+        ":hover": {
+          color: "accent",
+          transitionProperty: "color",
+          transitionDuration: "0.2s"
+        }
+      }}
+      onClick={() => showNav(!isNavShown)}
+    >
+      {children}
+    </button>
+  );
+}
 
 export default function Home() {
-  // Manual theme toggle (easter egg)
-  var toggleTheme = useThemeToggle();
-
   return (
-    <FullscreenNoScrollLayout>
+    <FullscreenNoScrollLayout showNavOnLoad={false}>
       {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
       <Box
         sx={{
@@ -51,20 +69,8 @@ export default function Home() {
           }}
         >
           Daniel Brady
-          {/* NOTE(dabrady) Secret theme toggle */}
-          <span
-            sx={{
-              cursor: "pointer",
-              ":hover": {
-                color: "accent",
-                transitionProperty: "color",
-                transitionDuration: "0.2s"
-              }
-            }}
-            onClick={toggleTheme}
-          >
-            .
-          </span>
+          {/* NOTE(dabrady) Secret nav toggle */}
+          <NavButton>.</NavButton>
         </Heading>
         <Heading
           as="h3"
