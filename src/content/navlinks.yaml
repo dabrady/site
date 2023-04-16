@@ -3,3 +3,6 @@
 
 - label: blog
   path: /blog/
+
+- label: credits
+  path: /credits/
