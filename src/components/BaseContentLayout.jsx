@@ -13,7 +13,8 @@ export default function BaseContentLayout({ children }) {
           width: 'inherit',
           maxWidth: ['100vw', '85vw', '60vw'],
           margin: ['1.5rem', '0 2.5rem 2.5rem 12rem'],
-          paddingTop: [0, '3rem']
+          paddingTop: [0, '3rem'],
+          paddingBottom: ['inherit', '18rem'],
         }}
       >
         {children}

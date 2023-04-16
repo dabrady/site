@@ -207,10 +207,7 @@ const theme = {
     smallerHeading: {
       variant: 'text.heading',
       fontSize: 0,
-      fontFamily: function smallCapsVariant({ fonts: { body } }) {
-        var [intendedFont, ...fallbacks] = body.split(", ");
-        return `${intendedFont.replace("-text", "-caps")}, ${fallbacks}`;
-      },
+      fontFamily: smallCaps('body'),
     },
     title: {
       display: 'block',
@@ -417,5 +414,12 @@ theme.text.default = theme.text.body;
 theme.styles.b = theme.styles.strong;
 theme.styles.i = theme.styles.em;
 theme.styles.thematicBreak = theme.styles.hr; // MDX alias for `hr`
+
+export function smallCaps(font) {
+  return function({ fonts }) {
+    var [intendedFont, ...fallbacks] = fonts[font].split(", ");
+    return `${intendedFont.replace("-text", "-caps")}, ${fallbacks}`;
+  };
+}
 
 export default theme;
