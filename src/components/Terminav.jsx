@@ -4,10 +4,15 @@ import _ from 'lodash';
 import { useRef, useState } from 'react';
 import { Box, Flex, Input, Label, NavLink, Paragraph } from 'theme-ui';
 
-const NAV_LINKS = {
-  ['home']: <NavLink variant='local' href='/'>home</NavLink>,
-  ['blog']: <NavLink variant='local' href='/blog/'>blog</NavLink>,
-}
+import NavLinks from '@content/navlinks.yaml';
+
+const NAV_LINKS = _.transform(
+  NavLinks,
+  function makeNavLink(acc, { label, path }) {
+    acc[label] = <NavLink variant='local' href={path}>{label}</NavLink>;
+  },
+  {}
+);
 const UNKNOWN_COMMAND = '_UNKNOWN_';
 const COMMANDS = {
   ['ls']: function listAvailableNavLinks() {
@@ -17,6 +22,7 @@ const COMMANDS = {
     return <MonoList items={_.without(_.keys(COMMANDS), UNKNOWN_COMMAND)}/>;
   },
   ['cd']: function navigateTo(link) {
+    // Navigate to the link destination.
     if (link in NAV_LINKS) {
       navigate(NAV_LINKS[link].props.href);
       return null;

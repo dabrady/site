@@ -33,6 +33,7 @@ module.exports = {
       resolve: "gatsby-plugin-root-import",
       options: {
         "@components": path.resolve(__dirname, "src/components"),
+        "@content": path.resolve(__dirname, "src/content"),
         "@templates": path.resolve(__dirname, "src/templates"),
         "@utils": path.resolve(__dirname, "src/utils"),
         "@styles": path.resolve(__dirname, "src/styles"),
