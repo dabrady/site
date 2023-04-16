@@ -1,14 +1,14 @@
 name: Blog syndication
-on:
-  push:
-    # Watch these branches...
-    # TODO Swap these once merged to main
-    # branches: [ main ]
-    branches: [ develop ]
-    # ...for changes to these files.
-    paths:
-    # TODO Can this be a bit more targeted towards posts?
-    - 'src/**/*.mdx?'
+on: workflow_dispatch
+  # push:
+  #   # Watch these branches...
+  #   # TODO Swap these once merged to main
+  #   # branches: [ main ]
+  #   branches: [ develop ]
+  #   # ...for changes to these files.
+  #   paths:
+  #   # TODO Can this be a bit more targeted towards posts?
+  #   - 'src/**/*.mdx?'
 
 jobs:
   syndicate:
