@@ -53,7 +53,7 @@ const COMMANDS = {
 };
 
 /** A navigation component with the look and feel of a terminal. */
-export default function Terminav(props) {
+export default function Terminav({ autofocus }) {
   var inputRef = useRef();
   var [output, setOutput] = useState(null);
 
@@ -89,7 +89,7 @@ export default function Terminav(props) {
           id='terminav-input'
           name='terminav-input'
           ref={inputRef}
-          autoFocus
+          autoFocus={autofocus}
           placeholder='explore...'
           sx={{ fontFamily: 'monospace' }}
         />

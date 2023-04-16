@@ -33,7 +33,7 @@ export default function FullscreenNoScrollLayout({ children, showNavOnLoad = tru
           margin: ["2rem auto", "2.8rem auto"],
         }}
       >
-        {showTerminav && <Terminav />}
+        {showTerminav && <Terminav autofocus={true}/>}
         <NavContext.Provider value={{
           showNav: setShowTerminav,
           isNavShown: showTerminav
