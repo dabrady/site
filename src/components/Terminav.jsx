@@ -84,7 +84,7 @@ export default function Terminav(props) {
             flex: 1,
             fontFamily: 'monospace'
           }}
-        >$</Label>
+        >➜</Label>
         <Input
           id='terminav-input'
           name='terminav-input'
