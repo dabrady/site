@@ -31,6 +31,7 @@
     "@theme-ui/mdx": "^0.15.5",
     "chroma-js": "^2.1.0",
     "core-js": "^3.13.1",
+    "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
     "encoding": "^0.1.13",
     "fontfaceobserver": "^2.1.0",
