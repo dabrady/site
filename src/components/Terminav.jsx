@@ -59,18 +59,19 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
   var [opacity, setOpacity] = useState(0);
 
   /**
-   * This effect makes the Terminav fade in and out of focus based on the 'distance'
-   * between the user's position in the document and the Terminav.
+   * This effect makes the Terminav fade in based on user's scroll position.
    */
   useEffect(function() {
     function adjustOpacity() {
-      if (!inputRef?.current) return;
+      var focused = inputRef?.current && document.activeElement == inputRef.current;
+      if (focused) return;
 
       var root = document.documentElement;
+      var navPosition = inputRef.current.getBoundingClientRect();
+      var navInView = navPosition.bottom <= root.clientHeight;
+
       var maxScrollPosition = root.scrollHeight - root.clientHeight;
       var currentScrollPosition = root.scrollTop;
-      var navInView = inputRef.current.getBoundingClientRect().bottom <= root.clientHeight;
-      var focused = document.activeElement == inputRef.current;
       var scrollProgress = (currentScrollPosition / maxScrollPosition) * 100;
 
       if (
@@ -79,8 +80,7 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
           || (navInView && scrollProgress >= scrollVisibilityThreshold)
       ) {
         setOpacity(1);
-        // Focus the Terminav once it's in view.
-        if (!focused && navInView) {
+        if (navInView) {
           inputRef.current.focus();
         }
       } else {
@@ -88,12 +88,12 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
       }
     }
 
-    // NOTE(dabrady) Using 'mousewheel' event instead of 'scroll' here because it
+    // NOTE(dabrady) Using 'wheel' event instead of 'scroll' here because it
     // fires when a user _attempts_ to scroll, even if the page is not scrollable.
     // The 'scroll' event only fires when the page actually scrolls.
-    window.addEventListener('mousewheel', adjustOpacity);
+    window.addEventListener('wheel', adjustOpacity);
     return function stopListening() {
-      window.removeEventListener('mousewheel', adjustOpacity);
+      window.removeEventListener('wheel', adjustOpacity);
     };
   }, []);
 
