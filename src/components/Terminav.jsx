@@ -62,7 +62,7 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
    * This effect makes the Terminav fade in based on user's scroll position.
    */
   useEffect(function() {
-    function adjustOpacity() {
+    function adjustOpacity(ev) {
       var focused = inputRef?.current && document.activeElement == inputRef.current;
       if (focused) return;
 
@@ -80,7 +80,10 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
           || (navInView && scrollProgress >= scrollVisibilityThreshold)
       ) {
         setOpacity(1);
-        if (navInView) {
+        // Focus on visible when not on touch devices.
+        // Input focus on touch devices tends to automatically open a keyboard,
+        // and that's annoying.
+        if (ev.type == 'wheel' && navInView) {
           inputRef.current.focus();
         }
       } else {
