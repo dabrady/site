@@ -217,6 +217,7 @@ const theme = {
       width: ['100%', '7.5rem'],
       textAlign: ['left', 'right'],
       marginBottom: '2rem',
+      paddingTop: ['0.3rem', '0'],
       clear: 'both',
       fontSize: '125%',
       lineHeight: 1.35,

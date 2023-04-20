@@ -5,10 +5,8 @@ import { useState } from 'react';
 
 import CoreLayout from '@components/CoreLayout';
 import Terminav from "@components/Terminav";
-import { NavContext } from "@utils/hooks/useNavContext";
 
-export default function FullscreenNoScrollLayout({ children, showNavOnLoad = true }) {
-  const [showTerminav, setShowTerminav] = useState(showNavOnLoad);
+export default function FullscreenNoScrollLayout({ children, className }) {
   return (
     <CoreLayout>
       <Global styles={{
@@ -22,6 +20,7 @@ export default function FullscreenNoScrollLayout({ children, showNavOnLoad = tru
         }
       }}/>
       <Container
+        className={className}
         sx={{
           position: "absolute",
           top: 0,
@@ -33,13 +32,9 @@ export default function FullscreenNoScrollLayout({ children, showNavOnLoad = tru
           margin: ["2rem auto", "2.8rem auto"],
         }}
       >
-        {showTerminav && <Terminav autofocus={true}/>}
-        <NavContext.Provider value={{
-          showNav: setShowTerminav,
-          isNavShown: showTerminav
-        }}>
-          {children}
-        </NavContext.Provider>
+        {/* Show the Terminav when a user _tries_ to scroll */}
+        <Terminav scrollVisibilityThreshold={0}/>
+        {children}
       </Container>
     </CoreLayout>
   );

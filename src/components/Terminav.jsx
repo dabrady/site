@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { navigate } from 'gatsby';
 import _ from 'lodash';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box, Flex, Input, Label, NavLink, Paragraph } from 'theme-ui';
 
 import NavLinks from '@content/navlinks.yaml';
@@ -53,9 +53,49 @@ const COMMANDS = {
 };
 
 /** A navigation component with the look and feel of a terminal. */
-export default function Terminav({ autofocus }) {
+export default function Terminav({ scrollVisibilityThreshold = 85 }) {
   var inputRef = useRef();
   var [output, setOutput] = useState(null);
+  var [opacity, setOpacity] = useState(0);
+
+  /**
+   * This effect makes the Terminav fade in and out of focus based on the 'distance'
+   * between the user's position in the document and the Terminav.
+   */
+  useEffect(function() {
+    function adjustOpacity() {
+      if (!inputRef?.current) return;
+
+      var root = document.documentElement;
+      var maxScrollPosition = root.scrollHeight - root.clientHeight;
+      var currentScrollPosition = root.scrollTop;
+      var navInView = inputRef.current.getBoundingClientRect().bottom <= root.clientHeight;
+      var focused = document.activeElement == inputRef.current;
+      var scrollProgress = (currentScrollPosition / maxScrollPosition) * 100;
+
+      if (
+        maxScrollPosition == 0
+          || isNaN(scrollProgress)
+          || (navInView && scrollProgress >= scrollVisibilityThreshold)
+      ) {
+        setOpacity(1);
+        // Focus the Terminav once it's in view.
+        if (!focused && navInView) {
+          inputRef.current.focus();
+        }
+      } else {
+        setOpacity(0);
+      }
+    }
+
+    // NOTE(dabrady) Using 'mousewheel' event instead of 'scroll' here because it
+    // fires when a user _attempts_ to scroll, even if the page is not scrollable.
+    // The 'scroll' event only fires when the page actually scrolls.
+    window.addEventListener('mousewheel', adjustOpacity);
+    return function stopListening() {
+      window.removeEventListener('mousewheel', adjustOpacity);
+    };
+  }, []);
 
   return (
     <Box sx={{
@@ -63,6 +103,9 @@ export default function Terminav({ autofocus }) {
       // lines of body text, so using that plus a bit extra to give breathing room.
       height: ({ lineHeights }) => `calc(${lineHeights.body} * 4rem)`,
       marginBottom: '0.6rem',
+      visibility: opacity ? 'visible' : 'hidden',
+      opacity,
+      transition: 'visibility 0.3s linear, opacity 0.3s linear',
     }}>
       <Flex
         as='form'
@@ -89,7 +132,6 @@ export default function Terminav({ autofocus }) {
           id='terminav-input'
           name='terminav-input'
           ref={inputRef}
-          autoFocus={autofocus}
           placeholder='explore...'
           sx={{ fontFamily: 'monospace' }}
         />

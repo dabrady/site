@@ -3,7 +3,6 @@
 import { Box, Heading, Link } from "theme-ui";
 
 import FullscreenNoScrollLayout from "@components/FullscreenNoScrollLayout";
-import useNavContext from "@utils/hooks/useNavContext";
 // import SEO from "@components/SEO.jsx";
 import {
   IconGithub,
@@ -13,31 +12,9 @@ import {
   IconNomadList
 } from "@components/Icons";
 
-function NavButton({ children }) {
-  var { showNav, isNavShown } = useNavContext();
-  return (
-    <button
-      tabIndex={0}
-      autoFocus={true}
-      sx={{
-        all: 'unset',
-        cursor: "pointer",
-        ":hover": {
-          color: "accent",
-          transitionProperty: "color",
-          transitionDuration: "0.2s"
-        }
-      }}
-      onClick={() => showNav(!isNavShown)}
-    >
-      {children}
-    </button>
-  );
-}
-
 export default function Home() {
   return (
-    <FullscreenNoScrollLayout showNavOnLoad={false}>
+    <FullscreenNoScrollLayout>
       {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
       <Box
         sx={{
@@ -68,9 +45,7 @@ export default function Home() {
             color: "bright"
           }}
         >
-          Daniel Brady
-          {/* NOTE(dabrady) Secret nav toggle */}
-          <NavButton>.</NavButton>
+          Daniel Brady.
         </Heading>
         <Heading
           as="h3"

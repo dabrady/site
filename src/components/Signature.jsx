@@ -10,7 +10,7 @@ import { smallCaps } from '@styles/theme';
 
 export default function Signature({ date }) {
   return (
-    <Box sx={{ padding: '2.3rem 0' }}>
+    <Box sx={{ paddingTop: '2.3rem' }}>
       <hr sx={{ marginBottom: '0.3rem' }}/>
       <small sx={{
         fontFamily: smallCaps('body'),
