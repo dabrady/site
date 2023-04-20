@@ -92,8 +92,10 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
     // fires when a user _attempts_ to scroll, even if the page is not scrollable.
     // The 'scroll' event only fires when the page actually scrolls.
     window.addEventListener('wheel', adjustOpacity);
+    window.addEventListener('touchmove', adjustOpacity);
     return function stopListening() {
       window.removeEventListener('wheel', adjustOpacity);
+      window.removeEventListener('touchmove', adjustOpacity);
     };
   }, []);
 
