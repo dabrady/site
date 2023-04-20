@@ -55,7 +55,7 @@ const COMMANDS = {
 /** A navigation component with the look and feel of a terminal. */
 export default function Terminav({ scrollVisibilityThreshold = 85 }) {
   var inputRef = useRef();
-  var [output, setOutput] = useState(null);
+  var [output, setOutput] = useState(COMMANDS.ls());
   var [opacity, setOpacity] = useState(0);
 
   /**
