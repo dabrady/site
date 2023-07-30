@@ -170,7 +170,10 @@ function MonoList({ heading, items }) {
                 display: 'inline',
                 margin: '0',
                 padding: '0',
-                paddingRight: 7
+                paddingRight: 7,
+                "&::before": {
+                  content: '""',
+                },
               }}
             >{item}</li>
           );

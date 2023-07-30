@@ -157,8 +157,13 @@ const theme = {
     li: {
       variant: 'text.body',
       marginBottom: '1em',
-      marginLeft: '0.8rem',
-      paddingLeft: '1.8rem'
+      marginLeft: '2.5rem',
+      listStyle: 'none',
+    },
+    'li:before': {
+      content: '"•"',
+      position: 'absolute',
+      marginLeft: '-2.5rem',
     },
 
     p: {
