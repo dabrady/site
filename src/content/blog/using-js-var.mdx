@@ -1,0 +1,226 @@
+---
+date: '2020-01-20T14:28:20Z'
+dev_silo_id: 241017
+published: true
+tags:
+- javascript
+- thinkdeep
+- spec
+title: 'Using JS: var'
+series: Know your tools
+---
+
+_This post is part of my miniseries, [Declaring Variables in JavaScript](https://dev.to/daniel13rady/declaring-variables-in-javascript-31ch)._
+
+_If you've already read some of the sibling posts, you can [skip straight to here](#what-is-it)._
+
+----
+
+<small>CONTENTS</small>
+- [The basics: declaring variables](#the-basics-declaring-variables)
+- [The specifics: declaring variables _in JavaScript_](#the-specifics-declaring-variables-in-javascript)
+- [What is it?](#what-is-it)
+- [Okay...but what does it _do_?](#okay-but-what-does-it-do)
+- [What is it good for?](#what-is-it-good-for)
+- [When should I use something else?](#when-should-i-use-something-else)
+- [So when _should_ I use it?](#so-when-should-i-use-it)
+
+# The basics: declaring variables
+Let's begin at the beginning: **variable declarations declare variables**. This may seem obvious to many, but in practice we often confuse _variables_ with _values_, and it is important, particularly for this conversation, that we are clear on the differences.
+
+A **variable** is a binding between a **name** and a **value**. It's just a box, not the contents of the box, and the contents of the box may _vary_ either in part or in whole (hence the term 'variable').
+
+The kind of box you use, that is, the declarator you use to create a binding, defines the way it can be handled by your program. And so when it comes to the question of, "How should I declare my variables?" you can think of the answer in terms of finding a box for your data that is best suited to the way you need to manipulate it.
+
+# The specifics: declaring variables _in JavaScript_
+At the time of this writing, JavaScript gives us these tools for declaring our variables:
+
+- `var`
+- `let`
+- `const`
+
+> :bulb: The [`function`](https://www.ecma-international.org/ecma-262/10.0/index.html#sec-function-definitions) keyword is not, in fact, a variable declarator, but it _can_ create a bound identifier. I won't focus on it here; it's a bit special because it can only bind identifiers to values of a particular type ([function objects](https://www.ecma-international.org/ecma-262/10.0/index.html#sec-ecmascript-function-objects)), and so has a rather undisputed usage.
+
+Why so many options? Well, the simple answer is that in the beginning, there was only `var`; but languages evolve, churn happens, and features come (but rarely go).
+
+In this post, we'll dive into the behavior of `var`: the original variable declarator.
+
+# What is it?
+![Quick! To the world wide web](https://media.giphy.com/media/3o6nUZm2TxFXDUXM0U/giphy.gif)
+
+`var` is a universally supported construct of JavaScript; it has been since the beginning and will be until the end. It's as old as the language itself, and very powerful.
+
+> A **`var`** statement declares variables that are scoped to the [running execution context](https://www.ecma-international.org/ecma-262/10.0/index.html#running-execution-context)'s VariableEnvironment. Var variables are created when their containing [Lexical Environment](https://www.ecma-international.org/ecma-262/10.0/index.html#sec-lexical-environments) is instantiated and are initialized to **`undefined`** when created. Within the scope of any VariableEnvironment a common _BindingIdentifier_ may appear in more than one _VariableDeclaration_ but those declarations collectively define only one variable. A variable defined by a _VariableDeclaration_ with an _Initializer_ is assigned the value of its _Initializer_'s _AssignmentExpression_ when the _VariableDeclaration_ is executed, not when the variable is created.
+
+<small>_Source: [ECMAScript 2019 Language Specification, &sect;13.3.2](https://www.ecma-international.org/ecma-262/10.0/index.html#sec-variable-statement)_</small>
+
+# Okay...but what does it _do_?
+Translation? 🤨 Let's learn by doing.
+
+
+`var` does what it says on the tin: it names a variable and lets me use it.
+
+```javascript
+function f() {
+  var x; // A wild variable appears!
+  return x;
+}
+```
+
+**During compilation**, that variable is
+1. **scoped to the nearest enclosing function** (or the global scope if we're not in one)
+2. **created and initialized to `undefined`** during the instantiation of that scope, and
+3. **available for reference anywhere** within the scope at run-time
+
+> :bulb: You might come across the term "variable hoisting" in your JS travels: it refers to this 'lifting' behavior of the JS compiler with respect to creating variables during instantiation of the scope itself. [All declarators hoist](https://blog.bitsrc.io/hoisting-in-modern-javascript-let-const-and-var-b290405adfda#5c82) their variables, but the accessibility of those variables [varies with the tool](http://jsrocks.org/2015/01/temporal-dead-zone-tdz-demystified) you use.
+
+**At run-time**, references to my variable are evaluated and manipulated.
+
+```javascript
+function f() {
+  // Compile-time: n/a
+  // Run-time: evaluates the expression `x` to `undefined`
+  x;
+
+  // Compile-time: creates `x` within `f` and initializes
+  //               it to `undefined`
+  // Run-time: n/a
+  var x;
+}
+
+// Compile-time: n/a
+// Run-time: ❌Uncaught ReferenceError: x is not defined
+x;
+```
+
+> :warning: In JavaScript error messages, "not defined" is not the same thing as having a value of `undefined` :sweat: The term "not defined," in this context, should really be ["not declared."](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Not_defined)
+
+If I combined my `var` declaration with a value assignment, that value doesn't go into the box until the assignment is evaluated, and evaluation happens at run-time.
+
+```javascript
+function f() {
+  // Compile-time: n/a
+  // Run-time: calls the `alert` function with the current
+  //           value of `x` (`undefined`)
+  alert(x);
+
+  // Compile-time: creates `x` within `f` and initializes
+  //               it to`undefined`
+  // Run-time: overwrites the previous value (`undefined`)
+  //           with 42
+  var x = 42;
+}
+```
+
+Furthermore, additional declarations of the same name in the same scope **using `var`** have no effect: it's always the same variable.
+
+```javascript
+function f() {
+  // Compile-time: creates `x` within `f` and initializes
+  //               it to `undefined`
+  // Run-time: overwrites the previous value (`undefined`)
+  //           with 42
+  var x = 42;
+
+  // Compile-time: n/a (`x` has already been created)
+  // Run-time: n/a
+  var x;
+
+  // Compile-time: n/a
+  // Run-time: calls the `alert` function with the current
+  //           value of `x` (42)
+  alert(x);
+}
+```
+
+# What is it good for?
+`var`, like `let` and `const`, gives the ability to encapsulate, manipulate, share, and hide data in boxes within my JavaScript.
+
+But unlike `let` and `const`, my box is accessible anywhere within the nearest enclosing **function**, not merely the closest lexical environment, and so `var` really shines at **function-level state management**.
+
+The ability of `var` to transcend the lexical environment of blocks and let me add to the state of the nearest enclosing function is particularly powerful, if perhaps an uncommon usage.
+
+And since [functions inherit the environment of their parents](https://www.ecma-international.org/ecma-262/10.0/index.html#sec-ecmascript-function-objects) thanks to closure, nested functions can access the `var`s of their parents, but [parents cannot assert their authority](https://www.youtube.com/watch?v=xrlVVELkSmw) as parents and come into their children's bedrooms to mess with their `var`s.
+
+```javascript
+var x = 40;
+function f() {
+  var y = x + 1; // accessing `x` from global scope
+  g(); // accessing `g` from scope of `f`
+
+  function g() {
+    var z = 42;
+
+    // accessing `x` from global scope
+    // accessing `y` from scope of `f`
+    // accessing `z` from scope of `g`
+    alert(`${y} is greater than ${x}, but not ${z}`);
+  }
+
+  z; // Compile-time: ❌Uncaught ReferenceError: z is not defined
+  y; // 👍
+  g; // 👍
+  x; // 👍
+}
+```
+
+# When should I use something else?
+Sometimes, I only need a box to hold some data for a short while, not an entire function. Since `var` scopes my data to the nearest enclosing function, it communicates "widely used" to the reader and so it's not the best tool for this job. In this situation, `let` is better.
+
+```javascript
+function f() {
+  var myStuff = ['cat', 'shoe', 42];
+
+  // Compile-time: n/a
+  // Run-time: calls the `alert` function with the current
+  //           value of `item` (`undefined`)
+  alert(`What item do I have? ${item}`); // 😱
+
+  // Compile-time: creates `item` within `f` and initializes
+  //               it to `undefined`
+  // Run-time: executes the loop
+  for (var item of myStuff) {
+    alert(`Look at my ${item}!`);
+  }
+
+  // Compile-time: n/a
+  // Run-time: calls the `alert` function with the current
+  //           value of `item` (the last item of `myStuff`)
+  alert(`Look at it again! LOOK AT IT: ${item}`); // 😱
+}
+```
+
+Sometimes, I want a box that only holds one thing throughout my program, and/or I want your readers to know I don't intend to make changes to the data I put in it. Since `var` makes boxes that are always open to having their contents replaced, it communicates the wrong thing and so it's not the best tool for this job. In this situation, `const` is better.
+
+```javascript
+function f() {
+  /**
+   * This works, but since we clearly only wish to read
+   * from `THE_ANSWER`, and we've used SCREAMING_SNAKE_CASE
+   * to indicate we intend this to be a constant, `const`
+   * would be a better choice to communicate our intent.
+   */
+  var THE_ANSWER = 42;
+  return THE_ANSWER;
+}
+```
+
+Using `var` **inappropriately** can hurt the readability and maintainability of my code because I'm communicating the wrong thing and not encapsulating my data as well as I could be.
+
+To learn how to communicate better in my code, I dove into the other tools available and wrote about what I found:
+
+- [Using JS: `let`](https://dev.to/daniel13rady/using-js-let-1k81)
+- [Using JS: `const`](https://dev.to/daniel13rady/using-js-const-444)
+
+# So when _should_ I use it?
+I prefer `var` for holding values whose names will be referenced throughout most, or all, of the current function.
+
+If, during the course of development, it makes sense to reduce the scope and/or accessibility of my data, I can move my declaration to a new scope and swap out `var` for a tool like `let`, `const`, or `function` that lets me do so.
+
+With `var`, like `let`, I am free to replace the contents of my box with something different or new at any time I might need, which makes it a great choice for tracking changes over time in situations where an immutable approach to managing function-level state is not practical to implement.
+
+---
+
+_Every tool has its use. Some can make your code clearer to humans or clearer to machines, and some can strike a bit of balance between both._
+
+_"Good enough to work" should not be "good enough for you." **Hold yourself to a higher standard**: learn a little about a lot and a lot about a little, so that when the time comes to do something, you've got a fair idea of how to do it well._
