@@ -11,11 +11,14 @@ import {
   IconLinkedIn,
   IconNomadList
 } from "@components/Icons";
+import Terminav from "@components/Terminav";
 
 export default function Home() {
   return (
     <FullscreenNoScrollLayout>
       {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
+      {/* Show the Terminav when a user _tries_ to scroll */}
+      <Terminav scrollVisibilityThreshold={0}/>
       <Box
         sx={{
           position: "absolute",
