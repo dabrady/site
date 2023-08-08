@@ -1,9 +1,11 @@
 /** @jsxImportSource theme-ui */
 
 import { graphql } from "gatsby";
+import { round } from 'lodash';
 import { Box, Heading, Paragraph } from "theme-ui";
 
 import { Link } from '@components/core';
+import theme from '@styles/theme';
 import BaseContent from '@templates/BaseContent';
 
 export default function Blog({ data }) {
@@ -18,32 +20,11 @@ export default function Blog({ data }) {
           {postNodes.map(({ frontmatter, fields }) => (
             <li
               key={fields.slug}
-              sx={{
-                marginBottom: 0,
-                marginLeft: '0.4rem',
-                paddingLeft: '2.5rem',
-                paddingBottom: '1rem',
-                borderLeft: '1px solid',
-                "&:nth-last-of-type(2)": {
-                  paddingBottom: '1.85rem',
-                },
-                "&:last-child": {
-                  marginTop: '-0.85rem',
-                  marginLeft: 'calc(0.4rem + 1px)',
-                  borderLeft: 'none',
-                },
-
-                "&::before": {
-                  content: '"—"',
-                  marginLeft: '-2.6rem',
-                },
-              }}
+              sx={theme.treelist}
             >
               <Link
                 href={fields.slug}
-                sx={{
-                  fontFamily: 'monospace'
-                }}
+                sx={{ fontFamily: 'monospace' }}
               >
                 {frontmatter.title}
               </Link>

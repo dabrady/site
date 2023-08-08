@@ -374,6 +374,27 @@ const theme = {
     }
   },
 
+  treelist: {
+    marginBottom: 0,
+    marginLeft: '0.4rem',
+    paddingLeft: '2.5rem',
+    paddingBottom: '0.6rem',
+    borderLeft: '1px solid',
+    "&:nth-last-of-type(2)": {
+      paddingBottom: '1.45rem',
+    },
+    "&:last-child": {
+      marginTop: '-0.85rem',
+      marginLeft: 'calc(0.4rem + 1px)',
+      borderLeft: 'none',
+    },
+    "&::before": {
+      content: '"——"',
+      marginLeft: '-2.6rem',
+      letterSpacing: '-0.2rem',
+    },
+  },
+
   /** Default Markdown styles */
   // NOTE(dabrady) This is an exhaustive list of all supported Markdown elements.
   // Any other HTML elements must be used explicitly as such in Markdown files,

@@ -6,17 +6,27 @@ import { Box, Flex, Input, Label, NavLink, Paragraph } from 'theme-ui';
 
 import NavLinks from '@content/navlinks.yaml';
 
+import theme from '@styles/theme';
+
 const NAV_LINKS = _.transform(
   NavLinks,
   function makeNavLink(acc, { label, path }) {
-    acc[label] = <NavLink variant='local' href={path}>{label}</NavLink>;
+    acc[label] = (
+      <NavLink
+        variant='local'
+        href={path}
+        sx={{ fontFamily: 'monospace', fontWeight: 'normal' }}
+      >
+        {label}
+      </NavLink>
+    );
   },
   {}
 );
 const UNKNOWN_COMMAND = '_UNKNOWN_';
 const COMMANDS = {
   ['ls']: function listAvailableNavLinks() {
-    return <MonoList items={_.values(availableNavLinks())}/>;
+    return <TreeList items={_.values(availableNavLinks())}/>;
   },
   ['help']: function listAvailableCommands() {
     return <MonoList items={_.without(_.keys(COMMANDS), UNKNOWN_COMMAND)}/>;
@@ -36,7 +46,7 @@ const COMMANDS = {
 
     // If you don't provide a known link, we show you your options.
     return (
-      <MonoList
+      <TreeList
         heading='Available links'
         items={_.values(availableNavLinks())}
       />
@@ -148,6 +158,29 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
 
 /**** Helpers ****/
 
+/** A tree-formatted list. */
+function TreeList({ heading, items }) {
+  return (
+    <>
+      {heading && (
+        <p sx={{
+          variant: 'text.monospace',
+          margin: '0',
+          padding: '0',
+        }}>
+          {heading}
+        </p>)}
+      <ul sx={{ padding: 0, margin: 0 }}>
+        {_.map(items, function renderItem(item, key) {
+          return (
+            <li key={key} sx={theme.treelist}>{item}</li>
+          );
+        })}
+      </ul>
+    </>
+  );
+}
+
 /** A monospaced, inline, undecorated list. */
 function MonoList({ heading, items }) {
   return (
@@ -170,7 +203,7 @@ function MonoList({ heading, items }) {
                 display: 'inline',
                 margin: '0',
                 padding: '0',
-                paddingRight: 7,
+                paddingRight: '1.4rem',
                 "&::before": {
                   content: '""',
                 },
