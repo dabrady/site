@@ -58,8 +58,13 @@ export default function Blog({ data }) {
 export const query = graphql`
   query {
     allMdx(
-      filter: { internal: { contentFilePath: { regex: "/src/content/blog/" } } }
-      sort: { frontmatter: { date: ASC } }
+      filter: {
+        internal: { contentFilePath: { regex: "/src/content/blog/" } }
+
+        # NOTE(dabrady) Blog posts must be explicitly published to be listed.
+        frontmatter: { published: { eq: true } }
+      }
+      sort: { frontmatter: { date: DESC } }
     ) {
       totalCount
       nodes {
