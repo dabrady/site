@@ -1,15 +1,21 @@
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const path = require("path");
 
-// Disables the dev 404 page. I find it mildly annoying.
-// @see https://github.com/gatsbyjs/gatsby/issues/16112
 exports.onCreatePage = ({ page, actions }) => {
+  const { createPage, deletePage } = actions;
+
+  // Disables the dev 404 page. I find it mildly annoying.
+  // @see https://github.com/gatsbyjs/gatsby/issues/16112
   if (process.env.NODE_ENV !== 'production' && page.path === '/404/') {
-    const { createPage } = actions;
     // Make the 404 page match everything client side.
     // This will be used as fallback if more specific pages are not found
     page.matchPath = '/*';
     createPage(page);
+  }
+
+  // NOTE(dabrady) Markdown content must be explicitly published.
+  if (page.context.frontmatter && !page.context.frontmatter.published) {
+    deletePage(page);
   }
 };
 

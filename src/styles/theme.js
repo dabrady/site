@@ -49,6 +49,7 @@ const modes = {
     shadow: palette.black,
     blackWhiteMono: palette.black,
     aside: palette.hardGray,
+    heading: palette.black,
     /* Unspecified  */
     // primary,
     // secondary,
@@ -71,6 +72,9 @@ const modes = {
     shadow: palette.black,
     blackWhiteMono: palette.white,
     aside: palette.gray,
+    heading: chroma(palette.red)
+      .saturate(0.125) // make it stand out a bit better in the dark
+      .css(),
     // primary,
     // secondary,
     // highlight,
@@ -100,8 +104,9 @@ const theme = {
   /** Theme Specification **/
 
   fonts: {
-    body: "concourse-text, sans-serif",
-    heading: "triplicate-text, serif",
+    body: "valkyrie-text, serif",
+    informal: "concourse-text, sans-serif",
+    heading: "valkyrie, serif",
     monospace: "triplicate-text, monospace",
     code: "triplicate-code, monospace"
   },
@@ -157,13 +162,22 @@ const theme = {
     li: {
       variant: 'text.body',
       marginBottom: '1em',
-      marginLeft: '0.8rem',
-      paddingLeft: '1.8rem'
+      marginLeft: '2.5rem',
+      listStyle: 'none',
+    },
+    'li:before': {
+      content: '"•"',
+      position: 'absolute',
+      marginLeft: '-2.5rem',
     },
 
     p: {
       variant: 'text.body',
       marginBottom: '1em',
+      '&:has(+ aside)': {
+        float: 'left',
+        width: '100%',
+      }
     },
 
     small: {
@@ -198,14 +212,17 @@ const theme = {
       lineHeight: "body",
     },
     heading: {
-      color: "text",
+      color: "heading",
       fontFamily: "heading",
       fontWeight: "heading",
+      fontStyle: 'italic',
       lineHeight: "heading",
       fontSize: '125%',
+      marginBottom: '0.4rem',
     },
     smallerHeading: {
       variant: 'text.heading',
+      fontStyle: 'normal',
       fontSize: 0,
       fontFamily: smallCaps('body'),
     },
@@ -214,7 +231,7 @@ const theme = {
       position: ['inherit', 'absolute'],
       float: ['inherit', 'left'],
       left: '2.5rem',
-      width: ['100%', '7.5rem'],
+      width: ['90%', 'calc(2.5rem * 3)'],
       textAlign: ['left', 'right'],
       marginBottom: '2rem',
       paddingTop: ['0.3rem', '0'],
@@ -367,6 +384,31 @@ const theme = {
         marginBottom: ['0'],
       }
     }
+  },
+
+  treelistItem: {
+    marginBottom: 0,
+    marginLeft: '0.4rem',
+    paddingLeft: '2.5rem',
+    paddingBottom: '0.6rem',
+    borderLeft: '1px solid',
+    "&:nth-last-of-type(2)": {
+      paddingBottom: '1.45rem',
+    },
+    "&:last-child": {
+      marginTop: '-0.85rem',
+      marginLeft: 'calc(0.4rem + 1px)',
+      borderLeft: 'none',
+    },
+    "&:only-child": {
+      margin: '0 0.4rem',
+      borderLeft: '1px solid',
+    },
+    "&::before": {
+      content: '"——"',
+      marginLeft: '-2.6rem',
+      letterSpacing: '-0.2rem',
+    },
   },
 
   /** Default Markdown styles */

@@ -32,8 +32,6 @@ export default function FullscreenNoScrollLayout({ children, className }) {
           margin: ["2rem auto", "2.8rem auto"],
         }}
       >
-        {/* Show the Terminav when a user _tries_ to scroll */}
-        <Terminav scrollVisibilityThreshold={0}/>
         {children}
       </Container>
     </CoreLayout>
