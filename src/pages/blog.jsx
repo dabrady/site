@@ -15,12 +15,12 @@ export default function Blog({ data }) {
   return (
     <BaseContent>
       <Box>
-        <Heading as='h1'>.</Heading>
+        <Heading as='h1' style={{ fontFamily: 'monospace' }}>.</Heading>
         <ul>
           {postNodes.map(({ frontmatter, fields }) => (
             <li
               key={fields.slug}
-              sx={theme.treelist}
+              sx={theme.treelistItem}
             >
               <Link
                 href={fields.slug}

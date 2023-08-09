@@ -31,6 +31,7 @@ export default function Home() {
           sx={{
             fontSize: [0, "1.325rem", "1.35rem"],
             fontFamily: "monospace",
+            fontStyle: "normal",
             fontWeight: "normal",
             fontFeatureSettings: "'ss01'",
             lineHeight: 2.4,
@@ -42,7 +43,8 @@ export default function Home() {
         </Heading>
         <Heading
           sx={{
-            fontFamily: 'body',
+            fontFamily: 'informal',
+            fontStyle: "normal",
             fontSize: [1, 2],
             lineHeight: 1.1,
             color: "bright"
@@ -53,10 +55,12 @@ export default function Home() {
         <Heading
           as="h3"
           sx={{
-            fontFamily: 'body',
+            fontFamily: 'informal',
             fontSize: [1, 2],
             lineHeight: 1.1,
-            fontWeight: "normal"
+            fontWeight: "normal",
+            fontStyle: "normal",
+            color: 'text',
           }}
         >
           I’m&nbsp;

@@ -173,7 +173,7 @@ function TreeList({ heading, items }) {
       <ul sx={{ padding: 0, margin: 0 }}>
         {_.map(items, function renderItem(item, key) {
           return (
-            <li key={key} sx={theme.treelist}>{item}</li>
+            <li key={key} sx={theme.treelistItem}>{item}</li>
           );
         })}
       </ul>

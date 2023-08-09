@@ -23,6 +23,12 @@ export default function BaseContentLayout({ children, className }) {
         <Box sx={{
           borderTop: '1px solid',
           paddingTop: [0, '1rem'],
+
+          '& > h1:nth-of-type(1)': {
+            color: 'accent',
+            paddingTop: '0.4rem',
+            marginBottom: '2rem',
+          },
         }}>
           {children}
         </Box>

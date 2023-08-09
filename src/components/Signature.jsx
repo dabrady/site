@@ -16,7 +16,7 @@ export default function Signature({ date }) {
       borderTop: '1px solid',
     }}>
       <small sx={{
-        fontFamily: smallCaps('body'),
+        fontFamily: smallCaps('informal'),
         fontFeatureSettings: "'c2sc'",
         float: 'right',
         textAlign: 'right',
