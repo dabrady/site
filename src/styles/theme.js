@@ -361,7 +361,7 @@ const theme = {
     left: '2.5rem',
     boxSizing: 'content-box',
     marginBottom: '1rem',
-    padding: ['0.3rem 0.5rem', '0'],
+    padding: ['0.3rem 0.5rem', '0.2rem 0'],
 
     border: ['1px solid #ccc', 'none'],
     borderLeft: ['3px solid #ccc', 'none'],
