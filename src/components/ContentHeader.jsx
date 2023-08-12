@@ -24,6 +24,9 @@ export default function ContentHeader({ children, sidelink }) {
             marginBottom: ['inherit', '0rem'],
             border: 'none',
             width: ['auto', '90%'],
+            a: {
+              lineHeight: 1,
+            }
           }}
         >
           {sidelink}
