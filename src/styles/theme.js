@@ -226,20 +226,6 @@ const theme = {
       fontSize: 0,
       fontFamily: smallCaps('body'),
     },
-    title: {
-      display: 'block',
-      position: ['inherit', 'absolute'],
-      float: ['inherit', 'left'],
-      left: '2.5rem',
-      width: ['90%', 'calc(2.5rem * 3)'],
-      textAlign: ['left', 'right'],
-      marginBottom: '2rem',
-      paddingTop: ['0.3rem', '0'],
-      clear: 'both',
-      fontSize: '125%',
-      lineHeight: 1.35,
-      textTransform: 'lowercase',
-    },
   },
 
   buttons: {

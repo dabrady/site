@@ -22,7 +22,7 @@ export default function BaseContentLayout({ children, className }) {
         {/* Main Content */}
         <Box sx={{
           borderTop: '1px solid',
-          paddingTop: [0, '1rem'],
+          paddingTop: [0, '0.8rem'],
 
           '& > h1:nth-of-type(1)': {
             color: 'accent',
