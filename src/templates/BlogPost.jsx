@@ -4,6 +4,8 @@ import dayjs from 'dayjs';
 import { Heading } from 'theme-ui';
 
 import BaseContentLayout from '@components/BaseContentLayout';
+import ContentHeader from '@components/ContentHeader';
+import { Link } from '@components/core';
 import Signature from '@components/Signature';
 
 export default function BlogPost({ children, pageContext }) {
@@ -13,23 +15,29 @@ export default function BlogPost({ children, pageContext }) {
         paddingBottom: ['inherit', '4rem'],
       }}
     >
-      <aside
-        sx={{
-          float: ['right', 'left'],
-          textAlign: 'right',
-          padding: ['0.3rem 0', '0'],
-          border: 'none',
-          width: 'calc(2.5rem * 3)',
-          '@media screen and (min-width: 1200px)': {
-            left: '0',
-            width: 'calc(2.5rem * 4)',
-          },
-        }}
-      ><p>
-         {dayjs(pageContext.frontmatter.date).format('D MMMM, YYYY')}
-       </p>
-      </aside>
+      <ContentHeader
+        sidelink={<Link href='/blog'>← back</Link>}
+      >
+        <aside
+          sx={{
+            display: 'inline-block',
+            position: ['inherit', 'relative'],
+            textAlign: 'right',
+            padding: ['0.3rem 0', '0'],
+            marginBottom: ['inherit', '0rem'],
+            border: 'none',
+            width: 'fit-content',
+            left: 'inherit',
+          }}
+        >
+          <p>
+            {dayjs(pageContext.frontmatter.date).format('D MMMM, YYYY')}
+          </p>
+        </aside>
+      </ContentHeader>
+
       {children}
+
       <Signature date={pageContext.frontmatter.date}/>
     </BaseContentLayout>
   );

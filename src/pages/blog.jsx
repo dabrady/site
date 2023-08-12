@@ -15,7 +15,12 @@ export default function Blog({ data }) {
   return (
     <BaseContent>
       <Box>
-        <Heading as='h1' style={{ fontFamily: 'monospace' }}>.</Heading>
+        <Heading as='h1' style={{
+          fontFamily: 'monospace',
+          fontStyle: 'normal',
+        }}>
+          ./blog
+        </Heading>
         <ul>
           {postNodes.map(({ frontmatter, fields }) => (
             <li
@@ -24,7 +29,7 @@ export default function Blog({ data }) {
             >
               <Link
                 href={fields.slug}
-                sx={{ fontFamily: 'monospace' }}
+                sx={{ fontFamily: 'code' }}
               >
                 {frontmatter.title}
               </Link>
