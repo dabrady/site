@@ -166,7 +166,7 @@ const theme = {
       listStyle: 'none',
     },
     'li:before': {
-      content: '"•"',
+      content: '"→"',
       position: 'absolute',
       marginLeft: '-2.5rem',
     },
