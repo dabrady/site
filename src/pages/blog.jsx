@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import { graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 import { round } from 'lodash';
 import { Box, Heading, Paragraph } from "theme-ui";
 
@@ -8,9 +8,37 @@ import { Link } from '@components/core';
 import theme from '@styles/theme';
 import BaseContent from '@templates/BaseContent';
 
-export default function Blog({ data }) {
-  var postNodes = data.allMdx.nodes;
-  var postCount = data.allMdx.totalCount;
+export default function Blog() {
+  var {
+    allMdx: {
+      nodes: postNodes,
+      totalCount: postCount,
+    }
+  } = useStaticQuery(graphql`
+    query {
+      allMdx(
+        filter: {
+          internal: { contentFilePath: { regex: "/src/content/blog/" } }
+
+          # NOTE(dabrady) Blog posts must be explicitly published to be listed.
+          frontmatter: { published: { eq: true } }
+        }
+        sort: { frontmatter: { date: DESC } }
+      ) {
+        totalCount
+        nodes {
+          id
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            date
+          }
+        }
+      }
+    }
+  `);
 
   return (
     <BaseContent>
@@ -41,28 +69,3 @@ export default function Blog({ data }) {
     </BaseContent>
   );
 }
-export const query = graphql`
-  query {
-    allMdx(
-      filter: {
-        internal: { contentFilePath: { regex: "/src/content/blog/" } }
-
-        # NOTE(dabrady) Blog posts must be explicitly published to be listed.
-        frontmatter: { published: { eq: true } }
-      }
-      sort: { frontmatter: { date: DESC } }
-    ) {
-      totalCount
-      nodes {
-        id
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-          date
-        }
-      }
-    }
-  }
-`;
