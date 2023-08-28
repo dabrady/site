@@ -376,10 +376,10 @@ const theme = {
     marginBottom: 0,
     marginLeft: '0.4rem',
     paddingLeft: '2.5rem',
-    paddingBottom: '0.6rem',
+    paddingBottom: ['0.6rem', '0.4rem'],
     borderLeft: '1px solid',
     "&:nth-last-of-type(2)": {
-      paddingBottom: '1.45rem',
+      paddingBottom: ['1.45rem', '1.25rem'],
     },
     "&:last-child": {
       marginTop: '-0.85rem',
