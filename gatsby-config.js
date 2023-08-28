@@ -13,19 +13,19 @@ module.exports = {
     baseUrl: "https://www.daniel13rady.com/",
   },
 
-  // for avoiding CORS while developing Netlify Functions locally
-  // read more: https://www.gatsbyjs.org/docs/api-proxy/#advanced-proxying
-  developMiddleware: function proxyNetlifyLambdas(app) {
-    app.use(
-      "/.netlify/functions/",
-      createProxyMiddleware({
-        target: "http://localhost:9000",
-        pathRewrite: {
-          "/.netlify/functions/": ""
-        }
-      })
-    );
-  },
+  /* NOTE(dabrady) Uncomment to avoid CORS issues if ever developing Netlify functions locally */
+  /* @see https://www.gatsbyjs.org/docs/api-proxy/#advanced-proxying */
+  // developMiddleware: function proxyNetlifyLambdas(app) {
+  //   app.use(
+  //     "/.netlify/functions/",
+  //     createProxyMiddleware({
+  //       target: "http://localhost:9000",
+  //       pathRewrite: {
+  //         "/.netlify/functions/": ""
+  //       }
+  //     })
+  //   );
+  // },
 
   plugins: [
     {
