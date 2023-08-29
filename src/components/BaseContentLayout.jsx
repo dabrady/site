@@ -9,35 +9,37 @@ import Terminav from "@components/Terminav";
 export default function BaseContentLayout({ children, className }) {
   return (
     <CoreLayout>
-      <Container
-        className={className}
-        sx={{
-          maxHeight: 'none',
-          width: 'inherit',
-          maxWidth: ['100vw', '85vw', '60vw'],
-          margin: ['1.5rem', '0 2.5rem 2.5rem 12rem'],
-          paddingTop: [0, '2rem'],
-        }}
-      >
-        {/* Main Content */}
-        <Box sx={{
-          borderTop: '1px solid',
-          paddingTop: [0, '0.8rem'],
+      <Box sx={{ position: 'relative' }}>
+        <Container
+          className={className}
+          sx={{
+            maxHeight: 'none',
+            width: 'inherit',
+            maxWidth: ['100vw', '85vw', '60vw'],
+            margin: ['1.5rem', '0 2.5rem 2.5rem 12rem'],
+            paddingTop: [0, '2rem'],
+          }}
+        >
+          {/* Main Content */}
+          <Box sx={{
+            borderTop: '1px solid',
+            paddingTop: [0, '0.8rem'],
 
-          '& > h1:nth-of-type(1)': {
-            color: 'accent',
-            paddingTop: '0.4rem',
-            marginBottom: '2rem',
-          },
-        }}>
-          {children}
-        </Box>
+            '& > h1:nth-of-type(1)': {
+              color: 'accent',
+              paddingTop: '0.4rem',
+              marginBottom: '2rem',
+            },
+          }}>
+            {children}
+          </Box>
 
-        {/* Footer */}
-        <Box sx={{ paddingTop: '2rem' }}>
-          <Terminav />
-        </Box>
-      </Container>
+          {/* Footer */}
+          {/* <Box sx={{ paddingTop: '2rem' }}> */}
+          {/*   <Terminav /> */}
+          {/* </Box> */}
+        </Container>
+      </Box>
     </CoreLayout>
   );
 }

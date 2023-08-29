@@ -4,13 +4,13 @@ import { Global, Container } from "theme-ui";
 import { useState } from 'react';
 
 import CoreLayout from '@components/CoreLayout';
-import Terminav from "@components/Terminav";
 
 export default function FullscreenNoScrollLayout({ children, className }) {
   return (
     <CoreLayout>
       <Global styles={{
         // Reset some 'body' global overrides
+        // TODO(dabrady) Don't do this, just redesign the home page layout.
         body: {
           marginLeft: 'inherit',
           marginRight: 'inherit',

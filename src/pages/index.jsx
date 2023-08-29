@@ -18,7 +18,7 @@ export default function Home() {
     <FullscreenNoScrollLayout>
       {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
       {/* Show the Terminav when a user _tries_ to scroll */}
-      <Terminav scrollVisibilityThreshold={0}/>
+      {/* <Terminav scrollVisibilityThreshold={0}/> */}
       <Box
         sx={{
           position: "absolute",
