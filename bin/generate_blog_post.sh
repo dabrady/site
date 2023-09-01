@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat << EOF > src/content/blog/___.md
+cat << EOF > src/content/blog/wip.mdx
 ---
 date: "$(gdate -Iminutes)"
 published: false
