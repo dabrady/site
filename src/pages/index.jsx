@@ -64,7 +64,7 @@ export default function Home() {
           }}
         >
           I’m&nbsp;
-          <Link variant="external" href="https://prodperfect.com">
+          <Link variant="external" href="https://scrappy-poet.com">
             a software mechanic.
           </Link>
         </Heading>
