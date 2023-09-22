@@ -106,7 +106,7 @@ const theme = {
   fonts: {
     body: "valkyrie-text, serif",
     informal: "concourse-text, sans-serif",
-    heading: "valkyrie, serif",
+    heading: "valkyrie-text, serif",
     monospace: "triplicate-text, monospace",
     code: "triplicate-code, monospace"
   },
