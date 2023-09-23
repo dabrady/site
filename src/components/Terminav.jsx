@@ -84,9 +84,13 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
   var [opacity, _setOpacity] = useState(0);
   function show() {
     _setOpacity(1);
+    // Prevent body from scrolling underneath.
+    document.body.setAttribute('style', 'overflow: hidden');
   }
   function hide() {
     _setOpacity(0);
+    // Reactivate scrolling on body.
+    document.body.removeAttribute('style');
   }
 
   /**
@@ -112,8 +116,6 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
       sx={{
         position: 'fixed',
         inset: 0,
-        // TODO(dabrady) This doesn't work. Need to directly stop the body from being scrollable.
-        /* overflowY: 'hidden', */
         backdropFilter: 'blur(20px)',
         zIndex: 9001,
         visibility: opacity ? 'visible' : 'hidden',
@@ -132,9 +134,7 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
       >
         {/* Overlay contents */}
         <Box sx={{
-          /* maxWidth: ['100vw', '85vw', '60vw'], */
           margin: ['5.5rem 3.5rem', '4.8rem 2.5rem 2.5rem 12rem'],
-          /* margin: ['30vh 2.5rem', '30vh 35vw'], */
         }}>
           <Box sx={{
             // NOTE(dabrady) Currently, the content of this navbar will be at most 3
