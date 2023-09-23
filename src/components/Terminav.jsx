@@ -8,6 +8,8 @@ import NavLinks from '@content/navlinks.yaml';
 
 import theme from '@styles/theme';
 
+import useEdgeScrollListener from '@utils/hooks/useEdgeScrollListener.hook';
+
 const NAV_LINKS = _.transform(
   NavLinks,
   function makeNavLink(acc, { label, path }) {
@@ -84,54 +86,21 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
   }
 
   /**
-   * This effect makes the Terminav fade in based on user's scroll position.
+   * This effect makes the Terminav fade in when you scroll past the edge of the screen.
    */
-  useEffect(function() {
-    /* For devices with mice */
-    function observeTriggerMouse(ev) {
-      if (opacity == 1) return;
-
-      var root = document.documentElement;
-      var maxScrollPosition = root.scrollHeight - root.clientHeight;
-
-      // If the user attempts to scroll up while they're already at the top of the page,
-      // show the terminav.
-      if (root.scrollTop <= 0 && ev.deltaY < 0) {
-        show();
+  useEdgeScrollListener({
+    handler: function showTerminav() {
+      show();
+      // Focus once visible.
+      setTimeout(function focusTerminav() {
         inputRef.current.focus();
-      } else {
-        // Do nothing.
-        return;
-      }
-    }
-    // NOTE(dabrady) Using 'wheel' event instead of 'scroll' here because it
-    // fires when a user _attempts_ to scroll, even if the page is not scrollable.
-    // The 'scroll' event only fires when the page actually scrolls.
-    window.addEventListener('wheel', observeTriggerMouse);
-
-    /* For devices with touch sensors */
-    var touchStart = 0;
-    var touchEnd = 0;
-    function recordTouchStarts(ev) {
-      touchStart = ev.changedTouches[0].screenY;
-    }
-    window.addEventListener('touchstart', recordTouchStarts);
-
-    function observeTriggerTouch(ev) {
-      touchEnd = ev.changedTouches[0].screenY;
-      if (touchEnd < touchStart) {
-        // ...? TODO
-      }
-    }
-    window.addEventListener('touchmove', observeTriggerTouch);
-
-    // window.addEventListener('touchmove', observeTriggerTouch);
-    return function stopListening() {
-      window.removeEventListener('wheel', observeTriggerMouse);
-      window.removeEventListener('touchstart', recordTouchStarts);
-      // window.removeEventListener('touchmove', observeTriggerTouch);
-    };
-  }, []);
+      }, 250);
+    },
+    pauseWhen: function terminavIsVisible() {
+      return opacity == 1;
+    },
+    deps: [opacity],
+  });
 
   return (
     /* Fullscreen overlay */
