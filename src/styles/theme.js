@@ -156,7 +156,6 @@ const theme = {
       width: '100%',
       maxWidth: '1000px',
       minHeight: '100vh; min-height: -webkit-fill-available',
-      position: 'relative',
     },
 
     li: {
@@ -319,7 +318,7 @@ const theme = {
       backgroundColor: "transparent",
       width: "100%",
       padding: '0',
-      marginLeft: '1rem',
+      marginLeft: '1.2rem',
 
       animation: "1ms void-animation-out",
       appearance: "none",
@@ -378,6 +377,9 @@ const theme = {
     paddingLeft: '2.5rem',
     paddingBottom: ['0.6rem', '0.4rem'],
     borderLeft: '1px solid',
+    "&:first-child": {
+      paddingTop: '0.4rem',
+    },
     "&:nth-last-of-type(2)": {
       paddingBottom: ['1.45rem', '1.25rem'],
     },
