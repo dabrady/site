@@ -2,11 +2,14 @@
 import { navigate } from 'gatsby';
 import _ from 'lodash';
 import { useEffect, useRef, useState } from 'react';
-import { Box, Flex, Input, Label, NavLink, Paragraph } from 'theme-ui';
+import { Box, Container, Flex, Input, Label, NavLink, Paragraph } from 'theme-ui';
 
 import NavLinks from '@content/navlinks.yaml';
 
 import theme from '@styles/theme';
+
+import isTouchDevice from '@utils/isTouchDevice';
+import useEdgeScrollListener from '@utils/hooks/useEdgeScrollListener.hook';
 
 const NAV_LINKS = _.transform(
   NavLinks,
@@ -31,17 +34,25 @@ const COMMANDS = {
   ['help']: function listAvailableCommands() {
     return <MonoList items={_.without(_.keys(COMMANDS), UNKNOWN_COMMAND)}/>;
   },
-  ['cd']: function navigateTo(link) {
+  ['cd']: function navigateTo(link, close) {
+    // Just reset if they try to navigate to the current page.
+    if (link == currentPageLink()) {
+      // Close the terminav.
+      close();
+      // Prep the display text for the next time they open it.
+      return COMMANDS['ls']();
+    }
+
     // Navigate to the link destination.
     if (link in NAV_LINKS) {
       navigate(NAV_LINKS[link].props.href);
-      return null;
+      return close();
     }
 
     // Bonus feature: `cd -` acts as a back-button.
     if (link == '-') {
       navigate(-1);
-      return null;
+      return close();
     }
 
     // If you don't provide a known link, we show you your options.
@@ -64,94 +75,121 @@ const COMMANDS = {
 
 /** A navigation component with the look and feel of a terminal. */
 export default function Terminav({ scrollVisibilityThreshold = 85 }) {
+  // NOTE(dabrady) Certain interactivity is not suited to touch interfaces.
+  var interactive = !isTouchDevice();
+
   var inputRef = useRef();
   var [output, setOutput] = useState(COMMANDS.ls());
-  var [opacity, setOpacity] = useState(0);
+
+  var [opacity, _setOpacity] = useState(0);
+  function show() {
+    _setOpacity(1);
+    // Prevent body from scrolling underneath.
+    document.body.setAttribute('style', 'overflow: hidden');
+  }
+  function hide() {
+    _setOpacity(0);
+    // Reactivate scrolling on body.
+    document.body.removeAttribute('style');
+  }
 
   /**
-   * This effect makes the Terminav fade in based on user's scroll position.
+   * This effect makes the Terminav fade in when you scroll past the edge of the screen.
    */
-  useEffect(function() {
-    function adjustOpacity(ev) {
-      var focused = inputRef?.current && document.activeElement == inputRef.current;
-      if (focused) return;
-
-      var root = document.documentElement;
-      var navPosition = inputRef.current.getBoundingClientRect();
-      var navInView = navPosition.bottom <= root.clientHeight;
-
-      var maxScrollPosition = root.scrollHeight - root.clientHeight;
-      var currentScrollPosition = root.scrollTop;
-      var scrollProgress = (currentScrollPosition / maxScrollPosition) * 100;
-
-      if (
-        maxScrollPosition == 0
-          || isNaN(scrollProgress)
-          || (navInView && scrollProgress >= scrollVisibilityThreshold)
-      ) {
-        setOpacity(1);
-        // Focus on visible when not on touch devices.
-        // Input focus on touch devices tends to automatically open a keyboard,
-        // and that's annoying.
-        if (ev.type == 'wheel' && navInView) {
-          inputRef.current.focus();
-        }
-      } else {
-        setOpacity(0);
-      }
-    }
-
-    // NOTE(dabrady) Using 'wheel' event instead of 'scroll' here because it
-    // fires when a user _attempts_ to scroll, even if the page is not scrollable.
-    // The 'scroll' event only fires when the page actually scrolls.
-    window.addEventListener('wheel', adjustOpacity);
-    window.addEventListener('touchmove', adjustOpacity);
-    return function stopListening() {
-      window.removeEventListener('wheel', adjustOpacity);
-      window.removeEventListener('touchmove', adjustOpacity);
-    };
-  }, []);
+  useEdgeScrollListener({
+    handler: function showTerminav() {
+      show();
+      // Focus once visible.
+      setTimeout(function focusTerminav() {
+        inputRef.current?.focus();
+      }, 250);
+    },
+    pauseWhen: function terminavIsVisible() {
+      return opacity == 1;
+    },
+    deps: [opacity],
+  });
 
   return (
-    <Box sx={{
-      // NOTE(dabrady) Currently, the content of this navbar will be at most 3
-      // lines of body text, so using that plus a bit extra to give breathing room.
-      height: ({ lineHeights }) => `calc(${lineHeights.body} * 4rem)`,
-      marginBottom: '0.6rem',
-      visibility: opacity ? 'visible' : 'hidden',
-      opacity,
-      transition: 'visibility 0.3s linear, opacity 0.3s linear',
-    }}>
-      <Flex
-        as='form'
-        spellCheck={false}
-        autoComplete='off'
-        onSubmit={function processInput(e) {
-          e.preventDefault();
-
-          var input = inputRef.current.value;
-          var [commandName, ...args] = input.split(' ');
-          var command = _.get(COMMANDS, commandName, COMMANDS['_UNKNOWN_']);
-          setOutput(() => command(...args));
-          inputRef.current.value = '';
+    /* Fullscreen overlay */
+    <Box
+      sx={{
+        position: 'fixed',
+        inset: 0,
+        backdropFilter: 'blur(20px)',
+        zIndex: 9001,
+        visibility: opacity ? 'visible' : 'hidden',
+        opacity,
+        transition: 'visibility 0.3s linear, opacity 0.3s linear',
+      }}
+      onClick={hide}
+    >
+      {/* Overlay body (for relative positioning of contents) */}
+      <Container
+        sx={{
+          maxHeight: 'none',
+          width: 'inherit',
+          maxWidth: '1000px',
         }}
       >
-        <Label
-          htmlFor='terminav-input'
-          sx={{
-            flex: 1,
-            fontFamily: 'monospace'
-          }}
-        >➜</Label>
-        <Input
-          id='terminav-input'
-          name='terminav-input'
-          ref={inputRef}
-          placeholder='explore...'
-          sx={{ fontFamily: 'monospace' }}
-        />
-      </Flex>
-      <Box>{output}</Box>
+        {/* Overlay contents */}
+        <Box sx={{
+          margin: ['5.5rem 3.5rem', '4.8rem 2.5rem 2.5rem 12rem'],
+        }}>
+          <Box sx={{
+            // NOTE(dabrady) Currently, the content of this navbar will be at most 3
+            // lines of body text, so using that plus a bit extra to give breathing room.
+            height: ({ lineHeights }) => `calc(${lineHeights.body} * 4rem)`,
+            marginBottom: '0.6rem',
+          }}>
+            <Flex
+              as='form'
+              spellCheck={false}
+              autoComplete='off'
+              onSubmit={function processInput(e) {
+                e.preventDefault();
+
+                var input = inputRef.current.value;
+                var [commandName, ...args] = input.split(' ');
+                var command = _.get(COMMANDS, commandName, COMMANDS['_UNKNOWN_']);
+                setOutput(() => command(...args, hide));
+                inputRef.current.value = '';
+              }}
+            >
+              <Label
+                htmlFor='terminav-input'
+                sx={{
+                  flex: 1,
+                  fontFamily: 'monospace',
+                  margin: 0,
+                  padding: 0,
+                  display: 'inline',
+                  width: 'fit-content'
+                }}
+              >{interactive
+                ? '➜'
+                : <span
+                    sx={{
+                      color: 'accent',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    ./
+                  </span>
+                }</Label>
+              {interactive &&
+               <Input
+                 id='terminav-input'
+                 name='terminav-input'
+                 ref={inputRef}
+                 placeholder='explore...'
+                 sx={{ fontFamily: 'monospace', color: 'accent' }}
+               />}
+            </Flex>
+            <Box>{output}</Box>
+          </Box>
+        </Box>
+      </Container>
     </Box>
   );
 }
@@ -216,9 +254,13 @@ function MonoList({ heading, items }) {
   );
 }
 
+/** Finds the nav link to the current page. */
+function currentPageLink() {
+  var currentPage = typeof window != 'undefined' ? window.location.pathname : '';
+  return _.findKey(NAV_LINKS, ['props.href', currentPage]);
+}
+
 /** Filters out the current page from the set of possible nav links. */
 function availableNavLinks() {
-  var currentPage = typeof window != 'undefined' ? window.location.pathname : '';
-  var currentPageLink = _.findKey(NAV_LINKS, ['props.href', currentPage]);
-  return _.omit(NAV_LINKS, currentPageLink);
+  return _.omit(NAV_LINKS, currentPageLink());
 }
