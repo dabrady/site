@@ -8,6 +8,7 @@ import NavLinks from '@content/navlinks.yaml';
 
 import theme from '@styles/theme';
 
+import isTouchDevice from '@utils/isTouchDevice';
 import useEdgeScrollListener from '@utils/hooks/useEdgeScrollListener.hook';
 
 const NAV_LINKS = _.transform(
@@ -74,6 +75,9 @@ const COMMANDS = {
 
 /** A navigation component with the look and feel of a terminal. */
 export default function Terminav({ scrollVisibilityThreshold = 85 }) {
+  // NOTE(dabrady) Certain interactivity is not suited to touch interfaces.
+  var interactive = !isTouchDevice();
+
   var inputRef = useRef();
   var [output, setOutput] = useState(COMMANDS.ls());
 
@@ -93,7 +97,7 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
       show();
       // Focus once visible.
       setTimeout(function focusTerminav() {
-        inputRef.current.focus();
+        inputRef.current?.focus();
       }, 250);
     },
     pauseWhen: function terminavIsVisible() {
@@ -129,7 +133,7 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
         {/* Overlay contents */}
         <Box sx={{
           /* maxWidth: ['100vw', '85vw', '60vw'], */
-          margin: ['5.5rem 1.5rem', '4.8rem 2.5rem 2.5rem 12rem'],
+          margin: ['5.5rem 3.5rem', '4.8rem 2.5rem 2.5rem 12rem'],
           /* margin: ['30vh 2.5rem', '30vh 35vw'], */
         }}>
           <Box sx={{
@@ -156,17 +160,31 @@ export default function Terminav({ scrollVisibilityThreshold = 85 }) {
                 htmlFor='terminav-input'
                 sx={{
                   flex: 1,
-                  fontFamily: 'monospace'
+                  fontFamily: 'monospace',
+                  margin: 0,
+                  padding: 0,
+                  display: 'inline',
+                  width: 'fit-content'
                 }}
-              >➜</Label>
-              <Input
-                id='terminav-input'
-                name='terminav-input'
-                ref={inputRef}
-                // TODO(dabrady) Show something like 'tap or type...' on mobile
-                placeholder='explore...'
-                sx={{ fontFamily: 'monospace', color: 'accent' }}
-              />
+              >{interactive
+                ? '➜'
+                : <span
+                    sx={{
+                      color: 'accent',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    ./
+                  </span>
+                }</Label>
+              {interactive &&
+               <Input
+                 id='terminav-input'
+                 name='terminav-input'
+                 ref={inputRef}
+                 placeholder='explore...'
+                 sx={{ fontFamily: 'monospace', color: 'accent' }}
+               />}
             </Flex>
             <Box>{output}</Box>
           </Box>
