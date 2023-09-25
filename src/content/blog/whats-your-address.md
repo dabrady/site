@@ -15,7 +15,7 @@ Last year, I changed my mailing address with the USA Post Office to point to a r
 - the address I use on my USA state taxes
 - the billing address of the credit card I’m using
 
-I keep bumping into weird edge-cases that come with not having a single forever address, and they’re a pain in the ass. It’s not always clear which choice is correct, but it boils down to answering a single question: 
+I keep bumping into weird edge-cases that come with not having a single forever address, and they’re a pain in the ass. It’s not always clear which choice is correct, but it boils down to answering a single question:
 >Why do you want to know?
 
 Rarely do I have the ability to ask someone that question, though. Most of the time I have to deduce the answer from context.
@@ -39,8 +39,6 @@ One exception to that has just popped up today. I recently formed an LLC to begi
 A ‘registered agent’ is a requirement of forming an LLC in the USA. Basically, someone has to be regularly, physically present in the state of registration to receive physical mail on behalf of the business.
 </aside>
 
-<h2 align='center'>
-\*&nbsp;&nbsp;*&nbsp;&nbsp;\* 
-</h2>
+<Stars />
 
 It’s funny, in a way, but in my nearly four years of transience, the USA unemployment office is the only time someone has cared whether I routinely slept at my address.

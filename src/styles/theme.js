@@ -266,12 +266,13 @@ const theme = {
       fontFeatureSettings: "'c2sc'",
       backgroundImage: null,
       textShadow: null,
+      padding: '0 0.2rem 0.2rem 0.2rem',
       ":hover, :focus": {
         backgroundColor: "muted",
         color: "bright",
         transitionProperty: "background, color",
         transitionDuration: "0.2s",
-        borderRadius: "8px"
+        borderRadius: "8px",
       }
     },
     external: {
@@ -286,7 +287,7 @@ const theme = {
       // Cloning link style from pracicaltypography.com
       "::after": {
         content: "'°'",
-        marginLeft: "0.1em",
+        marginLeft: "0.15rem",
         top: "-0.1em",
         fontSize: "90%",
         color: "accent"
@@ -377,7 +378,7 @@ const theme = {
     paddingLeft: '2.5rem',
     paddingBottom: ['0.6rem', '0.4rem'],
     borderLeft: '1px solid',
-    "&:first-child": {
+    "&:first-of-type": {
       paddingTop: '0.4rem',
     },
     "&:nth-last-of-type(2)": {
