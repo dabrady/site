@@ -1,5 +1,6 @@
 ---
 published: true
+title: "Credits & Acknowledgments"
 ---
 # Credits & Acknowledgments
 
