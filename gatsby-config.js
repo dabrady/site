@@ -8,9 +8,8 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "Daniel Brady",
-    description: "",
-    author: "@dabrady",
-    baseUrl: "https://www.daniel13rady.com/",
+    description: "my own little slice of the internet",
+    siteUrl: "https://daniel13rady.com/",
   },
 
   /* NOTE(dabrady) Uncomment to avoid CORS issues if ever developing Netlify functions locally */
@@ -34,6 +33,7 @@ module.exports = {
       options: {
         "@components": path.resolve(__dirname, "src/components"),
         "@content": path.resolve(__dirname, "src/content"),
+        "@hooks": path.resolve(__dirname, "src/utils/hooks"),
         "@templates": path.resolve(__dirname, "src/templates"),
         "@utils": path.resolve(__dirname, "src/utils"),
         "@styles": path.resolve(__dirname, "src/styles"),
