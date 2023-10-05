@@ -33,11 +33,6 @@ export default function BaseContentLayout({ children, className }) {
           }}>
             {children}
           </Box>
-
-          {/* Footer */}
-          {/* <Box sx={{ paddingTop: '2rem' }}> */}
-          {/*   <Terminav /> */}
-          {/* </Box> */}
         </Container>
       </Box>
     </CoreLayout>
