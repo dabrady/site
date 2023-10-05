@@ -3,7 +3,6 @@
 import { Box, Heading, Link } from "theme-ui";
 
 import FullscreenNoScrollLayout from "@components/FullscreenNoScrollLayout";
-// import SEO from "@components/SEO.jsx";
 import {
   IconGithub,
   IconDev,
@@ -12,13 +11,15 @@ import {
   IconNomadList
 } from "@components/Icons";
 import Terminav from "@components/Terminav";
+import SEO from '@components/SEO';
+
+export function Head() {
+  return <SEO />;
+}
 
 export default function Home() {
   return (
     <FullscreenNoScrollLayout>
-      {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
-      {/* Show the Terminav when a user _tries_ to scroll */}
-      {/* <Terminav scrollVisibilityThreshold={0}/> */}
       <Box
         sx={{
           position: "absolute",

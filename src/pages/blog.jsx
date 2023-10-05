@@ -6,8 +6,20 @@ import { last, round } from 'lodash';
 import { Box, Heading, Paragraph } from "theme-ui";
 
 import { Link } from '@components/core';
+import SEO from '@components/SEO';
+
 import theme from '@styles/theme';
+
 import BaseContent from '@templates/BaseContent';
+
+export function Head({ location }) {
+  return (
+    <SEO
+      title={(baseTitle) => `${baseTitle} → Blog`}
+      pathname={location.pathname}
+    />
+  );
+}
 
 export default function Blog() {
   var {
