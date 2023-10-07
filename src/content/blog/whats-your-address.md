@@ -2,6 +2,8 @@
 date: "2023-08-25T17:04+01:00"
 published: true
 title: “What’s your address?”
+description: >
+  The author has been living a nomadic lifestyle for nearly four years and does not have a permanent address. This has created challenges for them in various areas of their life, including employment, unemployment benefits, and banking.
 ---
 # “What’s your address?”
 

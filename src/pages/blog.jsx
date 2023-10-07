@@ -17,6 +17,7 @@ export function Head({ location }) {
     <SEO
       title={(baseTitle) => `${baseTitle} → Blog`}
       pathname={location.pathname}
+      description="Thoughts and words I'd like to share with you."
     />
   );
 }

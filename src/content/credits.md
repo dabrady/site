@@ -1,6 +1,8 @@
 ---
 published: true
 title: "Credits & Acknowledgments"
+description: >
+  Attribution and sources of inspiration in the development of this site.
 ---
 # Credits & Acknowledgments
 
