@@ -31,6 +31,7 @@ export function Head({ location, pageContext }) {
     <SEO
       pathname={location.pathname}
       title={frontmatter.title}
+      description={frontmatter.description}
     />
   );
 }
