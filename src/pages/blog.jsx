@@ -1,6 +1,9 @@
 /** @jsxImportSource theme-ui */
 
 import dayjs from 'dayjs';
+import dayjs__dayOfYear from 'dayjs/plugin/dayOfYear';
+dayjs.extend(dayjs__dayOfYear);
+
 import { useStaticQuery, graphql } from "gatsby";
 import { last, round } from 'lodash';
 import { Box, Heading, Paragraph } from "theme-ui";
@@ -55,7 +58,6 @@ export default function Blog() {
   `);
 
   // Time things
-  var now = dayjs();
   var newestPost = dayjs(postNodes[0].frontmatter.date);
   var oldestPost = dayjs(last(postNodes).frontmatter.date);
   var timeInterval = newestPost.diff(oldestPost, 'year');
@@ -73,34 +75,37 @@ export default function Blog() {
           ./blog
         </Heading>
         <ul sx={{ paddingBottom: '1.2rem' }}>
-          {postNodes.map(({ frontmatter: { title, date }, fields }) => (
-            <li key={fields.slug} sx={theme.treelistItem}>
-              <Link
-                href={fields.slug}
-                sx={{
-                  fontFamily: 'code',
-                  // NOTE(dabrady) This manually aligns wrapped titles
-                  display: 'inline-block',
-                  textIndent: [0, '-9.4rem'],
-                  paddingLeft: [0, '9.4rem'],
-                }}
-              >
-                <span sx={{
-                  display: ['block', 'inline'],
-                  paddingRight: '1rem',
-                  color: 'aside',
-                  whiteSpace: 'pre-wrap',
-                }}>
-                  {/* NOTE(dabrady) Show year instead of time for posts older than the current year */}
-                  [{dayjs(date).format(`MMM DD ${now.diff(date, 'year') > 0 ? ' YYYY' : 'HH:mm'}`)}]
-                </span>
-                <span sx={{
-                }}>
-                  {title}
-                </span>
-              </Link>
-            </li>
-          ))}
+          {postNodes.map(({ frontmatter: { title, date: rawDate }, fields }) => {
+            var { slug } = fields;
+            var date = dayjs(rawDate);
+            return (
+              <li key={slug} sx={theme.treelistItem}>
+                <Link
+                  href={slug}
+                  sx={{
+                    fontFamily: 'code',
+                    // NOTE(dabrady) This manually aligns wrapped titles
+                    display: 'inline-block',
+                    textIndent: [0, '-7rem'],
+                    paddingLeft: [0, '7rem'],
+                  }}
+                >
+                  <span sx={{
+                    display: ['block', 'inline'],
+                    paddingRight: '1rem',
+                    color: 'aside',
+                    whiteSpace: 'pre-wrap',
+                  }}>
+                    [{`${date.dayOfYear()}.${date.year()}`}]
+                  </span>
+                  <span sx={{
+                  }}>
+                    {title}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <Paragraph variant='monospace'>{postCount} posts{suffix}</Paragraph>
       </Box>
