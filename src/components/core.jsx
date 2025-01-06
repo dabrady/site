@@ -28,15 +28,15 @@ export function Nomad() {
       }}
       src='https://nomadlist.com/@daniel13rady/embed'
       scrolling='no'
-      frameborder='0'
-      allowfullscreen
+      frameBorder='0'
+      allowFullScreen
     />
   );
 }
 
 export function Series({ children, top = false }) {
   return (
-    <div sx={top && { paddingBottom: '2rem' }}>
+    <div sx={top ? { paddingBottom: '2rem' } : undefined}>
       {!top && (
         <span align="center">
           <p><em>This is part of a longer reflection.</em></p>
@@ -84,21 +84,26 @@ Series.Previous = function Previous({ children }) {
 };
 Series.Next = function Next({ children, todo = false}) {
   return (
-    <li
-      sx={{
-        margin: '0',
-        marginLeft: 'auto',
-        padding: '0',
-        textAlign: 'right',
-        textDecoration: todo ? 'line-through' : 'none',
-        "&::before": {
-          content: '""',
-        },
-        "& a::after": {
-          content: '"→"',
-          paddingLeft: '0.8rem',
-        },
-      }}
-    >{children}</li>
+    <span title={todo ? 'To be continued…' : undefined}>
+      <li
+        sx={{
+          margin: '0',
+          marginLeft: 'auto',
+          padding: '0',
+          textAlign: 'right',
+          "&::before": {
+            content: '""',
+          },
+          pointerEvents: todo ? 'none' : 'inherit',
+          "& a": {
+            color: (theme) => todo ? theme.colors.hardGray : 'inherit',
+          },
+          "& a::after": {
+            content: '"→"',
+            paddingLeft: '0.8rem',
+          },
+        }}
+      >{children}</li>
+    </span>
   );
 };
