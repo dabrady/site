@@ -31,7 +31,7 @@ export default function BlogPost({ children, pageContext }) {
           }}
         >
           <p>
-            {dayjs(pageContext.frontmatter.date).format('D MMMM, YYYY')}
+            {dayjs(pageContext.frontmatter.date).format('D MMMM, YYYY @ HH:mm')}
           </p>
         </aside>
       </ContentHeader>
