@@ -18,7 +18,7 @@ dev: ## Starts dev web server with a clear cache
 	yarn develop ${FLAGS}
 
 .PHONY: post
-post:
+post: ## Starts a new blog post
 	@./bin/generate_blog_post.sh
 
 .PHONY: pin-nodejs
